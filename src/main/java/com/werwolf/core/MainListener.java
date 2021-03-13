@@ -45,7 +45,7 @@ public class MainListener extends ListenerAdapter {
         if(args[0].equals("help")){
             if(args.length == 2){
                 for (MessageHandler messageHandler : messageHandlers) {
-                    if(messageHandler.getName().equals(args[1])){
+                    if(messageHandler.getCommand().equals(args[1])){
                         channel.sendMessage((messageHandler.help(prefix))).queue();
                         return;
                     }
