@@ -53,6 +53,7 @@ public class MainListener extends ListenerAdapter {
             }
             else{
                 channel.sendMessage(help()).queue();
+                return;
             }
         }
 
