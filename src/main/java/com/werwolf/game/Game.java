@@ -1,21 +1,19 @@
 package com.werwolf.game;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Game {
-    private final long channel;
     private List<Player> players;
     private List<Player> bannedPlayers;
     private Player host;
+    private long channelID;
 
 
-    public Game(long channel, Player... players) {
+    public Game(long channelID, Player... players) {
+        this.channelID = channelID;
         this.players = Arrays.asList(players);
-        this.channel = channel;
     }
 
     public boolean start() {
