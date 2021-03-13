@@ -8,9 +8,11 @@ public class Game {
     private List<Player> players;
     private List<Player> bannedPlayers;
     private Player host;
+    private long channelID;
 
 
-    public Game(Player... players) {
+    public Game(long channelID, Player... players) {
+        this.channelID = channelID;
         this.players = Arrays.asList(players);
     }
 
