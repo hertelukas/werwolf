@@ -1,4 +1,4 @@
 package com.werwolf.game;
 
-public class Villager {
+public class Villager extends Player {
 }
