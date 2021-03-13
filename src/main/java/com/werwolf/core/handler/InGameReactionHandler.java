@@ -1,4 +1,7 @@
 package com.werwolf.core.handler;
 
-public class InGameReactionHandler {
+import org.springframework.stereotype.Service;
+
+@Service
+public class InGameReactionHandler extends Handler {
 }

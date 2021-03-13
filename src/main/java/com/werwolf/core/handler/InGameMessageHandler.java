@@ -1,4 +1,7 @@
 package com.werwolf.core.handler;
 
-public class InGameMessageHandler {
+import org.springframework.stereotype.Service;
+
+@Service
+public class InGameMessageHandler extends Handler {
 }

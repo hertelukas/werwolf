@@ -1,4 +1,7 @@
 package com.werwolf.core.handler;
 
-public class PreGameHandler {
+import org.springframework.stereotype.Service;
+
+@Service
+public class PreGameHandler extends Handler {
 }
