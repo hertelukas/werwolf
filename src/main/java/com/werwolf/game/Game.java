@@ -1,43 +1,56 @@
 package com.werwolf.game;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Game {
+    private final long channel;
     private List<Player> players;
     private List<Player> bannedPlayers;
     private Player host;
 
 
-    public Game(Player... players) {
+    public Game(long channel, Player... players) {
         this.players = Arrays.asList(players);
+        this.channel = channel;
     }
 
     public boolean start() {
-        return true;
+        return true; //TODO
     }
 
     public boolean stop() {
-        return true;
+        return true; //TODO
     }
 
-    public boolean addPlayer(Player player) {
-        this.players.add(player);
-        return true;
+    public PlayerListStatus addPlayer(@NotNull Player player) {
+        if(players.contains(player)) return PlayerListStatus.contains;
+        players.add(player);
+        return PlayerListStatus.successful;
     }
 
-    public boolean removePlayer(Player player) {
-        if (this.players.contains(player)) {
-            this.players.remove(player);
-            return true;
+    public PlayerListStatus removePlayer(@NotNull Player player) {
+        if (players.contains(player)) {
+            players.remove(player);
+            return PlayerListStatus.successful;
         }
-
-        return false;
+        return PlayerListStatus.containsNot;
     }
 
-    public boolean banPlayer(Player player) {
+    public PlayerListStatus banPlayer(@NotNull Player player) {
+        if(bannedPlayers.contains(player)) return PlayerListStatus.contains;
         bannedPlayers.add(player);
-        return true;
+        return PlayerListStatus.successful;
+    }
+
+    public PlayerListStatus pardonPlayer(@NotNull Player player){
+        if (bannedPlayers.contains(player)) {
+            bannedPlayers.remove(player);
+            return PlayerListStatus.successful;
+        }
+        return PlayerListStatus.containsNot;
     }
 }
