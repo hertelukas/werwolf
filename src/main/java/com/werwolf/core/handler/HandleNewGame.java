@@ -17,7 +17,7 @@ public class HandleNewGame extends MessageHandler{
 
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
-        if(!command.equals("newGame")) return false;
+        if(!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
 
