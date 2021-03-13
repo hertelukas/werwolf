@@ -13,7 +13,7 @@ import java.util.EnumSet;
 @Configuration
 public class Core {
 
-    @Value("token")
+    @Value("${token}")
     private String token;
 
     @Bean
