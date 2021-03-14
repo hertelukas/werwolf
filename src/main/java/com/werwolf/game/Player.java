@@ -1,5 +1,6 @@
 package com.werwolf.game;
 
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 
 public class Player {
@@ -19,6 +20,11 @@ public class Player {
     public Player(User user){
         this.username = user.getName();
         this.id = user.getIdLong();
+    }
+
+    public Player(Member member) {
+        this.username = member.getNickname(); // username == nick?
+        this.id = member.getIdLong();
     }
 
     public boolean vote(Player player) {
