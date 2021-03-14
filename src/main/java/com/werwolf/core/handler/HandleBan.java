@@ -42,6 +42,7 @@ public class HandleBan extends MessageHandler{
                     channel.sendMessage("Ban failed. Mention the user you want to ban.").queue();
                 }
             }
+            updateMainMessage(channel);
         }
         else{
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
