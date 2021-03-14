@@ -10,10 +10,12 @@ public class Game {
     private List<Player> bannedPlayers;
     private Player host;
     private long channelID;
+    private long voiceChannelID;
 
 
-    public Game(long channelID, Player... players) {
+    public Game(long channelID, Player host, Player... players) {
         this.channelID = channelID;
+        this.host = host;
         this.players = Arrays.asList(players);
     }
 
