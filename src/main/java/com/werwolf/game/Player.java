@@ -1,37 +1,32 @@
 package com.werwolf.game;
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 
 public class Player {
-    private String username;
-    private long id;
-    private boolean isAlive;
+    String username;
+    long id;
+    boolean isAlive;
+    User user;
+    CharacterType characterType;
 
     //Todo we might want to remove this, makes no sense. Is here to allow Werewolf and Villager with no constructor
-    public Player(){};
-
-    public Player(long id, String username){
-        this.id = id;
-        this.username = username;
-    }
+    public Player(){}
 
     public Player(User user){
         this.username = user.getName();
         this.id = user.getIdLong();
-    }
-
-    public Player(Member member) {
-        if(member.getNickname() == null || member.getNickname().isEmpty())
-            this.username = member.getUser().getName();
-        else
-            this.username = member.getNickname();
-
-        this.id = member.getIdLong();
+        this.user = user;
+        this.characterType = CharacterType.Villager;
     }
 
     //Getter & Setter
 
+
+    public CharacterType getCharacterType() {
+        return characterType;
+    }
 
     public String getUsername() {
         return username;
@@ -57,6 +52,6 @@ public class Player {
      * @param message Nachricht
      */
     public void sendMessage(String message) {
-
+        user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(message).queue());
     }
 }

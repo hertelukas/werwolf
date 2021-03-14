@@ -30,7 +30,7 @@ public class HandleInfo extends MessageHandler{
             builder.setDescription("Current members: " + game.getPlayers().size()
              + "\nHost: " + game.getHost().getUsername());
             for (Player player : game.getPlayers()) {
-                builder.addField(player.getUsername(), player.getClass().getName(), false);
+                builder.addField(player.getUsername(), player.getCharacterType().toString(), false);
             }
             channel.sendMessage(builder.build()).queue();
         }

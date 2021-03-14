@@ -10,9 +10,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleNewGame extends MessageHandler{
+public class HandleNewGame extends MessageHandler {
 
-    public HandleNewGame(){
+    public HandleNewGame() {
         setName("New Game");
         setCommand("newgame");
         //Todo more precise description on how to use
@@ -22,18 +22,18 @@ public class HandleNewGame extends MessageHandler{
 
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
-        if(!command.equals(getCommand())) return false;
+        if (!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
         Player hostPlayer = new Player(event.getAuthor());
 
         //Try to create a new game with this id
-        if(Handler.createGame(channel.getIdLong(),hostPlayer)){
+        if (Handler.createGame(channel.getIdLong(), hostPlayer, channel.getGuild())) {
             //Embeded-MessageBauen
             Game game = games.get(channel.getIdLong());
             StringBuilder playerlistSB = new StringBuilder();
             for (Player player : games.get(channel.getIdLong()).getPlayers()) {
-                playerlistSB.append(player.getUsername() + "\r");
+                playerlistSB.append(player.getUsername()).append("\r");
             }
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png").setTitle("Werewolf: " + channel.getName())
@@ -44,7 +44,7 @@ public class HandleNewGame extends MessageHandler{
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
             });
-        }else{
+        } else {
             channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();
         }
 
