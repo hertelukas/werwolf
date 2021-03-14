@@ -1,16 +1,26 @@
 package com.werwolf.game;
 
 public class GameController {
-    private boolean isActive;
-    private boolean isNight;
-    private Game game;
-    private int werewolfVoteTime;
-    private int voteTime;
+    boolean isActive;
+    boolean isNight;
+    Game game;
+    long wolfVoteTime;
+    long dayTime; // oder voteTime (muss noch evtl geklaert werden)
 
     public GameController(Game game) {
         this.game = game;
         this.isActive = false;
         //TODO wereolfVoteTime und voteTime standard festlegen
+    }
+
+    boolean nextDay() {
+        //TODO
+        return false;
+    }
+
+    boolean nextNight() {
+        //TODO
+        return false;
     }
 
     public boolean isActive() {
@@ -35,21 +45,5 @@ public class GameController {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public int getWerewolfVoteTime() {
-        return werewolfVoteTime;
-    }
-
-    public void setWerewolfVoteTime(int werewolfVoteTime) {
-        this.werewolfVoteTime = werewolfVoteTime;
-    }
-
-    public int getVoteTime() {
-        return voteTime;
-    }
-
-    public void setVoteTime(int voteTime) {
-        this.voteTime = voteTime;
     }
 }
