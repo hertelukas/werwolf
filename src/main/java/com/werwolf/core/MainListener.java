@@ -1,6 +1,7 @@
 package com.werwolf.core;
 
 import com.werwolf.core.handler.MessageHandler;
+import com.werwolf.core.handler.ReactionHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -22,10 +23,12 @@ public class MainListener extends ListenerAdapter {
     @Value("${prefix}")
     private String prefix;
     private List<MessageHandler> messageHandlers;
+    private List<ReactionHandler> reactionHandlers;
 
 
-    public MainListener(MessageHandler... handlers) {
+    public MainListener(List<ReactionHandler> reactionHandlers, MessageHandler... handlers) {
         this.messageHandlers = Arrays.asList(handlers);
+        this.reactionHandlers = reactionHandlers;
     }
 
     @Override
@@ -66,7 +69,11 @@ public class MainListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReactionAdd(@Nonnull GuildMessageReactionAddEvent event) {
+        boolean found = false;
 
+        for (ReactionHandler handler : reactionHandlers) {
+            found = handler.handle(event) || found;
+        }
     }
 
     private MessageEmbed help() {

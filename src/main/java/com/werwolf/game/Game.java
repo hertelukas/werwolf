@@ -1,7 +1,5 @@
 package com.werwolf.game;
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ public class Game {
     private long voiceChannelID;
     long wolfChannelID;
     private long mainGameMessage;
+    private GameController controller = new GameController(this);
 
     public Game(long channelID, Player host, Player... players) {
         this.channelID = channelID;
@@ -95,6 +94,10 @@ public class Game {
             if(bannedPlayer == id) return true;
         }
         return false;
+    }
+
+    public boolean isActive() {
+        return controller.isActive();
     }
 
 

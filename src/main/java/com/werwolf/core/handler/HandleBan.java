@@ -31,7 +31,12 @@ public class HandleBan extends MessageHandler{
                 Game game = games.get(channel.getIdLong());
                 String idString = args[1].substring(3, args[1].length() - 1);
                 try {
-                    PlayerListStatus result = game.banPlayer(Long.parseLong(idString));
+                    long idToBan = Long.parseLong(idString);
+                    if(idToBan == event.getAuthor().getIdLong()){
+                        channel.sendMessage(event.getAuthor().getAsMention() + " you can't ban yourself.").queue();
+                        return true;
+                    }
+                    PlayerListStatus result = game.banPlayer(idToBan);
                     switch (result){
                         case successful -> channel.sendMessage("Successfully banned " + args[1]).queue();
                         case contains -> channel.sendMessage(args[1] + " is already banned").queue();
@@ -41,8 +46,8 @@ public class HandleBan extends MessageHandler{
                 catch (Exception e){
                     channel.sendMessage("Ban failed. Mention the user you want to ban.").queue();
                 }
+                updateMainMessage(channel);
             }
-            updateMainMessage(channel);
         }
         else{
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();

@@ -32,7 +32,7 @@ public class HandleUnban extends MessageHandler{
                 try{
                     PlayerListStatus result = game.pardonPlayer(Long.parseLong(idString));
                     switch (result){
-                        case successful -> channel.sendMessage("Successfully banned " + args[1]).queue();
+                        case successful -> channel.sendMessage("Successfully unbanned " + args[1]).queue();
                         case containsNot -> channel.sendMessage(args[1] + " is not banned").queue();
                         default -> channel.sendMessage("Something went wrong.").queue();
                     }
