@@ -31,7 +31,7 @@ public class HandleJoin extends MessageHandler {
                 channel.sendMessage(event.getAuthor().getAsMention() + " something went wrong.").queue();
             return true;
         } else {
-            channel.sendMessage(event.getAuthor().getAsMention() + " There is no game in this channel.").queue();
+            channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
             return true;
         }
     }
