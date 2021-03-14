@@ -64,13 +64,17 @@ public class MainListener extends ListenerAdapter {
     private MessageEmbed help() {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setTitle("Main help page");
-        builder.setDescription("Type " + prefix + "help <command>");
+        StringBuilder sb = new StringBuilder();
+        for (MessageHandler handler : messageHandlers) {
+            sb.append(prefix + "help " + handler.getCommand());
+            sb.append("\r");
+        }
+        builder.setDescription(sb.toString());
         return builder.build();
     }
 
     private boolean commandHandled(GuildMessageReceivedEvent event, String command, String... args){
         boolean found = false;
-
         for (MessageHandler handler : messageHandlers) {
             found = handler.handle(event, command, args) || found;
         }

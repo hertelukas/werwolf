@@ -1,10 +1,14 @@
 package com.werwolf.game;
 
-public abstract class Player {
+public class Player {
     private String username;
     private long id;
     private boolean isAlive;
 
+    public Player(String username, long id) {
+        this.username = username;
+        this.id = id;
+    }
 
     public boolean vote(Player player) {
         return true;

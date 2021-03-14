@@ -4,5 +4,6 @@ public enum PlayerListStatus {
     successful,
     unsuccessful,
     contains,
-    containsNot;
+    containsNot,
+    gameStartet;
 }

@@ -1,6 +1,10 @@
 package com.werwolf.core.handler;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
+import com.werwolf.game.Game;
+
+import java.util.HashMap;
 
 public abstract class Handler {
+    static HashMap<Long, Game> games = new HashMap<>();
 }
