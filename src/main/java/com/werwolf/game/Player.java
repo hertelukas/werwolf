@@ -30,6 +30,17 @@ public class Player {
         this.id = member.getIdLong();
     }
 
+    //Getter & Setter
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public long getId() {
+        return id;
+    }
+
     public boolean vote(Player player) {
         return true;
     }

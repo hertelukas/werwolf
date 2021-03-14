@@ -12,7 +12,4 @@ public class WerwolfApplication {
     public static void main(String[] args) {
         SpringApplication.run(WerwolfApplication.class, args);
     }
-
-
-
 }

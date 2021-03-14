@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class HandleJoin extends MessageHandler {
 
     public HandleJoin() {
-        setName("join");
+        setName("Join");
         setCommand("join");
         setDescription("Use this command to join a game");
     }
@@ -22,12 +22,16 @@ public class HandleJoin extends MessageHandler {
         TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
-            PlayerListStatus status = games.get(channel.getIdLong()).addPlayer(new Player(event.getMember()));
-            //TODO Passende Message ausgeben (Im ENUM status ist das wichtigste drinnen)
-            //TODO ggf. Überstandswechsel in der Statusmessage updaten
+            PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getAuthor()));
+            if(result == PlayerListStatus.successful)
+                channel.sendMessage(event.getAuthor().getAsMention() + " successfully joined the game!").queue();
+            else if(result == PlayerListStatus.contains)
+                channel.sendMessage(event.getAuthor().getAsMention() + " is already in the game.").queue();
+            else
+                channel.sendMessage(event.getAuthor().getAsMention() + " something went wrong.").queue();
             return true;
         } else {
-            //TODO Message die kommt wenn Spieler bereits dem Spiel beigetreten ist
+            channel.sendMessage(event.getAuthor().getAsMention() + " There is no game in this channel.").queue();
             return true;
         }
     }

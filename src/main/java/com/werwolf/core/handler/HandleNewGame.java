@@ -27,9 +27,9 @@ public class HandleNewGame extends MessageHandler{
 
         //Try to create a new game with this id
         if(Handler.createGame(channel.getIdLong(),hostPlayer)){
-            channel.sendMessage("Created a new game!").queue();
+            channel.sendMessage(event.getAuthor().getAsMention() + " created a new game!").queue();
         }else{
-            channel.sendMessage("Can't create new game. A game is already running in this channel").queue();
+            channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();
         }
 
         return true;
