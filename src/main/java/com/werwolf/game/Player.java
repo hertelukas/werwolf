@@ -48,6 +48,10 @@ public class Player {
     public boolean isAlive() {
         return isAlive;
     }
+
+    public void die() {
+        this.isAlive = false;
+    }
     /**
      * Sendet eine private Nachricht an den Spieler
      * @param message Nachricht
