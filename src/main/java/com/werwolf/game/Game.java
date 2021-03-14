@@ -11,8 +11,9 @@ public class Game {
     private List<Player> players = new ArrayList<>();
     private final List<Long> bannedPlayerIds = new ArrayList<>();
     private Player host;
-    private long channelID;
-    private long voiceChannelID;
+    long channelID;
+    long voiceChannelID;
+    long wolfChannelID;
 
     public Game(long channelID, Player host, Player... players) {
         this.channelID = channelID;
