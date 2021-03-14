@@ -153,6 +153,8 @@ public class Game {
                 Werewolf werewolf = new Werewolf(player);
                 werewolves.add(werewolf);
                 player.sendMessage("You are a werewolf");
+            }else{
+                player.sendMessage("You are a villager");
             }
         }
 
