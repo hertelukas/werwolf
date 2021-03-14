@@ -14,6 +14,7 @@ public class Game {
     private Player host;
     private long channelID;
     private long voiceChannelID;
+    long wolfChannelID;
     private long mainGameMessage;
 
     public Game(long channelID, Player host, Player... players) {
