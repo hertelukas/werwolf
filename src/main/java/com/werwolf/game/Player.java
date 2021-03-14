@@ -45,6 +45,9 @@ public class Player {
         return true;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
     /**
      * Sendet eine private Nachricht an den Spieler
      * @param message Nachricht

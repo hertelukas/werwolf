@@ -6,20 +6,26 @@ public class GameController {
     Game game;
     long wolfVoteTime;
     long dayTime; // oder voteTime (muss noch evtl geklaert werden)
+    NightController nightController;
+    DayController dayController;
 
     public GameController(Game game) {
         this.game = game;
         this.isActive = false;
-        //TODO wereolfVoteTime und voteTime standard festlegen
+        nightController = new NightController(game, wolfVoteTime);
+        dayController = new DayController(game);
+        //TODO wereWolfVoteTime und voteTime standard festlegen
     }
 
     boolean nextDay() {
         //TODO
+        dayController.startDay();
         return false;
     }
 
     boolean nextNight() {
         //TODO
+        nightController.startNight();
         return false;
     }
 
