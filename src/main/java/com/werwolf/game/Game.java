@@ -64,6 +64,7 @@ public class Game {
     public PlayerListStatus banPlayer(long id){
         if(isBanned(id)) return PlayerListStatus.contains;
         bannedPlayerIds.add(id);
+        removePlayer(id);
         return PlayerListStatus.successful;
     }
 
