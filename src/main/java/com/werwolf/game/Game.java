@@ -1,5 +1,6 @@
 package com.werwolf.game;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 ;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ public class Game {
     private Player host;
     private long channelID;
     private long voiceChannelID;
-
 
     public Game(long channelID, Player host, Player... players) {
         this.channelID = channelID;
