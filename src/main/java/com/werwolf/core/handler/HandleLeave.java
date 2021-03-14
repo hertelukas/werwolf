@@ -29,9 +29,9 @@ public class HandleLeave extends MessageHandler{
         else{
             //Todo handle what happens if player is host
             PlayerListStatus result = currentGame.removePlayer(event.getAuthor().getIdLong());
-            if(result == PlayerListStatus.successful)
-                channel.sendMessage(event.getAuthor().getAsMention() + " removed from game.").queue();
-            else if(result == PlayerListStatus.containsNot)
+            if(result == PlayerListStatus.successful) {
+                updateMainMessage(channel);
+            } else if(result == PlayerListStatus.containsNot)
                 channel.sendMessage(event.getAuthor().getAsMention() + " is not in the game").queue();
             else
                 channel.sendMessage(event.getAuthor().getAsMention() + " something went wrong.").queue();

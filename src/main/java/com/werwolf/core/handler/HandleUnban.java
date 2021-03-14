@@ -6,16 +6,15 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
 @Service
-public class HandleBan extends MessageHandler{
+public class HandleUnban extends MessageHandler{
 
-    public HandleBan(){
-        setName("Ban");
-        setCommand("ban");
-        setDescription("Use this command to ban a player");
+    public HandleUnban(){
+        setName("Unban");
+        setCommand("unban");
+        setDescription("Use this command to unban a player");
     }
+
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
         if(!command.equals(getCommand())) return false;
@@ -24,25 +23,24 @@ public class HandleBan extends MessageHandler{
 
         if(games.containsKey(channel.getIdLong())){
             if(games.get(channel.getIdLong()).getHost().getId() != event.getAuthor().getIdLong()){
-                channel.sendMessage(event.getAuthor().getAsMention() + " only the host can ban a player.").queue();
+                channel.sendMessage(event.getAuthor().getAsMention() + " only the host can unban a player.").queue();
             }
             //Author is host of the game, remove player
             else{
                 Game game = games.get(channel.getIdLong());
                 String idString = args[1].substring(3, args[1].length() - 1);
-                try {
-                    PlayerListStatus result = game.banPlayer(Long.parseLong(idString));
+                try{
+                    PlayerListStatus result = game.pardonPlayer(Long.parseLong(idString));
                     switch (result){
                         case successful -> channel.sendMessage("Successfully banned " + args[1]).queue();
-                        case contains -> channel.sendMessage(args[1] + " is already banned").queue();
+                        case containsNot -> channel.sendMessage(args[1] + " is not banned").queue();
                         default -> channel.sendMessage("Something went wrong.").queue();
                     }
                 }
                 catch (Exception e){
-                    channel.sendMessage("Ban failed. Mention the user you want to ban.").queue();
+                    channel.sendMessage("Unban failed. Mention the user you want to ban.").queue();
                 }
             }
-            updateMainMessage(channel);
         }
         else{
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();

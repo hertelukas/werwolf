@@ -1,6 +1,7 @@
 package com.werwolf.game;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Game {
     private Player host;
     private long channelID;
     private long voiceChannelID;
+    private long mainGameMessage;
 
     public Game(long channelID, Player host, Player... players) {
         this.channelID = channelID;
@@ -64,6 +66,7 @@ public class Game {
     public PlayerListStatus banPlayer(long id){
         if(isBanned(id)) return PlayerListStatus.contains;
         bannedPlayerIds.add(id);
+        removePlayer(id);
         return PlayerListStatus.successful;
     }
 
@@ -101,5 +104,13 @@ public class Game {
 
     public Player getHost(){
         return host;
+    }
+
+    public long getMainGameMessage() {
+        return mainGameMessage;
+    }
+
+    public void setMainGameMessage(long mainGameMessage) {
+        this.mainGameMessage = mainGameMessage;
     }
 }
