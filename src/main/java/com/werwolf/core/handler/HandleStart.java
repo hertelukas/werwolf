@@ -10,7 +10,7 @@ public class HandleStart extends MessageHandler{
     public HandleStart() {
         setName("start");
         setCommand("start");
-        setDescription("Startet deas Spiel");
+        setDescription("Starts the game");
     }
 
     @Override
@@ -24,6 +24,7 @@ public class HandleStart extends MessageHandler{
 
         if (games.containsKey(channel.getIdLong())) {
             games.get(channel.getIdLong()).start();
+            channel.sendMessage("Spiel startet (temporär muss überarbeitet werden)").queue();
         }
         return true;
     }
