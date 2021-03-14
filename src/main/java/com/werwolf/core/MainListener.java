@@ -46,7 +46,7 @@ public class MainListener extends ListenerAdapter {
             if(args.length == 2){
                 for (MessageHandler messageHandler : messageHandlers) {
                     if(messageHandler.getCommand().equals(args[1])){
-                        channel.sendMessage((messageHandler.help(prefix))).queue();
+                        channel.sendMessage(messageHandler.help()).queue();
                         return;
                     }
                 }
@@ -64,7 +64,10 @@ public class MainListener extends ListenerAdapter {
     private MessageEmbed help() {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setTitle("Main help page");
-        builder.setDescription("Type " + prefix + "help <command>");
+        builder.setDescription("All available commands. \nType " + prefix + "help <command> to get detailed information.");
+        for (MessageHandler messageHandler : messageHandlers) {
+            builder.addField(messageHandler.getCommand(), messageHandler.getDescription(), false);
+        }
         return builder.build();
     }
 
