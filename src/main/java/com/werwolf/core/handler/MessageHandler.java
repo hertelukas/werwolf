@@ -13,9 +13,9 @@ public abstract class MessageHandler extends Handler {
 
     public abstract boolean handle(GuildMessageReceivedEvent event, String command, String[] args);
 
-    public MessageEmbed help(String prefix){
+    public MessageEmbed help(){
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setTitle("Helper page for " + name);
+        builder.setTitle("Help page for " + name);
         builder.setDescription(description);
         return builder.build();
     }
@@ -42,5 +42,9 @@ public abstract class MessageHandler extends Handler {
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -1,9 +1,9 @@
 package com.werwolf.core.handler;
 
-import com.werwolf.game.Game;
+import com.werwolf.WerwolfApplication;
 import com.werwolf.game.Player;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +23,15 @@ public class HandleNewGame extends MessageHandler{
         if(!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
+        Player hostPlayer = new Player(event.getAuthor());
 
-        //Todo start a new game
-        //TODO fancy spielübersicht (alle Spieler, Einstellungen etc.)
-        channel.sendMessage("Starting a new game...").queue();
-        createNewGame(channel.getIdLong(), new Player(event.getAuthor().getName(), channel.getIdLong()));
+        //Try to create a new game with this id
+        if(WerwolfApplication.createGame(channel.getIdLong(),hostPlayer)){
+            channel.sendMessage("Created a new game!").queue();
+        }else{
+            channel.sendMessage("Can't create new game. A game is already running in this channel").queue();
+        }
+
         return true;
-    }
-
-    private void createNewGame(long channelID, Player player) {
-        games.put(channelID, new Game(channelID, player));
     }
 }

@@ -46,7 +46,7 @@ public class MainListener extends ListenerAdapter {
             if(args.length == 2){
                 for (MessageHandler messageHandler : messageHandlers) {
                     if(messageHandler.getCommand().equals(args[1])){
-                        channel.sendMessage((messageHandler.help(prefix))).queue();
+                        channel.sendMessage(messageHandler.help()).queue();
                         return;
                     }
                 }
@@ -64,17 +64,16 @@ public class MainListener extends ListenerAdapter {
     private MessageEmbed help() {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setTitle("Main help page");
-        StringBuilder sb = new StringBuilder();
-        for (MessageHandler handler : messageHandlers) {
-            sb.append(prefix + "help " + handler.getCommand());
-            sb.append("\r");
+        builder.setDescription("All available commands. \nType " + prefix + "help <command> to get detailed information.");
+        for (MessageHandler messageHandler : messageHandlers) {
+            builder.addField(messageHandler.getCommand(), messageHandler.getDescription(), false);
         }
-        builder.setDescription(sb.toString());
         return builder.build();
     }
 
     private boolean commandHandled(GuildMessageReceivedEvent event, String command, String... args){
         boolean found = false;
+
         for (MessageHandler handler : messageHandlers) {
             found = handler.handle(event, command, args) || found;
         }
