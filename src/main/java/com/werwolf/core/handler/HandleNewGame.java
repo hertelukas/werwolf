@@ -26,7 +26,7 @@ public class HandleNewGame extends MessageHandler{
         Player hostPlayer = new Player(event.getAuthor());
 
         //Try to create a new game with this id
-        if(WerwolfApplication.createGame(channel.getIdLong(),hostPlayer)){
+        if(Handler.createGame(channel.getIdLong(),hostPlayer)){
             channel.sendMessage("Created a new game!").queue();
         }else{
             channel.sendMessage("Can't create new game. A game is already running in this channel").queue();

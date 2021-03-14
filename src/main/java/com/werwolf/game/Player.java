@@ -16,14 +16,17 @@ public class Player {
         this.username = username;
     }
 
-    //Todo maybe use the users nickname? Might not be in the User class
     public Player(User user){
         this.username = user.getName();
         this.id = user.getIdLong();
     }
 
     public Player(Member member) {
-        this.username = member.getNickname(); // username == nick?
+        if(member.getNickname() == null || member.getNickname().isEmpty())
+            this.username = member.getUser().getName();
+        else
+            this.username = member.getNickname();
+
         this.id = member.getIdLong();
     }
 

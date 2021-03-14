@@ -22,7 +22,7 @@ public class HandleJoin extends MessageHandler {
         TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
-            PlayerListStatus status = games.get(channel.getIdLong()).addPlayer(new Player(event.getAuthor().getName(), event.getAuthor().getIdLong()));
+            PlayerListStatus status = games.get(channel.getIdLong()).addPlayer(new Player(event.getMember()));
             //TODO Passende Message ausgeben (Im ENUM status ist das wichtigste drinnen)
             //TODO ggf. Überstandswechsel in der Statusmessage updaten
             return true;

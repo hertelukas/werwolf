@@ -16,8 +16,10 @@ public class HandleStart extends MessageHandler{
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
         //TODO Noch nicht fertig
+        //Sendet MessageEmbed, auf das reagiert werden muss, um das Spiel zu starten
         if(!command.equals(getCommand())) return false;
 
+        //Todo Return if event author is not host
         TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
