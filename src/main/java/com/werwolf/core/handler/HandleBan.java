@@ -37,6 +37,7 @@ public class HandleBan extends MessageHandler{
                     default -> channel.sendMessage("Something went wrong.").queue();
                 }
             }
+            updateMainMessage(channel);
         }
         else{
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();

@@ -39,7 +39,7 @@ public class HandleNewGame extends MessageHandler{
             embedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png").setTitle("Werewolf: " + channel.getName())
                     .addField("Host:", games.get(channel.getIdLong()).getHost().getUsername(), false)
                     .addField("Player:", playerlistSB.toString(), false).addField("Configurations:", "TUM-MODE: " + "false", false);
-            channel.sendMessage(embedBuilder.build()).queue();
+            channel.sendMessage(embedBuilder.build()).queue(message -> games.get(channel.getIdLong()).setMainGameMessage(message.getIdLong()));
         }else{
             channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();
         }
