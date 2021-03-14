@@ -36,11 +36,7 @@ public class Game {
     }
 
     public PlayerListStatus removePlayer(@NotNull Player player) {
-        if (players.contains(player)) {
-            players.remove(player);
-            return PlayerListStatus.successful;
-        }
-        return PlayerListStatus.containsNot;
+        return removePlayer(player.getId());
     }
 
     public PlayerListStatus removePlayer(long id){
@@ -49,6 +45,10 @@ public class Game {
             for (Player player : players) {
                 if(player.getId() == id){
                     players.remove(player);
+                    //Todo if size is 0 we want to delete this game
+                    if(player.getId() == host.getId() && players.size() > 0){
+                        host = players.get(0);
+                    }
                     return PlayerListStatus.successful;
                 }
             }
