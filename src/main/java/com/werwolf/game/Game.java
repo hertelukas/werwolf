@@ -1,14 +1,14 @@
 package com.werwolf.game;
 
 import org.jetbrains.annotations.NotNull;
-;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Game {
     private List<Player> players = new ArrayList<>();
-    private List<Player> bannedPlayers;
+    private final List<Long> bannedPlayerIds = new ArrayList<>();
     private Player host;
     private long channelID;
     private long voiceChannelID;
@@ -58,14 +58,22 @@ public class Game {
     }
 
     public PlayerListStatus banPlayer(@NotNull Player player) {
-        if (bannedPlayers.contains(player)) return PlayerListStatus.contains;
-        bannedPlayers.add(player);
+        return banPlayer(player.getId());
+    }
+
+    public PlayerListStatus banPlayer(long id){
+        if(isBanned(id)) return PlayerListStatus.contains;
+        bannedPlayerIds.add(id);
         return PlayerListStatus.successful;
     }
 
     public PlayerListStatus pardonPlayer(@NotNull Player player) {
-        if (bannedPlayers.contains(player)) {
-            bannedPlayers.remove(player);
+        return pardonPlayer(player.getId());
+    }
+
+    public PlayerListStatus pardonPlayer(long id){
+        if(isBanned(id)){
+            bannedPlayerIds.remove(id);
             return PlayerListStatus.successful;
         }
         return PlayerListStatus.containsNot;
@@ -79,8 +87,8 @@ public class Game {
     }
 
     public boolean isBanned(long id){
-        for (Player bannedPlayer : bannedPlayers) {
-            if(bannedPlayer.getId() == id) return true;
+        for (Long bannedPlayer : bannedPlayerIds) {
+            if(bannedPlayer == id) return true;
         }
         return false;
     }
