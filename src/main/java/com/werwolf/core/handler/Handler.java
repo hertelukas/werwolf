@@ -22,6 +22,10 @@ public abstract class Handler {
 
     void updateMainMessage(TextChannel channel) {
         Game game = games.get(channel.getIdLong());
+        if (game.getPlayers().isEmpty()) {
+            channel.retrieveMessageById(game.getMainGameMessage()).queue(message -> message.delete().queue());
+            return;
+        }
         StringBuilder playerlistSB = new StringBuilder();
         for (Player player : games.get(channel.getIdLong()).getPlayers()) {
             playerlistSB.append(player.getUsername() + "\r");
