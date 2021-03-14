@@ -5,5 +5,6 @@ public enum PlayerListStatus {
     unsuccessful,
     contains,
     containsNot,
+    isBanned,
     gameStartet;
 }

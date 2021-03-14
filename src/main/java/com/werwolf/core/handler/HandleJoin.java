@@ -27,6 +27,8 @@ public class HandleJoin extends MessageHandler {
                 channel.sendMessage(event.getAuthor().getAsMention() + " successfully joined the game!").queue();
             else if(result == PlayerListStatus.contains)
                 channel.sendMessage(event.getAuthor().getAsMention() + " is already in the game.").queue();
+            else if(result == PlayerListStatus.isBanned)
+                channel.sendMessage(event.getAuthor().getAsMention() + " is banned from this game.").queue();
             else
                 channel.sendMessage(event.getAuthor().getAsMention() + " something went wrong.").queue();
             return true;

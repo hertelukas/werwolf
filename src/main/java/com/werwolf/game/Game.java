@@ -31,6 +31,7 @@ public class Game {
 
     public PlayerListStatus addPlayer(@NotNull Player player) {
         if(hasPlayer(player.getId())) return PlayerListStatus.contains;
+        if(isBanned(player.getId())) return PlayerListStatus.isBanned;
         players.add(player);
         return PlayerListStatus.successful;
     }
@@ -73,6 +74,13 @@ public class Game {
     public boolean hasPlayer(long id){
         for (Player player : players) {
             if(player.getId() == id) return true;
+        }
+        return false;
+    }
+
+    public boolean isBanned(long id){
+        for (Player bannedPlayer : bannedPlayers) {
+            if(bannedPlayer.getId() == id) return true;
         }
         return false;
     }
