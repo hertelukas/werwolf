@@ -76,6 +76,7 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
+            System.out.println("Spiel erfolgreich gestoppt");
         }
         catch (Exception e){
             System.out.println("Failed to remove werewolf channel: " + e.getMessage());
