@@ -1,6 +1,6 @@
 package com.werwolf.game.Controler;
 
-import com.werwolf.game.Game;
+import com.werwolf.game.*;
 
 public class GameController {
     boolean isActive;
@@ -23,7 +23,8 @@ public class GameController {
     public boolean nextDay() {
         //TODO
         isNight = false;
-        dayController.startDay();
+        // if (gameStatus() == GameStatus.Cont)
+            dayController.startDay();
         return false;
     }
 
@@ -32,6 +33,17 @@ public class GameController {
         isNight = true;
         nightController.startNight();
         return false;
+    }
+
+    public GameStatus gameStatus() {
+        long werewolves = game.getPlayers().stream().filter(p -> p.getCharacterType() == CharacterType.Werewolf).count();
+        long alive = game.getPlayers().stream().filter(Player::isAlive).count();
+        if (werewolves == 0)
+            return GameStatus.VillagerWin;
+        else if (werewolves >= (alive - werewolves))
+            return GameStatus.WolfWin;
+        else
+            return GameStatus.Cont;
     }
 
     public boolean isActive() {
