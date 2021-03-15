@@ -61,7 +61,7 @@ public class Game {
         if(voiceChannelID != 0){
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             if(voiceChannel != null)
-                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "test.mp3", true);
+                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true);
         }
 
         System.out.println("Erste Nacht gestartet");
