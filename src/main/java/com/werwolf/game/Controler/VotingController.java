@@ -43,7 +43,7 @@ public class VotingController {
                 if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
                     votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                     alreadyVoted.add(voter);
-                    System.out.println(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " wurde von " + gameController.getGame().getPlayer(voter).getUsername() + "gewählt in der Nacht!");
+                    System.out.println(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " wurde von " + gameController.getGame().getPlayer(voter).getUsername() + " gewählt in der Nacht!");
                 }
             }
 
