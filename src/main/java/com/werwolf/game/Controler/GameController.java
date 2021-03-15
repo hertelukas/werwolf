@@ -19,8 +19,8 @@ public class GameController {
     boolean isActive;
     boolean isNight;
     Game game;
-    long wolfVoteTime;
-    long dayTime; // oder voteTime (muss noch evtl geklaert werden)
+    long wolfVoteTime = 60000;
+    long dayTime = 300000; // oder voteTime (muss noch evtl geklaert werden)
     NightController nightController;
     DayController dayController;
     private VotingController votingController = new VotingController(this);
