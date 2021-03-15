@@ -34,7 +34,6 @@ public class VotingController {
     public void vote(String playerPrefix, long voter) {
 
         boolean finished = true;
-        System.out.println(playerPrefixmap + "   " + nightVoting );
 
         if (nightVoting) {
             System.out.println(gameController.nightController.nights.peek().getAlive().toString());
@@ -60,7 +59,6 @@ public class VotingController {
 
 
         } else {
-            System.out.println(gameController.dayController.days.peek().getAlive().toString());
             if (gameController.getGame().getPlayer(voter).isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 alreadyVoted.add(voter);
