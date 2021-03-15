@@ -94,10 +94,10 @@ public class DayController {
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
         game.getVotingController().newVoting(true);
 
-        char base = 'A';
+        char prefix = 'A';
 
         for (Player p : alive) {
-            playerSb.append(base++).append(": ").append(p.getUsername()).append("\r");
+            playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSb.toString(), true);
