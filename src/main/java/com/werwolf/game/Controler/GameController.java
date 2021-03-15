@@ -74,6 +74,22 @@ public class GameController {
         return votingController;
     }
 
+    public boolean isVoting() {
+        if (isNight) {
+            return nightController.isVotingTime();
+        } else {
+            return dayController.isVotingTime();
+        }
+    }
+
+    public void setVoting(boolean isVotingTime) {
+        if (isNight) {
+            nightController.setVotingTime(isVotingTime);
+        } else {
+            dayController.setVotingTime(isVotingTime);
+        }
+    }
+
     public Long getVotingMessage() {
         if (isNight) {
             if (nightController.isVotingTime()) {

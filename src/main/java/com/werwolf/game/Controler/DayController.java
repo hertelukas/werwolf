@@ -109,5 +109,9 @@ public class DayController {
         }
         return null;
     }
+
+    public void setVotingTime(boolean votingTime) {
+        this.votingTime = votingTime;
+    }
 }
 
