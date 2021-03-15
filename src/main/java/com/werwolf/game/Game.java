@@ -19,6 +19,7 @@ public class Game {
     private long mainGameMessage;
     private GameController controller = new GameController(this);
     private Guild guild;
+    private GameStatus status;
 
     private final static float WERWOLF_SPAWN_RATE = 0.5f;
 
@@ -28,11 +29,16 @@ public class Game {
         if (players.length > 0) this.players = Arrays.asList(players);
         this.players.add(host);
         this.guild = guild;
+        status = GameStatus.Created;
     }
 
     public boolean start() {
+        if(status == GameStatus.Running || status == GameStatus.Stopped) {
+            return false;
+        }
+        if(spawnWerewolves()) status = GameStatus.Running;
 
-        return (spawnWerewolves());
+        return true;
 
     }
 
@@ -142,6 +148,12 @@ public class Game {
         this.mainGameMessage = mainGameMessage;
     }
 
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    //Methods
+
     private boolean spawnWerewolves() {
         //Create the werewolves
         for (Player player : players) {
@@ -167,7 +179,7 @@ public class Game {
         try {
             //If there is no werewolf channel, create a new one
             if (guild.getTextChannelsByName(werewolfChannelName, true).size() == 0) {
-                guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position + 1).setSlowmode(10).complete();
+                guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position).setSlowmode(10).complete();
             }
 
             wolfChannelID = guild.getTextChannelsByName(werewolfChannelName, true).get(0).getIdLong();
