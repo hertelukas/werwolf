@@ -168,6 +168,9 @@ public class Game {
         this.mainGameMessage = mainGameMessage;
     }
 
+    public GameController getController() {
+        return controller;
+    }
 
     public TextChannel getChannel() {
         return channel;

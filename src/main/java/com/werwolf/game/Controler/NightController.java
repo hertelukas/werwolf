@@ -10,7 +10,7 @@ public class NightController {
 
     private Game game;
     private long voteTime;
-    private Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
+    Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
     private boolean votingtime = false;
     private long votingMessageID;
 
