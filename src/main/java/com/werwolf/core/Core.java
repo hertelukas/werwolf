@@ -20,7 +20,8 @@ public class Core {
     public JDA login(MainListener mainListener) throws LoginException {
         EnumSet<GatewayIntent> intents = EnumSet.of(
                 GatewayIntent.GUILD_MESSAGES,
-                GatewayIntent.GUILD_MESSAGE_REACTIONS
+                GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                GatewayIntent.GUILD_VOICE_STATES
         );
 
         return JDABuilder.create(token, intents).addEventListeners(mainListener).build();

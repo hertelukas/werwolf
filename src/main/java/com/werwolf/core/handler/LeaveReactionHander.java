@@ -13,9 +13,7 @@ public class LeaveReactionHander extends ReactionHandler {
 
         TextChannel channel = event.getChannel();
 
-
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
-
 
         Game currentGame = games.get(channel.getIdLong());
         //If there is no game in this channel, return

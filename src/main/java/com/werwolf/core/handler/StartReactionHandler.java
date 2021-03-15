@@ -1,7 +1,6 @@
 package com.werwolf.core.handler;
 
 import com.werwolf.game.Game;
-import com.werwolf.game.GameStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class StartReactionHandler extends ReactionHandler{
 
             updateReactions(channel, event.getMessageIdLong());
             if (game.getHost().getId() == event.getUser().getIdLong()) {
-                if (game.getStatus() == GameStatus.Running || game.getStatus() == GameStatus.Stopped) {
+                if (game.isActive()) {
                     channel.sendMessage("Game is already running").queue();
                 } else {
                     if (game.start()) {

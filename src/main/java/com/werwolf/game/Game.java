@@ -4,6 +4,7 @@ import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.MemberImpl;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +23,8 @@ public class Game {
     private long mainGameMessage;
     private GameController controller = new GameController(this);
     private Guild guild;
-    private GameStatus status;
+
+    private AudioManager audioManager;
 
     private final static float WERWOLF_SPAWN_RATE = 0.5f;
 
@@ -33,15 +35,19 @@ public class Game {
         if (players.length > 0) this.players = Arrays.asList(players);
         this.players.add(host);
         this.guild = guild;
-        status = GameStatus.Created;
+        audioManager = guild.getAudioManager();
     }
 
     public boolean start() {
-        if(status == GameStatus.Running || status == GameStatus.Stopped) {
+        if(controller.isActive()) {
             return false;
         }
         controller.setActive(true);
-        if(spawnWerewolves()) status = GameStatus.Running;
+        if(spawnWerewolves()) controller.setActive(true);
+
+        VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
+        audioManager.openAudioConnection(voiceChannel);
+
 
         System.out.println("Erste Nacht gestartet");
         controller.nextNight();
@@ -162,9 +168,6 @@ public class Game {
         this.mainGameMessage = mainGameMessage;
     }
 
-    public GameStatus getStatus() {
-        return status;
-    }
 
     public TextChannel getChannel() {
         return channel;
@@ -176,6 +179,10 @@ public class Game {
         } else {
             return null;
         }
+    }
+
+    public void setVoiceChannelID(long id){
+        voiceChannelID = id;
     }
 
     //Methods

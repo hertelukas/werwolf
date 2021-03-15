@@ -1,7 +1,6 @@
 package com.werwolf.core.handler;
 
 import com.werwolf.game.Game;
-import com.werwolf.game.GameStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class HandleStart extends MessageHandler {
             Game game = games.get(channel.getIdLong());
 
             if (game.getHost().getId() == event.getAuthor().getIdLong()) {
-                if (game.getStatus() == GameStatus.Running || game.getStatus() == GameStatus.Stopped) {
+                if (game.isActive()) {
                     channel.sendMessage("Game is already running").queue();
                 } else {
                     if (game.start()) {
