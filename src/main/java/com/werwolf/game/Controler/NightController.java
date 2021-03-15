@@ -72,7 +72,7 @@ public class NightController {
 
         }
 
-        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true);
+        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true).setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/12/32/tombstone-159792_960_720.png");
         game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
