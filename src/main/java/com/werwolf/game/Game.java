@@ -74,6 +74,8 @@ public class Game {
         try {
             Handler.deleteGame(channelID);
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
+            //Close audio connection no matter what
+            guild.getAudioManager().closeAudioConnection();
         }
         catch (Exception e){
             System.out.println("Failed to remove werewolf channel: " + e.getMessage());
@@ -98,7 +100,6 @@ public class Game {
             for (Player player : players) {
                 if (player.getId() == id) {
                     players.remove(player);
-                    //Todo if size is 0 we want to delete this game
                     if (player.getId() == host.getId() && players.size() > 0) {
                         host = players.get(0);
                     }
