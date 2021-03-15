@@ -2,7 +2,10 @@ package com.werwolf.game;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.werwolf.core.handler.AudioHandler;
+import com.werwolf.core.handler.GuildAudioManager;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
 import com.werwolf.game.Controler.VotingController;
@@ -30,7 +33,6 @@ public class Game {
     private GameController controller = new GameController(this);
     private Guild guild;
 
-    private AudioManager audioManager;
 
     private final static float WERWOLF_SPAWN_RATE = 0.5f;
     private boolean tumMode = false;
@@ -42,23 +44,24 @@ public class Game {
         if (players.length > 0) this.players = Arrays.asList(players);
         this.players.add(host);
         this.guild = guild;
-        audioManager = guild.getAudioManager();
     }
 
     public boolean start() {
         if(controller.isActive()) {
             return false;
         }
+
         controller.setActive(true);
+
+        //Story
+        controller.sendIntroMessage();
         if(spawnWerewolves()) controller.setActive(true);
 
+        //If there is a voice channel specified, we try to join
         if(voiceChannelID != 0){
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
-            audioManager.openAudioConnection(voiceChannel);
-
-            AudioHandler handler = new AudioHandler();
-            audioManager.setSendingHandler(handler.getAudioPlayerSendHandler());
-            handler.play("https://soundcloud.com/noraenpure/nora-en-pure-diving-with-whales-daniel-portman-radio-mix?in=digitalstreams/sets/saxxyhouse");
+            if(voiceChannel != null)
+                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "https://soundcloud.com/noraenpure/nora-en-pure-diving-with-whales-daniel-portman-radio-mix");
         }
 
         System.out.println("Erste Nacht gestartet");
@@ -71,8 +74,8 @@ public class Game {
         try {
             Handler.deleteGame(channelID);
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
-            audioManager.closeAudioConnection();
-
+            //Close audio connection no matter what
+            guild.getAudioManager().closeAudioConnection();
         }
         catch (Exception e){
             System.out.println("Failed to remove werewolf channel: " + e.getMessage());
@@ -97,7 +100,6 @@ public class Game {
             for (Player player : players) {
                 if (player.getId() == id) {
                     players.remove(player);
-                    //Todo if size is 0 we want to delete this game
                     if (player.getId() == host.getId() && players.size() > 0) {
                         host = players.get(0);
                     }
@@ -214,6 +216,14 @@ public class Game {
         return null;
     }
 
+    public void setTumMode(boolean tumMode) {
+        this.tumMode = tumMode;
+    }
+
+    public boolean getTumMode() {
+        return tumMode;
+    }
+
     //Methods
     private boolean spawnWerewolves() {
         //Create the werewolves
@@ -266,11 +276,4 @@ public class Game {
         return true;
     }
 
-    public void setTumMode(boolean tumMode) {
-        this.tumMode = tumMode;
-    }
-
-    public boolean getTumMode() {
-        return tumMode;
-    }
 }
