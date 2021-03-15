@@ -21,8 +21,8 @@ public class MainListener extends ListenerAdapter {
 
     @Value("${prefix}")
     private String prefix;
-    private List<MessageHandler> messageHandlers;
-    private List<ReactionHandler> reactionHandlers;
+    private final List<MessageHandler> messageHandlers;
+    private final List<ReactionHandler> reactionHandlers;
 
 
     public MainListener(List<ReactionHandler> reactionHandlers, MessageHandler... handlers) {

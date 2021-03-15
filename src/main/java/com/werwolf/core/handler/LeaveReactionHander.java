@@ -1,7 +1,6 @@
 package com.werwolf.core.handler;
 
 import com.werwolf.game.Game;
-import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;

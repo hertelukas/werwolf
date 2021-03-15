@@ -6,8 +6,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
 @Service
 public class HandleBan extends MessageHandler{
 

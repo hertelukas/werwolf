@@ -23,7 +23,7 @@ public class GameController {
     long dayTime = 300000; // oder voteTime (muss noch evtl geklaert werden)
     NightController nightController;
     DayController dayController;
-    private VotingController votingController = new VotingController(this);
+    private final VotingController votingController = new VotingController(this);
     GameStatus status = GameStatus.Cont;
 
     public GameController(Game game) {
@@ -154,9 +154,9 @@ public class GameController {
     }
 
     public static String getRandomStory(boolean tumMode, boolean isNight) {
-        String story = "ERROR";
+        String story;
         try {
-            File file = null;
+            File file;
             if (isNight) {
                 file = new File(new URI("src/main/resources/NightStories.xml").toString());
             } else {
@@ -165,7 +165,7 @@ public class GameController {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
-            int randy = (int) (Math.random() * (tumMode ? (isNight ? NIGHT_TUM_STORY_AMOUNT : DAY_TUM_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
+            int randy = (int) (Math.random() * (tumMode ? (isNight ? NIGHT_TUM_STORY_AMOUNT : NIGHT_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
             story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
         } catch (Exception e) {
             return "ERROR";
@@ -174,7 +174,7 @@ public class GameController {
     }
 
     public static String getRandomIntro(boolean tumMode) {
-        String story = "ERROR";
+        String story;
         try {
             File file = new File(new URI("src/main/resources/IntroStories.xml").toString());
 

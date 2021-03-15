@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Day {
 
-    private List<Player> alive;
-    private String story;
+    private final List<Player> alive;
+    private final String story;
 
     private final boolean tumMode;
 

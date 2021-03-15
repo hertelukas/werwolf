@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AudioHandler extends ListenerAdapter {
-    private static AudioHandler audioHandler = new AudioHandler();
+    private static final AudioHandler audioHandler = new AudioHandler();
 
     private final AudioPlayerManager playerManager;
     private final Map<Long, GuildAudioManager> guildAudioManagers;

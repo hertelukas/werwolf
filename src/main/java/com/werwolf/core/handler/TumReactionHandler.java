@@ -22,11 +22,7 @@ public class TumReactionHandler extends ReactionHandler {
 
             updateReactions(channel, event.getMessageIdLong());
             if (game.getHost().getId() == event.getUser().getIdLong()) {
-                if (game.getTumMode()) {
-                    game.setTumMode(false);
-                } else {
-                    game.setTumMode(true);
-                }
+                game.setTumMode(!game.getTumMode());
                 event.getReaction().removeReaction(event.getUser()).queue();
                 updateMainMessage(event.getChannel());
             } else {
