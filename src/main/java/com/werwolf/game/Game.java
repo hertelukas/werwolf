@@ -1,9 +1,13 @@
 package com.werwolf.game;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
 import com.werwolf.game.Controler.VotingController;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.audio.SpeakingMode;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -51,6 +55,10 @@ public class Game {
         if(voiceChannelID != 0){
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             audioManager.openAudioConnection(voiceChannel);
+
+            AudioHandler handler = new AudioHandler();
+            audioManager.setSendingHandler(handler.getAudioPlayerSendHandler());
+            handler.play("https://soundcloud.com/noraenpure/nora-en-pure-diving-with-whales-daniel-portman-radio-mix?in=digitalstreams/sets/saxxyhouse");
         }
 
         System.out.println("Erste Nacht gestartet");
