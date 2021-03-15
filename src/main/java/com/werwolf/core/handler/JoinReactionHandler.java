@@ -12,9 +12,11 @@ public class JoinReactionHandler extends ReactionHandler {
     @Override
     public boolean handle(GuildMessageReactionAddEvent event) {
 
+        TextChannel channel = event.getChannel();
+        updateReactions(channel);
+
         if (!event.getReactionEmote().getAsReactionCode().equals("✅")) return false;
 
-        TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
