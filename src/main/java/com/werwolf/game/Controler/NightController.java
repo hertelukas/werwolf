@@ -29,16 +29,24 @@ public class NightController {
         LOGGER.info("Nacht startet");
 
         //Fügt die neue Nacht dem Stackhinzu
-        if (nights.isEmpty()) nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
-        else nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
+        if (nights.isEmpty())
+            nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
+        else
+            nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
 
         //Storytime
         StringBuilder storySB = new StringBuilder();
-        storySB.append("Die ").append(nights.size()).append(". Nacht bricht an, ").append(nights.peek().getStory());
+        storySB.append("Die ")
+                .append(nights.size())
+                .append(". ")
+                .append(game.getTumMode() ? "Klausurenphase" : "Nacht")
+                .append("bricht an, ")
+                .append(nights.peek().getStory());
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(nights.size() + ". Nacht");
         storyBuilder.setDescription(storySB);
-        if (game.getTumMode()) storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2017/01/18/12/33/session-1989711_960_720.png");
+        if (game.getTumMode())
+            storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2017/01/18/12/33/session-1989711_960_720.png");
         else storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2016/11/29/13/12/cloudy-1869753_960_720.jpg");
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
@@ -66,7 +74,7 @@ public class NightController {
 
         char prefix = 'A';
         Map.Entry<Long, Integer> votedPlayer = null;
-        for (Map.Entry<Long, Integer> player: result.entrySet()) {
+        for (Map.Entry<Long, Integer> player : result.entrySet()) {
             if (votedPlayer == null) votedPlayer = player;
 
             if (votedPlayer.getValue() < player.getValue()) votedPlayer = player;
@@ -118,7 +126,7 @@ public class NightController {
         }
         game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
             int unicodeStart = 0xDDE6;
-            for (int i=0; i < nights.peek().getAlive().size(); i++) {
+            for (int i = 0; i < nights.peek().getAlive().size(); i++) {
                 message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
                 //Ins Votinghinzufügen
                 game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + i), nights.peek().getAlive().get(i).getId());

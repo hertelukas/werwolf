@@ -36,7 +36,11 @@ public class DayController {
         Collection<Player> killedDuringNight = CollectionUtils.subtract(lastNight, currAlive);
 
         StringBuilder storySb = new StringBuilder();
-        storySb.append("Der ").append(days.size()).append(". Tag beginnt, in der Nacht");
+        storySb.append(game.getTumMode()?"Die ":"Der ")
+                .append(days.size())
+                .append(game.getTumMode()?". Semesterferien beginnen":". Tag beginnt")
+                .append(", in der")
+                .append(game.getTumMode() ? "Klausurenphase" : "Nacht");
         if(killedDuringNight.size() == 0)
             storySb.append(" wurde niemand getötet");
         else {
@@ -48,7 +52,7 @@ public class DayController {
                     storySb.append(", ");
                 }
             }
-            storySb.append(" getötet.");
+            storySb.append(game.getTumMode() ? " exmatrikuliert." : " getötet.");
         }
 
         EmbedBuilder storyBuilder = new EmbedBuilder();
