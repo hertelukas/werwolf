@@ -25,7 +25,7 @@ public class GameController {
     boolean isNight;
     Game game;
     long wolfVoteTime = 60000;
-    long dayTime = 300000; // oder voteTime (muss noch evtl geklaert werden)
+    long dayTime = 300000;
     NightController nightController;
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
@@ -67,7 +67,7 @@ public class GameController {
 
     private void gameFinished() {
         EmbedBuilder finishedBuilder = new EmbedBuilder();
-
+        // todo TUM story ende
         if (status == GameStatus.WolfWin) {
             //TODO story am ende
             finishedBuilder.setTitle("Wölfe haben gewonnen");
