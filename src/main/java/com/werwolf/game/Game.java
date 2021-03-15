@@ -217,21 +217,37 @@ public class Game {
         return tumMode;
     }
 
+    public VoiceChannel getVoiceChannel() {
+        return guild.getVoiceChannelById(voiceChannelID);
+    }
+
     //Methods
     private boolean spawnWerewolves() {
+
+        boolean tmp = true;
         //Create the werewolves
         for (Player player : players) {
             Random r = new Random();
             float temp = r.nextFloat();
 
-            if (temp < WERWOLF_SPAWN_RATE) {
+            if (tmp) {
+                tmp = false;
                 player.characterType = CharacterType.Werewolf;
                 Werewolf werewolf = new Werewolf(player);
                 werewolves.add(werewolf);
                 player.sendMessage("You are a werewolf");
-            }else{
+            } else {
                 player.sendMessage("You are a villager");
             }
+
+//            if (temp < WERWOLF_SPAWN_RATE) {
+//                player.characterType = CharacterType.Werewolf;
+//                Werewolf werewolf = new Werewolf(player);
+//                werewolves.add(werewolf);
+//                player.sendMessage("You are a werewolf");
+//            }else{
+//                player.sendMessage("You are a villager");
+//            }
         }
 
         TextChannel channel = guild.getTextChannelById(channelID);

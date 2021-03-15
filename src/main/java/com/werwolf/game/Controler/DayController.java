@@ -86,9 +86,9 @@ public class DayController {
                 player.die();
                 playerSb.append("  🗡🩸");
             }
+            playerSb.append("\r");
         }
 
-        playerSb.append("\r");
 
         votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSb.toString(), true);
         if (game.getTumMode()) {
