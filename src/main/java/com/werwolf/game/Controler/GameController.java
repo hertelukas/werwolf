@@ -47,7 +47,7 @@ public class GameController {
             dayController.startDay();
             return true;
         } else {
-            gameFinihed();
+            gameFinished();
             return false;
         }
     }
@@ -60,12 +60,12 @@ public class GameController {
             nightController.startNight();
             return true;
         } else {
-            gameFinihed();
+            gameFinished();
             return false;
         }
     }
 
-    private void gameFinihed() {
+    private void gameFinished() {
         EmbedBuilder finishedBuilder = new EmbedBuilder();
 
         if (status == GameStatus.WolfWin) {
