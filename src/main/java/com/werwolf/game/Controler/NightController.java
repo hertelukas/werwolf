@@ -41,16 +41,16 @@ public class NightController {
     }
 
     void continueAfterVoting() {
-        updateVotingResult(game.getVotingController().getResult());
+        updateVotingResult();
 
         //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
 
         //Tag bricht an
     }
 
-    private void updateVotingResult(HashMap<Long, Integer> result) {
+    private void updateVotingResult() {
         //Voting auswerten
-        result = game.getController().getVotingController().getResult();
+        HashMap<Long, Integer> result = game.getController().getVotingController().getResult();
         StringBuilder playerSB = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
 
