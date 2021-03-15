@@ -94,7 +94,7 @@ public class DayController {
         if (game.getTumMode()) {
             votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
         } else {
-            votingMessageBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/12/32/tombstone-159792_960_720.png");
+            votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/821091668974633080/821134542374961172/firsttime.jpeg");
         }
         game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
             message.editMessage(votingMessageBuilder.build()).queue();
