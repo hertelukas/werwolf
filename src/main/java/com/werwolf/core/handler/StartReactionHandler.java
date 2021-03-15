@@ -13,7 +13,6 @@ public class StartReactionHandler extends ReactionHandler{
 
         TextChannel channel = event.getChannel();
 
-
         if (!event.getReactionEmote().getAsReactionCode().equals("▶")) return false;
 
         if (games.containsKey(channel.getIdLong())) {

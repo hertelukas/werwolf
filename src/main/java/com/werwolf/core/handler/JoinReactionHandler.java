@@ -14,9 +14,7 @@ public class JoinReactionHandler extends ReactionHandler {
 
         TextChannel channel = event.getChannel();
 
-
         if (!event.getReactionEmote().getAsReactionCode().equals("✅")) return false;
-
 
         if (games.containsKey(channel.getIdLong())) {
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
@@ -24,18 +22,19 @@ public class JoinReactionHandler extends ReactionHandler {
             updateReactions(channel, event.getMessageIdLong());
 
             PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
-            if(result == PlayerListStatus.successful) {
+
+            if(result == PlayerListStatus.successful)
                 updateMainMessage(channel);
-            } else if(result == PlayerListStatus.contains)
-                channel.sendMessage(event.getUser().getAsMention() + " is already in the game.").queue();
             else if(result == PlayerListStatus.isBanned)
-                channel.sendMessage(event.getUser().getAsMention() + " is banned from this game.").queue();
+                channel.sendMessage(event.getUser().getAsMention() + " you are banned").queue();
             else
-                channel.sendMessage(event.getUser().getAsMention() + " something went wrong.").queue();
+                System.out.println("Something went wrong: " + result.toString());
+
         } else {
             channel.sendMessage(event.getUser().getAsMention() + " there is no game in this channel.").queue();
         }
-        return true;
 
+        updateReactions(channel, event.getMessageIdLong());
+        return true;
     }
 }

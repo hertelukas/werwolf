@@ -1,6 +1,7 @@
 package com.werwolf.core.handler;
 
 import com.werwolf.game.Game;
+import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -17,19 +18,16 @@ public class LeaveReactionHander extends ReactionHandler {
 
         Game currentGame = games.get(channel.getIdLong());
         //If there is no game in this channel, return
-        if(currentGame == null) {
+        if (currentGame == null) {
             channel.sendMessage(event.getUser().getAsMention() + " There is no game in this channel.").queue();
-        }
-        else{
+        } else {
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
             updateReactions(channel, event.getMessageIdLong());
             PlayerListStatus result = currentGame.removePlayer(event.getUser().getIdLong());
-            if(result == PlayerListStatus.successful) {
+            if (result == PlayerListStatus.successful) {
                 updateMainMessage(channel);
-            } else if(result == PlayerListStatus.containsNot)
-                channel.sendMessage(event.getUser().getAsMention() + " is not in the game").queue();
-            else
-                channel.sendMessage(event.getUser().getAsMention() + " something went wrong.").queue();
+            } else
+                System.out.println("Failed to leave game: " + result.toString());
         }
 
         return true;
