@@ -20,7 +20,6 @@ public class VotingController {
     private boolean nightVoting = false;
     private List<Long> alreadyVoted = new ArrayList<>();
 
-
     public VotingController(GameController controller) {
         this.gameController = controller;
     }
@@ -97,4 +96,3 @@ public class VotingController {
         return votings;
     }
 }
-

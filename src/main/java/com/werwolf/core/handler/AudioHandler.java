@@ -22,7 +22,6 @@ import java.util.Map;
 public class AudioHandler extends ListenerAdapter {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AudioHandler.class);
-
     private static final AudioHandler audioHandler = new AudioHandler();
 
     private final AudioPlayerManager playerManager;

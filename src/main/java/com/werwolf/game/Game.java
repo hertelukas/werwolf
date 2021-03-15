@@ -29,8 +29,6 @@ public class Game {
     private long mainGameMessage;
     private final GameController controller = new GameController(this);
     private final Guild guild;
-
-
     private boolean tumMode = false;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
@@ -300,5 +298,4 @@ public class Game {
 
         return true;
     }
-
 }

@@ -4,7 +4,6 @@ import com.werwolf.game.Controler.GameController;
 
 import java.util.List;
 
-
 public class Night {
 
     private final List<Player> alive;

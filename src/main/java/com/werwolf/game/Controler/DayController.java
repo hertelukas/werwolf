@@ -64,11 +64,6 @@ public class DayController {
 
         LOGGER.info("Voting startet");
         createVoting();
-
-        // Update Tag Objekt mit Voting stats
-
-        // begin night
-
     }
 
     public void continueAfterVoting() {
@@ -113,7 +108,6 @@ public class DayController {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
         });
-
     }
 
     private void createVoting() {
@@ -141,7 +135,6 @@ public class DayController {
             }
             votingMessageID = message.getIdLong();
         });
-
         votingTime = true;
     }
 
@@ -166,7 +159,4 @@ public class DayController {
     public void setVotingTime(boolean votingTime) {
         this.votingTime = votingTime;
     }
-
-
 }
-

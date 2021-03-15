@@ -13,7 +13,6 @@ import java.net.URI;
 
 public class GameController {
 
-
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
     private static final int DAY_STORY_AMOUNT = 1;
