@@ -173,6 +173,14 @@ public class Game {
         return channel;
     }
 
+    public Long getCurrentVotingMessage() {
+        if (controller.isActive()) {
+            return controller.getVotingMessage();
+        } else {
+            return null;
+        }
+    }
+
     //Methods
     private boolean spawnWerewolves() {
         //Create the werewolves

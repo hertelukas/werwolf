@@ -11,9 +11,11 @@ import java.util.stream.Collectors;
 
 public class NightController {
 
-    Game game;
-    long voteTime;
-    Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
+    private Game game;
+    private long voteTime;
+    private Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
+    private boolean votingtime = false;
+    private long VotingMessageID;
 
     public NightController(Game game, long wolfVoteTime) {
         this.game = game;
@@ -106,6 +108,12 @@ public class NightController {
         game.sendToWerewolfChannel(werewolfMessage.build());
     }
 
-    // first night?
+    // Getter/Setter
+    public boolean isVotingtime() {
+        return votingtime;
+    }
 
+    public long getVotingMessageID() {
+        return VotingMessageID;
+    }
 }

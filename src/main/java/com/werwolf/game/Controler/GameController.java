@@ -55,4 +55,17 @@ public class GameController {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public Long getVotingMessage() {
+        if (isNight) {
+            if (nightController.isVotingtime()) {
+                return nightController.getVotingMessageID();
+            } else {
+                return null;
+            }
+        } else {
+            //TODO dayVoting return
+            return null;
+        }
+    }
 }
