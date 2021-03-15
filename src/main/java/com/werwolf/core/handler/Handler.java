@@ -35,7 +35,7 @@ public abstract class Handler {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png").setTitle("Werewolf: " + channel.getName())
                 .addField("Host:", games.get(channel.getIdLong()).getHost().getUsername(), false)
-                .addField("Player:", playerlistSB.toString(), false).addField("Configurations:", "TUM-MODE: " + "false", false);
+                .addField("Player:", playerlistSB.toString(), false).addField("Configurations:", "TUM-MODE: " + game.getTumMode(), false);
         channel.retrieveMessageById(game.getMainGameMessage()).queue(message -> message.editMessage(embedBuilder.build()).queue());
     }
 
