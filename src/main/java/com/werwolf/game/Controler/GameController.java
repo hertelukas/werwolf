@@ -90,6 +90,14 @@ public class GameController {
         return votingController;
     }
 
+    public void setDayTime(long dayTime) {
+        this.dayTime = dayTime;
+    }
+
+    public void setWolfVoteTime(long wolfVoteTime) {
+        this.wolfVoteTime = wolfVoteTime;
+    }
+
     public boolean isVoting() {
         if (isNight) {
             return nightController.isVotingTime();
@@ -118,7 +126,7 @@ public class GameController {
         if (isNight) {
             nightController.continueAfterVoting();
         } else {
-            //TODO
+            dayController.continueAfterVoting();
         }
     }
 

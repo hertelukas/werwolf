@@ -15,7 +15,7 @@ public class VotingController {
     private List<Long> alreadyVoted = new ArrayList<>();
 
 
-    public VotingController(GameController controller){
+    public VotingController(GameController controller) {
         this.gameController = controller;
     }
 
@@ -38,6 +38,7 @@ public class VotingController {
         if (nightVoting) {
             if (gameController.getGame().getPlayer(voter).isAlive() &&
                     gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
+
                 if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
                     votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                     alreadyVoted.add(voter);
@@ -57,7 +58,19 @@ public class VotingController {
 
 
         } else {
-            //TODO
+            if (gameController.getGame().getPlayer(voter).isAlive()) {
+                votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
+                alreadyVoted.add(voter);
+                System.out.println(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + "wurden von " + gameController.getGame().getPlayer(voter).getUsername() + "gewählt!");
+            }
+
+            for (Player player : gameController.getGame().getPlayers()) {
+                if (player.isAlive()) {
+                    if (!alreadyVoted.contains(player.getId())) {
+                        finished = false;
+                    }
+                }
+            }
         }
 
         if (finished) {
