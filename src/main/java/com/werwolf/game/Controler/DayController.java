@@ -32,7 +32,7 @@ public class DayController {
         Collection<Player> killedDuringNight = CollectionUtils.subtract(lastNight, currAlive);
 
         StringBuilder storySb = new StringBuilder();
-        storySb.append("Der").append(days.size()).append(". Tag beginnt, in der Nacht");
+        storySb.append("Der ").append(days.size()).append(". Tag beginnt, in der Nacht");
         if(killedDuringNight.size() == 0)
             storySb.append(" wurde niemand getötet");
         else {
@@ -64,6 +64,8 @@ public class DayController {
     public void continueAfterVoting() {
         updateVotingResult();
 
+        game.getController().nextNight();
+
     }
 
     public void updateVotingResult() {
@@ -85,6 +87,17 @@ public class DayController {
         }
 
         playerSb.append("\r");
+
+        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSb.toString(), true);
+        if (game.getTumMode()) {
+            votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
+        } else {
+            votingMessageBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/12/32/tombstone-159792_960_720.png");
+        }
+        game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
+            message.editMessage(votingMessageBuilder.build()).queue();
+            message.clearReactions().queue();
+        });
 
     }
 
