@@ -7,10 +7,7 @@ import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DayController {
@@ -64,6 +61,33 @@ public class DayController {
 
     }
 
+    public void continueAfterVoting() {
+        updateVotingResult();
+
+    }
+
+    public void updateVotingResult() {
+        HashMap<Long, Integer> result = game.getController().getVotingController().getResult();
+        StringBuilder playerSb = new StringBuilder();
+        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+
+        char prefix = 'A';
+        Map.Entry<Long, Integer> votedPlayer = null;
+        for(Map.Entry<Long, Integer> player : result.entrySet()) {
+            if(votedPlayer == null || votedPlayer.getValue() < player.getValue())
+                votedPlayer = player;
+        }
+
+        for(Player player : days.peek().getAlive()) {
+            playerSb.append(prefix++).append(": ").append(player.getUsername());
+            if (player.getId() == votedPlayer.getKey())
+                playerSb.append("  🗡🩸");
+        }
+
+        playerSb.append("\r");
+
+    }
+
     private void createVoting() {
         List<Player> alive = days.peek().getAlive();
         StringBuilder playerSb = new StringBuilder();
@@ -93,6 +117,7 @@ public class DayController {
         votingTime = true;
     }
 
+
     public boolean isVotingTime() {
         return votingTime;
     }
@@ -113,5 +138,7 @@ public class DayController {
     public void setVotingTime(boolean votingTime) {
         this.votingTime = votingTime;
     }
+
+
 }
 

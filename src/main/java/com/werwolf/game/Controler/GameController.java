@@ -115,7 +115,7 @@ public class GameController {
         if (isNight) {
             nightController.continueAfterVoting();
         } else {
-            //TODO
+            dayController.continueAfterVoting();
         }
     }
 
