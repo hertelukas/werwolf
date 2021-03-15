@@ -70,6 +70,7 @@ public class MainListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReactionAdd(@Nonnull GuildMessageReactionAddEvent event) {
         boolean found = false;
+        if (event.getUser().isBot()) return;
 
         for (ReactionHandler handler : reactionHandlers) {
             found = handler.handle(event) || found;
@@ -88,6 +89,7 @@ public class MainListener extends ListenerAdapter {
 
     private boolean commandHandled(GuildMessageReceivedEvent event, String command, String... args){
         boolean found = false;
+
 
         for (MessageHandler handler : messageHandlers) {
             found = handler.handle(event, command, args) || found;
