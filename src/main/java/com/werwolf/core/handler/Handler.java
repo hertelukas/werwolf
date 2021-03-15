@@ -40,6 +40,7 @@ public abstract class Handler {
     }
 
     public static void deleteGame(long id){
-        games.remove(id);
+        Game game = games.remove(id);
+        if(game == null) System.out.println("No game removed.");
     }
 }

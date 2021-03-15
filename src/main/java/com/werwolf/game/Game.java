@@ -44,8 +44,8 @@ public class Game {
 
     public boolean stop() {
         try {
-            Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             Handler.deleteGame(channelID);
+            Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
         }
         catch (Exception e){
             System.out.println("Failed to remove werewolf channel: " + e.getMessage());
