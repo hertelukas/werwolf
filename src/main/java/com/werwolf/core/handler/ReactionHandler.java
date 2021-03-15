@@ -11,24 +11,19 @@ public abstract class ReactionHandler extends Handler{
 
 
     void updateReactions(TextChannel channel, long messageID) {
+        if(games.get(channel.getIdLong()).getPlayers().size() <= 1) return;
+
         channel.retrieveMessageById(messageID).queue(message -> {
-            try {
-                for (MessageReaction reaction : message.getReactions()) {
-                    try {
-                        reaction.retrieveUsers().queue(users -> {
-                            for (User user : users) {
-                                if (!user.isBot()) {
-                                    System.out.println("test");
-                                    try {
-                                        message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).queue();
-                                    } catch (Exception e) {
-                                    }
-                                }
-                            }
-                        });
-                    } catch (Exception e){}
+            for (MessageReaction reaction : message.getReactions()) {
+                reaction.retrieveUsers().queue(users -> {
+                    for (User user : users) {
+                        if (!user.isBot()) {
+                            System.out.println("test");
+                            message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).queue();
+                        }
+                    }
+                });
             }
-            }catch (Exception e) {}
         });
     }
 }
