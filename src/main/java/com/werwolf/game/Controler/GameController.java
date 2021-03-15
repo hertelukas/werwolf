@@ -36,16 +36,30 @@ public class GameController {
 
     public boolean nextDay() {
         //TODO
-        isNight = false;
-        dayController.startDay();
-        return false;
+        if (status == GameStatus.Cont) {
+            votingController.newVoting(false);
+            isNight = false;
+            dayController.startDay();
+            return true;
+        } else {
+            game.getChannel().sendMessage("Spiel fertig" +  status.toString()).queue();
+            game.stop();
+            return false;
+        }
     }
 
     public boolean nextNight() {
         //TODO
-        isNight = true;
-        nightController.startNight();
-        return false;
+        if (status == GameStatus.Cont) {
+            votingController.newVoting(true);
+            isNight = true;
+            nightController.startNight();
+            return true;
+        } else {
+            game.getChannel().sendMessage("Spiel fertig: " + status.toString()).queue();
+            game.stop();
+            return false;
+        }
     }
 
     public GameStatus gameStatus() {
