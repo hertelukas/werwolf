@@ -36,7 +36,8 @@ public class VotingController {
         boolean finished = true;
 
         if (nightVoting) {
-            if (gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
+            if (gameController.getGame().getPlayer(voter).isAlive() &&
+                    gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
                 if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
                     votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                     alreadyVoted.add(voter);
