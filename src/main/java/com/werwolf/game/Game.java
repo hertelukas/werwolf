@@ -34,7 +34,7 @@ public class Game {
     private Guild guild;
 
 
-    private final static float WERWOLF_SPAWN_RATE = 0.5f;
+    private final static float WERWOLF_SPAWN_RATE = 0.2f;
     private boolean tumMode = false;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
