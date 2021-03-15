@@ -33,15 +33,19 @@ public class VotingController {
 
     public void vote(String playerPrefix, long voter) {
 
+        boolean finished = true;
+
         if (nightVoting) {
             if (gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
-                votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-                alreadyVoted.add(voter);
+                if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
+                    votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
+                    alreadyVoted.add(voter);
+                    System.out.println(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + "wurden von " + gameController.getGame().getPlayer(voter) + "gewählt!");
+                }
             }
 
 
             //Check ob jeder Werewolf gevotet hat
-            boolean finished = true;
             for (Player player : gameController.getGame().getPlayers()) {
                 if (player.isAlive() && player.getCharacterType() == CharacterType.Werewolf) {
                     if (!alreadyVoted.contains(player.getId())) {
@@ -55,11 +59,16 @@ public class VotingController {
             //TODO
         }
 
-        if (gameController.getGame().getCurrentVotingMessage() != null) {
-
+        if (finished) {
+            gameController.setVoting(false);
+            gameController.continueAfterVoting();
         }
 
 
+    }
+
+    public HashMap<Long, Integer> getResult() {
+        return votings;
     }
 }
 

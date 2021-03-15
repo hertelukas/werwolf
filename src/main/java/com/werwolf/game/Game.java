@@ -183,7 +183,7 @@ public class Game {
     }
 
     public Long getCurrentVotingMessage() {
-        if (controller.isActive() && controller.isVoting()) {
+        if (controller.isActive()) {
             return controller.getVotingMessage();
         } else {
             return null;

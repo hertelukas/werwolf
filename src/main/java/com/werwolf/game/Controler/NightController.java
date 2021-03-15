@@ -3,6 +3,8 @@ package com.werwolf.game.Controler;
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -39,15 +41,42 @@ public class NightController {
     }
 
     void continueAfterVoting() {
-
-
-        //Voting durchführen
-
-        //Voting auswerten
+        updateVotingResult(game.getVotingController().getResult());
 
         //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
 
         //Tag bricht an
+    }
+
+    private void updateVotingResult(HashMap<Long, Integer> result) {
+        //Voting auswerten
+        result = game.getController().getVotingController().getResult();
+        StringBuilder playerSB = new StringBuilder();
+        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+
+        char prefix = 'A';
+        Map.Entry<Long, Integer> votedPlayer = null;
+        for (Map.Entry<Long, Integer> player: result.entrySet()) {
+            if (votedPlayer == null) votedPlayer = player;
+
+            if (votedPlayer.getValue() < player.getValue()) votedPlayer = player;
+        }
+
+        for (Player player : nights.peek().getAlive()) {
+            playerSB.append(prefix++ + ": ").append(player.getUsername());
+            if (player.getId() == votedPlayer.getKey()) {
+                playerSB.append("  🗡🩸");
+            }
+
+            playerSB.append("\r");
+
+        }
+
+        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true);
+        game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
+            message.editMessage(votingMessageBuilder.build()).queue();
+            message.clearReactions().queue();
+        });
     }
 
 
