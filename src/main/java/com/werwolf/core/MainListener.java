@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class MainListener extends ListenerAdapter {
