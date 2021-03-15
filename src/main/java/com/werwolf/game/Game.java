@@ -250,7 +250,7 @@ public class Game {
 
         for (int i = 0; i < amount; i++) {
             int playerNumber;
-            do{ playerNumber = (int) (Math.random() * amount);}while(werewolves.contains(playerNumber));
+            do{ playerNumber = (int) (Math.random() * playerSize);}while(werewolves.contains(playerNumber));
             werewolves.add(playerNumber);
             Player player = players.get(playerNumber);
 
