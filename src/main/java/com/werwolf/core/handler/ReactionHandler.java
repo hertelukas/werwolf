@@ -10,6 +10,7 @@ public abstract class ReactionHandler extends Handler{
 
 
     void updateReactions(TextChannel channel, long messageID) {
+        if (games.get(channel.getIdLong()) == null) return;
         if(games.get(channel.getIdLong()).getPlayers().size() <= 1) return;
 
         channel.retrieveMessageById(messageID).queue(message -> {

@@ -43,6 +43,7 @@ public class NightController {
 
     void continueAfterVoting() {
         updateVotingResult();
+        game.getController().gameStatus();
         game.getController().nextDay();
         //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
 
