@@ -11,9 +11,11 @@ public class LeaveReactionHander extends ReactionHandler {
     @Override
     public boolean handle(GuildMessageReactionAddEvent event) {
 
+        TextChannel channel = event.getChannel();
+        updateReactions(channel);
+
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
 
-        TextChannel channel = event.getChannel();
 
         Game currentGame = games.get(channel.getIdLong());
         //If there is no game in this channel, return
