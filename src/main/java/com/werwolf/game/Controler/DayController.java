@@ -32,7 +32,7 @@ public class DayController {
         Collection<Player> killedDuringNight = CollectionUtils.subtract(lastNight, currAlive);
 
         StringBuilder storySb = new StringBuilder();
-        storySb.append("Der").append(days.size()).append(". Tag beginnt, in der Nacht");
+        storySb.append("Der ").append(days.size()).append(". Tag beginnt, in der Nacht");
         if(killedDuringNight.size() == 0)
             storySb.append(" wurde niemand getötet");
         else {
