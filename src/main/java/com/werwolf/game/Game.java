@@ -39,7 +39,6 @@ public class Game {
         if(spawnWerewolves()) status = GameStatus.Running;
 
         return true;
-
     }
 
     public boolean stop() {

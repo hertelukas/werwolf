@@ -25,17 +25,18 @@ public class HandleStart extends MessageHandler {
             Game game = games.get(channel.getIdLong());
 
             if (game.getHost().getId() == event.getAuthor().getIdLong()) {
-                if(game.getStatus() == GameStatus.Running || game.getStatus() == GameStatus.Stopped){
+                if (game.getStatus() == GameStatus.Running || game.getStatus() == GameStatus.Stopped) {
                     channel.sendMessage("Game is already running").queue();
-                }else{
-                    channel.sendMessage("Starting game...").queue();
-                    game.start();
+                } else {
+                    if (game.start())
+                        channel.sendMessage("Game started").queue();
+                    else
+                        channel.sendMessage("Something went wrong.").queue();
                 }
-            }
-            else {
+            } else {
                 channel.sendMessage("Only the host can start the game").queue();
             }
-        }else {
+        } else {
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
         }
         return true;
