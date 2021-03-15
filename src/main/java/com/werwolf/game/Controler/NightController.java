@@ -65,6 +65,7 @@ public class NightController {
         for (Player player : nights.peek().getAlive()) {
             playerSB.append(prefix++ + ": ").append(player.getUsername());
             if (player.getId() == votedPlayer.getKey()) {
+                player.die();
                 playerSB.append("  🗡🩸");
             }
 
