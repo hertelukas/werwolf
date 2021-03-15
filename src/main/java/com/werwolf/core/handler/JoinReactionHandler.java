@@ -13,13 +13,15 @@ public class JoinReactionHandler extends ReactionHandler {
     public boolean handle(GuildMessageReactionAddEvent event) {
 
         TextChannel channel = event.getChannel();
-        updateReactions(channel, event.getMessageIdLong());
+
 
         if (!event.getReactionEmote().getAsReactionCode().equals("✅")) return false;
 
 
         if (games.containsKey(channel.getIdLong())) {
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
+
+            updateReactions(channel, event.getMessageIdLong());
 
             PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
             if(result == PlayerListStatus.successful) {

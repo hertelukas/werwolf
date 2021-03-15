@@ -1,4 +1,6 @@
-package com.werwolf.game;
+package com.werwolf.game.Controler;
+
+import com.werwolf.game.Game;
 
 public class GameController {
     boolean isActive;
@@ -17,14 +19,15 @@ public class GameController {
         //TODO wereWolfVoteTime und voteTime standard festlegen
     }
 
-    boolean nextDay() {
+    public boolean nextDay() {
         //TODO
         dayController.startDay();
         return false;
     }
 
-    boolean nextNight() {
+    public boolean nextNight() {
         //TODO
+        System.out.println("Nächste Nacht");
         nightController.startNight();
         return false;
     }

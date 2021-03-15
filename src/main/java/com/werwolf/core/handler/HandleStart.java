@@ -28,9 +28,9 @@ public class HandleStart extends MessageHandler {
                 if (game.getStatus() == GameStatus.Running || game.getStatus() == GameStatus.Stopped) {
                     channel.sendMessage("Game is already running").queue();
                 } else {
-                    if (game.start())
-                        channel.sendMessage("Game started").queue();
-                    else
+                    if (game.start()) {
+                        System.out.println("Spiel erfolgreich gestartet");
+                    } else
                         channel.sendMessage("Something went wrong.").queue();
                 }
             } else {

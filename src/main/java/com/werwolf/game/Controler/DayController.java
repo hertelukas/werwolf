@@ -1,4 +1,6 @@
-package com.werwolf.game;
+package com.werwolf.game.Controler;
+
+import com.werwolf.game.Game;
 
 public class DayController {
 

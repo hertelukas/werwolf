@@ -1,6 +1,7 @@
 package com.werwolf.game;
 
 import com.werwolf.core.handler.Handler;
+import com.werwolf.game.Controler.GameController;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -15,6 +16,7 @@ public class Game {
     private List<Werewolf> werewolves = new ArrayList<>();
     private Player host;
     private long channelID;
+    private TextChannel channel;
     private long voiceChannelID;
     private long wolfChannelID;
     private long mainGameMessage;
@@ -24,8 +26,9 @@ public class Game {
 
     private final static float WERWOLF_SPAWN_RATE = 0.5f;
 
-    public Game(long channelID, Player host, Guild guild, Player... players) {
-        this.channelID = channelID;
+    public Game(TextChannel channel, Player host, Guild guild, Player... players) {
+        this.channel = channel;
+        this.channelID = channel.getIdLong();
         this.host = host;
         if (players.length > 0) this.players = Arrays.asList(players);
         this.players.add(host);
@@ -38,6 +41,9 @@ public class Game {
             return false;
         }
         if(spawnWerewolves()) status = GameStatus.Running;
+
+        System.out.println("Erste Nacht gestartet");
+        controller.nextNight();
 
         return true;
     }
@@ -157,6 +163,10 @@ public class Game {
 
     public GameStatus getStatus() {
         return status;
+    }
+
+    public TextChannel getChannel() {
+        return channel;
     }
 
     //Methods

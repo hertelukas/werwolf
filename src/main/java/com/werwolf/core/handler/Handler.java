@@ -12,12 +12,12 @@ import java.util.HashMap;
 public abstract class Handler {
     static final HashMap<Long, Game> games = new HashMap<>();
 
-    public static boolean createGame(long channelId, Player host, Guild guild) {
+    public static boolean createGame(TextChannel channel, Player host, Guild guild) {
         //If there is already a game with this channel id, we won't create a new one
-        if (games.containsKey(channelId)) return false;
+        if (games.containsKey(channel.getIdLong())) return false;
 
-        Game newGame = new Game(channelId, host, guild);
-        games.put(channelId, newGame);
+        Game newGame = new Game(channel, host, guild);
+        games.put(channel.getIdLong(), newGame);
         return true;
     }
 

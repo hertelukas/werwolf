@@ -26,7 +26,7 @@ public class HandleNewGame extends MessageHandler {
         Player hostPlayer = new Player(event.getAuthor());
 
         //Try to create a new game with this id
-        if (Handler.createGame(channel.getIdLong(), hostPlayer, channel.getGuild())) {
+        if (Handler.createGame(channel, hostPlayer, channel.getGuild())) {
             //Embeded-MessageBauen
             Game game = games.get(channel.getIdLong());
             StringBuilder playerlistSB = new StringBuilder();

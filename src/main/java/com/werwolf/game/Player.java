@@ -19,6 +19,7 @@ public class Player {
         this.id = user.getIdLong();
         this.user = user;
         this.characterType = CharacterType.Villager;
+        this.isAlive = true;
     }
 
     //Getter & Setter

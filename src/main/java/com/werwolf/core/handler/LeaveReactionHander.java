@@ -12,7 +12,7 @@ public class LeaveReactionHander extends ReactionHandler {
     public boolean handle(GuildMessageReactionAddEvent event) {
 
         TextChannel channel = event.getChannel();
-        updateReactions(channel, event.getMessageIdLong());
+
 
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
 
@@ -25,6 +25,7 @@ public class LeaveReactionHander extends ReactionHandler {
         else{
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
             //Todo handle what happens if player is host
+            updateReactions(channel, event.getMessageIdLong());
             PlayerListStatus result = currentGame.removePlayer(event.getUser().getIdLong());
             if(result == PlayerListStatus.successful) {
                 updateMainMessage(channel);
