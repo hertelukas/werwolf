@@ -1,5 +1,7 @@
 package com.werwolf.game;
 
+import com.werwolf.game.Controler.GameController;
+
 import java.util.List;
 
 public class Day {
@@ -7,8 +9,12 @@ public class Day {
     private List<Player> alive;
     private String story;
 
-    public Day(List<Player> alive) {
+    private final boolean tumMode;
+
+    public Day(List<Player> alive, boolean tumMode) {
         this.alive = alive;
+        this.tumMode = tumMode;
+        story = GameController.getRandomStory(tumMode,false);
     }
 
     public List<Player> getAlive() {
