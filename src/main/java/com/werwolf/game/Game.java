@@ -9,10 +9,15 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.MemberImpl;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class Game {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(Game.class);
+
     private List<Player> players = new ArrayList<>();
     private final List<Long> bannedPlayerIds = new ArrayList<>();
     private List<Werewolf> werewolves = new ArrayList<>();
@@ -56,7 +61,7 @@ public class Game {
                 AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true, true);
         }
 
-        System.out.println("Erste Nacht gestartet");
+        LOGGER.info("Erste Nacht gestartet");
         controller.nextNight();
 
         return true;
@@ -68,10 +73,10 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
-            System.out.println("Spiel erfolgreich gestoppt");
+            LOGGER.info("Spiel erfolgreich gestoppt");
         }
         catch (Exception e){
-            System.out.println("Failed to remove werewolf channel: " + e.getMessage());
+           LOGGER.info("Failed to remove werewolf channel: " + e.getMessage());
         }
         return true;
     }
@@ -148,7 +153,7 @@ public class Game {
         try {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).sendMessage(msg).queue();
         } catch (Exception e) {
-            System.err.println("Failed to send message to werwolves: " + e.getMessage());
+            LOGGER.info("Failed to send message to werwolves: " + e.getMessage());
         }
     }
 
@@ -156,7 +161,7 @@ public class Game {
         try {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).sendMessage(embed).queue();
         } catch (Exception e) {
-            System.err.println("Failed to send message to werwolves: " + e.getMessage());
+            LOGGER.info("Failed to send message to werwolves: " + e.getMessage());
         }
     }
 
@@ -241,22 +246,22 @@ public class Game {
             amount = 1;
         }
 
-        ArrayList<Integer> werewolfs= new ArrayList<>();
+        ArrayList<Integer> werewolves= new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
             int playerNumber;
-            do{ playerNumber = (int) (Math.random() * amount);}while(werewolfs.contains(playerNumber));
-            werewolfs.add(playerNumber);
+            do{ playerNumber = (int) (Math.random() * amount);}while(werewolves.contains(playerNumber));
+            werewolves.add(playerNumber);
             Player player = players.get(playerNumber);
 
             player.characterType = CharacterType.Werewolf;
             Werewolf werewolf = new Werewolf(player);
-            werewolves.add(werewolf);
+            this.werewolves.add(werewolf);
             player.sendMessage("You are a werewolf");
         }
 
         for (int i = 0; i < playerSize; i++) {
-            if(!werewolfs.contains(i)){
+            if(!werewolves.contains(i)){
                 players.get(i).sendMessage("You are a villager");
             }
         }
@@ -289,7 +294,7 @@ public class Game {
 
         } catch (Exception e) {
             channel.sendMessage("Failed to create werewolves channel.").queue();
-            System.out.println("Error creating werewolves channel " + e.getMessage());
+            LOGGER.info("Error creating werewolves channel " + e.getMessage());
             return false;
         }
 
