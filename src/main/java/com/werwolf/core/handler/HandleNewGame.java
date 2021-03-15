@@ -20,8 +20,7 @@ public class HandleNewGame extends MessageHandler {
     public HandleNewGame() {
         setName("New Game");
         setCommand("newgame");
-        //Todo more precise description on how to use
-        setDescription("This command creates a new game.");
+        setDescription("This command creates a new game");
     }
 
 
