@@ -63,7 +63,7 @@ public class DayController {
 
     public void continueAfterVoting() {
         updateVotingResult();
-
+        game.getController().gameStatus();
         game.getController().nextNight();
 
     }
@@ -105,7 +105,7 @@ public class DayController {
         List<Player> alive = days.peek().getAlive();
         StringBuilder playerSb = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
-        game.getVotingController().newVoting(true);
+        game.getVotingController().newVoting(false);
 
         char prefix = 'A';
 
