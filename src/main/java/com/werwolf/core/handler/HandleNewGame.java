@@ -1,17 +1,22 @@
 package com.werwolf.core.handler;
 
+import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
 public class HandleNewGame extends MessageHandler {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(HandleNewGame.class);
 
     public HandleNewGame() {
         setName("New Game");
@@ -36,7 +41,7 @@ public class HandleNewGame extends MessageHandler {
                 game.setVoiceChannelID(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).getChannel()).getIdLong());
             }
             catch (Exception e){
-                System.out.println("Host is not in a voice channel. " + e.getMessage());
+                LOGGER.info("Host is not in a voice channel. " + e.getMessage());
             }
             //Embedded-Message bauen
             StringBuilder playerlistSB = new StringBuilder();

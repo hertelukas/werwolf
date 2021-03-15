@@ -8,15 +8,21 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.werwolf.core.handler.audio.GuildAudioManager;
+import com.werwolf.game.Controler.VotingController;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AudioHandler extends ListenerAdapter {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(AudioHandler.class);
+
     private static AudioHandler audioHandler = new AudioHandler();
 
     private final AudioPlayerManager playerManager;
@@ -72,12 +78,12 @@ public class AudioHandler extends ListenerAdapter {
 
             @Override
             public void noMatches() {
-                System.out.println("AUDIO: File not found");
+                LOGGER.info("AUDIO: File not found");
             }
 
             @Override
             public void loadFailed(FriendlyException e) {
-                System.out.println("AUDIO: Failed to play " + e.getMessage());
+                LOGGER.info("AUDIO: Failed to play " + e.getMessage());
             }
         });
     }

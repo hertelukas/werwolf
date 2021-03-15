@@ -4,15 +4,20 @@ package com.werwolf.core.handler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
 public abstract class Handler {
+    private final static Logger LOGGER = LoggerFactory.getLogger(Handler.class);
+
     static final HashMap<Long, Game> games = new HashMap<>();
 
     public static boolean createGame(TextChannel channel, Player host, Guild guild) {
@@ -44,6 +49,6 @@ public abstract class Handler {
 
     public static void deleteGame(long id) {
         Game game = games.remove(id);
-        if (game == null) System.out.println("No game removed.");
+        if (game == null) LOGGER.info("No game removed.");
     }
 }

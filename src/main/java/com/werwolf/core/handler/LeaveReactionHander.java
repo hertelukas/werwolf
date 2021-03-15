@@ -1,14 +1,19 @@
 package com.werwolf.core.handler;
 
+import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LeaveReactionHander extends ReactionHandler {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ReactionHandler.class);
+
     @Override
     public boolean handle(GuildMessageReactionAddEvent event) {
 
@@ -27,7 +32,7 @@ public class LeaveReactionHander extends ReactionHandler {
             if (result == PlayerListStatus.successful) {
                 updateMainMessage(channel);
             } else
-                System.out.println("Failed to leave game: " + result.toString());
+                LOGGER.info("Failed to leave game: " + result.toString());
         }
 
         return true;

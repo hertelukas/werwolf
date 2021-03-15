@@ -1,12 +1,17 @@
 package com.werwolf.core.handler;
 
+import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class HandleStop extends MessageHandler{
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStop.class);
 
     public HandleStop(){
         setName("Stop");
@@ -28,7 +33,7 @@ public class HandleStop extends MessageHandler{
                 if (game.isActive()) {
                     game.stop();
                 } else {
-                    System.out.println("Tried to stop inactive game");
+                    LOGGER.info("Tried to stop inactive game");
                 }
             } else {
                 channel.sendMessage(event.getAuthor().getAsMention() + " only the host can stop the game").queue();
