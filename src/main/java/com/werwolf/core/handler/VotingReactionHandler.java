@@ -9,5 +9,7 @@ public class VotingReactionHandler extends ReactionHandler{
     @Override
     public boolean handle(GuildMessageReactionAddEvent event) {
         Game game = games.get(event.getChannel().getIdLong());
+
+        return false;
     }
 }
