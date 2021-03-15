@@ -11,7 +11,7 @@ public class NightController {
     private Game game;
     private long voteTime;
     Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
-    private boolean votingtime = false;
+    private boolean votingTime = false;
     private long votingMessageID;
     private VotingController votingController = new VotingController();
 
@@ -44,23 +44,6 @@ public class NightController {
         //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
 
         //Tag bricht an
-
-
-
-
-
-
-
-
-
-//        //todo
-//
-//        // mute all players in voice channel
-//
-//        // gather votes
-//        // player.die()
-//
-//        // unmute all players
 
     }
 
@@ -109,12 +92,12 @@ public class NightController {
 
         game.sendToWerewolfChannel(werewolfMessage.build());
 
-        votingtime = true;
+        votingTime = true;
     }
 
     // Getter/Setter
-    public boolean isVotingtime() {
-        return votingtime;
+    public boolean isVotingTime() {
+        return votingTime;
     }
 
     public long getVotingMessageID() {

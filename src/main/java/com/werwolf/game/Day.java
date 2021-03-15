@@ -11,4 +11,7 @@ public class Day {
         this.alive = alive;
     }
 
+    public List<Player> getAlive() {
+        return alive;
+    }
 }

@@ -18,6 +18,9 @@ public class DayController {
     Game game;
     long voteTime;
     Stack<Day> days = new Stack<>();
+    private boolean votingTime = false;
+    private long votingMessageID;
+    private VotingController votingController = new VotingController();
 
     public DayController(Game game, long voteTime) {
         this.game = game;
@@ -54,11 +57,50 @@ public class DayController {
         // storyBuilder.setThumbnail(); find picture
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
+        createVoting();
+
+        // Update Tag Objekt mit Voting stats
+
+        // begin night
+
     }
 
+    private void createVoting() {
+        List<Player> alive = days.peek().getAlive();
+        StringBuilder playerSb = new StringBuilder();
+        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+        votingController.newVoting();
 
+        char base = 'A';
 
-        // x Person wurde getötet
+        for (Player p : alive) {
+            playerSb.append(base++).append(": ").append(p.getUsername()).append("\r");
+        }
+
+        votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSb.toString(), true);
+
+        // Thread.sleep()?
+
+        game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
+            int unicodeStart = 0xDDE6;
+            for (int i=0; i < alive.size(); i++) {
+                message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
+                //Ins Voting hinzufügen
+                votingController.addPlayer("\uD83c" + (char) (unicodeStart + i), alive.get(i).getId());
+            }
+            votingMessageID = message.getIdLong();
+        });
+
+        votingTime = true;
+    }
+
+    public boolean isVotingTime() {
+        return votingTime;
+    }
+
+    public long getVotingMessageID() {
+        return votingMessageID;
+    }
 
 }
 

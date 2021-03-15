@@ -59,13 +59,15 @@ public class GameController {
 
     public Long getVotingMessage() {
         if (isNight) {
-            if (nightController.isVotingtime()) {
+            if (nightController.isVotingTime()) {
                 return nightController.getVotingMessageID();
             } else {
                 return null;
             }
         } else {
-            //TODO dayVoting return
+            if (dayController.isVotingTime()) {
+                return dayController.getVotingMessageID();
+            }
             return null;
         }
     }
