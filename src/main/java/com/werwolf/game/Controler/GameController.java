@@ -80,16 +80,17 @@ public class GameController {
 
     public Long getVotingMessage() {
         if (isNight) {
-            if (nightController.isVotingTime()) {
-                return nightController.getVotingMessageID();
-            } else {
-                return null;
-            }
+            return nightController.getVotingMessageID();
         } else {
-            if (dayController.isVotingTime()) {
-                return dayController.getVotingMessageID();
-            }
-            return null;
+            return dayController.getVotingMessageID();
+        }
+    }
+
+    public void continueAfterVoting() {
+        if (isNight) {
+            nightController.continueAfterVoting();
+        } else {
+            //TODO
         }
     }
 }
