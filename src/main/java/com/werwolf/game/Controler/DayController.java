@@ -64,6 +64,8 @@ public class DayController {
     public void continueAfterVoting() {
         updateVotingResult();
 
+        game.getController().nextNight();
+
     }
 
     public void updateVotingResult() {
