@@ -6,11 +6,14 @@ import com.werwolf.game.Player;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class DayController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(DayController.class);
 
     Game game;
     long voteTime;
@@ -24,7 +27,8 @@ public class DayController {
     }
 
     void startDay() {
-        //todo
+        LOGGER.info("Tag startet");
+
         List<Player> lastNight = game.getController().nightController.nights.peek().getAlive();
         List<Player> currAlive = game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList());
         days.add(new Day(currAlive, game.getTumMode()));
@@ -53,6 +57,7 @@ public class DayController {
         // storyBuilder.setThumbnail(); find picture
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
+        LOGGER.info("Voting startet");
         createVoting();
 
         // Update Tag Objekt mit Voting stats
@@ -62,6 +67,7 @@ public class DayController {
     }
 
     public void continueAfterVoting() {
+        LOGGER.info("Voting beendet");
         updateVotingResult();
         game.getController().gameStatus();
         game.getController().nextNight();
