@@ -28,6 +28,7 @@ public class Game {
     private AudioManager audioManager;
 
     private final static float WERWOLF_SPAWN_RATE = 0.5f;
+    private boolean tumMode = true;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
@@ -37,6 +38,7 @@ public class Game {
         this.players.add(host);
         this.guild = guild;
         audioManager = guild.getAudioManager();
+        setTumMode(true);
     }
 
     public boolean start() {
@@ -242,5 +244,13 @@ public class Game {
         }
 
         return true;
+    }
+
+    public void setTumMode(boolean tumMode) {
+        this.tumMode = tumMode;
+    }
+
+    public boolean getTumMode() {
+        return tumMode;
     }
 }

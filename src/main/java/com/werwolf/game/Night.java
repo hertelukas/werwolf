@@ -11,14 +11,19 @@ import java.util.List;
 
 public class Night {
 
-    private static final int STORY_AMOUNT = 2;
+    private final int STORY_AMOUNT = 2;
+    private final int TUM_STORY_AMOUNT = 1;
 
     private List<Player> alive;
 
-    private String story = getRandomStory();
+    private String story = "";
 
-    public Night(List<Player> alive) {
+    private final boolean tumMode;
+
+    public Night(List<Player> alive, boolean tumMode) {
         this.alive = alive;
+        this.tumMode = tumMode;
+        story = getRandomStory();
     }
 
     private String getRandomStory() {
@@ -28,8 +33,8 @@ public class Night {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
-            int randy = (int) (Math.random() * STORY_AMOUNT);
-            story = document.getElementsByTagName("story" + randy).item(0).getTextContent();
+            int randy = (int) (Math.random() * (tumMode ? TUM_STORY_AMOUNT : STORY_AMOUNT));
+            story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
         } catch (Exception e) {
             return "ERROR";
         }
