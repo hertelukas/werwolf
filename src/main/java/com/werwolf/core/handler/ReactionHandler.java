@@ -16,7 +16,9 @@ public abstract class ReactionHandler extends Handler{
                     for (User user : users) {
                         if (!user.isBot()) {
                             System.out.println("test");
-                            message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).queue();
+                            try {
+                                message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).queue();
+                            } catch (Exception e){}
                         }
                     }
                 });

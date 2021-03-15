@@ -21,13 +21,14 @@ public class GameController {
 
     public boolean nextDay() {
         //TODO
+        isNight = false;
         dayController.startDay();
         return false;
     }
 
     public boolean nextNight() {
         //TODO
-        System.out.println("Nächste Nacht");
+        isNight = true;
         nightController.startNight();
         return false;
     }

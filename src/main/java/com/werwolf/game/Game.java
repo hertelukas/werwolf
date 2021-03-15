@@ -43,6 +43,7 @@ public class Game {
         if(controller.isActive()) {
             return false;
         }
+        controller.setActive(true);
         if(spawnWerewolves()) controller.setActive(true);
 
         if(voiceChannelID != 0){
