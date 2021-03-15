@@ -36,6 +36,11 @@ public class NightController {
         //Voting Time
         createVoting();
 
+    }
+
+    void continueAfterVoting() {
+
+
         //Voting durchführen
 
         //Voting auswerten
@@ -43,7 +48,6 @@ public class NightController {
         //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
 
         //Tag bricht an
-
     }
 
 
@@ -103,12 +107,7 @@ public class NightController {
         return votingMessageID;
     }
 
-    public Player getPlayer(long playerID) {
-        for (Player player : nights.peek().getAlive()) {
-            if (player.getId() == playerID) {
-                return player;
-            }
-        }
-        return null;
+    public void setVotingTime(boolean votingTime) {
+        this.votingTime = votingTime;
     }
 }

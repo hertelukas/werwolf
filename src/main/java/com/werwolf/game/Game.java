@@ -184,7 +184,7 @@ public class Game {
     }
 
     public Long getCurrentVotingMessage() {
-        if (controller.isActive()) {
+        if (controller.isActive() && controller.isVoting()) {
             return controller.getVotingMessage();
         } else {
             return null;
@@ -197,6 +197,14 @@ public class Game {
 
     public void setVoiceChannelID(long id){
         voiceChannelID = id;
+    }
+    public Player getPlayer(long playerID) {
+        for (Player player : players) {
+            if (player.getId() == playerID) {
+                return player;
+            }
+        }
+        return null;
     }
 
     //Methods
