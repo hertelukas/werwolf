@@ -39,7 +39,7 @@ public class NightController {
         storySB.append("Die ")
                 .append(nights.size())
                 .append(". ")
-                .append(game.getTumMode() ? "Klausurenphase" : "Nacht")
+                .append(game.getTumMode() ? "Klausurenphase " : "Nacht ")
                 .append("bricht an, ")
                 .append(nights.peek().getStory());
         EmbedBuilder storyBuilder = new EmbedBuilder();
