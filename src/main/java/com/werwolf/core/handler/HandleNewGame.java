@@ -3,6 +3,7 @@ package com.werwolf.core.handler;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
@@ -45,12 +46,13 @@ public class HandleNewGame extends MessageHandler {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png").setTitle("Werewolf: " + channel.getName())
                     .addField("Host:", games.get(channel.getIdLong()).getHost().getUsername(), false)
-                    .addField("Player:", playerlistSB.toString(), false).addField("Configurations:", "TUM-MODE: " + "false", false);
+                    .addField("Player:", playerlistSB.toString(), false).addField("Configurations:", "TUM-MODE: " + games.get(channel.getIdLong()).getTumMode(), false);
             channel.sendMessage(embedBuilder.build()).queue(message -> {
                 games.get(channel.getIdLong()).setMainGameMessage(message.getIdLong());
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
                 message.addReaction("▶").queue();
+                message.addReaction("tum:821050411620368384").queue();
             });
         } else {
             channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();
