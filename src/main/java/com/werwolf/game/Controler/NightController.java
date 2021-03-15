@@ -3,6 +3,8 @@ package com.werwolf.game.Controler;
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class NightController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(NightController.class);
 
     private final Game game;
     private final long voteTime;
@@ -23,6 +26,8 @@ public class NightController {
     }
 
     void startNight() {
+        LOGGER.info("Nacht startet");
+
         //Fügt die neue Nacht dem Stackhinzu
         if (nights.isEmpty()) nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
         else nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
@@ -38,11 +43,13 @@ public class NightController {
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
         //Voting Time
+        LOGGER.info("Voting startet");
         createVoting();
 
     }
 
     void continueAfterVoting() {
+        LOGGER.info("Voting beendet");
         updateVotingResult();
         game.getController().gameStatus();
         game.getController().nextDay();

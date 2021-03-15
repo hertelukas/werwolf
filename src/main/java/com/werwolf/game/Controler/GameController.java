@@ -2,6 +2,8 @@ package com.werwolf.game.Controler;
 
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -10,6 +12,10 @@ import java.io.File;
 import java.net.URI;
 
 public class GameController {
+
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
+
     private static final int DAY_STORY_AMOUNT = 1;
     private static final int DAY_TUM_STORY_AMOUNT = 1;
     private static final int NIGHT_STORY_AMOUNT = 2;
@@ -147,9 +153,9 @@ public class GameController {
 
     public void endgame() {
         switch(status) {
-            case WolfWin -> System.out.println("yeet");
-            case VillagerWin -> System.out.println("bruh");
-            default -> System.out.println("no bueno.");
+            case WolfWin -> LOGGER.info("WOLFS WIN");
+            case VillagerWin -> LOGGER.info("VILLAGER WIN");
+            default -> LOGGER.info("Bis jetzt hat noch keiner gewonnen");
         }
     }
 
