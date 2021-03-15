@@ -63,8 +63,9 @@ public class GameController {
     }
 
     public GameStatus gameStatus() {
-        long werewolves = game.getPlayers().stream().filter(p -> p.getCharacterType() == CharacterType.Werewolf).count();
+        long werewolves = game.getPlayers().stream().filter(p -> p.getCharacterType() == CharacterType.Werewolf && p.isAlive()).count();
         long alive = game.getPlayers().stream().filter(Player::isAlive).count();
+
         GameStatus status;
         if (werewolves == 0)
             status = GameStatus.VillagerWin;
