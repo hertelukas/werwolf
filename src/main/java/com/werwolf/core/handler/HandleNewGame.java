@@ -41,6 +41,7 @@ public class HandleNewGame extends MessageHandler {
                 games.get(channel.getIdLong()).setMainGameMessage(message.getIdLong());
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
+                message.addReaction("▶").queue();
             });
         } else {
             channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();
