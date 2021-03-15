@@ -15,7 +15,7 @@ public class GameController {
         this.game = game;
         this.isActive = false;
         nightController = new NightController(game, wolfVoteTime);
-        dayController = new DayController(game);
+        dayController = new DayController(game, dayTime);
         //TODO wereWolfVoteTime und voteTime standard festlegen
     }
 

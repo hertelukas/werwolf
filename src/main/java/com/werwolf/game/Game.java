@@ -173,6 +173,10 @@ public class Game {
         return channel;
     }
 
+    public GameController getController() {
+        return controller;
+    }
+
     //Methods
     private boolean spawnWerewolves() {
         //Create the werewolves
