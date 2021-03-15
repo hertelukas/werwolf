@@ -37,6 +37,14 @@ public class NightController {
         //Voting Time
         createVoting();
 
+        //Voting durchführen
+
+        //Voting auswerten
+
+        //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
+
+        //Tag bricht an
+
 
 
 
