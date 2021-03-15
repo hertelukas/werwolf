@@ -153,10 +153,6 @@ public class Game {
         return host;
     }
 
-    public void setHost(Player newHost) {
-        host = newHost;
-    }
-
     public long getMainGameMessage() {
         return mainGameMessage;
     }
