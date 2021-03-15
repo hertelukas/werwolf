@@ -1,17 +1,14 @@
 package com.werwolf.core.handler;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.player.event.AudioEvent;
-import com.sedmelluq.discord.lavaplayer.player.event.AudioEventListener;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.werwolf.core.handler.audio.GuildAudioManager;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -46,7 +43,8 @@ public class AudioHandler extends ListenerAdapter {
         return audioManager;
     }
 
-    public void loadAndPlay(VoiceChannel channel, final String track, boolean isMusic){
+
+    public void loadAndPlay(VoiceChannel channel, final String track, boolean isMusic, boolean forcePlay){
         GuildAudioManager audioManager = getGuildAudioManager(channel.getGuild());
         String trackUrl = isMusic ? "src/main/resources/Audio/Music/" + track : "src/main/resources/Audio/Voice/" + track;
 
@@ -58,7 +56,7 @@ public class AudioHandler extends ListenerAdapter {
         playerManager.loadItemOrdered(audioManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack audioTrack) {
-                play(channel, audioManager, audioTrack);
+                play(channel, audioManager, audioTrack, forcePlay);
             }
 
             @Override
@@ -69,7 +67,7 @@ public class AudioHandler extends ListenerAdapter {
                     firstTrack = audioPlaylist.getTracks().get(0);
                 }
 
-                play(channel, audioManager, firstTrack);
+                play(channel, audioManager, firstTrack, forcePlay);
             }
 
             @Override
@@ -84,9 +82,10 @@ public class AudioHandler extends ListenerAdapter {
         });
     }
 
-    private void play(VoiceChannel channel, GuildAudioManager audioManager, AudioTrack track){
+    private void play(VoiceChannel channel, GuildAudioManager audioManager, AudioTrack track, boolean forcePlay){
         connectToFirstVoiceChannel(channel.getGuild().getAudioManager(), channel);
-        audioManager.scheduler.queue(track);
+        if(forcePlay) audioManager.scheduler.force(track);
+        else audioManager.scheduler.queue(track);
     }
 
     private static void connectToFirstVoiceChannel(AudioManager audioManager, VoiceChannel channel) {
@@ -98,6 +97,4 @@ public class AudioHandler extends ListenerAdapter {
     public static AudioHandler getAudioHandler(){
         return audioHandler;
     }
-
-
 }

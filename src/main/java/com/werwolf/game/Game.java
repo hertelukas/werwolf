@@ -1,19 +1,11 @@
 package com.werwolf.game;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.werwolf.core.handler.AudioHandler;
-import com.werwolf.core.handler.GuildAudioManager;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
 import com.werwolf.game.Controler.VotingController;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-import net.dv8tion.jda.api.audio.SpeakingMode;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.MemberImpl;
 import org.jetbrains.annotations.NotNull;
@@ -61,7 +53,7 @@ public class Game {
         if(voiceChannelID != 0){
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             if(voiceChannel != null)
-                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true);
+                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true, true);
         }
 
         System.out.println("Erste Nacht gestartet");

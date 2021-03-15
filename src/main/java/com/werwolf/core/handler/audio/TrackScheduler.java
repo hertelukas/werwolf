@@ -1,4 +1,4 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -21,6 +21,10 @@ public class TrackScheduler extends AudioEventAdapter {
         if(!player.startTrack(track, true)){
             queue.offer(track);
         }
+    }
+
+    public void force(AudioTrack track){
+        player.startTrack(track, true);
     }
 
     public void nextTrack(){

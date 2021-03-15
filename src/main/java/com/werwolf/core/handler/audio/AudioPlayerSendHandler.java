@@ -1,4 +1,4 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
