@@ -38,9 +38,11 @@ public class VotingController {
     }
 
     public void vote(String playerPrefix, long voter) {
+
         boolean finished = true;
 
         if (nightVoting) {
+            System.out.println(gameController.nightController.nights.peek().getAlive().toString());
             if (gameController.getGame().getPlayer(voter).isAlive() &&
                     gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
 
@@ -66,7 +68,7 @@ public class VotingController {
             if (gameController.getGame().getPlayer(voter).isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 alreadyVoted.add(voter);
-                LOGGER.info(gameController.getGame().getPlayer(voter).getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + " gestimmt");
+                System.out.println(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " wurde von " + gameController.getGame().getPlayer(voter).getUsername() + "gewählt Tagsüber!");
             }
 
             for (Player player : gameController.getGame().getPlayers()) {

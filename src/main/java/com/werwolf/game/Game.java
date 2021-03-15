@@ -39,7 +39,7 @@ public class Game {
     }
 
     public boolean start() {
-        if(controller.isActive()) {
+        if (controller.isActive()) {
             return false;
         }
 
@@ -47,10 +47,10 @@ public class Game {
 
         //Story
         controller.sendIntroMessage();
-        if(spawnWerewolves()) controller.setActive(true);
+        if (spawnWerewolves()) controller.setActive(true);
 
         //If there is a voice channel specified, we try to join
-        if(voiceChannelID != 0){
+        if (voiceChannelID != 0) {
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             if(voiceChannel != null)
                 AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true, true);
@@ -197,9 +197,10 @@ public class Game {
         return controller.getVotingController();
     }
 
-    public void setVoiceChannelID(long id){
+    public void setVoiceChannelID(long id) {
         voiceChannelID = id;
     }
+
     public Player getPlayer(long playerID) {
         for (Player player : players) {
             if (player.getId() == playerID) {
@@ -223,35 +224,45 @@ public class Game {
 
     //Methods
     private boolean spawnWerewolves() {
+        int amount = 0;
+        int playerSize = players.size();
 
-        boolean tmp = true;
-        //Create the werewolves
-        for (Player player : players) {
-            Random r = new Random();
-            float temp = r.nextFloat();
+        if (playerSize > 30) {
+            amount = playerSize / 6;
+        } else if (playerSize > 20) {
+            amount = 5;
+        } else if (playerSize > 10) {
+            amount = 4;
+        } else if (playerSize > 8) {
+            amount = 3;
+        } else if (playerSize > 4) {
+            amount = 2;
+        } else if (playerSize > 1) {
+            amount = 1;
+        }
 
-            if (tmp) {
-                tmp = false;
-                player.characterType = CharacterType.Werewolf;
-                Werewolf werewolf = new Werewolf(player);
-                werewolves.add(werewolf);
-                player.sendMessage("You are a werewolf");
-            } else {
-                player.sendMessage("You are a villager");
+        ArrayList<Integer> werewolves= new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            int playerNumber;
+            do{ playerNumber = (int) (Math.random() * amount);}while(werewolves.contains(playerNumber));
+            werewolves.add(playerNumber);
+            Player player = players.get(playerNumber);
+
+            player.characterType = CharacterType.Werewolf;
+            Werewolf werewolf = new Werewolf(player);
+            this.werewolves.add(werewolf);
+            player.sendMessage("You are a werewolf");
+        }
+
+        for (int i = 0; i < playerSize; i++) {
+            if(!werewolves.contains(i)){
+                players.get(i).sendMessage("You are a villager");
             }
-
-//            if (temp < WERWOLF_SPAWN_RATE) {
-//                player.characterType = CharacterType.Werewolf;
-//                Werewolf werewolf = new Werewolf(player);
-//                werewolves.add(werewolf);
-//                player.sendMessage("You are a werewolf");
-//            }else{
-//                player.sendMessage("You are a villager");
-//            }
         }
 
         TextChannel channel = guild.getTextChannelById(channelID);
-        if(channel == null) return false;
+        if (channel == null) return false;
         Category category = channel.getParent();
         int position = channel.getPosition();
         String werewolfChannelName = channel.getName() + "-werewolves";
@@ -265,7 +276,7 @@ public class Game {
             wolfChannelID = guild.getTextChannelsByName(werewolfChannelName, true).get(0).getIdLong();
 
             TextChannel wolfChannel = guild.getTextChannelById(wolfChannelID);
-            if(wolfChannel == null) return false;
+            if (wolfChannel == null) return false;
 
             //Set the permissions for all players
             for (Player player : players) {
