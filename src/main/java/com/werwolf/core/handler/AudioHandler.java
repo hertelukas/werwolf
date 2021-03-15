@@ -10,66 +10,88 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.managers.AudioManager;
 
-public class AudioHandler {
-    private final AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-    private AudioPlayerSendHandler audioPlayerSendHandler;
+import java.util.HashMap;
+import java.util.Map;
 
-    public AudioHandler(){
+public class AudioHandler extends ListenerAdapter {
+    private static AudioHandler audioHandler = new AudioHandler();
+
+    private final AudioPlayerManager playerManager;
+    private final Map<Long, GuildAudioManager> guildAudioManagers;
+
+    private AudioHandler(){
+        this.guildAudioManagers = new HashMap<>();
+
+        this.playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
+        AudioSourceManagers.registerLocalSource(playerManager);
     }
 
-    public void play(String location){
-        AudioPlayer player = playerManager.createPlayer();
-        TrackScheduler trackScheduler = new TrackScheduler(player);
-        player.addListener(trackScheduler);
-        audioPlayerSendHandler = new AudioPlayerSendHandler(player);
+    private synchronized GuildAudioManager getGuildAudioManager(Guild guild){
+        long guildId = Long.parseLong(guild.getId());
+        GuildAudioManager audioManager = guildAudioManagers.get(guildId);
 
-        playerManager.loadItem(location, new AudioLoadResultHandler() {
+        if(audioManager == null){
+            audioManager = new GuildAudioManager(playerManager);
+            guildAudioManagers.put(guildId, audioManager);
+        }
+
+        guild.getAudioManager().setSendingHandler(audioManager.getSendHandler());
+        return audioManager;
+    }
+
+    public void loadAndPlay(VoiceChannel channel, final String trackUrl){
+        GuildAudioManager audioManager = getGuildAudioManager(channel.getGuild());
+
+        playerManager.loadItemOrdered(audioManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack audioTrack) {
-                trackScheduler.queue(audioTrack);
+                play(channel, audioManager, audioTrack);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist audioPlaylist) {
-                for (AudioTrack track : audioPlaylist.getTracks()) {
-                    trackScheduler.queue(track);
+                AudioTrack firstTrack = audioPlaylist.getSelectedTrack();
+
+                if(firstTrack == null){
+                    firstTrack = audioPlaylist.getTracks().get(0);
                 }
+
+                play(channel, audioManager, firstTrack);
             }
 
             @Override
             public void noMatches() {
-                System.out.println("Audio: No matches found");
+                System.out.println("AUDIO: File not found");
             }
 
             @Override
             public void loadFailed(FriendlyException e) {
-                System.out.println("Audio: Failed to load audio: " + e.getMessage());
+                System.out.println("AUDIO: Failed to play " + e.getMessage());
             }
         });
-
     }
 
-    public AudioPlayerSendHandler getAudioPlayerSendHandler() {
-        return audioPlayerSendHandler;
+    private void play(VoiceChannel channel, GuildAudioManager audioManager, AudioTrack track){
+        connectToFirstVoiceChannel(channel.getGuild().getAudioManager(), channel);
+        audioManager.scheduler.queue(track);
     }
 
-    private static class TrackScheduler implements AudioEventListener {
-
-        AudioPlayer player;
-        public TrackScheduler(AudioPlayer player){
-            this.player = player;
-        }
-
-        @Override
-        public void onEvent(AudioEvent audioEvent) {
-            System.out.println("Track scheduler: " + audioEvent.player.getPlayingTrack());
-        }
-
-        public void queue(AudioTrack audioTrack) {
-            player.playTrack(audioTrack);
+    private static void connectToFirstVoiceChannel(AudioManager audioManager, VoiceChannel channel) {
+        if(!audioManager.isConnected() && !audioManager.isAttemptingToConnect()){
+            audioManager.openAudioConnection(channel);
         }
     }
+
+    public static AudioHandler getAudioHandler(){
+        return audioHandler;
+    }
+
 
 }
