@@ -77,7 +77,7 @@ public class NightController {
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSB.toString(), true);
         //TODO ggf. warteZeit verändern/entfernen
         try {
-            Thread.sleep(voteTime);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
