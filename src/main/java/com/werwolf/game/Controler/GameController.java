@@ -48,8 +48,7 @@ public class GameController {
             dayController.startDay();
             return true;
         } else {
-            game.getChannel().sendMessage("Spiel fertig" +  status.toString()).queue();
-            game.stop();
+            gameFinihed();
             return false;
         }
     }
@@ -62,10 +61,27 @@ public class GameController {
             nightController.startNight();
             return true;
         } else {
-            game.getChannel().sendMessage("Spiel fertig: " + status.toString()).queue();
-            game.stop();
+            gameFinihed();
             return false;
         }
+    }
+
+    private void gameFinihed() {
+        EmbedBuilder finishedBuilder = new EmbedBuilder();
+
+        if (status == GameStatus.WolfWin) {
+            //TODO story am ende
+            finishedBuilder.setTitle("Wölfe haben gewonnen");
+            finishedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/14/02/wolf-161987_960_720.png");
+            finishedBuilder.setDescription("Die Wölfe haben die Herrschaft über das Dorf übernommen!");
+        } else {
+            finishedBuilder.setTitle("Dorfbewohner haben gewonnen");
+            //TODO Opensource checken
+            finishedBuilder.setThumbnail("https://i.pinimg.com/originals/2c/9c/26/2c9c269156e26259dbe8f4733249f9b5.jpg");
+            finishedBuilder.setDescription("Die Dorfbewohner haben die Bedrohung der Wölfe abwehren können, das Dorf ist gerettet");
+        }
+        game.getChannel().sendMessage(finishedBuilder.build()).queue();
+        game.stop();
     }
 
     public GameStatus gameStatus() {
