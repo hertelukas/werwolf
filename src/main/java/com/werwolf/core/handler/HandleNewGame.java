@@ -7,6 +7,8 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class HandleNewGame extends MessageHandler {
 
@@ -27,8 +29,15 @@ public class HandleNewGame extends MessageHandler {
 
         //Try to create a new game with this id
         if (Handler.createGame(channel, hostPlayer, channel.getGuild())) {
+            //Wir versuchen den VoiceChannel zu bekommen, falls der Host nicht in einem Voice Channel ist, der Voicechannel nicht existiert usw, dann ignorieren wir den voiceChannel
+            try{
+                Game game = games.get(channel.getIdLong());
+                game.setVoiceChannelID(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).getChannel()).getIdLong());
+            }
+            catch (Exception e){
+                System.out.println("Host is not in a voice channel. " + e.getMessage());
+            }
             //Embedded-Message bauen
-            Game game = games.get(channel.getIdLong());
             StringBuilder playerlistSB = new StringBuilder();
             for (Player player : games.get(channel.getIdLong()).getPlayers()) {
                 playerlistSB.append(player.getUsername()).append("\r");
@@ -41,6 +50,7 @@ public class HandleNewGame extends MessageHandler {
                 games.get(channel.getIdLong()).setMainGameMessage(message.getIdLong());
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
+                message.addReaction("▶").queue();
             });
         } else {
             channel.sendMessage("Can't create new game. A game is already running in this channel.").queue();

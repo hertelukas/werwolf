@@ -2,18 +2,17 @@ package com.werwolf.game.Controler;
 
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.TextChannel;
 
-import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class NightController {
 
-    Game game;
-    long voteTime;
-    Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
+    private Game game;
+    private long voteTime;
+    private Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
+    private boolean votingtime = false;
+    private long votingMessageID;
 
     public NightController(Game game, long wolfVoteTime) {
         this.game = game;
@@ -87,6 +86,7 @@ public class NightController {
             for (int i=0; i < nights.peek().getAlive().size(); i++) {
                 message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
             }
+            votingMessageID = message.getIdLong();
         });
 
         //Lebende Spieler an den Werewolfchannel schicken
@@ -104,8 +104,16 @@ public class NightController {
         werewolfMessage.addField("Lebende Werewölfe", livingWerewolfsSB.toString(), false);
 
         game.sendToWerewolfChannel(werewolfMessage.build());
+
+        votingtime = true;
     }
 
-    // first night?
+    // Getter/Setter
+    public boolean isVotingtime() {
+        return votingtime;
+    }
 
+    public long getVotingMessageID() {
+        return votingMessageID;
+    }
 }

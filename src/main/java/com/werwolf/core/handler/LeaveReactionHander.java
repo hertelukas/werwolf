@@ -13,9 +13,7 @@ public class LeaveReactionHander extends ReactionHandler {
 
         TextChannel channel = event.getChannel();
 
-
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
-
 
         Game currentGame = games.get(channel.getIdLong());
         //If there is no game in this channel, return
@@ -24,14 +22,9 @@ public class LeaveReactionHander extends ReactionHandler {
         }
         else{
             if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
-            //Todo handle what happens if player is host
             updateReactions(channel, event.getMessageIdLong());
             PlayerListStatus result = currentGame.removePlayer(event.getUser().getIdLong());
             if(result == PlayerListStatus.successful) {
-                // "oldest" player becomes host if host leaves
-                if(!currentGame.getPlayers().contains(currentGame.getHost()) && !currentGame.getPlayers().isEmpty())
-                    currentGame.setHost(currentGame.getPlayers().get(0));
-
                 updateMainMessage(channel);
             } else if(result == PlayerListStatus.containsNot)
                 channel.sendMessage(event.getUser().getAsMention() + " is not in the game").queue();

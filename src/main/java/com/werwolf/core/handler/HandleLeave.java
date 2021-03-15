@@ -27,13 +27,8 @@ public class HandleLeave extends MessageHandler{
             channel.sendMessage(event.getAuthor().getAsMention() + " There is no game in this channel.").queue();
         }
         else{
-            //Todo handle what happens if player is host
             PlayerListStatus result = currentGame.removePlayer(event.getAuthor().getIdLong());
             if(result == PlayerListStatus.successful) {
-                // sets "oldest" player as host
-                if(!currentGame.getPlayers().contains(currentGame.getHost()) && !currentGame.getPlayers().isEmpty())
-                    currentGame.setHost(currentGame.getPlayers().get(0));
-
                 updateMainMessage(channel);
             } else if(result == PlayerListStatus.containsNot)
                 channel.sendMessage(event.getAuthor().getAsMention() + " is not in the game").queue();

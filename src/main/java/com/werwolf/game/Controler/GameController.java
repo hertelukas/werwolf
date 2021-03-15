@@ -21,13 +21,14 @@ public class GameController {
 
     public boolean nextDay() {
         //TODO
+        isNight = false;
         dayController.startDay();
         return false;
     }
 
     public boolean nextNight() {
         //TODO
-        System.out.println("Nächste Nacht");
+        isNight = true;
         nightController.startNight();
         return false;
     }
@@ -54,5 +55,18 @@ public class GameController {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public Long getVotingMessage() {
+        if (isNight) {
+            if (nightController.isVotingtime()) {
+                return nightController.getVotingMessageID();
+            } else {
+                return null;
+            }
+        } else {
+            //TODO dayVoting return
+            return null;
+        }
     }
 }

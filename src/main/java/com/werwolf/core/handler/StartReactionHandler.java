@@ -2,28 +2,26 @@ package com.werwolf.core.handler;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleStart extends MessageHandler {
-
-    public HandleStart() {
-        setName("start");
-        setCommand("start");
-        setDescription("Starts the game");
-    }
+public class StartReactionHandler extends ReactionHandler{
 
     @Override
-    public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
-        if (!command.equals(getCommand())) return false;
+    public boolean handle(GuildMessageReactionAddEvent event) {
 
         TextChannel channel = event.getChannel();
 
+
+        if (!event.getReactionEmote().getAsReactionCode().equals("▶")) return false;
+
         if (games.containsKey(channel.getIdLong())) {
             Game game = games.get(channel.getIdLong());
+            if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
 
-            if (game.getHost().getId() == event.getAuthor().getIdLong()) {
+            updateReactions(channel, event.getMessageIdLong());
+            if (game.getHost().getId() == event.getUser().getIdLong()) {
                 if (game.isActive()) {
                     channel.sendMessage("Game is already running").queue();
                 } else {
@@ -36,7 +34,7 @@ public class HandleStart extends MessageHandler {
                 channel.sendMessage("Only the host can start the game").queue();
             }
         } else {
-            channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
+            channel.sendMessage(event.getUser().getAsMention() + " there is no game in this channel.").queue();
         }
         return true;
     }
