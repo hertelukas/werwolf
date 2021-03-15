@@ -81,6 +81,7 @@ public class Game {
     }
 
     public PlayerListStatus addPlayer(@NotNull Player player) {
+        if(isActive()) return PlayerListStatus.unsuccessful;
         if (hasPlayer(player.getId())) return PlayerListStatus.contains;
         if (isBanned(player.getId())) return PlayerListStatus.isBanned;
         players.add(player);
