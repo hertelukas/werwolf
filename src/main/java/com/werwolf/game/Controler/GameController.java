@@ -161,7 +161,7 @@ public class GameController {
     public static String getRandomIntro(boolean tumMode) {
         String story = "ERROR";
         try {
-            File file = new File(new URI("src/main/resources/Introstories.xml").toString());
+            File file = new File(new URI("src/main/resources/IntroStories.xml").toString());
 
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
