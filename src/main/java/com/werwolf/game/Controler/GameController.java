@@ -11,6 +11,7 @@ public class GameController {
     NightController nightController;
     DayController dayController;
     private VotingController votingController = new VotingController(this);
+    GameStatus status = GameStatus.Cont;
 
     public GameController(Game game) {
         this.game = game;
@@ -23,8 +24,7 @@ public class GameController {
     public boolean nextDay() {
         //TODO
         isNight = false;
-        // if (gameStatus() == GameStatus.Cont)
-            dayController.startDay();
+        dayController.startDay();
         return false;
     }
 
@@ -38,12 +38,15 @@ public class GameController {
     public GameStatus gameStatus() {
         long werewolves = game.getPlayers().stream().filter(p -> p.getCharacterType() == CharacterType.Werewolf).count();
         long alive = game.getPlayers().stream().filter(Player::isAlive).count();
+        GameStatus status;
         if (werewolves == 0)
-            return GameStatus.VillagerWin;
+            status = GameStatus.VillagerWin;
         else if (werewolves >= (alive - werewolves))
-            return GameStatus.WolfWin;
+            status = GameStatus.WolfWin;
         else
-            return GameStatus.Cont;
+            status = GameStatus.Cont;
+        this.status = status;
+        return status;
     }
 
     public boolean isActive() {
@@ -103,6 +106,14 @@ public class GameController {
             nightController.continueAfterVoting();
         } else {
             //TODO
+        }
+    }
+
+    public void endgame() {
+        switch(status) {
+            case WolfWin -> System.out.println("yeet");
+            case VillagerWin -> System.out.println("bruh");
+            default -> System.out.println("no bueno.");
         }
     }
 }
