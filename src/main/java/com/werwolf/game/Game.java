@@ -167,7 +167,7 @@ public class Game {
         try {
             //If there is no werewolf channel, create a new one
             if (guild.getTextChannelsByName(werewolfChannelName, true).size() == 0) {
-                guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position + 1).setSlowmode(10).queue();
+                guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position + 1).setSlowmode(10).complete();
             }
 
             wolfChannelID = guild.getTextChannelsByName(werewolfChannelName, true).get(0).getIdLong();
@@ -177,7 +177,6 @@ public class Game {
 
             //Set the permissions for all players
             for (Player player : players) {
-                System.out.println("Handling permission for " + player.getUsername());
                 IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.user);
                 if (player.characterType != CharacterType.Werewolf)
                     wolfChannel.createPermissionOverride(permissionHolder).setDeny(Permission.VIEW_CHANNEL).queue();
