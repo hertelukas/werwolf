@@ -27,6 +27,7 @@ public class JoinReactionHandler extends ReactionHandler {
 
             PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
 
+            //todo maybe send private message with reason
             if(result == PlayerListStatus.successful)
                 updateMainMessage(channel);
             else if(result == PlayerListStatus.isBanned)
