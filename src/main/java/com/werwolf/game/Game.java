@@ -3,6 +3,7 @@ package com.werwolf.game;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.audio.SpeakingMode;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -18,7 +19,7 @@ public class Game {
     private Player host;
     private long channelID;
     private TextChannel channel;
-    private long voiceChannelID;
+    private long voiceChannelID = 0;
     private long wolfChannelID;
     private long mainGameMessage;
     private GameController controller = new GameController(this);
@@ -45,9 +46,10 @@ public class Game {
         controller.setActive(true);
         if(spawnWerewolves()) controller.setActive(true);
 
-        VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
-        audioManager.openAudioConnection(voiceChannel);
-
+        if(voiceChannelID != 0){
+            VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
+            audioManager.openAudioConnection(voiceChannel);
+        }
 
         System.out.println("Erste Nacht gestartet");
         controller.nextNight();
@@ -59,6 +61,8 @@ public class Game {
         try {
             Handler.deleteGame(channelID);
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
+            audioManager.closeAudioConnection();
+
         }
         catch (Exception e){
             System.out.println("Failed to remove werewolf channel: " + e.getMessage());
