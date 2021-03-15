@@ -1,5 +1,6 @@
 package com.werwolf.game;
 
+import com.werwolf.core.handler.Handler;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -42,7 +43,14 @@ public class Game {
     }
 
     public boolean stop() {
-        return true; //TODO
+        try {
+            Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
+            Handler.deleteGame(channelID);
+        }
+        catch (Exception e){
+            System.out.println("Failed to remove werewolf channel: " + e.getMessage());
+        }
+        return true;
     }
 
     public PlayerListStatus addPlayer(@NotNull Player player) {
