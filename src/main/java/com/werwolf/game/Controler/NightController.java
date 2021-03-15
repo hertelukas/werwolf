@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class NightController {
     private final static Logger LOGGER = LoggerFactory.getLogger(NightController.class);
 
-    private Game game;
-    private long voteTime;
+    private final Game game;
+    private final long voteTime;
     Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
     private boolean votingTime = false;
     private long votingMessageID;
@@ -73,7 +73,7 @@ public class NightController {
         }
 
         for (Player player : nights.peek().getAlive()) {
-            playerSB.append(prefix++ + ": ").append(player.getUsername());
+            playerSB.append(prefix++).append(": ").append(player.getUsername());
             if (player.getId() == votedPlayer.getKey()) {
                 player.die();
                 playerSB.append("  🗡🩸");
@@ -106,7 +106,7 @@ public class NightController {
         char prefix = 'A';
 
         for (Player player : nights.peek().getAlive()) {
-            playerSB.append(prefix++ + ": ").append(player.getUsername()).append("\r");
+            playerSB.append(prefix++).append(": ").append(player.getUsername()).append("\r");
         }
 
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSB.toString(), true);

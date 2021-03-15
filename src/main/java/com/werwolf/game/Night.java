@@ -1,20 +1,15 @@
 package com.werwolf.game;
 
 import com.werwolf.game.Controler.GameController;
-import org.w3c.dom.Document;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.net.URI;
 import java.util.List;
 
 
 public class Night {
 
-    private List<Player> alive;
+    private final List<Player> alive;
 
-    private String story = "";
+    private final String story;
 
     private final boolean tumMode;
 

@@ -20,18 +20,17 @@ public class Game {
 
     private List<Player> players = new ArrayList<>();
     private final List<Long> bannedPlayerIds = new ArrayList<>();
-    private List<Werewolf> werewolves = new ArrayList<>();
+    private final List<Werewolf> werewolves = new ArrayList<>();
     private Player host;
-    private long channelID;
-    private TextChannel channel;
+    private final long channelID;
+    private final TextChannel channel;
     private long voiceChannelID = 0;
     private long wolfChannelID;
     private long mainGameMessage;
-    private GameController controller = new GameController(this);
-    private Guild guild;
+    private final GameController controller = new GameController(this);
+    private final Guild guild;
 
 
-    private final static float WERWOLF_SPAWN_RATE = 0.2f;
     private boolean tumMode = false;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
