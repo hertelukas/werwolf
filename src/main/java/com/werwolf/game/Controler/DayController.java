@@ -20,7 +20,6 @@ public class DayController {
     Stack<Day> days = new Stack<>();
     private boolean votingTime = false;
     private long votingMessageID;
-    private VotingController votingController = new VotingController();
 
     public DayController(Game game, long voteTime) {
         this.game = game;
@@ -69,7 +68,7 @@ public class DayController {
         List<Player> alive = days.peek().getAlive();
         StringBuilder playerSb = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
-        votingController.newVoting(true);
+        game.getVotingController().newVoting(true);
 
         char base = 'A';
 
@@ -86,7 +85,7 @@ public class DayController {
             for (int i=0; i < alive.size(); i++) {
                 message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
                 //Ins Voting hinzufügen
-                votingController.addPlayer("\uD83c" + (char) (unicodeStart + i), alive.get(i).getId());
+                game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + i), alive.get(i).getId());
             }
             votingMessageID = message.getIdLong();
         });
@@ -102,5 +101,13 @@ public class DayController {
         return votingMessageID;
     }
 
+    public Player getPlayer(long playerID) {
+        for (Player player : days.peek().getAlive()) {
+            if (player.getId() == playerID) {
+                return player;
+            }
+        }
+        return null;
+    }
 }
 
