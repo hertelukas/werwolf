@@ -40,7 +40,7 @@ public class DayController {
         storySb.append(game.getTumMode()?"Die ":"Der ")
                 .append(days.size())
                 .append(game.getTumMode()?". Semesterferien beginnen":". Tag beginnt")
-                .append(", in der")
+                .append(", in der ")
                 .append(game.getTumMode() ? "Klausurenphase" : "Nacht");
         if(killedDuringNight.size() == 0)
             storySb.append(" wurde niemand getötet");
