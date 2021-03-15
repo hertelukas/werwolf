@@ -15,6 +15,7 @@ public class VotingReactionHandler extends ReactionHandler{
 
         if (votingMessage == null || event.getMessageIdLong() != game.getCurrentVotingMessage()) return false;
 
+        game.getVotingController().vote(event.getReactionEmote().getAsReactionCode(), event.getUser().getIdLong());
 
         return false;
     }

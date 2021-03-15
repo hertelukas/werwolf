@@ -13,7 +13,6 @@ public class NightController {
     Stack<Night> nights = new Stack<>(); // Update am Anfang oder Ende der Nacht?
     private boolean votingTime = false;
     private long votingMessageID;
-    private VotingController votingController = new VotingController();
 
     public NightController(Game game, long wolfVoteTime) {
         this.game = game;
@@ -51,7 +50,7 @@ public class NightController {
     private void createVoting() {
         StringBuilder playerSB = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
-        votingController.newVoting();
+        game.getVotingController().newVoting(true);
 
         char prefix = 'A';
 
@@ -71,7 +70,7 @@ public class NightController {
             for (int i=0; i < nights.peek().getAlive().size(); i++) {
                 message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
                 //Ins Votinghinzufügen
-                votingController.addPlayer("\uD83c" + (char) (unicodeStart + i), nights.peek().getAlive().get(i).getId());
+                game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + i), nights.peek().getAlive().get(i).getId());
             }
             votingMessageID = message.getIdLong();
         });
@@ -102,5 +101,14 @@ public class NightController {
 
     public long getVotingMessageID() {
         return votingMessageID;
+    }
+
+    public Player getPlayer(long playerID) {
+        for (Player player : nights.peek().getAlive()) {
+            if (player.getId() == playerID) {
+                return player;
+            }
+        }
+        return null;
     }
 }

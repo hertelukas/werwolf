@@ -10,6 +10,7 @@ public class GameController {
     long dayTime; // oder voteTime (muss noch evtl geklaert werden)
     NightController nightController;
     DayController dayController;
+    private VotingController votingController = new VotingController(this);
 
     public GameController(Game game) {
         this.game = game;
@@ -55,6 +56,10 @@ public class GameController {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public VotingController getVotingController() {
+        return votingController;
     }
 
     public Long getVotingMessage() {

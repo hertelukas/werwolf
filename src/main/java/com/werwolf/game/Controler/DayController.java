@@ -69,7 +69,7 @@ public class DayController {
         List<Player> alive = days.peek().getAlive();
         StringBuilder playerSb = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
-        votingController.newVoting();
+        votingController.newVoting(true);
 
         char base = 'A';
 

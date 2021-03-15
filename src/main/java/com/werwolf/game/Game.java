@@ -2,6 +2,7 @@ package com.werwolf.game;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Controler.GameController;
+import com.werwolf.game.Controler.VotingController;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.audio.SpeakingMode;
 import net.dv8tion.jda.api.entities.*;
@@ -188,6 +189,10 @@ public class Game {
         } else {
             return null;
         }
+    }
+
+    public VotingController getVotingController() {
+        return controller.getVotingController();
     }
 
     public void setVoiceChannelID(long id){
