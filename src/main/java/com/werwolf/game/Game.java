@@ -57,6 +57,7 @@ public class Game {
         controller.sendIntroMessage();
         if(spawnWerewolves()) controller.setActive(true);
 
+        //If there is a voice channel specified, we try to join
         if(voiceChannelID != 0){
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             if(voiceChannel != null)
