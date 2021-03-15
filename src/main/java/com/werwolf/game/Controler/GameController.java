@@ -1,6 +1,7 @@
 package com.werwolf.game.Controler;
 
 import com.werwolf.game.*;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +14,8 @@ public class GameController {
     private static final int DAY_TUM_STORY_AMOUNT = 1;
     private static final int NIGHT_STORY_AMOUNT = 2;
     private static final int NIGHT_TUM_STORY_AMOUNT = 1;
+    private static final int INTRO_TUM_STORY_AMOUNT = 1;
+    private static final int INTRO_STORY_AMOUNT = 1;
     boolean isActive;
     boolean isNight;
     Game game;
@@ -145,5 +148,32 @@ public class GameController {
             return "ERROR";
         }
         return story;
+    }
+
+    public static String getRandomIntro(boolean tumMode) {
+        String story = "ERROR";
+        try {
+            File file = new File(new URI("src/main/resources/Introstories.xml").toString());
+
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(file);
+            int randy = (int) (Math.random() * (tumMode ? INTRO_TUM_STORY_AMOUNT : INTRO_STORY_AMOUNT));
+            story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
+        } catch (Exception e) {
+            return "ERROR";
+        }
+        return story;
+    }
+
+    public void sendIntroMessage() {
+        EmbedBuilder introBuilder = new EmbedBuilder();
+        if (game.getTumMode()) {
+            introBuilder.setTitle("TUMWOLF").setDescription(getRandomIntro(true)).setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080884324990996/Kondom.jpg");
+        } else {
+            introBuilder.setTitle("Werewolf").setDescription(getRandomIntro(false)).setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png");
+
+        }
+        game.getChannel().sendMessage(introBuilder.build()).queue();
     }
 }

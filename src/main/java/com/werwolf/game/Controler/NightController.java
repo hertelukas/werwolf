@@ -32,7 +32,8 @@ public class NightController {
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(nights.size() + ". Nacht");
         storyBuilder.setDescription(storySB);
-        storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2016/11/29/13/12/cloudy-1869753_960_720.jpg");
+        if (game.getTumMode()) storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2017/01/18/12/33/session-1989711_960_720.png");
+        else storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2016/11/29/13/12/cloudy-1869753_960_720.jpg");
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
         //Voting Time
@@ -73,7 +74,12 @@ public class NightController {
 
         }
 
-        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true).setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/12/32/tombstone-159792_960_720.png");
+        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true);
+        if (game.getTumMode()) {
+            votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
+        } else {
+            votingMessageBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/12/32/tombstone-159792_960_720.png");
+        }
         game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
