@@ -8,7 +8,6 @@ public class GuildAudioManager {
 
     public final TrackScheduler scheduler;
 
-
     public GuildAudioManager(AudioPlayerManager manager){
         player = manager.createPlayer();
         scheduler = new TrackScheduler(player);
@@ -17,6 +16,10 @@ public class GuildAudioManager {
 
     public AudioPlayerSendHandler getSendHandler(){
         return new AudioPlayerSendHandler(player);
+    }
+
+    public void setVolume(int volume){
+        player.setVolume(volume);
     }
 
 }

@@ -46,8 +46,14 @@ public class AudioHandler extends ListenerAdapter {
         return audioManager;
     }
 
-    public void loadAndPlay(VoiceChannel channel, final String trackUrl){
+    public void loadAndPlay(VoiceChannel channel, final String track, boolean isMusic){
         GuildAudioManager audioManager = getGuildAudioManager(channel.getGuild());
+        String trackUrl = isMusic ? "src/main/resources/Audio/Music/" + track : "src/main/resources/Audio/Voice/" + track;
+
+        if(isMusic)
+            audioManager.setVolume(15);
+        else
+            audioManager.setVolume(50);
 
         playerManager.loadItemOrdered(audioManager, trackUrl, new AudioLoadResultHandler() {
             @Override
