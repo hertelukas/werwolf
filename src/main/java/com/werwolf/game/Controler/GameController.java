@@ -1,8 +1,18 @@
 package com.werwolf.game.Controler;
 
 import com.werwolf.game.*;
+import org.w3c.dom.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.net.URI;
 
 public class GameController {
+    private static final int DAY_STORY_AMOUNT = 1;
+    private static final int DAY_TUM_STORY_AMOUNT = 1;
+    private static final int NIGHT_STORY_AMOUNT = 2;
+    private static final int NIGHT_TUM_STORY_AMOUNT = 1;
     boolean isActive;
     boolean isNight;
     Game game;
@@ -115,5 +125,25 @@ public class GameController {
             case VillagerWin -> System.out.println("bruh");
             default -> System.out.println("no bueno.");
         }
+    }
+
+    public static String getRandomStory(boolean tumMode, boolean isNight) {
+        String story = "ERROR";
+        try {
+            File file = null;
+            if (isNight) {
+                file = new File(new URI("src/main/resources/NightStories.xml").toString());
+            } else {
+                file = new File(new URI("src/main/resources/DayStories.xml").toString());
+            }
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(file);
+            int randy = (int) (Math.random() * (tumMode ? (isNight ? NIGHT_TUM_STORY_AMOUNT : DAY_TUM_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
+            story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
+        } catch (Exception e) {
+            return "ERROR";
+        }
+        return story;
     }
 }
