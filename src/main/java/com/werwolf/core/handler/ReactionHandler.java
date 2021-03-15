@@ -9,14 +9,14 @@ public abstract class ReactionHandler extends Handler{
     public abstract boolean handle(GuildMessageReactionAddEvent event);
 
 
-    void updateReactions(TextChannel channel) {
-        channel.retrieveMessageById(games.get(channel.getIdLong()).getMainGameMessage()).queue(message -> {
+    void updateReactions(TextChannel channel, long messageID) {
+        channel.retrieveMessageById(messageID).queue(message -> {
             for (MessageReaction reaction : message.getReactions()) {
                 reaction.retrieveUsers().queue(users -> {
                     for (User user : users) {
                         if (!user.isBot()) {
                             System.out.println("test");
-                            message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).queue();
+                            message.removeReaction(reaction.getReactionEmote().getAsReactionCode(), user).complete();
                         }
                     }
                 });

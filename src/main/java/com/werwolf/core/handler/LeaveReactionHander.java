@@ -12,7 +12,7 @@ public class LeaveReactionHander extends ReactionHandler {
     public boolean handle(GuildMessageReactionAddEvent event) {
 
         TextChannel channel = event.getChannel();
-        updateReactions(channel);
+        updateReactions(channel, event.getMessageIdLong());
 
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
 
