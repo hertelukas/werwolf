@@ -40,6 +40,7 @@ public class Game {
         if(status == GameStatus.Running || status == GameStatus.Stopped) {
             return false;
         }
+        controller.setActive(true);
         if(spawnWerewolves()) status = GameStatus.Running;
 
         System.out.println("Erste Nacht gestartet");

@@ -10,6 +10,12 @@ public class VotingReactionHandler extends ReactionHandler{
     public boolean handle(GuildMessageReactionAddEvent event) {
         Game game = games.get(event.getChannel().getIdLong());
 
+        Long votingMessage = game.getCurrentVotingMessage();
+
+        if (votingMessage == null || event.getMessageIdLong() != game.getCurrentVotingMessage()) return false;
+
+        String reaction = event.getReaction().getReactionEmote().getAsReactionCode();
+
         return false;
     }
 }
