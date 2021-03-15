@@ -82,7 +82,7 @@ public class VotingController {
         if (finished) {
             StringBuilder loggingSB = new StringBuilder();
             for (Map.Entry<Long, Integer> entry : votings.entrySet()) {
-                loggingSB.append(gameController.getGame().getPlayer(entry.getKey()) + " hat " + entry.getValue() + "Stimmen\r");
+                loggingSB.append(gameController.getGame().getPlayer(entry.getKey()).getUsername() + " hat " + entry.getValue() + "Stimmen\r");
             }
             LOGGER.info(loggingSB.toString());
 
