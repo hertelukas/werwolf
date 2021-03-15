@@ -70,7 +70,8 @@ public class NightController {
             if (player.getId() == votedPlayer.getKey()) {
                 player.die();
                 playerSB.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "trivial.wav", true, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "trivial.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Never.mp3", true, false);
             }
 
             playerSB.append("\r");
