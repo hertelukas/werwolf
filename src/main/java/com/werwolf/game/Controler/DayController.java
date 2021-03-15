@@ -1,5 +1,6 @@
 package com.werwolf.game.Controler;
 
+import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.Day;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
@@ -95,6 +96,8 @@ public class DayController {
             if (player.getId() == votedPlayer.getKey()) {
                 player.die();
                 playerSb.append("  🗡🩸");
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Betrugsversuch.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Never.mp3", true, false);
             }
             playerSb.append("\r");
         }
