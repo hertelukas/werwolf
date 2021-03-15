@@ -241,22 +241,22 @@ public class Game {
             amount = 1;
         }
 
-        ArrayList<Integer> werewolfs= new ArrayList<>();
+        ArrayList<Integer> werewolves= new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
             int playerNumber;
-            do{ playerNumber = (int) (Math.random() * amount);}while(werewolfs.contains(playerNumber));
-            werewolfs.add(playerNumber);
+            do{ playerNumber = (int) (Math.random() * amount);}while(werewolves.contains(playerNumber));
+            werewolves.add(playerNumber);
             Player player = players.get(playerNumber);
 
             player.characterType = CharacterType.Werewolf;
             Werewolf werewolf = new Werewolf(player);
-            werewolves.add(werewolf);
+            this.werewolves.add(werewolf);
             player.sendMessage("You are a werewolf");
         }
 
         for (int i = 0; i < playerSize; i++) {
-            if(!werewolfs.contains(i)){
+            if(!werewolves.contains(i)){
                 players.get(i).sendMessage("You are a villager");
             }
         }
