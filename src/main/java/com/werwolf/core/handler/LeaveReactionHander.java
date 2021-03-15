@@ -28,6 +28,10 @@ public class LeaveReactionHander extends ReactionHandler {
             updateReactions(channel, event.getMessageIdLong());
             PlayerListStatus result = currentGame.removePlayer(event.getUser().getIdLong());
             if(result == PlayerListStatus.successful) {
+                // "oldest" player becomes host if host leaves
+                if(!currentGame.getPlayers().contains(currentGame.getHost()) && !currentGame.getPlayers().isEmpty())
+                    currentGame.setHost(currentGame.getPlayers().get(0));
+
                 updateMainMessage(channel);
             } else if(result == PlayerListStatus.containsNot)
                 channel.sendMessage(event.getUser().getAsMention() + " is not in the game").queue();

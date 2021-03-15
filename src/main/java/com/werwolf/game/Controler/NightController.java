@@ -56,20 +56,6 @@ public class NightController {
 //        //todo
 //
 //        // mute all players in voice channel
-//        EmbedBuilder wolfVoteMsg = new EmbedBuilder();
-//        wolfVoteMsg.setTitle("who ded");
-//        // scuffed but kinda works
-//        List<Player> alive = game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList());
-//        for (int i = 0; i < alive.size(); i++)
-//            wolfVoteMsg.addField(alive.get(i).getUsername(), ":regional_indicator_" + (char) ('a' + i), false);
-//
-//        channel.sendMessage(wolfVoteMsg.build()).queue(msg -> msg.addReaction("platzhalter lol").queue()); // fix this
-//
-//
-//        try {
-//            TimeUnit.MILLISECONDS.sleep(voteTime); // this waits, but checks jackshit -> need to check if wolf voting ended
-//        } catch (InterruptedException ignored) {
-//        }
 //
 //        // gather votes
 //        // player.die()
@@ -92,7 +78,7 @@ public class NightController {
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSB.toString(), true);
         //TODO ggf. warteZeit verändern/entfernen
         try {
-            Thread.sleep(3000);
+            Thread.sleep(voteTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
