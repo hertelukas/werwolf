@@ -34,6 +34,7 @@ public class VotingController {
     public void vote(String playerPrefix, long voter) {
 
         boolean finished = true;
+        System.out.println(playerPrefixmap);
 
         if (nightVoting) {
             if (gameController.getGame().getPlayer(voter).isAlive() &&
