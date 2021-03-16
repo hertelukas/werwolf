@@ -1,7 +1,8 @@
-package com.werwolf.game.controler;
+package com.werwolf.game.controller;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
+import com.werwolf.helpers.NightTextCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,12 +37,7 @@ public class NightController {
 
         //Storytime
         StringBuilder storySB = new StringBuilder();
-        storySB.append("Die ")
-                .append(nights.size())
-                .append(". ")
-                .append(game.getTumMode() ? "Klausurenphase " : "Nacht ")
-                .append("bricht an, ")
-                .append(nights.peek().getStory());
+        storySB.append(NightTextCreator.getCreator().getStory(game, nights.size()));
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(nights.size() + ". Nacht");
         storyBuilder.setDescription(storySB);

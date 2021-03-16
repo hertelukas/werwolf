@@ -2,8 +2,8 @@ package com.werwolf.game;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
-import com.werwolf.game.controler.GameController;
-import com.werwolf.game.controler.VotingController;
+import com.werwolf.game.controller.GameController;
+import com.werwolf.game.controller.VotingController;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -238,7 +238,7 @@ public class Game {
             amount = 4;
         } else if (playerSize > 8) {
             amount = 3;
-        } else if (playerSize > 4) {
+        } else if (playerSize > 5) {
             amount = 2;
         } else if (playerSize > 1) {
             amount = 1;
