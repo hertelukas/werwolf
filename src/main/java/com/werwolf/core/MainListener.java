@@ -62,7 +62,12 @@ public class MainListener extends ListenerAdapter {
             }
         }
 
-        if(!commandHandled(event, args[0], args))
+        String[] arguments = new String[args.length-1];
+        for (int i=1; i < args.length; i++) {
+            arguments[i-1] = args[i];
+        }
+
+        if(!commandHandled(event, args[0], arguments))
             channel.sendMessage("Command not found.").queue();
     }
 
