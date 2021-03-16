@@ -20,7 +20,7 @@ public class JSONReader {
     JSONObject parseFile(String fileLocation){
         JSONObject result;
         try {
-            File file = new File(new URI("src/main/resources/NightStories.json").toString());
+            File file = new File(new URI(fileLocation).toString());
             result = new JSONObject(FileUtils.readFileToString(file, "utf-8"));
             return result;
         }

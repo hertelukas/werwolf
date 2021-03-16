@@ -1,8 +1,10 @@
 package com.werwolf.core.handler.reaction;
 
 import com.werwolf.core.handler.Handler;
+import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
+import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import org.slf4j.Logger;
@@ -24,14 +26,15 @@ public class JoinReactionHandler extends ReactionHandler {
             if (event.getMessageIdLong() != Handler.games.get(channel.getIdLong()).getMainGameMessage()) return false;
 
             updateReactions(channel, event.getMessageIdLong());
+            Game game = Handler.games.get(channel.getIdLong());
 
-            PlayerListStatus result = Handler.games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
+            PlayerListStatus result = game.addPlayer(new Player(event.getUser()));
 
             //todo maybe send private message with reason
             if(result == PlayerListStatus.successful)
                 updateMainMessage(channel);
             else if(result == PlayerListStatus.isBanned)
-                channel.sendMessage(event.getUser().getAsMention() + " you are banned").queue();
+                event.getUser().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(UserMessageCreator.getCreator().getMessage(game, "user-banned")).queue());
             else
                 LOGGER.info("Something went wrong: " + result.toString());
 
