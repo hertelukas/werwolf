@@ -31,7 +31,7 @@ public class NightController {
 
         //Fügt die neue Nacht dem Stackhinzu
         if (nights.isEmpty())
-            nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
+            nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game));
         else
             nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game));
 

@@ -1,0 +1,10 @@
+{
+  "stories": [
+    {
+      "english": "Some random intro text",
+      "german": "Hier kommt mal der intro text",
+      "englishTUM" : "Some random TUM intro text",
+      "germanTUM" : "Nach einer weiteren zusätzlichen Klausurphase, um den Exzellenzstatus beizubehalten scheint erstmal alles beim alten. Doch der Schein trügt..."
+    }
+  ]
+}

@@ -2,6 +2,7 @@ package com.werwolf.game.controller;
 
 import com.werwolf.game.*;
 import com.werwolf.helpers.DayTextCreator;
+import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
@@ -197,7 +198,7 @@ public class GameController {
     }
 
     private String getRandomIntro() {
-        return UserMessageCreator.getCreator().getMessage(game, "intro-story");
+        return IntroTextCreator.getCreator().getStory(game, 0);
     }
 
 
