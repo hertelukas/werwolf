@@ -22,5 +22,43 @@
     "german": "Du bist ein Dorfbewohner",
     "englishTUM": "You are a student",
     "germanTUM": "Du bist Student"
+  },
+  "day": {
+    "tumMode": false,
+    "english": "Day",
+    "german": "Tag"
+  },
+  "night": {
+    "tumMode": false,
+    "english": "Night",
+    "german": "Nacht"
+  },
+  "wolf-win-title": {
+    "tumMode": true,
+    "english": "Werwolves won!",
+    "german": "Die Werwolfe haben gewonnen!",
+    "englishTUM": "Die Übungsleitung ist genug Studenten los geworden! (en)",
+    "germanTUM": "Die Übungsleitung ist genug Studenten los geworden!"
+  },
+  "villager-win-title": {
+    "tumMode": true,
+    "english": "Villagers won!",
+    "german": "Die Dorfbewohner haben gewonnen!",
+    "englishTUM": "The students won!",
+    "germanTUM": "Die Studenten haben gewonnen!"
+  },
+  "wolf-win-text": {
+    "tumMode": true,
+    "english": "The werewolves managed to wipe out the whole village",
+    "german": "Die Werwölfe haben es geschafft das ganze Dorf auszulöschen",
+    "englishTUM": "The ÜL has managed to bully enough students to the LMU to maintain the excellence status. Let's hope it was worth it!",
+    "germanTUM": "Die Übungsleitung hat es geschafft genügend Studenten zur LMU zu mobben um den Exzellenzstatus beizubehalten. Hoffen wir es hat sich gelohnt!"
+  },
+  "villager-win-text": {
+    "tumMode": true,
+    "english": "The villagers have managed to track down all the werewolves. Finally, one can sleep peacefully again.",
+    "german": "Die Dorfbewohner haben es geschafft alle Werwölfe ausfindig zu machen. Endlich kann man wieder ruhig schlafen.",
+    "englishTUM": "TThe students weren't intimidated and managed to track down and destroy the undercover agents of the ÜL.",
+    "germanTUM": "Die Studenten haben sich nicht einschüchtern lassen und konnten die Undercover Agenten der Übungsleitung ausfindig machen und vernichten."
   }
 }

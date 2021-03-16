@@ -3,6 +3,7 @@ package com.werwolf.game.controller;
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
 import com.werwolf.helpers.NightTextCreator;
+import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,7 @@ public class NightController {
         StringBuilder storySB = new StringBuilder();
         storySB.append(NightTextCreator.getCreator().getStory(game, nights.size()));
         EmbedBuilder storyBuilder = new EmbedBuilder();
-        storyBuilder.setTitle(nights.size() + ". Nacht");
+        storyBuilder.setTitle(nights.size() + ". " + UserMessageCreator.getCreator().getMessage(game, "night"));
         storyBuilder.setDescription(storySB);
         if (game.getTumMode())
             storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2017/01/18/12/33/session-1989711_960_720.png");

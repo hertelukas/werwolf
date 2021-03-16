@@ -3,6 +3,7 @@ package com.werwolf.game.controller;
 import com.werwolf.game.*;
 import com.werwolf.helpers.DayTextCreator;
 import com.werwolf.helpers.IntroTextCreator;
+import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
@@ -70,17 +71,15 @@ public class GameController {
 
     private void gameFinished() {
         EmbedBuilder finishedBuilder = new EmbedBuilder();
-        // todo TUM story ende
         if (status == GameStatus.WolfWin) {
-            //TODO story am ende
-            finishedBuilder.setTitle("Wölfe haben gewonnen");
+            finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "wolf-win-title"));
             finishedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/14/02/wolf-161987_960_720.png");
-            finishedBuilder.setDescription("Die Wölfe haben die Herrschaft über das Dorf übernommen!");
+            finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "wolf-win-text"));
         } else {
-            finishedBuilder.setTitle("Dorfbewohner haben gewonnen");
+            finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "villager-win-title"));
             //TODO Opensource checken
             finishedBuilder.setThumbnail("https://i.pinimg.com/originals/2c/9c/26/2c9c269156e26259dbe8f4733249f9b5.jpg");
-            finishedBuilder.setDescription("Die Dorfbewohner haben die Bedrohung der Wölfe abwehren können, das Dorf ist gerettet");
+            finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "villager-win-text"));
         }
         game.getChannel().sendMessage(finishedBuilder.build()).queue();
         game.stop();
@@ -178,23 +177,11 @@ public class GameController {
     }
 
     public String getRandomStory(boolean isNight) {
-        String story;
-        try {
-            File file;
-            if (isNight) {
-                file = new File(new URI("src/main/resources/NightStories.xml").toString());
-            } else {
-                file = new File(new URI("src/main/resources/DayStories.xml").toString());
-            }
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(file);
-            int randy = (int) (Math.random() * (game.getTumMode() ? (isNight ? NIGHT_TUM_STORY_AMOUNT : NIGHT_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
-            story = document.getElementsByTagName("story" + (game.getTumMode() ? "TUM" : "") + randy).item(0).getTextContent();
-        } catch (Exception e) {
-            return "ERROR";
-        }
-        return story;
+        if(isNight)
+            return NightTextCreator.getCreator().getStory(game, 0);
+        else
+            return NightTextCreator.getCreator().getStory(game, 0);
+
     }
 
     private String getRandomIntro() {
