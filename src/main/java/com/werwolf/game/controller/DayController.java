@@ -97,7 +97,7 @@ public class DayController {
         }
 
 
-        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "vote-results"), playerSb.toString(), true);
         if (game.getTumMode()) {
             votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
         } else {

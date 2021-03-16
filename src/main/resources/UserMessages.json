@@ -4,6 +4,16 @@
     "english": "Sorry you can't join this game, the host has banned you.",
     "german": "Du wurdest gebannt. Bitte kontaktiere den Host."
   },
+  "vote-results": {
+    "tumMode": false,
+    "english": "Results",
+    "german": "Resultate"
+  },
+  "vote-title": {
+    "tumMode": false,
+    "english": "Voting",
+    "german": "Abstimmung"
+  },
   "werewolf-channel-creation-failed": {
     "tumMode": false,
     "english": "Failed to create werewolves channel, you might want to restart the game or check the permissions",
