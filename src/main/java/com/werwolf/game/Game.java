@@ -2,8 +2,8 @@ package com.werwolf.game;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
-import com.werwolf.game.Controler.GameController;
-import com.werwolf.game.Controler.VotingController;
+import com.werwolf.game.controler.GameController;
+import com.werwolf.game.controler.VotingController;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;

@@ -1,6 +1,5 @@
 package com.werwolf.core.handler;
 
-import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;

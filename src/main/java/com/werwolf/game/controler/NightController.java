@@ -1,4 +1,4 @@
-package com.werwolf.game.Controler;
+package com.werwolf.game.controler;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
