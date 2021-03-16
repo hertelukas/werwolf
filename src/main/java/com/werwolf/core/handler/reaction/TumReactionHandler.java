@@ -27,7 +27,12 @@ public class TumReactionHandler extends ReactionHandler {
                 updateMainMessage(event.getChannel());
             } else {
                 event.getReaction().removeReaction(event.getUser()).queue();
-                channel.sendMessage("Only the host can turn the TUM-Mode on or off").queue();
+                if (!game.isTummodeenablesend()) {
+                    event.getUser().openPrivateChannel().queue(w -> w.sendMessage("Only the host can start the game").queue());
+                } else {
+                    game.setTummodeenablesend(true);
+                    channel.sendMessage("Only the host can start the game").queue();
+                }
             }
         } else {
             channel.sendMessage(event.getUser().getAsMention() + " there is no game in this channel.").queue();

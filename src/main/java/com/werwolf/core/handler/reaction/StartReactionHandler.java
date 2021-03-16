@@ -33,7 +33,12 @@ public class StartReactionHandler extends ReactionHandler{
                         channel.sendMessage("Something went wrong.").queue();
                 }
             } else {
-                channel.sendMessage("Only the host can start the game").queue();
+                if (!game.isGamestartsend()) {
+                    event.getUser().openPrivateChannel().queue(w -> w.sendMessage("Only the host can start the game").queue());
+                } else {
+                    channel.sendMessage("Only the host can start the game").queue();
+                    game.setGamestartsend(true);
+                }
             }
         } else {
             channel.sendMessage(event.getUser().getAsMention() + " there is no game in this channel.").queue();

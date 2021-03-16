@@ -19,6 +19,9 @@ public class Game {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Game.class);
 
+    private boolean gamestartsend = false;
+    private boolean tummodeenablesend = false;
+
     private List<Player> players = new ArrayList<>();
     private final List<Long> bannedPlayerIds = new ArrayList<>();
     private final List<Werewolf> werewolves = new ArrayList<>();
@@ -217,6 +220,22 @@ public class Game {
             }
         }
         return null;
+    }
+
+    public boolean isGamestartsend() {
+        return gamestartsend;
+    }
+
+    public void setGamestartsend(boolean gamestartsend) {
+        this.gamestartsend = gamestartsend;
+    }
+
+    public boolean isTummodeenablesend() {
+        return tummodeenablesend;
+    }
+
+    public void setTummodeenablesend(boolean tummodeenablesend) {
+        this.tummodeenablesend = tummodeenablesend;
     }
 
     public void setTumMode(boolean tumMode) {

@@ -124,6 +124,11 @@ public class DayController {
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSb.toString(), true);
 
         // Thread.sleep()?
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
             int unicodeStart = 0xDDE6;
