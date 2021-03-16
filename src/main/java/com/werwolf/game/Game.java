@@ -31,11 +31,7 @@ public class Game {
     private final GameController controller = new GameController(this);
     private final Guild guild;
     private boolean tumMode = false;
-
-    private int witchnum = 0;
-    private int seernum = 0;
-    private int hunternum = 0;
-    private int littleGirlnum = 0;
+    private Configurations configurations = new Configurations();
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
@@ -202,6 +198,10 @@ public class Game {
         }
     }
 
+    public Configurations getConfigurations() {
+        return configurations;
+    }
+
     public VotingController getVotingController() {
         return controller.getVotingController();
     }
@@ -268,10 +268,10 @@ public class Game {
         }
 
         //Spzialrollen verteilen
-        int witchtmp = witchnum;
-        int seertmp = seernum;
-        int huntertmp = hunternum;
-        int littleGirltmp = littleGirlnum;
+        int witchtmp = configurations.getWitchnum();
+        int seertmp = configurations.getSeernum();
+        int huntertmp = configurations.getHunternum();
+        int littleGirltmp = configurations.getLittleGirlnum();
         for (int i = 0; i < playerSize; i++) {
             int playerNumber;
             do {

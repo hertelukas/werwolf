@@ -24,7 +24,7 @@ public class HandleConfig extends MessageHandler {
     public HandleConfig(Config... configs) {
         setName("Configurations");
         setCommand("config");
-        setDescription("Get information about the possible Configurations");
+        setDescription("Get information about the possible configurations");
 
         this.configs = new ArrayList<>(Arrays.asList(configs));
     }
@@ -37,28 +37,21 @@ public class HandleConfig extends MessageHandler {
         Game game = Handler.games.get(channel.getIdLong());
         System.out.println(Arrays.toString(args));
 
-        if (args.length == 0) {
-            EmbedBuilder configBuilder = new EmbedBuilder();
-            configBuilder.setTitle("Configurations").setDescription("Use ww!config <configuaration>");
-            for (Config config : configs) {
-                configBuilder.addField(config.getCommand(), config.getName(), false);
-            }
 
-            channel.sendMessage(configBuilder.build()).queue();
-            return true;
-        }
 
         if (game == null)
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this Channel.").queue();
         else {
-            EmbedBuilder builder = new EmbedBuilder();
-            builder.setTitle("Your game");
-            builder.setDescription("Current members: " + game.getPlayers().size()
-                    + "\nHost: " + game.getHost().getUsername());
-            for (Player player : game.getPlayers()) {
-                builder.addField(player.getUsername(), player.getCharacterType().toString(), false);
+            if (args.length == 0) {
+                EmbedBuilder configBuilder = new EmbedBuilder();
+                configBuilder.setTitle("Configurations").setDescription("Use ww!config <configuaration>");
+                for (Config config : configs) {
+                    configBuilder.addField(config.getCommand(), config.getName() + ": " + config.getConfigResult(game), false);
+                }
+
+                channel.sendMessage(configBuilder.build()).queue();
+                return true;
             }
-            channel.sendMessage(builder.build()).queue(m -> m.delete().queueAfter(2, TimeUnit.SECONDS));
         }
 
         return true;

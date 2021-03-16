@@ -1,6 +1,8 @@
 package com.werwolf.core.handler.message.configs;
 
-public class Config {
+import com.werwolf.game.Game;
+
+public abstract class Config {
 
     private String name;
     private String description;
@@ -33,4 +35,5 @@ public class Config {
         this.description = description;
     }
 
+    public abstract String getConfigResult(Game game);
 }
