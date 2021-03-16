@@ -1,9 +1,11 @@
-package com.werwolf.game.Controler;
+package com.werwolf.game.controller;
 
+import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.Day;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 
+import com.werwolf.helpers.DayTextCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;

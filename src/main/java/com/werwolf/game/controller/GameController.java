@@ -1,4 +1,4 @@
-package com.werwolf.game.controler;
+package com.werwolf.game.controller;
 
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;

@@ -1,6 +1,6 @@
 package com.werwolf.game;
 
-import com.werwolf.game.controler.GameController;
+import com.werwolf.game.controller.GameController;
 
 import java.util.List;
 

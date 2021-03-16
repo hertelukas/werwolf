@@ -1,4 +1,4 @@
-package com.werwolf.game.controler;
+package com.werwolf.game.controller;
 
 import com.werwolf.game.CharacterType;
 import com.werwolf.game.Player;

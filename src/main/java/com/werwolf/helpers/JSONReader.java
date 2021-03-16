@@ -1,6 +1,5 @@
 package com.werwolf.helpers;
 
-import com.werwolf.game.Controler.GameController;
 import com.werwolf.game.Game;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -8,8 +7,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Random;
 
 import org.slf4j.Logger;
