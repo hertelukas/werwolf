@@ -12,9 +12,12 @@ public class UserMessageCreator extends JSONReader {
         document = parseFile("src/main/resources/UserMessages.json");
     }
 
+    //Todo handle language
     public String getMessage(Game game, String title){
         JSONObject message = document.getJSONObject(title);
-        //Todo handle language
+        if(message.getBoolean("tumMode") && game.getTumMode()){
+            return message.getString("englishTUM");
+        }
         return message.getString("english");
     }
 

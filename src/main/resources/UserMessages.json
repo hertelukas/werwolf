@@ -1,6 +1,26 @@
 {
   "user-banned": {
+    "tumMode": false,
     "english": "Sorry you can't join this game, the host has banned you.",
     "german": "Du wurdest gebannt. Bitte kontaktiere den Host."
+  },
+  "werewolf-channel-creation-failed": {
+    "tumMode": false,
+    "english": "Failed to create werewolves channel, you might want to restart the game or check the permissions",
+    "german": "Werwolf Textchannel konnte nicht erstellt werden. Bitte überprüfe die Berechtigungen und probiere es erneut."
+  },
+  "role-werewolf": {
+    "tumMode": true,
+    "english": "You are a werewolf",
+    "german": "Du bis ein Werwolf",
+    "englishTUM": "You are in the exercise management. Try to torture as many students  as possible!",
+    "germanTUM": "Du bist in der Übungsleitung. Versuche so viele Studenten wie möglich rauszuquälen!"
+  },
+  "role-villager": {
+    "tumMode": true,
+    "english": "You are a villager",
+    "german": "Du bist ein Dorfbewohner",
+    "englishTUM": "You are a student",
+    "germanTUM": "Du bist Student"
   }
 }

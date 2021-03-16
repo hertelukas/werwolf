@@ -4,6 +4,7 @@ import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.controller.GameController;
 import com.werwolf.game.controller.VotingController;
+import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -255,12 +256,12 @@ public class Game {
             player.characterType = CharacterType.Werewolf;
             Werewolf werewolf = new Werewolf(player);
             this.werewolves.add(werewolf);
-            player.sendMessage("You are a werewolf");
+            player.sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-werewolf"));
         }
 
         for (int i = 0; i < playerSize; i++) {
             if(!werewolves.contains(i)){
-                players.get(i).sendMessage("You are a villager");
+                players.get(i).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-villager"));
             }
         }
 
@@ -291,7 +292,7 @@ public class Game {
             }
 
         } catch (Exception e) {
-            channel.sendMessage("Failed to create werewolves channel.").queue();
+            channel.sendMessage(UserMessageCreator.getCreator().getMessage(this,  "werewolf-channel-creation-failed")).queue();
             LOGGER.error("Error creating werewolves channel " + e.getMessage());
             return false;
         }
