@@ -2,6 +2,7 @@ package com.werwolf.game.controller;
 
 import com.werwolf.game.CharacterType;
 import com.werwolf.game.Player;
+import com.werwolf.helpers.UserMessageCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +54,7 @@ public class VotingController {
 
                 } else if (currVoter.getCharacterType() == CharacterType.Seer) { // Seher
                     // todo embed message
-                    currVoter.sendMessage(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType().toString() + " lol");
+                    currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "role-seer"));
                     alreadyVoted.add(voter);
                     LOGGER.info(currVoter.getUsername() + " schaut " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + "s Rolle an");
                 }
