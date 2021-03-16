@@ -1,4 +1,4 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.reaction;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;

@@ -1,6 +1,6 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.message;
 
-import com.werwolf.game.Controler.VotingController;
+import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;

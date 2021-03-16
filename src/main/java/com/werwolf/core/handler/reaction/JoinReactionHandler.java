@@ -1,6 +1,6 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.reaction;
 
-import com.werwolf.game.Controler.VotingController;
+import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -20,12 +20,12 @@ public class JoinReactionHandler extends ReactionHandler {
 
         if (!event.getReactionEmote().getAsReactionCode().equals("✅")) return false;
 
-        if (games.containsKey(channel.getIdLong())) {
-            if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
+        if (Handler.games.containsKey(channel.getIdLong())) {
+            if (event.getMessageIdLong() != Handler.games.get(channel.getIdLong()).getMainGameMessage()) return false;
 
             updateReactions(channel, event.getMessageIdLong());
 
-            PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
+            PlayerListStatus result = Handler.games.get(channel.getIdLong()).addPlayer(new Player(event.getUser()));
 
             //todo maybe send private message with reason
             if(result == PlayerListStatus.successful)

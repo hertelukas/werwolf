@@ -4,7 +4,6 @@ import com.werwolf.game.Day;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 
-import com.werwolf.helpers.DayTextCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -55,16 +54,11 @@ public class DayController {
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(days.size() + ". Tag");
         storyBuilder.setDescription(storySb);
-        // storyBuilder.setThumbnail(); find picture
+        storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2018/04/16/12/59/face-3324569_960_720.jpg"); // pls review somebody
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
         LOGGER.info("Voting startet");
         createVoting();
-
-        // Update Tag Objekt mit Voting stats
-
-        // begin night
-
     }
 
     public void continueAfterVoting() {
@@ -92,6 +86,8 @@ public class DayController {
             if (player.getId() == votedPlayer.getKey()) {
                 player.die();
                 playerSb.append("  🗡🩸");
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Betrugsversuch.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Never.mp3", true, false);
             }
             playerSb.append("\r");
         }
@@ -107,7 +103,6 @@ public class DayController {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
         });
-
     }
 
     private void createVoting() {
@@ -135,7 +130,6 @@ public class DayController {
             }
             votingMessageID = message.getIdLong();
         });
-
         votingTime = true;
     }
 
@@ -160,7 +154,4 @@ public class DayController {
     public void setVotingTime(boolean votingTime) {
         this.votingTime = votingTime;
     }
-
-
 }
-

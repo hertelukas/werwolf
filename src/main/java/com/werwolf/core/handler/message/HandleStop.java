@@ -1,6 +1,5 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.message;
 
-import com.werwolf.game.Controler.VotingController;
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -9,15 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleStart extends MessageHandler {
+public class HandleStop extends MessageHandler{
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStart.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStop.class);
 
-    public HandleStart() {
-        setName("start");
-        setCommand("start");
-        setDescription("Starts the game");
+    public HandleStop(){
+        setName("Stop");
+        setCommand("stop");
+        setDescription("Stops a game");
     }
+
 
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
@@ -30,19 +30,15 @@ public class HandleStart extends MessageHandler {
 
             if (game.getHost().getId() == event.getAuthor().getIdLong()) {
                 if (game.isActive()) {
-                    channel.sendMessage("Game is already running").queue();
+                    game.stop();
                 } else {
-                    if (game.start()) {
-                        LOGGER.info("Spiel erfolgreich gestartet");
-                    } else
-                        channel.sendMessage("Something went wrong.").queue();
+                    LOGGER.info("Tried to stop inactive game");
                 }
             } else {
-                channel.sendMessage("Only the host can start the game").queue();
+                channel.sendMessage(event.getAuthor().getAsMention() + " only the host can stop the game").queue();
             }
         } else {
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
         }
-        return true;
-    }
+        return true;    }
 }

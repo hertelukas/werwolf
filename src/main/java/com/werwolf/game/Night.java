@@ -1,9 +1,8 @@
 package com.werwolf.game;
 
-import com.werwolf.game.Controler.GameController;
+import com.werwolf.game.controler.GameController;
 
 import java.util.List;
-
 
 public class Night {
 

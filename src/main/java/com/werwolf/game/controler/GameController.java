@@ -1,4 +1,4 @@
-package com.werwolf.game.Controler;
+package com.werwolf.game.controler;
 
 import com.werwolf.game.*;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -13,7 +13,6 @@ import java.net.URI;
 
 public class GameController {
 
-
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
     private static final int DAY_STORY_AMOUNT = 1;
@@ -26,7 +25,7 @@ public class GameController {
     boolean isNight;
     Game game;
     long wolfVoteTime = 60000;
-    long dayTime = 300000; // oder voteTime (muss noch evtl geklaert werden)
+    long dayTime = 300000;
     NightController nightController;
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
@@ -48,7 +47,7 @@ public class GameController {
             dayController.startDay();
             return true;
         } else {
-            gameFinihed();
+            gameFinished();
             return false;
         }
     }
@@ -61,14 +60,14 @@ public class GameController {
             nightController.startNight();
             return true;
         } else {
-            gameFinihed();
+            gameFinished();
             return false;
         }
     }
 
-    private void gameFinihed() {
+    private void gameFinished() {
         EmbedBuilder finishedBuilder = new EmbedBuilder();
-
+        // todo TUM story ende
         if (status == GameStatus.WolfWin) {
             //TODO story am ende
             finishedBuilder.setTitle("Wölfe haben gewonnen");

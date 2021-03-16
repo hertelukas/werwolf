@@ -4,7 +4,6 @@ import net.dv8tion.jda.api.entities.User;
 
 public class Player {
 
-
     String username;
     long id;
     boolean isAlive;
@@ -23,8 +22,6 @@ public class Player {
     }
 
     //Getter & Setter
-
-
     public CharacterType getCharacterType() {
         return characterType;
     }
@@ -43,6 +40,10 @@ public class Player {
 
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void die() {

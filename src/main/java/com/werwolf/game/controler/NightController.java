@@ -2,7 +2,6 @@ package com.werwolf.game.Controler;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
-import com.werwolf.helpers.NightTextCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,6 +78,7 @@ public class NightController {
         for (Player player : nights.peek().getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
             if (player.getId() == votedPlayer.getKey()) {
+                if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                 player.die();
                 playerSB.append("  🗡🩸");
                 AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "trivial.wav", false, true);

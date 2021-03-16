@@ -1,5 +1,5 @@
 
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.message;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
