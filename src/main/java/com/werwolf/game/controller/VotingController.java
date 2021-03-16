@@ -39,22 +39,31 @@ public class VotingController {
     public void vote(String playerPrefix, long voter) {
 
         boolean finished = true;
+        Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
 
         if (nightVoting) {
-            if (gameController.getGame().getPlayer(voter).isAlive() &&
-                    gameController.getGame().getPlayer(voter).getCharacterType() == CharacterType.Werewolf) {
+            if (currVoter.isAlive()) {
+                if (currVoter.getCharacterType() == CharacterType.Werewolf) { // Wolf
 
-                if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
-                    votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
+                    if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
+                        votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
+                        alreadyVoted.add(voter);
+                        LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + " gestimmt");
+                    }
+
+                } else if (currVoter.getCharacterType() == CharacterType.Seer) { // Seher
+                    // todo embed message
+                    currVoter.sendMessage(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType().toString() + " lol");
+
                     alreadyVoted.add(voter);
-                    LOGGER.info(gameController.getGame().getPlayer(voter).getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + " gestimmt");
+                    LOGGER.info(currVoter.getUsername() + " schaut " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + "s Rolle an");
                 }
             }
 
 
-            //Check ob jeder Werewolf gevotet hat
+            //Check ob jeder Werewolf (und Seher) gevotet hat/-ben
             for (Player player : gameController.getGame().getPlayers()) {
-                if (player.isAlive() && player.getCharacterType() == CharacterType.Werewolf) {
+                if (player.isAlive() && (player.getCharacterType() == CharacterType.Werewolf || player.getCharacterType() ==  CharacterType.Seer)) {
                     if (!alreadyVoted.contains(player.getId())) {
                         finished = false;
                     }
@@ -63,10 +72,10 @@ public class VotingController {
 
 
         } else {
-            if (gameController.getGame().getPlayer(voter).isAlive()) {
+            if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 alreadyVoted.add(voter);
-                LOGGER.info(gameController.getGame().getPlayer(voter).getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " gestimmt");
+                LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " gestimmt");
             }
 
             for (Player player : gameController.getGame().getPlayers()) {
