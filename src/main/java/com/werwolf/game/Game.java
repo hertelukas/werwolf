@@ -31,6 +31,11 @@ public class Game {
     private final Guild guild;
     private boolean tumMode = false;
 
+    private int witchnum = 0;
+    private int seernum = 0;
+    private int hunternum = 0;
+    private int littleGirlnum = 0;
+
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
         this.channelID = channel.getIdLong();
@@ -240,7 +245,7 @@ public class Game {
             amount = 3;
         } else if (playerSize > 5) {
             amount = 2;
-        } else if (playerSize > 1) {
+        } else if (playerSize > 2) {
             amount = 1;
         }
 
@@ -256,11 +261,41 @@ public class Game {
             Werewolf werewolf = new Werewolf(player);
             this.werewolves.add(werewolf);
             player.sendMessage("You are a werewolf");
+            LOGGER.info(player.getUsername() + " ist ein Werwolf");
+        }
+
+        //Spzialrollen verteilen
+        int witchtmp = witchnum;
+        int seertmp = seernum;
+        int huntertmp = hunternum;
+        int littleGirltmp = littleGirlnum;
+        for (int i = 0; i < playerSize; i++) {
+            int playerNumber;
+            do{ playerNumber = (int) (Math.random() * playerSize);}while(werewolves.contains(playerNumber));
+
+            if (witchtmp-- > 0) {
+                players.get(playerNumber).characterType = CharacterType.Witch;
+                players.get(playerNumber).sendMessage("You are the witch. \rYou got one Potion to heal somebody and one Potion to kill somebody");
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist die Hexe");
+            } else if (seertmp-- > 0) {
+                players.get(playerNumber).characterType = CharacterType.Seer;
+                players.get(playerNumber).sendMessage("You are the Seer. \rEach round you can choose a Player and you will get to see his role");
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");
+            } else if (huntertmp-- > 0) {
+                players.get(playerNumber).characterType = CharacterType.Hunter;
+                players.get(playerNumber).sendMessage("You are the Hunter. \rWhile you are dying you can shoot the random player you have chosen");
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist der Jäger");
+            } else if (littleGirltmp-- > 0) {
+                players.get(playerNumber).characterType = CharacterType.LittleGirl;
+                players.get(playerNumber).sendMessage("You are the Little Girl. \rYou can sneak into the Werewolfschannel and act like you are one of them, but you want to help the village");
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist das Mädchen");
+            }
         }
 
         for (int i = 0; i < playerSize; i++) {
-            if(!werewolves.contains(i)){
+            if(!werewolves.contains(i) && players.get(i).characterType == CharacterType.Villager){
                 players.get(i).sendMessage("You are a villager");
+                LOGGER.info(players.get(i).getUsername() + " ist ein Dorfbewohner");
             }
         }
 
