@@ -33,7 +33,7 @@ public class DayController {
 
         List<Player> lastNight = game.getController().nightController.nights.peek().getAlive();
         List<Player> currAlive = game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList());
-        days.add(new Day(currAlive, game.getTumMode()));
+        days.add(new Day(currAlive, game));
 
         Collection<Player> killedDuringNight = CollectionUtils.subtract(lastNight, currAlive);
 

@@ -1,6 +1,8 @@
 package com.werwolf.game.controller;
 
 import com.werwolf.game.*;
+import com.werwolf.helpers.DayTextCreator;
+import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -174,7 +176,7 @@ public class GameController {
         }
     }
 
-    public static String getRandomStory(boolean tumMode, boolean isNight) {
+    public String getRandomStory(boolean isNight) {
         String story;
         try {
             File file;
@@ -186,36 +188,25 @@ public class GameController {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
-            int randy = (int) (Math.random() * (tumMode ? (isNight ? NIGHT_TUM_STORY_AMOUNT : NIGHT_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
-            story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
+            int randy = (int) (Math.random() * (game.getTumMode() ? (isNight ? NIGHT_TUM_STORY_AMOUNT : NIGHT_STORY_AMOUNT) : (isNight ? DAY_TUM_STORY_AMOUNT : DAY_STORY_AMOUNT)));
+            story = document.getElementsByTagName("story" + (game.getTumMode() ? "TUM" : "") + randy).item(0).getTextContent();
         } catch (Exception e) {
             return "ERROR";
         }
         return story;
     }
 
-    public static String getRandomIntro(boolean tumMode) {
-        String story;
-        try {
-            File file = new File(new URI("src/main/resources/IntroStories.xml").toString());
-
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(file);
-            int randy = (int) (Math.random() * (tumMode ? INTRO_TUM_STORY_AMOUNT : INTRO_STORY_AMOUNT));
-            story = document.getElementsByTagName("story" + (tumMode ? "TUM" : "") + randy).item(0).getTextContent();
-        } catch (Exception e) {
-            return "ERROR";
-        }
-        return story;
+    private String getRandomIntro() {
+        return UserMessageCreator.getCreator().getMessage(game, "intro-story");
     }
+
 
     public void sendIntroMessage() {
         EmbedBuilder introBuilder = new EmbedBuilder();
         if (game.getTumMode()) {
-            introBuilder.setTitle("TUMWOLF").setDescription(getRandomIntro(true)).setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080884324990996/Kondom.jpg");
+            introBuilder.setTitle("TUMWOLF").setDescription(getRandomIntro()).setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080884324990996/Kondom.jpg");
         } else {
-            introBuilder.setTitle("Werewolf").setDescription(getRandomIntro(false)).setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png");
+            introBuilder.setTitle("Werewolf").setDescription(getRandomIntro()).setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png");
 
         }
         game.getChannel().sendMessage(introBuilder.build()).queue();

@@ -9,12 +9,9 @@ public class Day {
     private final List<Player> alive;
     private final String story;
 
-    private final boolean tumMode;
-
-    public Day(List<Player> alive, boolean tumMode) {
+    public Day(List<Player> alive, Game game) {
         this.alive = alive;
-        this.tumMode = tumMode;
-        story = GameController.getRandomStory(tumMode,false);
+        story = game.getController().getRandomStory(false);
     }
 
     public List<Player> getAlive() {

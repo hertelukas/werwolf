@@ -33,7 +33,7 @@ public class NightController {
         if (nights.isEmpty())
             nights.add(new FirstNight(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
         else
-            nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game.getTumMode()));
+            nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game));
 
         //Storytime
         StringBuilder storySB = new StringBuilder();

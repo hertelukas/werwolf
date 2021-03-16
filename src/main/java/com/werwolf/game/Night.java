@@ -10,12 +10,9 @@ public class Night {
 
     private final String story;
 
-    private final boolean tumMode;
-
-    public Night(List<Player> alive,boolean tumMode) {
+    public Night(List<Player> alive, Game game) {
         this.alive = alive;
-        this.tumMode = tumMode;
-        story = GameController.getRandomStory(tumMode,true);
+        story = game.getController().getRandomStory(true);
     }
 
     public List<Player> getAlive() {
