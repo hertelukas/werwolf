@@ -48,15 +48,15 @@ public class VotingController {
                     if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
                         votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                         alreadyVoted.add(voter);
-                        LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + " gestimmt");
+                        LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " gestimmt");
                     }
 
                 } else if (currVoter.getCharacterType() == CharacterType.Seer) { // Seher
                     // todo embed message
                     currVoter.sendMessage(gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType().toString() + " lol");
-
+                    System.out.println("works?");
                     alreadyVoted.add(voter);
-                    LOGGER.info(currVoter.getUsername() + " schaut " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)) + "s Rolle an");
+                    LOGGER.info(currVoter.getUsername() + " schaut " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + "s Rolle an");
                 }
             }
 
