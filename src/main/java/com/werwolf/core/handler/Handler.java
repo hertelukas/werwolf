@@ -14,7 +14,7 @@ import java.util.HashMap;
 public abstract class Handler {
     private final static Logger LOGGER = LoggerFactory.getLogger(Handler.class);
 
-    static final HashMap<Long, Game> games = new HashMap<>();
+    public static final HashMap<Long, Game> games = new HashMap<>();
 
     public static boolean createGame(TextChannel channel, Player host, Guild guild) {
         //If there is already a game with this channel id, we won't create a new one
@@ -25,7 +25,7 @@ public abstract class Handler {
         return true;
     }
 
-    void updateMainMessage(TextChannel channel) {
+    public void updateMainMessage(TextChannel channel) {
         Game game = games.get(channel.getIdLong());
         if (game.getPlayers().isEmpty()) {
             channel.retrieveMessageById(game.getMainGameMessage()).queue(message -> message.delete().queue());

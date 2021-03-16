@@ -1,5 +1,6 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.messages;
 
+import com.werwolf.core.handler.Handler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

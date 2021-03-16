@@ -1,4 +1,4 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.messages;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -8,16 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleStop extends MessageHandler{
+public class HandleStart extends MessageHandler {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStop.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStart.class);
 
-    public HandleStop(){
-        setName("Stop");
-        setCommand("stop");
-        setDescription("Stops a game");
+    public HandleStart() {
+        setName("start");
+        setCommand("start");
+        setDescription("Starts the game");
     }
-
 
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
@@ -30,15 +29,19 @@ public class HandleStop extends MessageHandler{
 
             if (game.getHost().getId() == event.getAuthor().getIdLong()) {
                 if (game.isActive()) {
-                    game.stop();
+                    channel.sendMessage("Game is already running").queue();
                 } else {
-                    LOGGER.info("Tried to stop inactive game");
+                    if (game.start()) {
+                        LOGGER.info("Spiel erfolgreich gestartet");
+                    } else
+                        channel.sendMessage("Something went wrong.").queue();
                 }
             } else {
-                channel.sendMessage(event.getAuthor().getAsMention() + " only the host can stop the game").queue();
+                channel.sendMessage("Only the host can start the game").queue();
             }
         } else {
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();
         }
-        return true;    }
+        return true;
+    }
 }

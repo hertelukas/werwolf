@@ -1,5 +1,6 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.reaction;
 
+import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -19,12 +20,12 @@ public class LeaveReactionHander extends ReactionHandler {
 
         if (!event.getReactionEmote().getAsReactionCode().equals("❌")) return false;
 
-        Game currentGame = games.get(channel.getIdLong());
+        Game currentGame = Handler.games.get(channel.getIdLong());
         //If there is no game in this channel, return
         if (currentGame == null) {
             channel.sendMessage(event.getUser().getAsMention() + " There is no game in this channel.").queue();
         } else {
-            if (event.getMessageIdLong() != games.get(channel.getIdLong()).getMainGameMessage()) return false;
+            if (event.getMessageIdLong() != Handler.games.get(channel.getIdLong()).getMainGameMessage()) return false;
             updateReactions(channel, event.getMessageIdLong());
             PlayerListStatus result = currentGame.removePlayer(event.getUser().getIdLong());
             if (result == PlayerListStatus.successful) {

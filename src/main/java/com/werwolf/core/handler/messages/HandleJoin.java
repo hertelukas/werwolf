@@ -1,4 +1,4 @@
-package com.werwolf.core.handler;
+package com.werwolf.core.handler.messages;
 
 import com.werwolf.game.Player;
 import com.werwolf.game.PlayerListStatus;
