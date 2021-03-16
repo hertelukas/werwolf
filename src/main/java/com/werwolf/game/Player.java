@@ -42,6 +42,10 @@ public class Player {
         return isAlive;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void die() {
         this.isAlive = false;
     }
