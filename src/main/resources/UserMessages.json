@@ -12,16 +12,16 @@
   "role-werewolf": {
     "tumMode": true,
     "english": "You are a werewolf",
-    "german": "Du bis ein Werwolf",
-    "englishTUM": "You are in the exercise management. Try to torture as many students  as possible!",
+    "german": "Du bist ein Werwolf",
+    "englishTUM": "You are in the exercise management. Try to torture as many students as possible!",
     "germanTUM": "Du bist in der Übungsleitung. Versuche so viele Studenten wie möglich rauszuquälen!"
   },
   "role-seer": {
     "tumMode": true,
-    "english": "You are a seer, you can uncover a role every turn",
-    "german": "Du bis Seher. Jede Runde kannst du eine Rolle aufdecken",
-    "englishTUM": "You are a tutor. You can uncover a role every turn",
-    "germanTUM": "Du bist Tutor, dir ist es möglich jede Rune eine Rolle aufzudecken"
+    "english": "You are a seer, you can uncover a role every night",
+    "german": "Du bist Seher. Jede Nacht kannst du eine Rolle aufdecken",
+    "englishTUM": "You are a tutor. You can uncover a role during each exam",
+    "germanTUM": "Du bist Tutor, dir ist es möglich jede Klausurenphase eine Rolle aufzudecken"
   },
   "role-villager": {
     "tumMode": true,
@@ -46,10 +46,10 @@
   },
   "wolf-win-title": {
     "tumMode": true,
-    "english": "Werwolves won!",
+    "english": "Werewolves won!",
     "german": "Die Werwolfe haben gewonnen!",
-    "englishTUM": "Die Übungsleitung ist genug Studenten los geworden! (en)",
-    "germanTUM": "Die Übungsleitung ist genug Studenten los geworden!"
+    "englishTUM": "The ÜL has gotten rid of enough unexcellent students!",
+    "germanTUM": "Die Übungsleitung ist genug Plagiatuine los geworden!"
   },
   "villager-win-title": {
     "tumMode": true,
@@ -63,27 +63,27 @@
     "english": "The werewolves managed to wipe out the whole village",
     "german": "Die Werwölfe haben es geschafft das ganze Dorf auszulöschen",
     "englishTUM": "The ÜL has managed to bully enough students to the LMU to maintain the excellence status. Let's hope it was worth it!",
-    "germanTUM": "Die Übungsleitung hat es geschafft genügend Studenten zur LMU zu mobben um den Exzellenzstatus beizubehalten. Hoffen wir es hat sich gelohnt!"
+    "germanTUM": "Die Übungsleitung hat es geschafft genügend Studenten zur LMU zu mobben, um den Exzellenzstatus beizubehalten. Hoffen wir es hat sich gelohnt!"
   },
   "villager-win-text": {
     "tumMode": true,
     "english": "The villagers have managed to track down all the werewolves. Finally, one can sleep peacefully again.",
     "german": "Die Dorfbewohner haben es geschafft alle Werwölfe ausfindig zu machen. Endlich kann man wieder ruhig schlafen.",
-    "englishTUM": "The students weren't intimidated and managed to track down and destroy the undercover agents of the ÜL.",
-    "germanTUM": "Die Studenten haben sich nicht einschüchtern lassen und konnten die Undercover Agenten der Übungsleitung ausfindig machen und vernichten."
+    "englishTUM": "The students weren't intimidated and managed to track down and destroy the undercover penguins of the ÜL.",
+    "germanTUM": "Die Studenten haben sich nicht einschüchtern lassen und konnten die Undercover Pinguine der Übungsleitung ausfindig machen und vernichten."
   },
   "killed": {
     "tumMode": true,
-    "english": " got killed.",
+    "english": " was killed.",
     "german": " getötet",
-    "englishTUM": " got exmatriculated",
+    "englishTUM": " was exmatriculated",
     "germanTUM": " exmatrikuliert"
   },
   "nobody-killed": {
     "tumMode": true,
     "english": " nobody got killed.",
     "german": " niemand wurde getötet.",
-    "englishTUM": " nobody got exmatriculated.",
+    "englishTUM": " nobody was exmatriculated.",
     "germanTUM": " niemand wurde exmatrikuliert."
   }
 }
