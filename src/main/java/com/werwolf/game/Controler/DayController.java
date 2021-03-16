@@ -4,6 +4,7 @@ import com.werwolf.game.Day;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 
+import com.werwolf.helpers.DayTextCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -36,11 +37,7 @@ public class DayController {
         Collection<Player> killedDuringNight = CollectionUtils.subtract(lastNight, currAlive);
 
         StringBuilder storySb = new StringBuilder();
-        storySb.append(game.getTumMode()?"Die ":"Der ")
-                .append(days.size())
-                .append(game.getTumMode()?". Semesterferien beginnen":". Tag beginnt")
-                .append(", in der")
-                .append(game.getTumMode() ? "Klausurenphase" : "Nacht");
+        storySb.append(DayTextCreator.getCreator().getStory(game, days.size()));
         if(killedDuringNight.size() == 0)
             storySb.append(" wurde niemand getötet");
         else {

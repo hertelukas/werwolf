@@ -240,7 +240,7 @@ public class Game {
             amount = 4;
         } else if (playerSize > 8) {
             amount = 3;
-        } else if (playerSize > 4) {
+        } else if (playerSize > 5) {
             amount = 2;
         } else if (playerSize > 1) {
             amount = 1;
