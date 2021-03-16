@@ -1,8 +1,6 @@
 package com.werwolf.core.handler.message;
 
-import com.werwolf.core.MainListener;
 import com.werwolf.game.CharacterType;
-import com.werwolf.game.Game;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
