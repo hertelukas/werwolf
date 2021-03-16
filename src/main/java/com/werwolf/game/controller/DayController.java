@@ -6,6 +6,7 @@ import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 
 import com.werwolf.helpers.DayTextCreator;
+import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -54,7 +55,7 @@ public class DayController {
         }
 
         EmbedBuilder storyBuilder = new EmbedBuilder();
-        storyBuilder.setTitle(days.size() + ". Tag");
+        storyBuilder.setTitle(days.size() + ". " + UserMessageCreator.getCreator().getMessage(game,"day"));
         storyBuilder.setDescription(storySb);
         storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2018/04/16/12/59/face-3324569_960_720.jpg"); // pls review somebody
         game.getChannel().sendMessage(storyBuilder.build()).queue();
