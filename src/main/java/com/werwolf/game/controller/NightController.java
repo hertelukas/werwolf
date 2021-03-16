@@ -116,6 +116,7 @@ public class NightController {
         }
 
         votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSB.toString(), true);
+        if (game.getTumMode()) votingMessageBuilder.setThumbnail("https://www.gerassist.com/wp-content/uploads/2020/02/tum-logo.png");
         //TODO ggf. warteZeit verändern/entfernen
         try {
             Thread.sleep(3000);
