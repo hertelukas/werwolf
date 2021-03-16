@@ -1,6 +1,6 @@
 package com.werwolf.core;
 
-import com.werwolf.core.handler.messages.MessageHandler;
+import com.werwolf.core.handler.message.MessageHandler;
 import com.werwolf.core.handler.reaction.ReactionHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;

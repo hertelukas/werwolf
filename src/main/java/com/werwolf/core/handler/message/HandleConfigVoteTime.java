@@ -1,26 +1,23 @@
-package com.werwolf.core.handler.messages;
+package com.werwolf.core.handler.message;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleStart extends MessageHandler {
+public class HandleConfigVoteTime extends MessageHandler {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HandleStart.class);
-
-    public HandleStart() {
-        setName("start");
-        setCommand("start");
-        setDescription("Starts the game");
+    public HandleConfigVoteTime() {
+        setName("Set vote time");
+        setCommand("setvotetime");
+        setDescription("Set the voting time during the day in minutes");
     }
 
     @Override
     public boolean handle(GuildMessageReceivedEvent event, String command, String[] args) {
-        if (!command.equals(getCommand())) return false;
+        if (!command.equals(getCommand()))
+            return false;
 
         TextChannel channel = event.getChannel();
 
@@ -31,13 +28,16 @@ public class HandleStart extends MessageHandler {
                 if (game.isActive()) {
                     channel.sendMessage("Game is already running").queue();
                 } else {
-                    if (game.start()) {
-                        LOGGER.info("Spiel erfolgreich gestartet");
-                    } else
-                        channel.sendMessage("Something went wrong.").queue();
+                    try {
+                        game.getController().setDayTime(Long.parseLong(args[1]) * 60L * 1000L);
+                        // todo change message(s)
+                        channel.sendMessage("Vote time set to " + args[1] + " minutes").queue();
+                    } catch (Exception ex) {
+                        channel.sendMessage("Config failed. Include the amount of time you wish to have in minutes.").queue();
+                    }
                 }
             } else {
-                channel.sendMessage("Only the host can start the game").queue();
+                channel.sendMessage("Only the host can change the game configurations").queue();
             }
         } else {
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this channel.").queue();

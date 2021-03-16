@@ -1,4 +1,4 @@
-package com.werwolf.core.handler.messages;
+package com.werwolf.core.handler.message;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
