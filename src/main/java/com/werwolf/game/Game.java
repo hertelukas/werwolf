@@ -285,14 +285,14 @@ public class Game {
             for (Player player : players) {
                 IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.user);
                 if (player.characterType != CharacterType.Werewolf)
-                    wolfChannel.createPermissionOverride(permissionHolder).setDeny(Permission.VIEW_CHANNEL).queue();
+                    wolfChannel.putPermissionOverride(permissionHolder).setDeny(Permission.VIEW_CHANNEL).queue();
                 else
-                    wolfChannel.createPermissionOverride(permissionHolder).setAllow(Permission.VIEW_CHANNEL).queue();
+                    wolfChannel.putPermissionOverride(permissionHolder).setAllow(Permission.VIEW_CHANNEL).queue();
             }
 
         } catch (Exception e) {
             channel.sendMessage("Failed to create werewolves channel.").queue();
-            LOGGER.info("Error creating werewolves channel " + e.getMessage());
+            LOGGER.error("Error creating werewolves channel " + e.getMessage());
             return false;
         }
 
