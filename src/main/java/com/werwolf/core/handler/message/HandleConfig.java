@@ -35,7 +35,6 @@ public class HandleConfig extends MessageHandler {
 
         TextChannel channel = event.getChannel();
         Game game = Handler.games.get(channel.getIdLong());
-        System.out.println(Arrays.toString(args));
 
 
 
@@ -51,6 +50,15 @@ public class HandleConfig extends MessageHandler {
 
                 channel.sendMessage(configBuilder.build()).queue();
                 return true;
+            } else {
+                for (Config config : configs) {
+                    if (args.length == 1) {
+                        config.updateConfig(game, args[0], null);
+                    } else {
+                        config.updateConfig(game, args[0], args[1]);
+                    }
+                }
+
             }
         }
 

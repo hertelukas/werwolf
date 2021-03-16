@@ -11,6 +11,10 @@ public abstract class Config {
     public Config() {
     }
 
+    public abstract String getConfigResult(Game game);
+
+    public abstract boolean updateConfig(Game game, String command, String arg);
+
     public void setCommand(String command){
         this.command = command;
     }
@@ -34,6 +38,4 @@ public abstract class Config {
     public void setDescription(String description){
         this.description = description;
     }
-
-    public abstract String getConfigResult(Game game);
 }
