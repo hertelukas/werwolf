@@ -41,17 +41,18 @@ public class DayController {
         StringBuilder storySb = new StringBuilder();
         storySb.append(DayTextCreator.getCreator().getStory(game, days.size()));
         if(killedDuringNight.size() == 0)
-            storySb.append(" wurde niemand getötet");
+            storySb.append(UserMessageCreator.getCreator().getMessage(game, "nobody-killed"));
         else {
+            //todo only if german
             storySb.append(killedDuringNight.size() > 1 ? " wurden " : " wurde ");
             for (Iterator<Player> it = killedDuringNight.iterator(); it.hasNext(); ) {
                 Player p = it.next();
-                storySb.append(p.getUsername());
+                storySb.append(p.getUser().getAsMention());
                 if (it.hasNext()) {
                     storySb.append(", ");
                 }
             }
-            storySb.append(game.getTumMode() ? " exmatrikuliert." : " getötet.");
+            storySb.append(UserMessageCreator.getCreator().getMessage(game, "killed"));
         }
 
         EmbedBuilder storyBuilder = new EmbedBuilder();

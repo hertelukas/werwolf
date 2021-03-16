@@ -24,14 +24,18 @@
     "germanTUM": "Du bist Student"
   },
   "day": {
-    "tumMode": false,
+    "tumMode": true,
     "english": "Day",
-    "german": "Tag"
+    "german": "Tag",
+    "englishTUM": "Tutor lesson",
+    "germanTUM": "Tutorium"
   },
   "night": {
-    "tumMode": false,
+    "tumMode": true,
     "english": "Night",
-    "german": "Nacht"
+    "german": "Nacht",
+    "englishTUM": "Exam",
+    "germanTUM": "Prüfungsphase"
   },
   "wolf-win-title": {
     "tumMode": true,
@@ -60,5 +64,19 @@
     "german": "Die Dorfbewohner haben es geschafft alle Werwölfe ausfindig zu machen. Endlich kann man wieder ruhig schlafen.",
     "englishTUM": "TThe students weren't intimidated and managed to track down and destroy the undercover agents of the ÜL.",
     "germanTUM": "Die Studenten haben sich nicht einschüchtern lassen und konnten die Undercover Agenten der Übungsleitung ausfindig machen und vernichten."
+  },
+  "killed": {
+    "tumMode": true,
+    "english": " got killed.",
+    "german": " getötet",
+    "englishTUM": " got exmatriculated",
+    "germanTUM": " exmatrikuliert"
+  },
+  "nobody-killed": {
+    "tumMode": true,
+    "english": " nobody got killed.",
+    "german": " niemand wurde getötet.",
+    "englishTUM": " nobody got exmatriculated.",
+    "germanTUM": " niemand wurde exmatrikuliert."
   }
 }
