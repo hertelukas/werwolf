@@ -5,8 +5,10 @@ import com.werwolf.core.handler.message.configs.Config;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +23,28 @@ public class HandleConfig extends MessageHandler {
 
     private List<Config> configs;
 
+    @Value("${prefix}")
+    private String prefix;
+
+
     public HandleConfig(Config... configs) {
         setName("Configurations");
         setCommand("config");
         setDescription("Get information about the possible configurations");
 
         this.configs = new ArrayList<>(Arrays.asList(configs));
+    }
+
+    @Override
+    public MessageEmbed help() {
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setTitle("Help page for Configurations");
+        builder.setDescription("All available configurations. \nType " + prefix + "config <config> <value> to configure a game.");
+
+        for (Config config : configs) {
+            builder.addField(config.getCommand(), config.getDescription(), false);
+        }
+        return builder.build();
     }
 
     @Override

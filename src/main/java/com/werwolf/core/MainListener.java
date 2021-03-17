@@ -1,6 +1,8 @@
 package com.werwolf.core;
 
+import com.werwolf.core.handler.message.HandleConfig;
 import com.werwolf.core.handler.message.MessageHandler;
+import com.werwolf.core.handler.message.configs.Config;
 import com.werwolf.core.handler.reaction.ReactionHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -70,6 +72,7 @@ public class MainListener extends ListenerAdapter {
         if(!commandHandled(event, args[0], arguments))
             channel.sendMessage("Command not found.").queue();
     }
+
 
     @Override
     public void onGuildMessageReactionAdd(@Nonnull GuildMessageReactionAddEvent event) {
