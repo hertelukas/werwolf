@@ -289,6 +289,7 @@ public class Game {
             do {
                 playerNumber = (int) (Math.random() * playerSize);
             } while (werewolves.contains(playerNumber));
+
             werewolves.add(playerNumber);
             Player player = players.get(playerNumber);
 
@@ -307,7 +308,7 @@ public class Game {
         int sherifftmp = configurations.getSheriffnum();
         int jailortmp = configurations.getJailornum();
 
-        for (int i = 0; i < playerSize; i++) {
+        for (int i = werewolves.size(); i < playerSize; i++) {
             int playerNumber;
             do {
                 playerNumber = (int) (Math.random() * playerSize);
