@@ -253,6 +253,7 @@ public class Game {
 
     public void setWerwolfWritePermissions(boolean value){
         for (Player player : players) {
+            if(!player.characterType.isCanSeeWWChannel()) continue;
             IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.user);
             try {
                 if(value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
