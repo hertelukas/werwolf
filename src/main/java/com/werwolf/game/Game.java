@@ -387,13 +387,13 @@ public class Game {
     private void presetCheck(int werewolfNum) {
         switch (configurations.getPreset()) {
             case 1 -> {
-                int[] temp = new int[6];
+                int[] temp = new int[7];
                 for (int i = 0; i < players.size() - werewolfNum; i++) {
                     temp[i] = 1;
                 }
                 configurations.setAll(temp);
             }
-            default -> configurations.setAll(new int[6]);
+            default -> configurations.setAll(new int[7]);
         }
 
     }

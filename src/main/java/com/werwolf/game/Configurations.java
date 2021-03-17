@@ -103,6 +103,14 @@ public class Configurations {
     }
 
     public void setAll(int[] num) {
-
+        if(num.length != 7)
+            return;
+        witchnum = num[0];
+        seernum = num[1];
+        hunternum = num[2];
+        littleGirlnum = num[3];
+        sheriffnum = num[4];
+        jailornum = num[5];
+        bodyguardnum = num[6];
     }
 }
