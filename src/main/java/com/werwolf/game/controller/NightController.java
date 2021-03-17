@@ -83,15 +83,15 @@ public class NightController {
                 if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                 player.die();
                 playerSB.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "trivial.wav", false, true);
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Never.mp3", true, false);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Drums.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Werwolf3.wav", true, false);
             }
 
             playerSB.append("\r");
 
         }
 
-        votingMessageBuilder.setTitle("Voting").addField("Voting Ergebnisse", playerSB.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "vote-results"), playerSB.toString(), true);
         if (game.getTumMode()) {
             votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
         } else {

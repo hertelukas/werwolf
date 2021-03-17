@@ -53,7 +53,7 @@ public class AudioHandler extends ListenerAdapter {
         String trackUrl = isMusic ? "src/main/resources/Audio/Music/" + track : "src/main/resources/Audio/Voice/" + track;
 
         if(isMusic)
-            audioManager.setVolume(15);
+            audioManager.setVolume(30);
         else
             audioManager.setVolume(50);
 

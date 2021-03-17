@@ -60,7 +60,7 @@ public class Game {
         if (voiceChannelID != 0) {
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
             if(voiceChannel != null)
-                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Never.mp3", true, true);
+                AudioHandler.getAudioHandler().loadAndPlay(voiceChannel, "Werwolf.wav", true, true);
         }
 
         LOGGER.info("Erste Nacht gestartet");
