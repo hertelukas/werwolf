@@ -37,7 +37,6 @@ public class HandleConfig extends MessageHandler {
         Game game = Handler.games.get(channel.getIdLong());
 
 
-
         if (game == null)
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this Channel.").queue();
         else {
@@ -45,7 +44,7 @@ public class HandleConfig extends MessageHandler {
                 EmbedBuilder configBuilder = new EmbedBuilder();
                 configBuilder.setTitle("Configurations").setDescription("Use ww!config <config> <value>");
                 for (Config config : configs) {
-                    configBuilder.addField(config.getCommand(), config.getName() + ": " + config.getConfigResult(game), false);
+                    configBuilder.addField(config.getName(), config.getCommand() + ": " + config.getConfigResult(game), false);
                 }
 
                 channel.sendMessage(configBuilder.build()).queue();

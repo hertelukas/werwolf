@@ -90,8 +90,8 @@ public class DayController {
             if (player.getId() == votedPlayer.getKey()) {
                 player.die();
                 playerSb.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Betrugsversuch.wav", false, true);
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Never.mp3", true, false);
+                AudioHandler.getAudioHandler().loadAndPlay(game, "Betrugsversuch.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game, "Never.mp3", true, false);
             }
             playerSb.append("\r");
         }

@@ -8,6 +8,8 @@ public class Configurations {
     private int littleGirlnum = 0;
     private int sheriffnum = 0;
     private boolean isEnglish = true;
+    private boolean playMusic = true;
+    private boolean playAudio = true;
 
     public int getWitchnum() {
         return witchnum;
@@ -29,7 +31,17 @@ public class Configurations {
         return sheriffnum;
     }
 
-    public boolean isEnglish(){return isEnglish;}
+    public boolean isEnglish() {
+        return isEnglish;
+    }
+
+    public boolean playAudio() {
+        return playAudio;
+    }
+
+    public boolean playMusic() {
+        return playMusic;
+    }
 
     public void setWitchnum(int witchnum) {
         this.witchnum = witchnum;
@@ -53,5 +65,13 @@ public class Configurations {
 
     public void setEnglish(boolean english) {
         isEnglish = english;
+    }
+
+    public void setPlayAudio(boolean playAudio) {
+        this.playAudio = playAudio;
+    }
+
+    public void setPlayMusic(boolean playMusic) {
+        this.playMusic = playMusic;
     }
 }
