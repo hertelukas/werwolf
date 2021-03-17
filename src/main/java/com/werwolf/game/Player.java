@@ -81,4 +81,8 @@ public class Player {
     public void sendMessage(MessageEmbed embed){
         user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(embed).queue());
     }
+
+    public boolean canVote() {
+        return characterType.canVote();
+    }
 }
