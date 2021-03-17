@@ -41,22 +41,23 @@ public class VotingController {
 
         boolean finished = true;
         Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
+        Player votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
 
         if (nightVoting) {
             if (currVoter.isAlive()) {
                 if (currVoter.getCharacterType() == CharacterType.Werewolf) { // Wolf
 
-                    if (gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getCharacterType() != CharacterType.Werewolf) {
+                    if (votedPlayer.getCharacterType() != CharacterType.Werewolf) {
                         votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                         alreadyVoted.add(voter);
-                        LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " gestimmt");
+                        LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
                     }
 
                 } else if (currVoter.getCharacterType() == CharacterType.Seer) { // Seher
-                    // todo embed message
-                    currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "role-seer"));
+                    // todo embed message oder grundsätzlich etwas verschönern
+                    currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
                     alreadyVoted.add(voter);
-                    LOGGER.info(currVoter.getUsername() + " schaut " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + "s Rolle an");
+                    LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
                 }
             }
 
@@ -75,7 +76,7 @@ public class VotingController {
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 alreadyVoted.add(voter);
-                LOGGER.info(currVoter.getUsername() + " hat für " + gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)).getUsername() + " gestimmt");
+                LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
             }
 
             for (Player player : gameController.getGame().getPlayers()) {
