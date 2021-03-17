@@ -6,6 +6,7 @@ public class Configurations {
     private int seernum = 0;
     private int hunternum = 0;
     private int littleGirlnum = 0;
+    private boolean isEnglish = true;
 
     public int getWitchnum() {
         return witchnum;
@@ -23,6 +24,8 @@ public class Configurations {
         return littleGirlnum;
     }
 
+    public boolean isEnglish(){return isEnglish;}
+
     public void setWitchnum(int witchnum) {
         this.witchnum = witchnum;
     }
@@ -37,5 +40,9 @@ public class Configurations {
 
     public void setLittleGirlnum(int littleGirlnum) {
         this.littleGirlnum = littleGirlnum;
+    }
+
+    public void setEnglish(boolean english) {
+        isEnglish = english;
     }
 }

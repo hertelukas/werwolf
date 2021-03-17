@@ -17,30 +17,28 @@ public class JSONReader {
 
     JSONObject document;
 
-    JSONObject parseFile(String fileLocation){
+    JSONObject parseFile(String fileLocation) {
         JSONObject result;
         try {
             File file = new File(new URI(fileLocation).toString());
             result = new JSONObject(FileUtils.readFileToString(file, "utf-8"));
             return result;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.warn("Failed to read JSON: " + e.getMessage());
             return null;
         }
     }
 
-    public String getStory(Game game, int index){
+    public String getStory(Game game, int index) {
         JSONArray array = document.getJSONArray("stories");
         int rnd = new Random().nextInt((array.length()));
         JSONObject randomStory = array.getJSONObject(rnd);
 
-        if(game.getTumMode()){
-            //Todo Handle language
-            return randomStory.getString("englishTUM");
+        if (game.getTumMode()) {
+            if (game.getConfigurations().isEnglish()) return randomStory.getString("englishTUM");
+            return randomStory.getString("germanTUM");
         }
-        else{
-            return randomStory.getString("english");
-        }
+        if(game.getConfigurations().isEnglish()) return randomStory.getString("english");
+        return randomStory.getString("german");
     }
 }

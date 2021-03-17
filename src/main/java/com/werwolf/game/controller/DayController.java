@@ -43,8 +43,8 @@ public class DayController {
         if(killedDuringNight.size() == 0)
             storySb.append(UserMessageCreator.getCreator().getMessage(game, "nobody-killed"));
         else {
-            //todo only if german
-            storySb.append(killedDuringNight.size() > 1 ? " wurden " : " wurde ");
+            if(!game.getConfigurations().isEnglish()) storySb.append(killedDuringNight.size() > 1 ? " wurden " : " wurde ");
+
             for (Iterator<Player> it = killedDuringNight.iterator(); it.hasNext(); ) {
                 Player p = it.next();
                 storySb.append(p.getUser().getAsMention());
