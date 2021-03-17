@@ -78,17 +78,25 @@ public class NightController {
             if (votedPlayer == null) votedPlayer = player;
 
             if (votedPlayer.getValue() < player.getValue()) votedPlayer = player;
+            LOGGER.info(game.getPlayer(player.getKey()).getUsername() + " hat " + player.getValue() + " Stimmen");
         }
 
-        if (votedPlayer.getValue() == 0) votedPlayer = null;
+        LOGGER.info("Der spieler der sterben muss ist " + game.getPlayer(votedPlayer.getKey()).getUsername());
+        if (votedPlayer.getValue() == 0) {
+            votedPlayer = null;
+            LOGGER.info("Er muss nicht sterben!");
+        }
+
+
 
         for (Player player : nights.peek().getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
             if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
-                if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                 if(!player.isSavedByBodyguyard()){
+                    if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                     player.die();
                     playerSB.append("  🗡🩸");
+                    LOGGER.info(player.getUsername() + " stirbt!");
                 }
                 else{
                     notifyBodyguard(player);
