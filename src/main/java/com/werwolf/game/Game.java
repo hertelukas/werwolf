@@ -296,7 +296,7 @@ public class Game {
             int playerNumber;
             do {
                 playerNumber = (int) (Math.random() * playerSize);
-            } while (getPlayer(playerNumber).characterType == CharacterType.Villager);
+            } while (players.get(playerNumber).characterType != CharacterType.Villager);
 
             if (witchtmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.Witch;
