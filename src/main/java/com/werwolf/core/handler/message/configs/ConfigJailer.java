@@ -23,7 +23,7 @@ public class ConfigJailer extends Config {
         try {
             game.getConfigurations().setJailornum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for jailer must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for jailer must be a number").queue();
         }
         return true;
     }

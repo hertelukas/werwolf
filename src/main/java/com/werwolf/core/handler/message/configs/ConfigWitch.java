@@ -4,9 +4,9 @@ import com.werwolf.game.Game;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConifWitch extends Config{
+public class ConfigWitch extends Config{
 
-    public ConifWitch() {
+    public ConfigWitch() {
         setName("Amount of witches");
         setCommand("witch");
         setDescription("Sets the amount of witches");
@@ -24,7 +24,7 @@ public class ConifWitch extends Config{
         try {
             game.getConfigurations().setWitchnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for witch must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for witch must be a number").queue();
         }
         return true;
     }

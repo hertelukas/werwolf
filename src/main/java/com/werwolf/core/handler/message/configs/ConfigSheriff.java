@@ -24,7 +24,7 @@ public class ConfigSheriff extends Config {
         try {
             game.getConfigurations().setSheriffnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for sheriff must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for sheriff must be a number").queue();
         }
         return true;
     }
