@@ -168,14 +168,6 @@ public class GameController {
         }
     }
 
-    public void endgame() {
-        switch(status) {
-            case WolfWin -> LOGGER.info("WOLFS WIN");
-            case VillagerWin -> LOGGER.info("VILLAGER WIN");
-            default -> LOGGER.info("Bis jetzt hat noch keiner gewonnen");
-        }
-    }
-
     public String getRandomStory(boolean isNight) {
         if(isNight)
             return NightTextCreator.getCreator().getStory(game, 0);
@@ -187,7 +179,6 @@ public class GameController {
     private String getRandomIntro() {
         return IntroTextCreator.getCreator().getStory(game, 0);
     }
-
 
     public void sendIntroMessage() {
         EmbedBuilder introBuilder = new EmbedBuilder();

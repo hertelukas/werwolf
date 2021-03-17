@@ -176,11 +176,11 @@ public class VotingController {
 
     /**
      * Sheriff stimmt ab
-     * @param votedPlayer
-     * @param voter
+     * @param target Spieler der gevotet wurde
+     * @param voter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
      */
-    private void voteAsSheriff(Player votedPlayer, Player voter, String playerPrefix) {
+    private void voteAsSheriff(Player target, Player voter, String playerPrefix) {
         Random rd = new Random();
         int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
         int success = rd.nextInt(100);
@@ -190,18 +190,18 @@ public class VotingController {
         //If we have success we send true information
         if(success < chanceForTrueInformation){
             //Todo alle Rollen auflisten die in der Nacht nichts machen
-            if(votedPlayer.getCharacterType() == CharacterType.Villager)
-                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
+            if(target.getCharacterType() == CharacterType.Villager)
+                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
             else
-                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
         }else{
             //This information is random
             if(rd.nextBoolean())
-                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
+                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
             else
-                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
         }
         voter.sendMessage(builder.build());
-        LOGGER.info(voter.getUsername() + " untersucht " + votedPlayer.getUsername());
+        LOGGER.info(voter.getUsername() + " untersucht " + target.getUsername());
     }
 }
