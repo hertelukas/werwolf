@@ -22,7 +22,7 @@ public class ConifWitch extends Config{
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setWitchnum(Integer.parseInt(arg) < 0 ? 0 : Integer.parseInt(arg));
+            game.getConfigurations().setWitchnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
             game.getChannel().sendMessage("Conifg parameter for witch must be a number").queue();
         }

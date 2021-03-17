@@ -4,12 +4,12 @@ import com.werwolf.game.Game;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConfigHunter extends Config {
+public class ConfigSheriff extends Config {
 
-    public ConfigHunter() {
-        setName("Amount of Hunters");
-        setCommand("hunter");
-        setDescription("Sets the amount of hunters");
+    public ConfigSheriff() {
+        setName("Amount of Sheriffs");
+        setCommand("sheriff");
+        setDescription("Sets the amount of sheriffs");
     }
 
     @Override
@@ -22,9 +22,9 @@ public class ConfigHunter extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setHunternum(Math.max(Integer.parseInt(arg), 0));
+            game.getConfigurations().setSheriffnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for hunter must be a number").queue();
+            game.getChannel().sendMessage("Conifg parameter for sheriff must be a number").queue();
         }
         return true;
     }

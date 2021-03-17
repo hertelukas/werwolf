@@ -291,6 +291,7 @@ public class Game {
         int seertmp = configurations.getSeernum();
         int huntertmp = configurations.getHunternum();
         int littleGirltmp = configurations.getLittleGirlnum();
+        int sherifftmp = configurations.getSheriffnum();
         for (int i = 0; i < playerSize; i++) {
             int playerNumber;
             do {
@@ -313,6 +314,10 @@ public class Game {
                 players.get(playerNumber).characterType = CharacterType.LittleGirl;
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-littlegirl"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist das Mädchen");
+            } else if(sherifftmp-- > 0){
+                players.get(playerNumber).characterType = CharacterType.Sheriff;
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-sheriff"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist Sheriff");
             }
         }
 

@@ -6,6 +6,7 @@ public class Configurations {
     private int seernum = 0;
     private int hunternum = 0;
     private int littleGirlnum = 0;
+    private int sheriffnum = 0;
     private boolean isEnglish = true;
 
     public int getWitchnum() {
@@ -24,6 +25,10 @@ public class Configurations {
         return littleGirlnum;
     }
 
+    public int getSheriffnum() {
+        return sheriffnum;
+    }
+
     public boolean isEnglish(){return isEnglish;}
 
     public void setWitchnum(int witchnum) {
@@ -40,6 +45,10 @@ public class Configurations {
 
     public void setLittleGirlnum(int littleGirlnum) {
         this.littleGirlnum = littleGirlnum;
+    }
+
+    public void setSheriffnum(int sheriffnum) {
+        this.sheriffnum = sheriffnum;
     }
 
     public void setEnglish(boolean english) {

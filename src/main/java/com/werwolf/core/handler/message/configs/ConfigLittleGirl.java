@@ -22,7 +22,7 @@ public class ConfigLittleGirl extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setLittleGirlnum(Integer.parseInt(arg) < 0 ? 0 : Integer.parseInt(arg));
+            game.getConfigurations().setLittleGirlnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
             game.getChannel().sendMessage("Conifg parameter for little girl must be a number").queue();
         }

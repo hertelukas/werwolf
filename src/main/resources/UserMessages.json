@@ -61,6 +61,13 @@
     "englishTUM": "Girl EN TUM",
     "germanTUM": "Girl DE TUM"
   },
+  "role-sheriff": {
+    "tumMode": true,
+    "english": "You are the sheriff of the village. You can follow a citizen every night, maybe you notice something suspicious?",
+    "german": "Du bist der Sheriff des Dorfs. Du kannst jede Nacht eine Person verfolgen, vielleicht merkst du ja was auffälliges?",
+    "englishTUM": "Sheriff EN TUM",
+    "germanTUM": "Sheriff DE TUM"
+  },
   "day": {
     "tumMode": true,
     "english": "Day",

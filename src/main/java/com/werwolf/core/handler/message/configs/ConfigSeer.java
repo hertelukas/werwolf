@@ -22,7 +22,7 @@ public class ConfigSeer extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setSeernum(Integer.parseInt(arg) < 0 ? 0 : Integer.parseInt(arg));
+            game.getConfigurations().setSeernum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
             game.getChannel().sendMessage("Conifg parameter for seer must be a number").queue();
         }
