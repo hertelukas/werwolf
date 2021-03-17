@@ -7,7 +7,7 @@ public class Configurations {
     private int hunternum = 0;
     private int littleGirlnum = 0;
     private int sheriffnum = 0;
-    private int jailernum = 0;
+    private int jailornum = 0;
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
@@ -32,8 +32,8 @@ public class Configurations {
         return sheriffnum;
     }
 
-    public int getJailernum() {
-        return jailernum;
+    public int getJailornum() {
+        return jailornum;
     }
 
     public boolean isEnglish() {
@@ -68,8 +68,8 @@ public class Configurations {
         this.sheriffnum = sheriffnum;
     }
 
-    public void setJailernum(int jailernum) {
-        this.jailernum = jailernum;
+    public void setJailornum(int jailornum) {
+        this.jailornum = jailornum;
     }
 
     public void setEnglish(boolean english) {

@@ -80,9 +80,11 @@ public class NightController {
             if (votedPlayer.getValue() < player.getValue()) votedPlayer = player;
         }
 
+        if (votedPlayer.getValue() == 0) votedPlayer = null;
+
         for (Player player : nights.peek().getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
-            if (player.getId() == votedPlayer.getKey()) {
+            if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
                 if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                 player.die();
                 playerSB.append("  🗡🩸");
