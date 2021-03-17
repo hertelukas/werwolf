@@ -59,6 +59,7 @@ public class VotingController {
                     currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
                     alreadyVoted.add(voter);
                     LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
+
                 } else if(currVoter.getCharacterType() == CharacterType.Sheriff){ //Sheriff
                     Random rd = new Random();
                     int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
