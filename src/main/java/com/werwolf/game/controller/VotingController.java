@@ -51,7 +51,6 @@ public class VotingController {
                 //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
                 if (!alreadyVoted.contains(currVoter) && currVoter.canVote()) {
                     computeVote(currVoter, votedPlayer);
-                    alreadyVoted.add(currVoter);
                 }
             }
 
@@ -122,12 +121,17 @@ public class VotingController {
      * @param target Spieler der gevotet wurde
      */
     private void computeVote(Player voter, Player target) {
+        if(voter.getId() == target.getId()){
+            voter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "self-vote"));
+            return;
+        }
         if (voter.getCharacterType() == CharacterType.Jailor) {
             target.setJailed(true);
         } else {
             savedReaction.put(voter, target);
         }
         voter.sendMessage("Vote received!");
+        alreadyVoted.add(voter);
     }
 
     /**
@@ -145,7 +149,9 @@ public class VotingController {
     }
 
     private void voteAsBodyguard(Player votedPlayer, Player currVoter, String playerPrefix) {
+
         votedPlayer.setSavedByBodyguyard(true);
+
     }
 
 

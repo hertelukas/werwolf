@@ -205,5 +205,10 @@
     "german": "Dein Kleint wurde angegriffen. Dank dir lebt er noch.",
     "englishTUM": "bodyguard TUM",
     "germanTUM": "bodyguard TUM DE"
+  },
+  "self-vote": {
+    "tumMode": false,
+    "english": "You can't vote for yourself",
+    "german": "Du kannst nicht für dich selbst abstimmen"
   }
 }
