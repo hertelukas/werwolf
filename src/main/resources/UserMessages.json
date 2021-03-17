@@ -57,7 +57,7 @@
   "role-littlegirl": {
     "tumMode": true,
     "english": "You are the Little Girl. \nYou can secretly live among the werewolves and act like you are one of them, but you want to help the village",
-    "german":"Du bist das Mädchen. Du kannst heimlich unter den Werwölfen leben und so tun, als wärst du einer von ihnen, aber du willst dem Dorf helfen",
+    "german": "Du bist das Mädchen. Du kannst heimlich unter den Werwölfen leben und so tun, als wärst du einer von ihnen, aber du willst dem Dorf helfen",
     "englishTUM": "Girl EN TUM",
     "germanTUM": "Girl DE TUM"
   },
@@ -144,5 +144,31 @@
     "german": "Übersicht",
     "englishTUM": "Excellence status overview",
     "germanTUM": "Exzellenzstatus Überwachung"
+  },
+  "sheriff-report": {
+    "tumMode": true,
+    "english": "Detective Report",
+    "german": "Detektivbericht",
+    "englishTUM": "Report",
+    "germanTUM": "Report"
+  },
+  "certainty": {
+    "tumMode": false,
+    "english": "Certainty",
+    "german": "Sicherheit"
+  },
+  "sheriff-report-home": {
+    "tumMode": true,
+    "english": " seemed to sleep through the night.",
+    "german": " schein die ganze Nacht zu schlafen.",
+    "englishTUM": " behaves like every excellent student.",
+    "germanTUM": " verhielt sich wie sich ein exzellenter Student verhalten sollte."
+  },
+  "sheriff-report-sus": {
+    "tumMode": true,
+    "english": " behaved pretty sus. I saw him leave his house while everyone was asleep",
+    "german": " verhielt sich auffällig. Er war ziemlich sicher in der Nacht unterwegs.",
+    "englishTUM": " is sus. Let's keep an eye on him...",
+    "germanTUM": " ist sicher mal sus. Während der Klausur ging er mehrfach 'auf die Toilette'"
   }
 }

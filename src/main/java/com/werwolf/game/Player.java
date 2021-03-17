@@ -1,6 +1,7 @@
 package com.werwolf.game;
 
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,5 +72,13 @@ public class Player {
      */
     public void sendMessage(String message) {
         user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(message).queue());
+    }
+
+    /**
+     * Sendet eine private Nachricht an den Spieler
+     * @param embed Nachricht
+     */
+    public void sendMessage(MessageEmbed embed){
+        user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(embed).queue());
     }
 }

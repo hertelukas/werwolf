@@ -3,13 +3,13 @@ package com.werwolf.game.controller;
 import com.werwolf.game.CharacterType;
 import com.werwolf.game.Player;
 import com.werwolf.helpers.UserMessageCreator;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VotingController {
 
@@ -20,6 +20,7 @@ public class VotingController {
     private HashMap<String, Long> playerPrefixmap = new HashMap<>();
     private boolean nightVoting = false;
     private List<Long> alreadyVoted = new ArrayList<>();
+    private static final int SHERIFF_AVG_SUCCESS = 40;
 
     public VotingController(GameController controller) {
         this.gameController = controller;
@@ -58,6 +59,28 @@ public class VotingController {
                     currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
                     alreadyVoted.add(voter);
                     LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
+                } else if(currVoter.getCharacterType() == CharacterType.Sheriff){ //Sheriff
+                    Random rd = new Random();
+                    int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
+                    int success = rd.nextInt(100);
+                    EmbedBuilder builder = new EmbedBuilder();
+                    builder.setTitle(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report"));
+                    builder.addField(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "certainty"), chanceForTrueInformation + ((100 - chanceForTrueInformation) / 2) + "%", false );
+                    //If we have success we send true information
+                    if(success < chanceForTrueInformation){
+                        //Todo alle Rollen auflisten die in der Nacht nichts machen
+                         if(votedPlayer.getCharacterType() == CharacterType.Villager)
+                             builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
+                         else
+                             builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+                    }else{
+                        //This information is random
+                        if(rd.nextBoolean())
+                            builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
+                        else
+                            builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+                    }
+                    currVoter.sendMessage(builder.build());
                 }
             }
 
