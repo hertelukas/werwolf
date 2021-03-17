@@ -296,7 +296,7 @@ public class Game {
             int playerNumber;
             do {
                 playerNumber = (int) (Math.random() * playerSize);
-            } while (werewolves.contains(playerNumber));
+            } while (getPlayer(playerNumber).characterType == CharacterType.Villager);
 
             if (witchtmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.Witch;
