@@ -37,6 +37,8 @@ public class NightController {
         else
             nights.add(new Night(game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList()), game));
 
+        game.setWerwolfWritePermissions(true);
+
         //Storytime
         StringBuilder storySB = new StringBuilder();
         storySB.append(NightTextCreator.getCreator().getStory(game, nights.size()));

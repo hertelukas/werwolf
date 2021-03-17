@@ -32,6 +32,8 @@ public class DayController {
     void startDay() {
         LOGGER.info("Tag startet");
 
+        game.setWerwolfWritePermissions(false);
+
         List<Player> lastNight = game.getController().nightController.nights.peek().getAlive();
         List<Player> currAlive = game.getPlayers().stream().filter(Player::isAlive).collect(Collectors.toList());
         days.add(new Day(currAlive, game));
