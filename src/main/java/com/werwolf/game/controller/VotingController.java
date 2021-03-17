@@ -82,13 +82,12 @@ public class VotingController {
                 }
             }
 
-
         } else {
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 if (!alreadyVoted.contains(currVoter)) {
                     alreadyVoted.add(currVoter);
-                    currVoter.sendMessage("Du hast für " + votedPlayer.getUsername() + "gestimmt");
+                    currVoter.sendMessage("Du hast für " + votedPlayer.getUsername() + " gestimmt");
                     LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
                 }
             }
@@ -116,6 +115,7 @@ public class VotingController {
 
 
     public HashMap<Long, Integer> getResult() {
+        LOGGER.info(votings.toString());
         return votings;
     }
 
@@ -149,14 +149,14 @@ public class VotingController {
      */
     private void voteAsWerewolf(Player target, Player voter, String playerPrefix) {
         if (target.getCharacterType() != CharacterType.Werewolf) {
-            votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-            LOGGER.info(voter.getUsername() + " hat für " + target.getUsername() + " gestimmt");
+            LOGGER.info(gameController.game.getPlayer(target.getId()).getUsername() + " wurde vom Werewolf " + voter.getUsername() + " ausgewählt");
+            votings.computeIfPresent(target.getId(), (aLong, integer) -> (integer = integer + 1));
         }
     }
 
-    private void voteAsBodyguard(Player votedPlayer, Player currVoter, String playerPrefix) {
+    private void voteAsBodyguard(Player target, Player voter, String playerPrefix) {
 
-        votedPlayer.setSavedByBodyguyard(true);
+        target.setSavedByBodyguyard(true);
 
     }
 
