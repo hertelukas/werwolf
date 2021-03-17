@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.MemberImpl;
-import net.dv8tion.jda.internal.entities.RoleImpl;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -306,6 +305,8 @@ public class Game {
         int huntertmp = configurations.getHunternum();
         int littleGirltmp = configurations.getLittleGirlnum();
         int sherifftmp = configurations.getSheriffnum();
+        int jailortmp = configurations.getJailornum();
+
         for (int i = 0; i < playerSize; i++) {
             int playerNumber;
             do {
@@ -332,6 +333,10 @@ public class Game {
                 players.get(playerNumber).characterType = CharacterType.Sheriff;
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-sheriff"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Sheriff");
+            } else if(jailortmp-- > 0){
+                players.get(playerNumber).characterType = CharacterType.Jailor;
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-jailor"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist Jailor");
             }
         }
 
