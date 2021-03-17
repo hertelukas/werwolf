@@ -43,7 +43,7 @@ public class HandleConfig extends MessageHandler {
         else {
             if (args.length == 0) {
                 EmbedBuilder configBuilder = new EmbedBuilder();
-                configBuilder.setTitle("Configurations").setDescription("Use ww!config <configuaration>");
+                configBuilder.setTitle("Configurations").setDescription("Use ww!config <config> <value>");
                 for (Config config : configs) {
                     configBuilder.addField(config.getCommand(), config.getName() + ": " + config.getConfigResult(game), false);
                 }
