@@ -14,13 +14,14 @@ import java.util.*;
 public class VotingController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(VotingController.class);
+    private static final int SHERIFF_AVG_SUCCESS = 40;
 
     private final GameController gameController;
     private HashMap<Long, Integer> votings = new HashMap<>();
     private HashMap<String, Long> playerPrefixmap = new HashMap<>();
+    private HashMap<Player, Player> savedReaction = new HashMap<>();
     private boolean nightVoting = false;
-    private List<Long> alreadyVoted = new ArrayList<>();
-    private static final int SHERIFF_AVG_SUCCESS = 40;
+    private List<Player> alreadyVoted = new ArrayList<>();
 
     public VotingController(GameController controller) {
         this.gameController = controller;
@@ -31,6 +32,7 @@ public class VotingController {
         playerPrefixmap = new HashMap<>();
         this.nightVoting = isNight;
         alreadyVoted = new ArrayList<>();
+        savedReaction = new HashMap<>();
     }
 
     public void addPlayer(String playerPrefix, long playerID) {
@@ -49,13 +51,9 @@ public class VotingController {
 
 
                 //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
-                if (!alreadyVoted.contains(voter) && currVoter.canVote()) {
-                    switch (currVoter.getCharacterType()) {
-                        case Werewolf -> voteAsWerewolf(votedPlayer, currVoter, playerPrefix);
-                        case Seer -> voteAsSeer(votedPlayer, currVoter, playerPrefix);
-                        case Sheriff -> voteAsSheriff(votedPlayer, currVoter, playerPrefix);
-                    }
-                    alreadyVoted.add(voter);
+                if (!alreadyVoted.contains(currVoter) && currVoter.canVote()) {
+                    computeVote(currVoter, votedPlayer);
+                    alreadyVoted.add(currVoter);
                 }
             }
 
@@ -63,9 +61,25 @@ public class VotingController {
             //Check ob jeder der Voten kann gevotet hat/-ben
             for (Player player : gameController.getGame().getPlayers()) {
                 if (player.isAlive() && player.canVote()) {
-                    if (!alreadyVoted.contains(player.getId())) {
+                    if (!alreadyVoted.contains(player)) {
                         finished = false;
                     }
+                }
+            }
+
+            //Votes werden ausgeführt wenn die Person voten darf
+            if (finished) {
+                for (Player p : alreadyVoted) {
+                    if (p.canVote()) {
+                        switch (p.getCharacterType()) {
+                            case Werewolf -> voteAsWerewolf(savedReaction.get(p), p, playerPrefix);
+                            case Seer -> voteAsSeer(savedReaction.get(p), p, playerPrefix);
+                            case Sheriff -> voteAsSheriff(savedReaction.get(p), p, playerPrefix);
+                        }
+                    } else if (p.isJailed()) {
+                        p.sendMessage("Du warst gejailt du konntest in der Nacht nicht dein Haus verlassen!");
+                    }
+                    p.setJailed(false);
                 }
             }
 
@@ -73,13 +87,13 @@ public class VotingController {
         } else {
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-                alreadyVoted.add(voter);
+                alreadyVoted.add(currVoter);
                 LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
             }
 
             for (Player player : gameController.getGame().getPlayers()) {
                 if (player.isAlive()) {
-                    if (!alreadyVoted.contains(player.getId())) {
+                    if (!alreadyVoted.contains(player)) {
                         finished = false;
                     }
                 }
@@ -102,6 +116,20 @@ public class VotingController {
 
     public HashMap<Long, Integer> getResult() {
         return votings;
+    }
+
+    /**
+     * Bekommt die ganzen Votes und speichert sie in einer Liste zwischen, gibt eine Nachricht an den Spieler aus
+     * @param voter
+     * @param target
+     */
+    private void computeVote(Player voter, Player target) {
+        if (voter.getCharacterType() == CharacterType.Jailer) {
+            target.setJailed(true);
+        } else {
+            savedReaction.put(voter, target);
+        }
+        voter.sendMessage("Vote received!");
     }
 
     /**

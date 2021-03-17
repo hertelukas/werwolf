@@ -7,7 +7,8 @@ public enum CharacterType {
     Witch(true, false),
     LittleGirl(false, true),
     Sheriff(true, false),
-    Hunter(false,false);
+    Hunter(false,false),
+    Jailer(true, false);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;
@@ -18,7 +19,7 @@ public enum CharacterType {
     }
 
     //Getter und Setter
-    public boolean canVote() {
+    boolean canVote() {
         return canVote;
     }
 

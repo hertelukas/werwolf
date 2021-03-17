@@ -17,6 +17,7 @@ public class Player {
     boolean isAlive;
     User user;
     CharacterType characterType;
+    private boolean jailed;
 
     //Todo we might want to remove this, makes no sense. Is here to allow Werewolf and Villager with no constructor
     public Player(){}
@@ -59,6 +60,14 @@ public class Player {
         return isAlive;
     }
 
+    public void setJailed(boolean jailed) {
+        this.jailed = jailed;
+    }
+
+    public boolean isJailed() {
+        return jailed;
+    }
+
     public User getUser() {
         return user;
     }
@@ -83,6 +92,10 @@ public class Player {
     }
 
     public boolean canVote() {
-        return characterType.canVote();
+        if (!jailed) {
+            return characterType.canVote();
+        } else {
+            return false;
+        }
     }
 }
