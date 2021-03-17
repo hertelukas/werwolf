@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.werwolf.core.handler.audio.GuildAudioManager;
+import com.werwolf.game.Game;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -47,7 +48,11 @@ public class AudioHandler extends ListenerAdapter {
         return audioManager;
     }
 
-    public void loadAndPlay(VoiceChannel channel, final String track, boolean isMusic, boolean forcePlay){
+    public void loadAndPlay(Game game, final String track, boolean isMusic, boolean forcePlay){
+        if(!game.getConfigurations().playMusic() && isMusic) return;
+        if(!game.getConfigurations().playAudio() && !isMusic) return;
+
+        VoiceChannel channel = game.getVoiceChannel();
         if(channel == null) return;
         GuildAudioManager audioManager = getGuildAudioManager(channel.getGuild());
         String trackUrl = isMusic ? "src/main/resources/Audio/Music/" + track : "src/main/resources/Audio/Voice/" + track;

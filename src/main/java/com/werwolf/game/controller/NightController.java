@@ -84,8 +84,8 @@ public class NightController {
                 if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                 player.die();
                 playerSB.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Drums.wav", false, true);
-                AudioHandler.getAudioHandler().loadAndPlay(game.getVoiceChannel(), "Werwolf3.wav", true, false);
+                AudioHandler.getAudioHandler().loadAndPlay(game, "Drums.wav", false, true);
+                AudioHandler.getAudioHandler().loadAndPlay(game, "Werwolf3.wav", true, false);
             }
 
             playerSB.append("\r");
