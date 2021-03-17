@@ -119,10 +119,10 @@
   },
   "nobody-killed": {
     "tumMode": true,
-    "english": " nobody got killed.",
-    "german": " niemand wurde getötet.",
-    "englishTUM": " nobody was exmatriculated.",
-    "germanTUM": " niemand wurde exmatrikuliert."
+    "english": "Nobody got killed.",
+    "german": " Niemand wurde getötet.",
+    "englishTUM": "Nobody was exmatriculated.",
+    "germanTUM": " Niemand wurde exmatrikuliert."
   },
   "living-players": {
     "tumMode": true,
