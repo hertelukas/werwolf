@@ -4,10 +4,8 @@ import com.werwolf.game.CharacterType;
 import com.werwolf.game.Player;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import java.util.*;
 
@@ -77,9 +75,9 @@ public class VotingController {
                             case Sheriff -> voteAsSheriff(savedReaction.get(p), p, playerPrefix);
                         }
                     } else if (p.isJailed()) {
-                        p.sendMessage("Du warst gejailt du konntest in der Nacht nicht dein Haus verlassen!");
+                        p.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.game, "jailor-jails"));
+                        p.setJailed(false);
                     }
-                    p.setJailed(false);
                 }
             }
 
@@ -124,7 +122,7 @@ public class VotingController {
      * @param target
      */
     private void computeVote(Player voter, Player target) {
-        if (voter.getCharacterType() == CharacterType.Jailer) {
+        if (voter.getCharacterType() == CharacterType.Jailor) {
             target.setJailed(true);
         } else {
             savedReaction.put(voter, target);

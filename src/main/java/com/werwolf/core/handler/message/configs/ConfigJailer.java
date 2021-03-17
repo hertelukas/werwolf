@@ -13,7 +13,7 @@ public class ConfigJailer extends Config {
 
     @Override
     public String getConfigResult(Game game) {
-        return Integer.toString(game.getConfigurations().getJailernum());
+        return Integer.toString(game.getConfigurations().getJailornum());
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ConfigJailer extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setJailernum(Math.max(Integer.parseInt(arg), 0));
+            game.getConfigurations().setJailornum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
             game.getChannel().sendMessage("Conifg parameter for jailer must be a number").queue();
         }

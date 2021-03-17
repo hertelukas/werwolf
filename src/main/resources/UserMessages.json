@@ -54,6 +54,13 @@
     "englishTUM": "Hunter EN TUM",
     "germanTUM": "Hunter DE TUM"
   },
+  "role-jailor": {
+    "tumMode": true,
+    "english": "You are the Jailor. \nEach Night you can jail the person you choose, this person cant interact during the night.",
+    "german": "Du bist Gefängniswärter. \nJede Nacht kannst du eine Person auswählen, diese Person kann in dieser Nacht keine Aktion ausführen.",
+    "englishTUM": "Jailor EN TUM",
+    "germanTUM": "Jailor DE TUM"
+  },
   "role-littlegirl": {
     "tumMode": true,
     "english": "You are the Little Girl. \nYou can secretly live among the werewolves and act like you are one of them, but you want to help the village",
@@ -119,10 +126,10 @@
   },
   "nobody-killed": {
     "tumMode": true,
-    "english": " nobody got killed.",
-    "german": " niemand wurde getötet.",
-    "englishTUM": " nobody was exmatriculated.",
-    "germanTUM": " niemand wurde exmatrikuliert."
+    "english": "Nobody got killed.",
+    "german": " Niemand wurde getötet.",
+    "englishTUM": "Nobody was exmatriculated.",
+    "germanTUM": " Niemand wurde exmatrikuliert."
   },
   "living-players": {
     "tumMode": true,
@@ -170,5 +177,12 @@
     "german": " verhielt sich auffällig. Er war ziemlich sicher in der Nacht unterwegs.",
     "englishTUM": " is sus. Let's keep an eye on him...",
     "germanTUM": " ist sicher mal sus. Während der Klausur ging er mehrfach 'auf die Toilette'"
+  },
+  "jailor-jails": {
+    "tumMode": true,
+    "english": "You got jailed by the Jailor you must vote if you can, but your votes have no effect",
+    "german": "Du wurdest eingesperrt vom Gefängniswärter, Vote wenn du kannst, deine Stimme hat aber leider keinen Einfluss!",
+    "englishTUM": "TUM-MODE You got jailed",
+    "germanTUM": "TUM-MODE Du wurdest eingesperrt"
   }
 }

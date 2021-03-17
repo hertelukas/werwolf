@@ -1,13 +1,13 @@
 {
   "stories": [
     {
-      "english": "A new night begins",
-      "german": "Die Werwölfe legen sich auf die Lauer",
+      "english": "Night falls again and silence returns to the otherwise busy streets of Mondheim. But the silence is deceptive, as the werewolves go on the hunt for a further victim...",
+      "german": "Die Nacht bricht wieder hinein und Ruhe kehrt in die sonst so lebendigen Strassen Mondheims. Doch die Stille trügt, denn die Werwölfe unter der Bevölkerung sind hungriger denn je... ",
       "englishTUM" : "Another exam season has begun",
       "germanTUM" : "Eine weitere Klausurphase bricht an"
     }, {
-      "english": "Blabla",
-      "german": "Blabla",
+      "english": "Maybe Mondheim will be spared tonight? Probably not, but the hope remains",
+      "german": "Vielleicht bleibt Mondheim ja heute verschont? - Die Hoffnung stirbt wohl zu letzt.",
       "englishTUM": "Blabla",
       "germanTUM": "Blabla"
     }
