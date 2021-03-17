@@ -14,7 +14,7 @@ public class ConfigSheriff extends Config {
 
     @Override
     public String getConfigResult(Game game) {
-        return Integer.toString(game.getConfigurations().getHunternum());
+        return Integer.toString(game.getConfigurations().getSheriffnum());
     }
 
     @Override
