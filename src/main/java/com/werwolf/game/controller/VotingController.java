@@ -17,6 +17,7 @@ public class VotingController {
     private final GameController gameController;
     private HashMap<Long, Integer> votings = new HashMap<>();
     private HashMap<String, Long> playerPrefixmap = new HashMap<>();
+    //Player a greift -> Player b an
     private HashMap<Player, Player> savedReaction = new HashMap<>();
     private boolean nightVoting = false;
     private List<Player> alreadyVoted = new ArrayList<>();
@@ -142,14 +143,14 @@ public class VotingController {
     /**
      * Werewolf stimmt ab
      *
-     * @param votedPlayer Spieler der gevotet wurde
-     * @param currVoter Spieler der die Stimme abgegeben hat
+     * @param target Spieler der gevotet wurde
+     * @param voter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
      */
-    private void voteAsWerewolf(Player votedPlayer, Player currVoter, String playerPrefix) {
-        if (votedPlayer.getCharacterType() != CharacterType.Werewolf) {
+    private void voteAsWerewolf(Player target, Player voter, String playerPrefix) {
+        if (target.getCharacterType() != CharacterType.Werewolf) {
             votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-            LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+            LOGGER.info(voter.getUsername() + " hat für " + target.getUsername() + " gestimmt");
         }
     }
 
@@ -162,24 +163,24 @@ public class VotingController {
 
     /**
      * Seher stimmt ab
-     * @param votedPlayer Spieler der gevotet wurde
-     * @param currVoter Spieler der die Stimme abgegeben hat
+     * @param target Spieler der gevotet wurde
+     * @param voter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
      */
-    private void voteAsSeer(Player votedPlayer, Player currVoter, String playerPrefix) {
+    private void voteAsSeer(Player target, Player voter, String playerPrefix) {
         // todo embed message oder grundsätzlich etwas verschönern
-        currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
-        LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
+        voter.sendMessage(target.getUsername() + ": " + target.getCharacterType());
+        LOGGER.info(voter.getUsername() + " schaut " + target.getUsername() + "s Rolle an");
 
     }
 
     /**
      * Sheriff stimmt ab
      * @param votedPlayer
-     * @param currVoter
+     * @param voter
      * @param playerPrefix
      */
-    private void voteAsSheriff(Player votedPlayer, Player currVoter, String playerPrefix) {
+    private void voteAsSheriff(Player votedPlayer, Player voter, String playerPrefix) {
         Random rd = new Random();
         int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
         int success = rd.nextInt(100);
@@ -200,7 +201,7 @@ public class VotingController {
             else
                 builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
         }
-        currVoter.sendMessage(builder.build());
-        LOGGER.info(currVoter.getUsername() + " untersucht " + votedPlayer.getUsername());
+        voter.sendMessage(builder.build());
+        LOGGER.info(voter.getUsername() + " untersucht " + votedPlayer.getUsername());
     }
 }
