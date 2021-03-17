@@ -308,6 +308,7 @@ public class Game {
         int littleGirltmp = configurations.getLittleGirlnum();
         int sherifftmp = configurations.getSheriffnum();
         int jailortmp = configurations.getJailornum();
+        int bodytmp = configurations.getBodyguardnum();
 
         for (int i = werewolves.size(); i < playerSize; i++) {
             int playerNumber;
@@ -339,6 +340,10 @@ public class Game {
                 players.get(playerNumber).characterType = CharacterType.Jailor;
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-jailor"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Jailor");
+            }else if(bodytmp-- > 0){
+                players.get(playerNumber).characterType = CharacterType.Bodyguard;
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-bodyguard"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist Bodyguard");
             }
         }
 

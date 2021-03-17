@@ -1,7 +1,9 @@
 package com.werwolf.core.handler.message.configs;
 
 import com.werwolf.game.Game;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConfigBodyguard extends Config{
 
     public ConfigBodyguard(){

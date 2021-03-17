@@ -75,6 +75,13 @@
     "englishTUM": "Girl EN TUM",
     "germanTUM": "Girl DE TUM"
   },
+  "role-bodyguard": {
+    "tumMode": true,
+    "english": "You are bodyguard",
+    "german": "Du bist Gefängniswärter. \nJede Nacht kannst du eine Person auswählen, diese Person kann in dieser Nacht keine Aktion ausführen.",
+    "englishTUM": "body EN TUM",
+    "germanTUM": "body DE TUM"
+  },
   "role-sheriff": {
     "tumMode": true,
     "english": "You are the sheriff of the village. You can follow a citizen every night, maybe you notice something suspicious?",
@@ -191,5 +198,12 @@
     "german": "Du wurdest eingesperrt vom Gefängniswärter, Vote wenn du kannst, deine Stimme hat aber leider keinen Einfluss!",
     "englishTUM": "TUM-MODE You got jailed",
     "germanTUM": "TUM-MODE Du wurdest eingesperrt"
+  },
+  "bodyguard-save": {
+    "tumMode": true,
+    "english": "Your client got attacked!",
+    "german": "Dein Kleint wurde angegriffen. Dank dir lebt er noch.",
+    "englishTUM": "bodyguard TUM",
+    "germanTUM": "bodyguard TUM DE"
   }
 }

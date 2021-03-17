@@ -55,7 +55,7 @@ public class HandleConfig extends MessageHandler {
         Game game = Handler.games.get(channel.getIdLong());
 
         if(game.getHost().getId() != event.getAuthor().getIdLong()){
-            game.getHost().sendMessage("Only the host can configure the game.");
+            event.getAuthor().openPrivateChannel().queue (privateChannel -> privateChannel.sendMessage("Only the host can configure the game.").queue());
             return true;
         }
 

@@ -86,15 +86,19 @@ public class NightController {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
             if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
                 if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
-                player.die();
-                playerSB.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game, "Drums.wav", false, true);
-                AudioHandler.getAudioHandler().loadAndPlay(game, "Werwolf3.wav", true, false);
+                if(!player.isSavedByBodyguyard()){
+                    player.die();
+                    playerSB.append("  🗡🩸");
+                }
+                else{
+                    notifyBodyguard();
+                }
             }
-
             playerSB.append("\r");
-
         }
+
+        AudioHandler.getAudioHandler().loadAndPlay(game, "Drums.wav", false, true);
+        AudioHandler.getAudioHandler().loadAndPlay(game, "Werwolf3.wav", true, false);
 
         votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "vote-results"), playerSB.toString(), true);
         if (game.getTumMode()) {
@@ -106,6 +110,14 @@ public class NightController {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
         });
+    }
+
+    private void notifyBodyguard() {
+        for (Player player : game.getPlayers()) {
+            if(player.getCharacterType() == CharacterType.Bodyguard)
+                player.sendMessage(UserMessageCreator.getCreator().getMessage(game, "bodyguard-save"));
+        }
+
     }
 
 

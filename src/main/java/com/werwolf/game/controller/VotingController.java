@@ -73,6 +73,7 @@ public class VotingController {
                             case Werewolf -> voteAsWerewolf(savedReaction.get(p), p, playerPrefix);
                             case Seer -> voteAsSeer(savedReaction.get(p), p, playerPrefix);
                             case Sheriff -> voteAsSheriff(savedReaction.get(p), p, playerPrefix);
+                            case Bodyguard -> voteAsBodyguard(savedReaction.get(p), p, playerPrefix);
                         }
                     } else if (p.isJailed()) {
                         p.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.game, "jailor-jails"));
@@ -110,6 +111,7 @@ public class VotingController {
         }
     }
 
+
     public HashMap<Long, Integer> getResult() {
         return votings;
     }
@@ -141,6 +143,11 @@ public class VotingController {
             LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
         }
     }
+
+    private void voteAsBodyguard(Player votedPlayer, Player currVoter, String playerPrefix) {
+        votedPlayer.setSavedByBodyguyard(true);
+    }
+
 
     /**
      * Seher stimmt ab

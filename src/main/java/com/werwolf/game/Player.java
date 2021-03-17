@@ -18,6 +18,7 @@ public class Player {
     User user;
     CharacterType characterType;
     private boolean jailed;
+    private boolean savedByBodyguyard = false;
 
     //Todo we might want to remove this, makes no sense. Is here to allow Werewolf and Villager with no constructor
     public Player(){}
@@ -97,5 +98,13 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    public boolean isSavedByBodyguyard() {
+        return savedByBodyguyard;
+    }
+
+    public void setSavedByBodyguyard(boolean savedByBodyguyard) {
+        this.savedByBodyguyard = savedByBodyguyard;
     }
 }
