@@ -46,49 +46,23 @@ public class VotingController {
 
         if (nightVoting) {
             if (currVoter.isAlive()) {
-                if (currVoter.getCharacterType() == CharacterType.Werewolf) { // Wolf
-
-                    if (votedPlayer.getCharacterType() != CharacterType.Werewolf) {
-                        votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-                        alreadyVoted.add(voter);
-                        LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
-                    }
-
-                } else if (currVoter.getCharacterType() == CharacterType.Seer) { // Seher
-                    // todo embed message oder grundsätzlich etwas verschönern
-                    currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
+                if (currVoter.canVote()) {
                     alreadyVoted.add(voter);
-                    LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
+                }
 
-                } else if(currVoter.getCharacterType() == CharacterType.Sheriff){ //Sheriff
-                    Random rd = new Random();
-                    int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
-                    int success = rd.nextInt(100);
-                    EmbedBuilder builder = new EmbedBuilder();
-                    builder.setTitle(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report"));
-                    builder.addField(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "certainty"), chanceForTrueInformation + ((100 - chanceForTrueInformation) / 2) + "%", false );
-                    //If we have success we send true information
-                    if(success < chanceForTrueInformation){
-                        //Todo alle Rollen auflisten die in der Nacht nichts machen
-                         if(votedPlayer.getCharacterType() == CharacterType.Villager)
-                             builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
-                         else
-                             builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
-                    }else{
-                        //This information is random
-                        if(rd.nextBoolean())
-                            builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
-                        else
-                            builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+                if (!alreadyVoted.contains(currVoter)) {
+                    switch (currVoter.getCharacterType()) {
+                        case Werewolf -> voteAsWerewolf(votedPlayer, currVoter, playerPrefix);
+                        case Seer -> voteAsSeer(votedPlayer, currVoter, playerPrefix);
+                        case Sheriff -> voteAsSheriff(votedPlayer, currVoter, playerPrefix);
                     }
-                    currVoter.sendMessage(builder.build());
                 }
             }
 
 
-            //Check ob jeder Werewolf (und Seher) gevotet hat/-ben
+            //Check ob jeder der Voten kann gevotet hat/-ben
             for (Player player : gameController.getGame().getPlayers()) {
-                if (player.isAlive() && (player.getCharacterType() == CharacterType.Werewolf || player.getCharacterType() ==  CharacterType.Seer)) {
+                if (player.isAlive() && player.canVote()) {
                     if (!alreadyVoted.contains(player.getId())) {
                         finished = false;
                     }
@@ -128,5 +102,62 @@ public class VotingController {
 
     public HashMap<Long, Integer> getResult() {
         return votings;
+    }
+
+    /**
+     * Werewolf stimmt ab
+     *
+     * @param votedPlayer
+     * @param currVoter
+     * @param playerPrefix
+     */
+    private void voteAsWerewolf(Player votedPlayer, Player currVoter, String playerPrefix) {
+        if (votedPlayer.getCharacterType() != CharacterType.Werewolf) {
+            votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
+            LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+        }
+    }
+
+    /**
+     * Seher stimmt ab
+     * @param votedPlayer
+     * @param currVoter
+     * @param playerPrefix
+     */
+    private void voteAsSeer(Player votedPlayer, Player currVoter, String playerPrefix) {
+        // todo embed message oder grundsätzlich etwas verschönern
+        currVoter.sendMessage(votedPlayer.getUsername() + ": " + votedPlayer.getCharacterType());
+        LOGGER.info(currVoter.getUsername() + " schaut " + votedPlayer.getUsername() + "s Rolle an");
+
+    }
+
+    /**
+     * Sheriff stimmt ab
+     * @param votedPlayer
+     * @param currVoter
+     * @param playerPrefix
+     */
+    private void voteAsSheriff(Player votedPlayer, Player currVoter, String playerPrefix) {
+        Random rd = new Random();
+        int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
+        int success = rd.nextInt(100);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setTitle(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report"));
+        builder.addField(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "certainty"), chanceForTrueInformation + ((100 - chanceForTrueInformation) / 2) + "%", false );
+        //If we have success we send true information
+        if(success < chanceForTrueInformation){
+            //Todo alle Rollen auflisten die in der Nacht nichts machen
+            if(votedPlayer.getCharacterType() == CharacterType.Villager)
+                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
+            else
+                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+        }else{
+            //This information is random
+            if(rd.nextBoolean())
+                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
+            else
+                builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
+        }
+        currVoter.sendMessage(builder.build());
     }
 }
