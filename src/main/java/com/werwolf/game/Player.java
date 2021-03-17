@@ -1,8 +1,15 @@
 package com.werwolf.game;
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 public class Player {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(Game.class);
 
     String username;
     long id;
@@ -13,12 +20,21 @@ public class Player {
     //Todo we might want to remove this, makes no sense. Is here to allow Werewolf and Villager with no constructor
     public Player(){}
 
-    public Player(User user){
+    public Player(User user, Guild guild){
         this.username = user.getName();
         this.id = user.getIdLong();
         this.user = user;
         this.characterType = CharacterType.Villager;
         this.isAlive = true;
+
+        try{
+            if(!Objects.requireNonNull(Objects.requireNonNull(guild.getMemberById(id)).getNickname()).isEmpty()){
+                username = Objects.requireNonNull(guild.getMemberById(id)).getNickname();
+            }
+        }
+        catch (Exception e){
+            LOGGER.warn("Couldn't get nickname: " + e.getMessage());
+        }
     }
 
     //Getter & Setter

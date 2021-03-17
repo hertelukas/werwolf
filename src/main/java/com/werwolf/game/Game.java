@@ -78,7 +78,7 @@ public class Game {
             LOGGER.info("Spiel erfolgreich gestoppt");
         }
         catch (Exception e){
-           LOGGER.info("Failed to remove werewolf channel: " + e.getMessage());
+           LOGGER.warn("Failed to remove werewolf channel: " + e.getMessage());
         }
         return true;
     }
@@ -156,7 +156,7 @@ public class Game {
         try {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).sendMessage(msg).queue();
         } catch (Exception e) {
-            LOGGER.info("Failed to send message to werwolves: " + e.getMessage());
+            LOGGER.warn("Failed to send message to werwolves: " + e.getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ public class Game {
         try {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).sendMessage(embed).queue();
         } catch (Exception e) {
-            LOGGER.info("Failed to send message to werwolves: " + e.getMessage());
+            LOGGER.warn("Failed to send message to werwolves: " + e.getMessage());
         }
     }
 
@@ -350,7 +350,7 @@ public class Game {
 
             } catch (Exception e) {
                 channel.sendMessage(UserMessageCreator.getCreator().getMessage(this, "werewolf-channel-creation-failed")).queue();
-                LOGGER.error("Error creating werewolves channel " + e.getMessage());
+                LOGGER.warn("Error creating werewolves channel " + e.getMessage());
                 return false;
             }
         }

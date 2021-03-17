@@ -29,7 +29,7 @@ public class HandleNewGame extends MessageHandler {
         if (!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
-        Player hostPlayer = new Player(event.getAuthor());
+        Player hostPlayer = new Player(event.getAuthor(), event.getGuild());
 
         //Try to create a new game with this id
         if (Handler.createGame(channel, hostPlayer, channel.getGuild())) {

@@ -28,7 +28,7 @@ public class JoinReactionHandler extends ReactionHandler {
             updateReactions(channel, event.getMessageIdLong());
             Game game = Handler.games.get(channel.getIdLong());
 
-            PlayerListStatus result = game.addPlayer(new Player(event.getUser()));
+            PlayerListStatus result = game.addPlayer(new Player(event.getUser(), event.getGuild()));
 
             if(result == PlayerListStatus.successful)
                 updateMainMessage(channel);

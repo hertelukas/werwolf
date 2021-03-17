@@ -22,7 +22,7 @@ public class HandleJoin extends MessageHandler {
         TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
-            PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getAuthor()));
+            PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getAuthor(), event.getGuild()));
             if(result == PlayerListStatus.successful) {
                 updateMainMessage(channel);
             } else if(result == PlayerListStatus.contains)
