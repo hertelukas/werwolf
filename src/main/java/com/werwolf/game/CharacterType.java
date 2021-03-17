@@ -8,7 +8,8 @@ public enum CharacterType {
     LittleGirl(false, true),
     Sheriff(true, false),
     Hunter(false,false),
-    Jailor(true, false);
+    Jailor(true, false),
+    Bodyguard(true, false);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;

@@ -24,7 +24,7 @@ public class ConfigHunter extends Config {
         try {
             game.getConfigurations().setHunternum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for hunter must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for hunter must be a number").queue();
         }
         return true;
     }

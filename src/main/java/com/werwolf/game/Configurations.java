@@ -8,6 +8,7 @@ public class Configurations {
     private int littleGirlnum = 0;
     private int sheriffnum = 0;
     private int jailornum = 0;
+    private int bodyguardnum = 0;
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
@@ -82,5 +83,13 @@ public class Configurations {
 
     public void setPlayMusic(boolean playMusic) {
         this.playMusic = playMusic;
+    }
+
+    public int getBodyguardnum() {
+        return bodyguardnum;
+    }
+
+    public void setBodyguardnum(int bodyguardnum) {
+        this.bodyguardnum = bodyguardnum;
     }
 }
