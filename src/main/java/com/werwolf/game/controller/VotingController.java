@@ -46,16 +46,16 @@ public class VotingController {
 
         if (nightVoting) {
             if (currVoter.isAlive()) {
-                if (currVoter.canVote()) {
-                    alreadyVoted.add(voter);
-                }
 
-                if (!alreadyVoted.contains(currVoter)) {
+
+                //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
+                if (!alreadyVoted.contains(voter) && currVoter.canVote()) {
                     switch (currVoter.getCharacterType()) {
                         case Werewolf -> voteAsWerewolf(votedPlayer, currVoter, playerPrefix);
                         case Seer -> voteAsSeer(votedPlayer, currVoter, playerPrefix);
                         case Sheriff -> voteAsSheriff(votedPlayer, currVoter, playerPrefix);
                     }
+                    alreadyVoted.add(voter);
                 }
             }
 
@@ -159,5 +159,6 @@ public class VotingController {
                 builder.setDescription(votedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
         }
         currVoter.sendMessage(builder.build());
+        LOGGER.info(currVoter.getUsername() + " untersucht " + votedPlayer.getUsername());
     }
 }

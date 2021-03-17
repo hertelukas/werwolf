@@ -139,7 +139,7 @@ public class NightController {
         StringBuilder livingPlayerSB = new StringBuilder();
         StringBuilder livingWerewolfsSB = new StringBuilder();
         for (Player player : nights.peek().getAlive()) {
-            if (player.getCharacterType() == CharacterType.Werewolf) {
+            if (player.getCharacterType().isCanSeeWWChannel()) {
                 livingWerewolfsSB.append(player.getUsername()).append("\r");
             } else {
                 livingPlayerSB.append(player.getUsername()).append("\r");

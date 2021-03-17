@@ -347,7 +347,7 @@ public class Game {
                 //Set the permissions for all players
                 for (Player player : players) {
                     IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.user);
-                    if (player.characterType != CharacterType.Werewolf)
+                    if (!player.getCharacterType().isCanSeeWWChannel())
                         wolfChannel.putPermissionOverride(permissionHolder).setDeny(Permission.VIEW_CHANNEL).queue();
                     else
                         wolfChannel.putPermissionOverride(permissionHolder).setAllow(Permission.VIEW_CHANNEL).queue();

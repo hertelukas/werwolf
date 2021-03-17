@@ -1,15 +1,28 @@
 package com.werwolf.game;
 
 public enum CharacterType {
-    Villager(false), Werewolf(true), Seer(true), Witch(true), LittleGirl(true), Sheriff(true), Hunter(false);
+    Villager(false, false),
+    Werewolf(true,true),
+    Seer(true, false),
+    Witch(true, false),
+    LittleGirl(false, true),
+    Sheriff(true, false),
+    Hunter(false,false);
 
     private final boolean canVote;
+    private final boolean canSeeWWChannel;
 
-    private CharacterType(boolean canVote) {
+    private CharacterType(boolean canVote, boolean canSeeWWChannel) {
         this.canVote = canVote;
+        this.canSeeWWChannel = canSeeWWChannel;
     }
 
+    //Getter und Setter
     public boolean canVote() {
         return canVote;
+    }
+
+    public boolean isCanSeeWWChannel() {
+        return canSeeWWChannel;
     }
 }
