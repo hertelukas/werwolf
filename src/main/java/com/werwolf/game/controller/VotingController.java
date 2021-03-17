@@ -49,7 +49,7 @@ public class VotingController {
 
 
                 //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
-                if (!alreadyVoted.contains(currVoter) && currVoter.canVote()) {
+                if (!alreadyVoted.contains(currVoter)) {
                     computeVote(currVoter, votedPlayer);
                 }
             }
@@ -85,8 +85,11 @@ public class VotingController {
         } else {
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
-                alreadyVoted.add(currVoter);
-                LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+                if (alreadyVoted.contains(currVoter)) {
+                    alreadyVoted.add(currVoter);
+                    currVoter.sendMessage("Du hast für " + votedPlayer.getUsername() + "gestimmt");
+                    LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+                }
             }
 
             for (Player player : gameController.getGame().getPlayers()) {
@@ -126,8 +129,10 @@ public class VotingController {
             return;
         }
         if (voter.getCharacterType() == CharacterType.Jailor) {
+            LOGGER.info(voter.getUsername() + " hat " + target.getUsername() + "(" + gameController.game.getPlayer(target.getId()) + ") erflogreich gejailt");
             target.setJailed(true);
         } else {
+            LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()) + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()) + ") zwischengespeichert");
             savedReaction.put(voter, target);
         }
         voter.sendMessage("Vote received!");
