@@ -4,16 +4,17 @@ import com.werwolf.game.Game;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConfigJailer extends Config {
-    public ConfigJailer() {
-        setName("Amount of jailers");
-        setCommand("jailer");
-        setDescription("Sets the amount of jailers");
+public class ConfigWitch extends Config{
+
+    public ConfigWitch() {
+        setName("Amount of witches");
+        setCommand("witch");
+        setDescription("Sets the amount of witches");
     }
 
     @Override
     public String getConfigResult(Game game) {
-        return Integer.toString(game.getConfigurations().getJailornum());
+        return Integer.toString(game.getConfigurations().getWitchnum());
     }
 
     @Override
@@ -21,9 +22,9 @@ public class ConfigJailer extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setJailornum(Math.max(Integer.parseInt(arg), 0));
+            game.getConfigurations().setWitchnum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Config parameter for jailer must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for witch must be a number").queue();
         }
         return true;
     }

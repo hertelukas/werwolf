@@ -24,7 +24,7 @@ public class ConfigSeer extends Config {
         try {
             game.getConfigurations().setSeernum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Conifg parameter for seer must be a number").queue();
+            game.getChannel().sendMessage("Config parameter for seer must be a number").queue();
         }
         return true;
     }
