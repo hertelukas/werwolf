@@ -26,19 +26,40 @@
     "englishTUM": "You are in the exercise management. Try to torture as many students as possible!",
     "germanTUM": "Du bist in der Übungsleitung. Versuche so viele Studenten wie möglich rauszuquälen!"
   },
-  "role-seer": {
-    "tumMode": true,
-    "english": "You are a seer, you can uncover a role every night",
-    "german": "Du bist Seher. Jede Nacht kannst du eine Rolle aufdecken",
-    "englishTUM": "You are a tutor. You can uncover a role during each exam",
-    "germanTUM": "Du bist Tutor, dir ist es möglich jede Klausurenphase eine Rolle aufzudecken"
-  },
   "role-villager": {
     "tumMode": true,
     "english": "You are a villager",
     "german": "Du bist ein Dorfbewohner",
     "englishTUM": "You are a student",
     "germanTUM": "Du bist Student"
+  },
+  "role-witch": {
+    "tumMode": true,
+    "english": "You are the witch. \nYou got one Potion to heal somebody and one Potion to kill somebody",
+    "german": "Du bist die Hexe. \nDu hast einen Trank, der einmal jemanden Retten kann und einmal kannst du einen weiteren mit in den Tod reissen. Wähle klug",
+    "englishTUM": "Witch EN TUM",
+    "germanTUM": "Witch DE TUM"
+  },
+  "role-seer": {
+    "tumMode": true,
+    "english": "You are the Seer. \nEach round you can choose a fellow citizen and you will get to see his role",
+    "german": "Du bist Seher. \nJede Runde kannst du einen Mitbürger wählen, von dem du die wahre Identität entdecken wirst.",
+    "englishTUM": "You are a tutor. You can uncover a role during each exam",
+    "germanTUM": "Du bist Tutor, dir ist es möglich jede Klausurenphase eine Rolle aufzudecken"
+  },
+  "role-hunter": {
+    "tumMode": true,
+    "english": "You are the Hunter. \nWhen your life ends you can take another citizen with you to death",
+    "german": "Du bist Jäger. \nWenn dein Leben endet kannst du einen weitere Person mit dir in den Tod reissen. Wähle weise!",
+    "englishTUM": "Hunter EN TUM",
+    "germanTUM": "Hunter DE TUM"
+  },
+  "role-littlegirl": {
+    "tumMode": true,
+    "english": "You are the Little Girl. \nYou can secretly live among the werewolves and act like you are one of them, but you want to help the village",
+    "german":"Du bist das Mädchen. Du kannst heimlich unter den Werwölfen leben und so tun, als wärst du einer von ihnen, aber du willst dem Dorf helfen",
+    "englishTUM": "Girl EN TUM",
+    "germanTUM": "Girl DE TUM"
   },
   "day": {
     "tumMode": true,

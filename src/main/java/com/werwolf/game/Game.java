@@ -54,7 +54,7 @@ public class Game {
 
         //Story
         controller.sendIntroMessage();
-        if (spawnWerewolves()) controller.setActive(true);
+        if (createRoles()) controller.setActive(true);
 
         //If there is a voice channel specified, we try to join
         if (voiceChannelID != 0) {
@@ -251,7 +251,7 @@ public class Game {
     }
 
     //Methods
-    private boolean spawnWerewolves() {
+    private boolean createRoles() {
         int amount = 0;
         int playerSize = players.size();
 
@@ -299,19 +299,19 @@ public class Game {
 
             if (witchtmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.Witch;
-                players.get(playerNumber).sendMessage("You are the witch. \rYou got one Potion to heal somebody and one Potion to kill somebody");
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-witch"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist die Hexe");
             } else if (seertmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.Seer;
-                players.get(playerNumber).sendMessage("You are the Seer. \rEach round you can choose a Player and you will get to see his role");
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-seer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");
             } else if (huntertmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.Hunter;
-                players.get(playerNumber).sendMessage("You are the Hunter. \rWhile you are dying you can shoot the random player you have chosen");
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-hunter"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Jäger");
             } else if (littleGirltmp-- > 0) {
                 players.get(playerNumber).characterType = CharacterType.LittleGirl;
-                players.get(playerNumber).sendMessage("You are the Little Girl. \rYou can sneak into the Werewolfschannel and act like you are one of them, but you want to help the village");
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-littlegirl"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist das Mädchen");
             }
         }
