@@ -387,12 +387,8 @@ public class Game {
 
     private void presetCheck(int werewolfNum) {
         switch (configurations.getPreset()) {
-            case 1 -> { // one of each (obv when enough players)
-                int[] temp = new int[7];
-                for (int i = 0; i < players.size() - werewolfNum; i++) {
-                    temp[i] = 1;
-                }
-                configurations.setAll(temp);
+            case 1 -> { // one of each
+                configurations.setAll(new int[]{1,1,1,1,1,1,1});
             }
             case 2 -> {}
             case 3 -> {}
