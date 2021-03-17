@@ -301,6 +301,7 @@ public class Game {
         }
 
         //Spzialrollen verteilen
+        presetCheck(amount);
         int witchtmp = configurations.getWitchnum();
         int seertmp = configurations.getSeernum();
         int huntertmp = configurations.getHunternum();
@@ -383,4 +384,19 @@ public class Game {
         return true;
 
     }
+
+    private void presetCheck(int werewolfNum) {
+        switch (configurations.getPreset()) {
+            case 1 -> {
+                int[] temp = new int[7];
+                for (int i = 0; i < players.size() - werewolfNum; i++) {
+                    temp[i] = 1;
+                }
+                configurations.setAll(temp);
+            }
+            default -> configurations.setAll(new int[7]);
+        }
+
+    }
+
 }

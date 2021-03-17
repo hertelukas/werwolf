@@ -192,9 +192,9 @@ public class GameController {
     public void sendIntroMessage() {
         EmbedBuilder introBuilder = new EmbedBuilder();
         if (game.getTumMode()) {
-            introBuilder.setTitle("TUMWOLF").setDescription(getRandomIntro()).setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080884324990996/Kondom.jpg");
+            introBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "title")).setDescription(getRandomIntro()).setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080884324990996/Kondom.jpg");
         } else {
-            introBuilder.setTitle("Werewolf").setDescription(getRandomIntro()).setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png");
+            introBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "title")).setDescription(getRandomIntro()).setThumbnail("https://cdn.pixabay.com/photo/2020/12/28/14/31/wolf-5867343_960_720.png");
 
         }
         game.getChannel().sendMessage(introBuilder.build()).queue();
