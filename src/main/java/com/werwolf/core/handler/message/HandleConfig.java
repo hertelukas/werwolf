@@ -54,6 +54,10 @@ public class HandleConfig extends MessageHandler {
         TextChannel channel = event.getChannel();
         Game game = Handler.games.get(channel.getIdLong());
 
+        if(game.getHost().getId() != event.getAuthor().getIdLong()){
+            game.getHost().sendMessage("Only the host can configure the game.");
+            return true;
+        }
 
         if (game == null)
             channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this Channel.").queue();
