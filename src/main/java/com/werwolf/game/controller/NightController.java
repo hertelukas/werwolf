@@ -7,6 +7,7 @@ import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -115,7 +116,7 @@ public class NightController {
             playerSB.append(prefix++).append(": ").append(player.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSB.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSB.toString(), true);
         if (game.getTumMode()) votingMessageBuilder.setThumbnail("https://www.gerassist.com/wp-content/uploads/2020/02/tum-logo.png");
         //TODO ggf. warteZeit verändern/entfernen
         try {
@@ -134,7 +135,7 @@ public class NightController {
         });
 
         //Lebende Spieler an den Werewolfchannel schicken
-        EmbedBuilder werewolfMessage = new EmbedBuilder().setTitle("Spielerinformation");
+        EmbedBuilder werewolfMessage = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game,  "wolf-information"));
         StringBuilder livingPlayerSB = new StringBuilder();
         StringBuilder livingWerewolfsSB = new StringBuilder();
         for (Player player : nights.peek().getAlive()) {
@@ -144,8 +145,8 @@ public class NightController {
                 livingPlayerSB.append(player.getUsername()).append("\r");
             }
         }
-        werewolfMessage.addField("Lebende Spieler", livingPlayerSB.toString(), false);
-        werewolfMessage.addField("Lebende Werewölfe", livingWerewolfsSB.toString(), false);
+        werewolfMessage.addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), livingPlayerSB.toString(), false);
+        werewolfMessage.addField(UserMessageCreator.getCreator().getMessage(game, "living-wolves"), livingWerewolfsSB.toString(), false);
 
         game.sendToWerewolfChannel(werewolfMessage.build());
 

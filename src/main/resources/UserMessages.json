@@ -23,7 +23,7 @@
     "tumMode": true,
     "english": "You are a werewolf",
     "german": "Du bist ein Werwolf",
-    "englishTUM": "You are in the exercise management. Try to torture as many students as possible!",
+    "englishTUM": "You are in the exercise management (ÜL). Try to torture as many students as possible!",
     "germanTUM": "Du bist in der Übungsleitung. Versuche so viele Studenten wie möglich rauszuquälen!"
   },
   "role-villager": {
@@ -116,5 +116,26 @@
     "german": " niemand wurde getötet.",
     "englishTUM": " nobody was exmatriculated.",
     "germanTUM": " niemand wurde exmatrikuliert."
+  },
+  "living-players": {
+    "tumMode": true,
+    "english": "Alive",
+    "german": "Überlebende",
+    "englishTUM": "Excellent students",
+    "germanTUM": "Exzellente Studenten"
+  },
+  "living-wolves": {
+    "tumMode": true,
+    "english": "Living wolves",
+    "german": "Lebende Werwölfe",
+    "englishTUM": "Undercover ÜL",
+    "germanTUM": "Undercover Übungsleitung"
+  },
+  "wolf-information": {
+    "tumMode": true,
+    "english": "Overview",
+    "german": "Übersicht",
+    "englishTUM": "Excellence status overview",
+    "germanTUM": "Exzellenzstatus Überwachung"
   }
 }
