@@ -55,7 +55,6 @@ public class VotingController {
                 }
             }
 
-
             //Check ob jeder der Voten kann gevotet hat/-ben
             for (Player player : gameController.getGame().getPlayers()) {
                 if (player.isAlive() && player.canVote()) {
@@ -142,7 +141,6 @@ public class VotingController {
 
     /**
      * Werewolf stimmt ab
-     *
      * @param target Spieler der gevotet wurde
      * @param voter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
@@ -154,6 +152,12 @@ public class VotingController {
         }
     }
 
+    /**
+     * Bodyguards stimmen ab
+     * @param target Spieler der gevotet wurde
+     * @param voter Spieler der die Stimme abgegeben hat
+     * @param playerPrefix
+     */
     private void voteAsBodyguard(Player target, Player voter, String playerPrefix) {
 
         target.setSavedByBodyguyard(true);
