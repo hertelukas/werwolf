@@ -2,6 +2,7 @@ package com.werwolf.game;
 
 public class Configurations {
 
+    private int preset = 0;
     private int witchnum = 0;
     private int seernum = 0;
     private int hunternum = 0;
@@ -82,5 +83,13 @@ public class Configurations {
 
     public void setPlayMusic(boolean playMusic) {
         this.playMusic = playMusic;
+    }
+
+    public int getPreset() {
+        return preset;
+    }
+
+    public void setPreset(int preset) {
+        this.preset = preset;
     }
 }

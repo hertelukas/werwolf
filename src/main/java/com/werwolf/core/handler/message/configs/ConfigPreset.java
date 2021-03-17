@@ -4,17 +4,17 @@ import com.werwolf.game.Game;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConfigSeer extends Config {
+public class ConfigPreset extends Config {
 
-    public ConfigSeer() {
-        setName("Amount of seers");
-        setCommand("seer");
-        setDescription("Sets the amount of seers");
+    public ConfigPreset() {
+        setName("Preset");
+        setCommand("preset");
+        setDescription("Sets the preset");
     }
 
     @Override
     public String getConfigResult(Game game) {
-        return Integer.toString(game.getConfigurations().getSeernum());
+        return Integer.toString(game.getConfigurations().getPreset());
     }
 
     @Override
@@ -22,9 +22,9 @@ public class ConfigSeer extends Config {
         if (!command.equals(getCommand()) || game == null) return false;
 
         try {
-            game.getConfigurations().setSeernum(Math.max(Integer.parseInt(arg), 0));
+            game.getConfigurations().setPreset(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
-            game.getChannel().sendMessage("Config parameter for seer must be a number").queue();
+            game.getChannel().sendMessage("Config number pls").queue();
         }
         return true;
     }
