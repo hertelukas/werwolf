@@ -91,7 +91,7 @@ public class NightController {
                     playerSB.append("  🗡🩸");
                 }
                 else{
-                    notifyBodyguard();
+                    notifyBodyguard(player);
                 }
             }
             playerSB.append("\r");
@@ -112,10 +112,10 @@ public class NightController {
         });
     }
 
-    private void notifyBodyguard() {
+    private void notifyBodyguard(Player savedPlayer) {
         for (Player player : game.getPlayers()) {
             if(player.getCharacterType() == CharacterType.Bodyguard)
-                player.sendMessage(UserMessageCreator.getCreator().getMessage(game, "bodyguard-save"));
+                player.sendMessage(savedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(game, "bodyguard-save"));
         }
 
     }

@@ -201,8 +201,8 @@
   },
   "bodyguard-save": {
     "tumMode": true,
-    "english": "Your client got attacked!",
-    "german": "Dein Kleint wurde angegriffen. Dank dir lebt er noch.",
+    "english": " got attacked. You rescued him.",
+    "german": " wurde angegriffen. Dank dir lebt er noch.",
     "englishTUM": "bodyguard TUM",
     "germanTUM": "bodyguard TUM DE"
   },
