@@ -108,8 +108,6 @@ public class VotingController {
             gameController.setVoting(false);
             gameController.continueAfterVoting();
         }
-
-
     }
 
     public HashMap<Long, Integer> getResult() {
@@ -118,8 +116,8 @@ public class VotingController {
 
     /**
      * Bekommt die ganzen Votes und speichert sie in einer Liste zwischen, gibt eine Nachricht an den Spieler aus
-     * @param voter
-     * @param target
+     * @param voter Spieler der die Stimme abgegeben hat
+     * @param target Spieler der gevotet wurde
      */
     private void computeVote(Player voter, Player target) {
         if (voter.getCharacterType() == CharacterType.Jailor) {
@@ -133,8 +131,8 @@ public class VotingController {
     /**
      * Werewolf stimmt ab
      *
-     * @param votedPlayer
-     * @param currVoter
+     * @param votedPlayer Spieler der gevotet wurde
+     * @param currVoter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
      */
     private void voteAsWerewolf(Player votedPlayer, Player currVoter, String playerPrefix) {
@@ -146,8 +144,8 @@ public class VotingController {
 
     /**
      * Seher stimmt ab
-     * @param votedPlayer
-     * @param currVoter
+     * @param votedPlayer Spieler der gevotet wurde
+     * @param currVoter Spieler der die Stimme abgegeben hat
      * @param playerPrefix
      */
     private void voteAsSeer(Player votedPlayer, Player currVoter, String playerPrefix) {
