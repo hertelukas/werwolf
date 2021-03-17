@@ -9,6 +9,7 @@ public class Configurations {
     private int littleGirlnum = 0;
     private int sheriffnum = 0;
     private int jailornum = 0;
+    private int bodyguardnum = 0;
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
@@ -93,14 +94,11 @@ public class Configurations {
         this.preset = preset;
     }
 
-    public void setAll (int[] nums) { // todo change or sth idk
-        if (nums.length != 6)
-            return;
-        witchnum = nums[0];
-        seernum = nums[1];
-        hunternum = nums[2];
-        littleGirlnum = nums[3];
-        sheriffnum = nums[4];
-        jailornum = nums[5];
+    public int getBodyguardnum() {
+        return bodyguardnum;
+    }
+
+    public void setBodyguardnum(int bodyguardnum) {
+        this.bodyguardnum = bodyguardnum;
     }
 }

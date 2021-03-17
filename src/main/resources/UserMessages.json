@@ -1,4 +1,11 @@
 {
+  "title": {
+    "tumMode": true,
+    "english": "Werewolf",
+    "german": "Werwolf",
+    "englishTUM": "TUM Mode Title",
+    "germanTUM": "TUM Mode Titel"
+  },
   "user-banned": {
     "tumMode": false,
     "english": "Sorry you can't join this game, the host has banned you.",

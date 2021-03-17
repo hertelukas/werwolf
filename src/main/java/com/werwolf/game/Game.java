@@ -341,6 +341,7 @@ public class Game {
             }
         }
 
+        //Create Werewolves channel
         for (int i = 0; i < playerSize; i++) {
             if (!werewolves.contains(i) && players.get(i).characterType == CharacterType.Villager) {
                 players.get(i).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-villager"));
