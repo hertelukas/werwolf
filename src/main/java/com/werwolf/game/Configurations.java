@@ -101,4 +101,8 @@ public class Configurations {
     public void setBodyguardnum(int bodyguardnum) {
         this.bodyguardnum = bodyguardnum;
     }
+
+    public void setAll(int[] num) {
+
+    }
 }
