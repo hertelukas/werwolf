@@ -169,7 +169,9 @@ public class VotingController {
      */
     private void voteAsSeer(Player target, Player voter, String playerPrefix) {
         // todo embed message oder grundsätzlich etwas verschönern
-        voter.sendMessage(target.getUsername() + ": " + target.getCharacterType());
+        String temp = target.getCharacterType().isCanSeeWWChannel() ? UserMessageCreator.getCreator().getMessage(gameController.getGame(), "seer-response-true")
+                : UserMessageCreator.getCreator().getMessage(gameController.getGame(), "seer-response-false");
+        voter.sendMessage(target.getUsername() + temp);
         LOGGER.info(voter.getUsername() + " schaut " + target.getUsername() + "s Rolle an");
 
     }

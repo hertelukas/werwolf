@@ -210,5 +210,19 @@
     "tumMode": false,
     "english": "You can't vote for yourself",
     "german": "Du kannst nicht für dich selbst abstimmen"
+  },
+  "seer-response-true": {
+    "tumMode": true,
+    "english": " is a werewolf",
+    "german": " ist Werwolf",
+    "englishTUM": " is part of the exercise management (ÜL)",
+    "germanTUM": " ist teil der Übungsleitung"
+  },
+  "seer-response-false": {
+    "tumMode": true,
+    "english": " is not a werewolf",
+    "german": " ist kein Werwolf",
+    "englishTUM": " is not part of the exercise management (ÜL)",
+    "germanTUM": " ist nicht teil der Übungsleitung"
   }
 }
