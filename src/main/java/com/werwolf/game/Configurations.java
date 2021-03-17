@@ -92,4 +92,15 @@ public class Configurations {
     public void setPreset(int preset) {
         this.preset = preset;
     }
+
+    public void setAll (int[] nums) { // todo change or sth idk
+        if (nums.length != 6)
+            return;
+        witchnum = nums[0];
+        seernum = nums[1];
+        hunternum = nums[2];
+        littleGirlnum = nums[3];
+        sheriffnum = nums[4];
+        jailornum = nums[5];
+    }
 }
