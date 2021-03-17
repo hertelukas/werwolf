@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.MemberImpl;
+import net.dv8tion.jda.internal.entities.RoleImpl;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -248,6 +249,18 @@ public class Game {
 
     public VoiceChannel getVoiceChannel() {
         return guild.getVoiceChannelById(voiceChannelID);
+    }
+
+    public void setWerwolfWritePermissions(boolean value){
+        for (Player player : players) {
+            IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.user);
+            try {
+                if(value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+                else Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
+            }catch (Exception e){
+                LOGGER.warn("Failed to change writing permissions in werwolf channel: " + e.getMessage());
+            }
+        }
     }
 
     //Methods

@@ -8,8 +8,8 @@ public class ConfigMusic extends Config {
 
     public ConfigMusic() {
         setName("Enable Music");
-        setCommand("audio");
-        setDescription("Enables or disables audio (on/off)");
+        setCommand("music");
+        setDescription("Enables or disables music (on/off)");
     }
 
     @Override
