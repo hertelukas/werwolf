@@ -94,7 +94,7 @@ public class HandleConfig extends MessageHandler {
                         configMessage = m;
                         return m;
                     })
-                            .delay(Duration.ofSeconds(10))
+                            .delay(Duration.ofSeconds(25))
                             .flatMap(m -> {
                                 if(m.equals(configMessage)) configMessage = null;
                                 return m.delete();
