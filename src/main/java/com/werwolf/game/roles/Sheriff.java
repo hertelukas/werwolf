@@ -30,6 +30,8 @@ public class Sheriff extends Villager {
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+        if (!canVote()) return;
+
         Random rd = new Random();
         int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
         int success = rd.nextInt(100);

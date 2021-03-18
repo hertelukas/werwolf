@@ -28,9 +28,12 @@ public class Jailor extends Villager {
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+        if (!canVote()) return;
+
         LOGGER.info(getUsername() + " hat " + target.getUsername() + "(" + game.getPlayer(target.getId()).getCharacterType() + ") erflogreich gejailt");
         target.setJailed(true);
         jailedPlayer = target;
+
     }
 
     /**
