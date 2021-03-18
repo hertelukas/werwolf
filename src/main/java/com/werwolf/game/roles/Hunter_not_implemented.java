@@ -15,7 +15,7 @@ public class Hunter_not_implemented extends Villager {
         characterType = CharacterType.Hunter;
     }
 
-    public void die(Game game) {
+    public boolean die(Game game) {
         this.isAlive = false;
 
         sendMessage("You died.");
@@ -28,5 +28,6 @@ public class Hunter_not_implemented extends Villager {
 
             game.getChannel().sendMessage(showRole.build()).queue();
         }
+        return true;
     }
 }

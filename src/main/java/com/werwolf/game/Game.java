@@ -254,6 +254,8 @@ public class Game {
         return guild.getVoiceChannelById(voiceChannelID);
     }
 
+
+
     public void setWerwolfWritePermissions(boolean value){
         for (Player player : players) {
             if(!player.getCharacterType().isCanSeeWWChannel()) continue;

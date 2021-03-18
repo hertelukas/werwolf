@@ -68,40 +68,17 @@ public class NightController {
     }
 
     private void updateVotingResult() {
-        //Voting auswerten
-        HashMap<Long, Integer> result = game.getController().getVotingController().getResult();
+
+        //Nachricht wird geupdatet
+        char prefix = 'A';
         StringBuilder playerSB = new StringBuilder();
+        Night currentnight = game.getController().getNightController().getNights().peek();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
 
-        char prefix = 'A';
-        Map.Entry<Long, Integer> votedPlayer = null;
-        for (Map.Entry<Long, Integer> player : result.entrySet()) {
-            if (votedPlayer == null) votedPlayer = player;
-
-            if (votedPlayer.getValue() < player.getValue()) votedPlayer = player;
-            LOGGER.info(game.getPlayer(player.getKey()).getUsername() + " hat " + player.getValue() + " Stimmen");
-        }
-
-        LOGGER.info("Der spieler der sterben muss ist " + game.getPlayer(votedPlayer.getKey()).getUsername());
-        if (votedPlayer.getValue() == 0) {
-            votedPlayer = null;
-            LOGGER.info("Er muss nicht sterben!");
-        }
-
-
-
-        for (Player player : nights.peek().getAlive()) {
+        for (Player player : currentnight.getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
-            if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
-                if(!player.isSavedByBodyguard()){
-                    if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
-                    player.die(game);
-                    playerSB.append("  🗡🩸");
-                    LOGGER.info(player.getUsername() + " stirbt!");
-                }
-                else{
-                    notifyBodyguard(player);
-                }
+            if (nights.peek().getDiedtonight().contains(player)) {
+                playerSB.append("  🗡🩸");
             }
             playerSB.append("\r");
         }
@@ -119,6 +96,7 @@ public class NightController {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
         });
+
     }
 
     private void notifyBodyguard(Player savedPlayer) {
@@ -189,5 +167,9 @@ public class NightController {
 
     public void setVotingTime(boolean votingTime) {
         this.votingTime = votingTime;
+    }
+
+    public Stack<Night> getNights() {
+        return nights;
     }
 }

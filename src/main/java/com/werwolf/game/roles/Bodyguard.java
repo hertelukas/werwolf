@@ -10,6 +10,8 @@ public class Bodyguard extends Villager {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Bodyguard.class);
 
+    private Player savedPlayer = null;
+
     public Bodyguard(Player player) {
         super(player);
         this.username = player.username;
@@ -29,8 +31,21 @@ public class Bodyguard extends Villager {
         if (canVote()) {
             LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wird vom Bodyguard " + getUsername() + " beschützt");
             target.setSavedByBodyguard(true);
+            savedPlayer = target;
         } else {
             setCanVoteTrue(game);
+        }
+    }
+
+    /**
+     * entschützt den gesicherten Spieler
+     * @param game
+     */
+    @Override
+    public void reset(Game game) {
+        if (savedPlayer != null) {
+            savedPlayer.setSavedByBodyguard(false);
+            savedPlayer = null;
         }
     }
 }

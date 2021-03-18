@@ -32,4 +32,13 @@ public class Seer extends Villager {
         sendMessage(target.getUsername() + temp);
         LOGGER.info(getUsername() + " schaut " + target.getUsername() + "s Rolle an");
     }
+
+    /**
+     * Reset wird nicht überschrieben, da der Seher nicht resetten muss
+     * @param game
+     */
+    @Override
+    public void reset(Game game){
+
+    }
 }

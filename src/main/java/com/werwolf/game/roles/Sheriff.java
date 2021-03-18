@@ -53,4 +53,13 @@ public class Sheriff extends Villager {
         sendMessage(builder.build());
         LOGGER.info(getUsername() + " untersucht " + target.getUsername());
     }
+
+    /**
+     * Reset wird nicht überschrieben, da der Sheriff nicht resetten muss
+     * @param game
+     */
+    @Override
+    public void reset(Game game){
+
+    }
 }

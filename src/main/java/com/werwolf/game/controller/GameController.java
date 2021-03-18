@@ -205,4 +205,8 @@ public class GameController {
         }
         game.getChannel().sendMessage(introBuilder.build()).queue();
     }
+
+    public NightController getNightController() {
+        return nightController;
+    }
 }

@@ -86,17 +86,24 @@ public class Player {
 
 
     /**
-     * Bringt den Spieler um
+     * Versucht den Spieler umzubringen falls möglich true sonst false
      */
-    public void die(Game game) {
-        this.isAlive = false;
+    public boolean die(Game game) {
+        if (!isSavedByBodyguard()) {
+            this.isAlive = false;
+            if (game.getTumMode()) sendMessage("https://bit.ly/unexzellent");
 
-        if (game.getConfigurations().isShowRole()) {
-            EmbedBuilder showRole = new EmbedBuilder();
-            showRole.setTitle(getUsername()).setDescription(getUsername() + UserMessageCreator.getCreator().getMessage(game, "death-Message") + characterType);
+            if (game.getConfigurations().isShowRole()) {
+                EmbedBuilder showRole = new EmbedBuilder();
+                showRole.setTitle(getUsername()).setDescription(getUsername() + UserMessageCreator.getCreator().getMessage(game, "death-Message") + characterType);
 
-            game.getChannel().sendMessage(showRole.build()).queue();
+                game.getChannel().sendMessage(showRole.build()).queue();
+            }
+            return true;
+        } else {
+            return false;
         }
+
     }
 
     /**
@@ -131,8 +138,18 @@ public class Player {
      * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
      * @param target Spieler der als Ziel des möglichen Votings ausgewählt wurde
      * @param votings Hashmap, die die Voting der Werewölfe beinhaltet (Falls später auch noch andere darauf zugriff haben sollen)
+     * @param game
      */
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+    }
+
+    /**
+     * Setzt die ggf. gesetzen Attribute/durch den Charackter ausgelösten Aktionen zurück beim Aufruf
+     * (Wird jede Runde für die in der Runde am Anfang lebenden Spieler aufgerufen
+     * @param game
+     */
+    public void reset(Game game) {
+
     }
 
     /**

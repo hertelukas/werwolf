@@ -16,11 +16,6 @@ public class LittleGirl extends Villager {
     }
 
     /**
-     * Mädchen kann nicht voten!
-     * @param target
-     * @param votings
+     * Mädchen kann in der Nacht nicht voten, weshalb sie weder die vote noch die reset Methode überschreibt
      */
-    @Override
-    public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
-    }
 }
