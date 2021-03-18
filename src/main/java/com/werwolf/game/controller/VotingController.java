@@ -47,8 +47,6 @@ public class VotingController {
 
         if (nightVoting) {
             if (currVoter.isAlive()) {
-
-
                 //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
                 if (!alreadyVoted.contains(currVoter)) {
                     computeVote(currVoter, votedPlayer);
@@ -135,7 +133,9 @@ public class VotingController {
             LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()).getCharacterType() + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") zwischengespeichert");
             savedReaction.put(voter, target);
         }
-        voter.sendMessage("Vote received!");
+        if(voter.getCharacterType().canVote())
+            voter.sendMessage("Vote received!");
+
         alreadyVoted.add(voter);
     }
 

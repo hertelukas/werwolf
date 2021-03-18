@@ -20,7 +20,7 @@ public enum CharacterType {
     }
 
     //Getter und Setter
-    boolean canVote() {
+    public boolean canVote() {
         return canVote;
     }
 
