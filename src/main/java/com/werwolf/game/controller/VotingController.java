@@ -44,15 +44,14 @@ public class VotingController {
         Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
 
         Player votedPlayer;
-        //Check if it is skipped player
-        if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
-        else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
 
 
 
 
         //VOTING IN DER NACHT
         if (nightVoting) {
+
+            votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
             if(votedPlayer == null){
                 LOGGER.warn(currVoter.getUsername() + " voted for skip in the night. This shouldn't be possible");
                 return;
@@ -87,6 +86,9 @@ public class VotingController {
 
         //VOTING AM TAG
         } else {
+            if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
+            else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 if (!alreadyVoted.contains(currVoter)) {
