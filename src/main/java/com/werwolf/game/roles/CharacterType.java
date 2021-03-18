@@ -1,15 +1,16 @@
 package com.werwolf.game.roles;
 
 public enum CharacterType {
-    Villager(false, false, 10, 0),
-    Werewolf(true,true, 10, 1),
-    Seer(true, false, 10, 0),
-    Witch(true, false, 10, 0),
-    LittleGirl(false, true, 10, 0),
-    Sheriff(true, false, 10, 0),
-    Hunter(false,false, 10, 0),
-    Jailor(true, false, 1, 0),
-    Bodyguard(true, false, 10, 0);
+    Villager(false, false, 10, Team.Village),
+    Werewolf(true,true, 10, Team.Werewolf),
+    Seer(true, false, 10,  Team.Village),
+    Witch(true, false, 10,  Team.Village),
+    LittleGirl(false, true, 10,  Team.Village),
+    Sheriff(true, false, 10,  Team.Village),
+    Hunter(false,false, 10,  Team.Village),
+    Jailor(true, false, 1,  Team.Village),
+    Bodyguard(true, false, 10,  Team.Village),
+    SerialKiller(true, false, 5, Team.SerialKiller);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;
@@ -19,13 +20,13 @@ public enum CharacterType {
     0:  Fürs Dorf
     1:  Für die Werewölfe
      */
-    private final int good_bad_special;
+    private final Team team;
 
-    private CharacterType(boolean canVote, boolean canSeeWWChannel, int priority, int good_bad_special) {
+    private CharacterType(boolean canVote, boolean canSeeWWChannel, int priority, Team team) {
         this.canVote = canVote;
         this.canSeeWWChannel = canSeeWWChannel;
         this.priority = priority;
-        this.good_bad_special = good_bad_special;
+        this.team = team;
     }
 
     //Getter und Setter
@@ -41,7 +42,7 @@ public enum CharacterType {
         return priority;
     }
 
-    public int getGood_bad_special() {
-        return good_bad_special;
+    public Team getTeam() {
+        return team;
     }
 }

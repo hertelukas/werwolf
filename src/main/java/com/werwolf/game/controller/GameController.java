@@ -3,6 +3,7 @@ package com.werwolf.game.controller;
 import com.werwolf.game.*;
 import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
+import com.werwolf.game.roles.Team;
 import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
@@ -86,13 +87,12 @@ public class GameController {
 
         //Rollen aller Spieler ausgeben
         EmbedBuilder roleoutBuilder = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
-        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().getGood_bad_special())).collect(Collectors.groupingBy(Player::getCharacterType));
+        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().collect(Collectors.groupingBy(Player::getCharacterType));
         for (Map.Entry<CharacterType, List<Player>> playerEntry : groups.entrySet()) {
             StringBuilder groupSB = new StringBuilder();
             for (Player player : playerEntry.getValue()) {
                 groupSB.append(player.getUsername()).append("\r");
             }
-            if (playerEntry.getValue().get(0).getCharacterType().getGood_bad_special() == 0) roleoutBuilder.setColor(Color.GREEN);
             roleoutBuilder.addField(playerEntry.getKey().toString(), groupSB.toString(), false);
         }
         game.getChannel().sendMessage(roleoutBuilder.build()).queue();

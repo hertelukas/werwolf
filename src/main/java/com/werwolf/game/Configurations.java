@@ -10,6 +10,7 @@ public class Configurations {
     private int sheriffnum = 0;
     private int jailornum = 0;
     private int bodyguardnum = 0;
+    private boolean serialKiller = false;
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
@@ -130,5 +131,13 @@ public class Configurations {
 
     public void setWrite(boolean write) {
         this.write = write;
+    }
+
+    public boolean getSerialkiller() {
+        return serialKiller;
+    }
+
+    public void setSerialkiller(boolean serialKiller) {
+        this.serialKiller = serialKiller;
     }
 }
