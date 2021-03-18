@@ -10,6 +10,7 @@ public class Configurations {
     private int sheriffnum = 0;
     private int jailornum = 0;
     private int bodyguardnum = 0;
+    private boolean major = true;
     private boolean serialKiller = false;
     private boolean isEnglish = true;
     private boolean playMusic = true;
@@ -113,18 +114,6 @@ public class Configurations {
         this.showRole = showRole;
     }
 
-    public void setAll(int[] num) {
-        if(num.length != 7)
-            return;
-        witchnum = num[0];
-        seernum = num[1];
-        hunternum = num[2];
-        littleGirlnum = num[3];
-        sheriffnum = num[4];
-        jailornum = num[5];
-        bodyguardnum = num[6];
-    }
-
     public boolean canWrite() {
         return write;
     }
@@ -139,5 +128,25 @@ public class Configurations {
 
     public void setSerialkiller(boolean serialKiller) {
         this.serialKiller = serialKiller;
+    }
+
+    public boolean getMajor() {
+        return major;
+    }
+
+    public void setMajor(boolean major) {
+        this.major = major;
+    }
+
+    public void setAll(int[] num) {
+        if(num.length != 7)
+            return;
+        witchnum = num[0];
+        seernum = num[1];
+        hunternum = num[2];
+        littleGirlnum = num[3];
+        sheriffnum = num[4];
+        jailornum = num[5];
+        bodyguardnum = num[6];
     }
 }

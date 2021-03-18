@@ -2,15 +2,15 @@ package com.werwolf.game.roles;
 
 public enum CharacterType {
     Villager(false, false, 10, Team.Village),
-    Werewolf(true,true, 10, Team.Werewolf),
+    Werewolf(true,true, 20, Team.Werewolf),
     Seer(true, false, 10,  Team.Village),
     Witch(true, false, 10,  Team.Village),
     LittleGirl(false, true, 10,  Team.Village),
     Sheriff(true, false, 10,  Team.Village),
     Hunter(false,false, 10,  Team.Village),
     Jailor(true, false, 1,  Team.Village),
-    Bodyguard(true, false, 10,  Team.Village),
-    SerialKiller(true, false, 5, Team.SerialKiller);
+    Bodyguard(true, false, 5,  Team.Village),
+    SerialKiller(true, false, 15, Team.SerialKiller);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;

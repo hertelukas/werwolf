@@ -24,6 +24,7 @@ public class Player {
     boolean jailed;
     boolean savedByBodyguard = false;
     Guild guild;
+    boolean isMajor = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;

@@ -47,4 +47,19 @@ public class Bodyguard extends Villager {
             savedPlayer = null;
         }
     }
+
+    /**
+     *  Wenn er stirbt, wird sein ziel nicht mehr beschützt
+     * @param game
+     * @return Ob er wirklich gestorben ist
+     */
+    @Override
+    public boolean die(Game game) {
+        if (super.die(game)) {
+            reset(game);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
