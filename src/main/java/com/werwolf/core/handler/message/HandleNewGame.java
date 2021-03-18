@@ -29,11 +29,12 @@ public class HandleNewGame extends MessageHandler {
         if (!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
-        Game game = games.get(channel.getIdLong());
         Player hostPlayer = new Player(event.getAuthor(), event.getGuild());
 
         //Try to create a new game with this id
         if (Handler.createGame(channel, hostPlayer, channel.getGuild())) {
+            Game game = games.get(channel.getIdLong());
+
             //Wir versuchen den VoiceChannel zu bekommen, falls der Host nicht in einem Voice Channel ist, der Voicechannel nicht existiert usw, dann ignorieren wir den voiceChannel
             try{
                 game.setVoiceChannelID(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).getChannel()).getIdLong());
