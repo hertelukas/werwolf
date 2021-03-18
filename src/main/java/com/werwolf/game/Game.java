@@ -77,6 +77,7 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
+            controller.setActive(false);
             setMainWritePermissions();
             LOGGER.info("Spiel erfolgreich gestoppt");
         }
@@ -258,7 +259,7 @@ public class Game {
             if(!player.getCharacterType().isCanSeeWWChannel()) continue;
             IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.getUser());
             try {
-                if(value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+                if(player.isAlive() && value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
                 else Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
             }catch (Exception e){
                 LOGGER.warn("Failed to change writing permissions in werwolf channel: " + e.getMessage());
