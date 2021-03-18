@@ -4,7 +4,7 @@ import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.controller.GameController;
 import com.werwolf.game.controller.VotingController;
-import com.werwolf.game.specialRoles.*;
+import com.werwolf.game.roles.*;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;

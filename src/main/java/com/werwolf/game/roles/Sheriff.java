@@ -1,6 +1,5 @@
-package com.werwolf.game.specialRoles;
+package com.werwolf.game.roles;
 
-import com.werwolf.game.CharacterType;
 import com.werwolf.game.Game;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;

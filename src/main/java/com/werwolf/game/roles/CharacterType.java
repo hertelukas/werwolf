@@ -1,4 +1,4 @@
-package com.werwolf.game;
+package com.werwolf.game.roles;
 
 public enum CharacterType {
     Villager(false, false),

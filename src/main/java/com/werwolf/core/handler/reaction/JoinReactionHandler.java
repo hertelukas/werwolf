@@ -2,7 +2,7 @@ package com.werwolf.core.handler.reaction;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.Player;
 import com.werwolf.game.PlayerListStatus;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.entities.TextChannel;

@@ -2,7 +2,7 @@ package com.werwolf.core.handler;
 
 
 import com.werwolf.game.Game;
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;

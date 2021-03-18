@@ -1,6 +1,4 @@
-package com.werwolf.game.specialRoles;
-
-import com.werwolf.game.CharacterType;
+package com.werwolf.game.roles;
 
 public class Hunter extends Villager {
 
