@@ -14,6 +14,7 @@ import java.util.EnumSet;
 public class Core {
 
     @Value("${token}")
+   // @Value("ODE5NjQ4ODYyMjg5MjY0NzUw.YEprfQ.HVglR4A3M1CmGVYLc53R5QgsfaA")
     private String token;
 
     @Bean
@@ -22,7 +23,8 @@ public class Core {
                 GatewayIntent.GUILD_MESSAGES,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS,
                 GatewayIntent.GUILD_VOICE_STATES,
-                GatewayIntent.DIRECT_MESSAGE_REACTIONS
+                GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                GatewayIntent.DIRECT_MESSAGES
         );
 
         return JDABuilder.create(token, intents).addEventListeners(mainListener).build();
