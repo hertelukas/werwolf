@@ -2,7 +2,8 @@ package com.werwolf.game.controller;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.CharacterType;
+import com.werwolf.game.roles.Player;
 import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;

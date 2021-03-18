@@ -1,6 +1,6 @@
 package com.werwolf.game;
 
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.Player;
 
 import java.util.List;
 

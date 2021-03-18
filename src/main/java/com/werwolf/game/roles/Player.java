@@ -1,6 +1,5 @@
-package com.werwolf.game.specialRoles;
+package com.werwolf.game.roles;
 
-import com.werwolf.game.CharacterType;
 import com.werwolf.game.Game;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class Player {

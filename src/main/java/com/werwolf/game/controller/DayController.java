@@ -3,7 +3,7 @@ package com.werwolf.game.controller;
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.Day;
 import com.werwolf.game.Game;
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.Player;
 
 import com.werwolf.helpers.DayTextCreator;
 import com.werwolf.helpers.UserMessageCreator;

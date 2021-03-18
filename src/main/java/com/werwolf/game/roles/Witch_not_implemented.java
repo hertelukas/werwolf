@@ -1,10 +1,8 @@
-package com.werwolf.game.specialRoles;
+package com.werwolf.game.roles;
 
-import com.werwolf.game.CharacterType;
+public class Witch_not_implemented extends Villager {
 
-public class Witch extends Villager {
-
-    public Witch(Player player) {
+    public Witch_not_implemented(Player player) {
         super(player);
         this.username = player.username;
         this.id = player.id;

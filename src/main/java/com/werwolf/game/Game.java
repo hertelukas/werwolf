@@ -4,7 +4,7 @@ import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.controller.GameController;
 import com.werwolf.game.controller.VotingController;
-import com.werwolf.game.specialRoles.*;
+import com.werwolf.game.roles.*;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
@@ -318,7 +318,7 @@ public class Game {
             } while (players.get(playerNumber).getCharacterType() != CharacterType.Villager);
 
             if (witchtmp-- > 0) {
-                players.set(playerNumber, new Witch(players.get(playerNumber)));
+                players.set(playerNumber, new Witch_not_implemented(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-witch"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist die Hexe");
             } else if (seertmp-- > 0) {
@@ -326,7 +326,7 @@ public class Game {
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-seer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");
             } else if (huntertmp-- > 0) {
-                players.set(playerNumber, new Hunter(players.get(playerNumber)));
+                players.set(playerNumber, new Hunter_not_implemented(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-hunter"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Jäger");
             } else if (littleGirltmp-- > 0) {

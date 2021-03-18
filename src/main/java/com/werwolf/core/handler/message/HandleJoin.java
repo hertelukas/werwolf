@@ -1,6 +1,6 @@
 package com.werwolf.core.handler.message;
 
-import com.werwolf.game.specialRoles.Player;
+import com.werwolf.game.roles.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
