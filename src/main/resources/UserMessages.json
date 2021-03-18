@@ -227,9 +227,9 @@
   },
   "death-Message": {
     "tumMode": true,
-    "english": " died he/she was: ",
+    "english": " died they were: ",
     "german": " ist gestorben er/sie war ein: ",
-    "englishTUM": " got exmatriculated he/she was: ",
+    "englishTUM": " got exmatriculated they were: ",
     "germanTUM": " ist nun unexzellent, er/sie war ein: "
   }
 }
