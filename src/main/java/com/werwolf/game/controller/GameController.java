@@ -88,7 +88,7 @@ public class GameController {
         game.getChannel().sendMessage(finishedBuilder.build()).queue();
 
         //Rollen aller Spieler ausgeben
-        EmbedBuilder roleoutBuilder = new EmbedBuilder().setDescription(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
+        EmbedBuilder roleoutBuilder = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
         Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().ordinal())).collect(Collectors.groupingBy(Player::getCharacterType));
         for (Map.Entry<CharacterType, List<Player>> playerEntry : groups.entrySet()) {
             StringBuilder groupSB = new StringBuilder();
