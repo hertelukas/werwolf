@@ -29,4 +29,13 @@ public class Serialkiller extends Player{
         game.getController().getNightController().getNights().peek().getDiedtonight().add(target);
         LOGGER.info(getUsername() + "(SerialKiller) hat " + target.getUsername() + " umgebracht");
     }
+
+    /**
+     * SerialKiller dont need to reset anything
+     * @param game
+     */
+    @Override
+    public void reset(Game game) {
+        super.reset(game);
+    }
 }
