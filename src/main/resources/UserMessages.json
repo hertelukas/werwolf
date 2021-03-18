@@ -224,5 +224,12 @@
     "german": " ist kein Werwolf",
     "englishTUM": " is not part of the exercise management (ÜL)",
     "germanTUM": " ist nicht teil der Übungsleitung"
+  },
+  "death-Message": {
+    "tumMode": true,
+    "english": " died he/she was: ",
+    "german": " ist gestorben er/sie war ein: ",
+    "englishTUM": " got exmatriculated he/she was: ",
+    "germanTUM": " ist nun unexzellent, er/sie war ein: "
   }
 }

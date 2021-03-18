@@ -90,7 +90,7 @@ public class DayController {
         for(Player player : days.peek().getAlive()) {
             playerSb.append(prefix++).append(": ").append(player.getUsername());
             if (player.getId() == votedPlayer.getKey()) {
-                player.die();
+                player.die(game);
                 playerSb.append("  🗡🩸");
             }
             playerSb.append("\r");

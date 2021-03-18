@@ -1,7 +1,10 @@
 package com.werwolf.game;
 
+import com.werwolf.helpers.UserMessageCreator;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,9 +76,17 @@ public class Player {
         return user;
     }
 
-    public void die() {
+    public void die(Game game) {
         this.isAlive = false;
+
+        if (game.getConfigurations().isShowRole()) {
+            EmbedBuilder showRole = new EmbedBuilder();
+            showRole.setTitle(getUsername()).setDescription(getUsername() + UserMessageCreator.getCreator().getMessage(game, "death-Message") + characterType);
+
+            game.getChannel().sendMessage(showRole.build()).queue();
+        }
     }
+
     /**
      * Sendet eine private Nachricht an den Spieler
      * @param message Nachricht
