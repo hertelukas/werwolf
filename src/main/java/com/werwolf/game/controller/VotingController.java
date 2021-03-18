@@ -43,10 +43,10 @@ public class VotingController {
         boolean finished = true;
         Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
 
+        //This might happen when the voter is not a player
+        if(currVoter == null)return;
+
         Player votedPlayer;
-
-
-
 
         //VOTING IN DER NACHT
         if (nightVoting) {
