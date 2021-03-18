@@ -9,6 +9,7 @@ public abstract class Config {
     private String name;
     private String description;
     private String command;
+    private boolean isRole = false;
 
     public Config() {
     }
@@ -39,5 +40,13 @@ public abstract class Config {
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public boolean isRole() {
+        return isRole;
+    }
+
+    public void setRole(boolean role) {
+        isRole = role;
     }
 }

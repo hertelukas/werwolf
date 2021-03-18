@@ -41,7 +41,6 @@ public class HandleConfig extends MessageHandler {
 
     public Message configMessage;
 
-
     public HandleConfig(Config... configs) {
         setName("Configurations");
         setCommand("config");
@@ -118,9 +117,25 @@ public class HandleConfig extends MessageHandler {
     private MessageEmbed getConfigEmbed(Game game) {
         EmbedBuilder configBuilder = new EmbedBuilder();
         configBuilder.setTitle("Configurations").setDescription("Use ww!config <config> <value>");
+        List<Config> roleConfigs = new ArrayList<>();
+
+        //First add all normal configs and safe role configs
         for (Config config : configs) {
+            if(config.isRole()){
+                roleConfigs.add(config);
+                continue;
+            }
             configBuilder.addField(config.getName(), config.getCommand() + ": " + config.getConfigResult(game), false);
         }
+        configBuilder.addField("-----------------", "", true);
+
+        //Add all role configs
+        for (Config roleConfig : roleConfigs) {
+            configBuilder.addField(roleConfig.getName(), roleConfig.getDescription() + ": " + roleConfig.getConfigResult(game), false);
+        }
+
         return configBuilder.build();
     }
+
+
 }

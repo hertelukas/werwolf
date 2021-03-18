@@ -10,6 +10,7 @@ public class ConfigWitch extends Config{
         setName("Amount of witches");
         setCommand("witch");
         setDescription("Sets the amount of witches");
+        setRole(true);
     }
 
     @Override

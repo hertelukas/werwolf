@@ -9,6 +9,7 @@ public class ConfigJailer extends Config {
         setName("Amount of jailors");
         setCommand("jailor");
         setDescription("Sets the amount of jailors");
+        setRole(true);
     }
 
     @Override

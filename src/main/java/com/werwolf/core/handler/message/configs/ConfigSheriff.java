@@ -10,6 +10,7 @@ public class ConfigSheriff extends Config {
         setName("Amount of Sheriffs");
         setCommand("sheriff");
         setDescription("Sets the amount of sheriffs");
+        setRole(true);
     }
 
     @Override

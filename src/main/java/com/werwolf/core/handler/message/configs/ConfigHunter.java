@@ -10,6 +10,7 @@ public class ConfigHunter extends Config {
         setName("Amount of Hunters");
         setCommand("hunter");
         setDescription("Sets the amount of hunters");
+        setRole(true);
     }
 
     @Override

@@ -10,6 +10,7 @@ public class ConfigBodyguard extends Config{
         setName("Amount of Bodyguards");
         setCommand("bodyguard");
         setDescription("Sets the amount of bodyguards");
+        setRole(true);
     }
 
     @Override

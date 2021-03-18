@@ -10,6 +10,7 @@ public class ConfigSeer extends Config {
         setName("Amount of seers");
         setCommand("seer");
         setDescription("Sets the amount of seers");
+        setRole(true);
     }
 
     @Override
