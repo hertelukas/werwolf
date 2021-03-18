@@ -59,6 +59,11 @@ public class NightController {
 
     void continueAfterVoting() {
         LOGGER.info("Voting beendet");
+        LOGGER.info("Rollen werden resettet");
+        for (Player player : nights.peek().getAlive()) {
+            player.reset(game);
+        }
+
         updateVotingResult();
         game.getController().gameStatus();
         game.getController().nextDay();
