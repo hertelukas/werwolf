@@ -21,7 +21,8 @@ public class Core {
         EnumSet<GatewayIntent> intents = EnumSet.of(
                 GatewayIntent.GUILD_MESSAGES,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                GatewayIntent.GUILD_VOICE_STATES
+                GatewayIntent.GUILD_VOICE_STATES,
+                GatewayIntent.DIRECT_MESSAGE_REACTIONS
         );
 
         return JDABuilder.create(token, intents).addEventListeners(mainListener).build();

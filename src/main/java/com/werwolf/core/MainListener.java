@@ -1,14 +1,14 @@
 package com.werwolf.core;
 
-import com.werwolf.core.handler.message.HandleConfig;
 import com.werwolf.core.handler.message.MessageHandler;
-import com.werwolf.core.handler.message.configs.Config;
+import com.werwolf.core.handler.reaction.PrivateReactionHandler;
 import com.werwolf.core.handler.reaction.ReactionHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MainListener extends ListenerAdapter {
@@ -25,9 +26,11 @@ public class MainListener extends ListenerAdapter {
     private String prefix;
     private final List<MessageHandler> messageHandlers;
     private final List<ReactionHandler> reactionHandlers;
+    private final PrivateReactionHandler privateReactionHandler;
 
 
-    public MainListener(List<ReactionHandler> reactionHandlers, MessageHandler... handlers) {
+    public MainListener(List<ReactionHandler> reactionHandlers, PrivateReactionHandler privateReactionHandler, MessageHandler... handlers) {
+        this.privateReactionHandler = privateReactionHandler;
         this.messageHandlers = Arrays.asList(handlers);
         this.reactionHandlers = reactionHandlers;
     }
@@ -81,6 +84,16 @@ public class MainListener extends ListenerAdapter {
 
         for (ReactionHandler handler : reactionHandlers) {
             found = handler.handle(event) || found;
+        }
+    }
+
+    @Override
+    public void onPrivateMessageReactionAdd(@Nonnull PrivateMessageReactionAddEvent event) {
+        boolean found = false;
+        if (Objects.requireNonNull(event.getUser()).isBot()) return;
+
+        for (ReactionHandler handler : reactionHandlers) {
+            found = privateReactionHandler.handle(event) || found;
         }
     }
 
