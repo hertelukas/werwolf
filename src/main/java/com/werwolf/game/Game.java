@@ -77,6 +77,7 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
+            controller.setActive(false);
             setMainWritePermissions();
             LOGGER.info("Spiel erfolgreich gestoppt");
         }
