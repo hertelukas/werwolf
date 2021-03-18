@@ -87,10 +87,15 @@ public class DayController {
 
         char prefix = 'A';
         Map.Entry<Long, Integer> votedPlayer = null;
+        boolean isTie = false;
         for(Map.Entry<Long, Integer> player : result.entrySet()) {
             boolean votedPlayerExists = votedPlayer != null;
             boolean playerHasMoreThanSkip = player.getValue() > votedForSkip;
             boolean playerHasMoreThanOldVotedPlayer = votedPlayerExists && player.getValue() > votedPlayer.getValue();
+
+            if(votedPlayerExists && player.getValue().equals(votedPlayer.getValue())){
+                isTie = true;
+            }
 
             if((!votedPlayerExists && playerHasMoreThanSkip) || (playerHasMoreThanOldVotedPlayer))
                 votedPlayer = player;
@@ -98,14 +103,14 @@ public class DayController {
 
         for(Player player : days.peek().getAlive()) {
             playerSb.append(prefix++).append(": ").append(player.getUsername());
-            if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
+            if (votedPlayer != null && player.getId() == votedPlayer.getKey() && !isTie) {
                 player.die(game);
                 playerSb.append("  🗡🩸");
             }
             playerSb.append("\r");
         }
 
-        if(votedPlayer == null){
+        if(votedPlayer == null || isTie){
             playerSb.append(UserMessageCreator.getCreator().getMessage(game, "skip-win")).append("\n");
         }
 
