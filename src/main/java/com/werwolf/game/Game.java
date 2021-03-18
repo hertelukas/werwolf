@@ -52,6 +52,7 @@ public class Game {
         }
 
         controller.setActive(true);
+        setMainWritePermissions();
 
         //Story
         controller.sendIntroMessage();
@@ -76,6 +77,7 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
+            setMainWritePermissions();
             LOGGER.info("Spiel erfolgreich gestoppt");
         }
         catch (Exception e){
@@ -263,6 +265,26 @@ public class Game {
             }
         }
     }
+
+
+    public void setMainWritePermissions() {
+        for (Player player : players) {
+            if(player.getId() == host.getId())continue;
+
+            IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.getUser());
+
+            try {
+                if(!configurations.canWrite() && isActive())
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
+                else
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+            }
+            catch (Exception e){
+                LOGGER.warn("Failed to update write permissions for main channel: " + e.getMessage());
+            }
+        }
+    }
+
 
     //Methods
     private boolean createRoles() {
