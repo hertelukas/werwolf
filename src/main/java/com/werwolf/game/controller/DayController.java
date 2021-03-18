@@ -92,11 +92,12 @@ public class DayController {
             if (player.getId() == votedPlayer.getKey()) {
                 player.die(game);
                 playerSb.append("  🗡🩸");
-                AudioHandler.getAudioHandler().loadAndPlay(game, "Betrugsversuch.wav", false, true);
-                AudioHandler.getAudioHandler().loadAndPlay(game, "Never.mp3", true, false);
             }
             playerSb.append("\r");
         }
+
+        if(game.getTumMode()) AudioHandler.getAudioHandler().loadAndPlay(game, "Betrugsversuch.wav", false, true);
+        AudioHandler.getAudioHandler().loadAndPlay(game, "Werwolf2.wav", true, false);
 
 
         votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "vote-results"), playerSb.toString(), true);
