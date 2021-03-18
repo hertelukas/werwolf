@@ -43,12 +43,15 @@ public class VotingController {
         boolean finished = true;
         Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
 
-        Player votedPlayer;
-        //Check if it is skipped player
-        if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
-        else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+        //This might happen when the voter is not a player
+        if(currVoter == null)return;
 
+        Player votedPlayer;
+
+        //VOTING IN DER NACHT
         if (nightVoting) {
+
+            votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
             if(votedPlayer == null){
                 LOGGER.warn(currVoter.getUsername() + " voted for skip in the night. This shouldn't be possible");
                 return;
@@ -72,12 +75,19 @@ public class VotingController {
 
             //Votes werden ausgeführt wenn die Person voten darf
             if (finished) {
+                alreadyVoted.sort(Comparator.comparingInt(p -> p.getCharacterType().getPriority()));
                 for (Player p : alreadyVoted) {
                     p.vote(savedReaction.get(p), votings, gameController.game);
                 }
             }
 
+
+
+        //VOTING AM TAG
         } else {
+            if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
+            else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 if (!alreadyVoted.contains(currVoter)) {
@@ -132,15 +142,14 @@ public class VotingController {
             voter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "self-vote"));
             return;
         }
-        if (voter.getCharacterType() == CharacterType.Jailor) {
-            LOGGER.info(voter.getUsername() + " hat " + target.getUsername() + "(" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") erflogreich gejailt");
-            target.setJailed(true);
-        } else {
+
+
+
+        if(voter.getCharacterType().canVote()) {
+            voter.sendMessage("Vote received!");
             LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()).getCharacterType() + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") zwischengespeichert");
             savedReaction.put(voter, target);
         }
-        if(voter.getCharacterType().canVote())
-            voter.sendMessage("Vote received!");
 
         alreadyVoted.add(voter);
     }

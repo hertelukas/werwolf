@@ -12,7 +12,7 @@ import java.util.Random;
 public class Sheriff extends Villager {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Sheriff.class);
-    private static final int SHERIFF_AVG_SUCCESS = 40;
+    private static final int SHERIFF_AVG_SUCCESS = 20;
 
     public Sheriff(Player player) {
         super(player);
@@ -39,7 +39,7 @@ public class Sheriff extends Villager {
         //If we have success we send true information
         if(success < chanceForTrueInformation){
             //Todo alle Rollen auflisten die in der Nacht nichts machen
-            if(target.getCharacterType() == CharacterType.Villager)
+            if(target.getCharacterType() != CharacterType.Werewolf)
                 builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(game,  "sheriff-report-home"));
             else
                 builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(game, "sheriff-report-sus"));

@@ -68,6 +68,13 @@
     "englishTUM": "Jailor EN TUM",
     "germanTUM": "Jailor DE TUM"
   },
+  "role-killer": {
+    "tumMode": true,
+    "english": "You are serial killer. \nYou play alone, and your goal is to kill everyone, even all werwolves.",
+    "german": "Du bist Serienmörder. \nDu spielst alleine, dein Ziel ist es alle zu töten, sogar die Werwölfe",
+    "englishTUM": "Killer EN TUM",
+    "germanTUM": "Killer DE TUM"
+  },
   "role-littlegirl": {
     "tumMode": true,
     "english": "You are the Little Girl. \nYou can secretly live among the werewolves and act like you are one of them, but you want to help the village",

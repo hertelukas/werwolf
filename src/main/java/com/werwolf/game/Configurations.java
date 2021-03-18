@@ -10,10 +10,12 @@ public class Configurations {
     private int sheriffnum = 0;
     private int jailornum = 0;
     private int bodyguardnum = 0;
+    private boolean serialKiller = false;
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
     private boolean showRole = false;
+    private boolean write = false;
 
     public int getWitchnum() {
         return witchnum;
@@ -121,5 +123,21 @@ public class Configurations {
         sheriffnum = num[4];
         jailornum = num[5];
         bodyguardnum = num[6];
+    }
+
+    public boolean canWrite() {
+        return write;
+    }
+
+    public void setWrite(boolean write) {
+        this.write = write;
+    }
+
+    public boolean getSerialkiller() {
+        return serialKiller;
+    }
+
+    public void setSerialkiller(boolean serialKiller) {
+        this.serialKiller = serialKiller;
     }
 }

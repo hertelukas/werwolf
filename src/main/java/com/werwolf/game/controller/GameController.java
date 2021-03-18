@@ -3,6 +3,7 @@ package com.werwolf.game.controller;
 import com.werwolf.game.*;
 import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
+import com.werwolf.game.roles.Team;
 import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +87,7 @@ public class GameController {
 
         //Rollen aller Spieler ausgeben
         EmbedBuilder roleoutBuilder = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
-        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().ordinal())).collect(Collectors.groupingBy(Player::getCharacterType));
+        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().collect(Collectors.groupingBy(Player::getCharacterType));
         for (Map.Entry<CharacterType, List<Player>> playerEntry : groups.entrySet()) {
             StringBuilder groupSB = new StringBuilder();
             for (Player player : playerEntry.getValue()) {

@@ -52,6 +52,7 @@ public class Game {
         }
 
         controller.setActive(true);
+        setMainWritePermissions();
 
         //Story
         controller.sendIntroMessage();
@@ -76,6 +77,8 @@ public class Game {
             Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).delete().queue();
             //Close audio connection no matter what
             guild.getAudioManager().closeAudioConnection();
+            controller.setActive(false);
+            setMainWritePermissions();
             LOGGER.info("Spiel erfolgreich gestoppt");
         }
         catch (Exception e){
@@ -256,13 +259,33 @@ public class Game {
             if(!player.getCharacterType().isCanSeeWWChannel()) continue;
             IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.getUser());
             try {
-                if(value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+                if(player.isAlive() && value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
                 else Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
             }catch (Exception e){
                 LOGGER.warn("Failed to change writing permissions in werwolf channel: " + e.getMessage());
             }
         }
     }
+
+
+    public void setMainWritePermissions() {
+        for (Player player : players) {
+            if(player.getId() == host.getId())continue;
+
+            IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.getUser());
+
+            try {
+                if(!configurations.canWrite() && isActive())
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
+                else
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+            }
+            catch (Exception e){
+                LOGGER.warn("Failed to update write permissions for main channel: " + e.getMessage());
+            }
+        }
+    }
+
 
     //Methods
     private boolean createRoles() {
@@ -292,11 +315,10 @@ public class Game {
             } while (werewolves.contains(playerNumber));
 
             werewolves.add(playerNumber);
+            players.set(playerNumber, new Werewolf(players.get(playerNumber)));
             Player player = players.get(playerNumber);
 
-            player.setCharacterType(CharacterType.Werewolf);
-            Werewolf werewolf = new Werewolf(player);
-            this.werewolves.add(werewolf);
+            this.werewolves.add((Werewolf) players.get(playerNumber));
             player.sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-werewolf"));
             LOGGER.info(player.getUsername() + " ist ein Werwolf");
         }
@@ -310,6 +332,7 @@ public class Game {
         int sherifftmp = configurations.getSheriffnum();
         int jailortmp = configurations.getJailornum();
         int bodytmp = configurations.getBodyguardnum();
+
 
         for (int i = werewolves.size(); i < playerSize; i++) {
             int playerNumber;
@@ -345,6 +368,10 @@ public class Game {
                 players.set(playerNumber, new Bodyguard(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-bodyguard"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Bodyguard");
+            }else if(configurations.getSerialkiller()){
+                players.set(playerNumber, new Serialkiller(players.get(playerNumber)));
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-killer"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist Serienmörder");
             }
         }
 
