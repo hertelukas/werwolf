@@ -93,7 +93,7 @@ public class NightController {
         for (Player player : nights.peek().getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
             if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
-                if(!player.isSavedByBodyguyard()){
+                if(!player.isSavedByBodyguard()){
                     if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
                     player.die(game);
                     playerSB.append("  🗡🩸");

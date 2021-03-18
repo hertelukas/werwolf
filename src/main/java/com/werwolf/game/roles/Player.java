@@ -22,7 +22,7 @@ public class Player {
     User user;
     CharacterType characterType;
     boolean jailed;
-    boolean savedByBodyguyard = false;
+    boolean savedByBodyguard = false;
     Guild guild;
 
     public Player(User user, Guild guild){
@@ -76,12 +76,12 @@ public class Player {
         this.characterType = characterType;
     }
 
-    public boolean isSavedByBodyguyard() {
-        return savedByBodyguyard;
+    public boolean isSavedByBodyguard() {
+        return savedByBodyguard;
     }
 
-    public void setSavedByBodyguyard(boolean savedByBodyguyard) {
-        this.savedByBodyguyard = savedByBodyguyard;
+    public void setSavedByBodyguard(boolean savedByBodyguard) {
+        this.savedByBodyguard = savedByBodyguard;
     }
 
 

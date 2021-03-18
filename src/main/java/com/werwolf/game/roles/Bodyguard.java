@@ -28,7 +28,7 @@ public class Bodyguard extends Villager {
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
         if (canVote()) {
             LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wird vom Bodyguard " + getUsername() + " beschützt");
-            target.setSavedByBodyguyard(true);
+            target.setSavedByBodyguard(true);
         } else {
             setCanVoteTrue(game);
         }
