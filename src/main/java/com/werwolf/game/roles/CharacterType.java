@@ -1,19 +1,19 @@
 package com.werwolf.game.roles;
 
 public enum CharacterType {
-    Villager(false, false, 1, 0),
-    Werewolf(true,true, 1, 1),
-    Seer(true, false, 1, 0),
-    Witch(true, false, 1, 0),
-    LittleGirl(false, true, 1, 0),
-    Sheriff(true, false, 1, 0),
-    Hunter(false,false, 1, 0),
-    Jailor(true, false, 10, 0),
-    Bodyguard(true, false, 1, 0);
+    Villager(false, false, 10, 0),
+    Werewolf(true,true, 10, 1),
+    Seer(true, false, 10, 0),
+    Witch(true, false, 10, 0),
+    LittleGirl(false, true, 10, 0),
+    Sheriff(true, false, 10, 0),
+    Hunter(false,false, 10, 0),
+    Jailor(true, false, 1, 0),
+    Bodyguard(true, false, 10, 0);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;
-    //Je höher die Priorität, desto früher ist der Carackter am Zug
+    //Je niedriger die Priorität, desto früher ist der Carackter am Zug
     private final int priority;
     /*
     0:  Fürs Dorf

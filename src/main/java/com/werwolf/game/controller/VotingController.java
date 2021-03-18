@@ -75,10 +75,9 @@ public class VotingController {
 
             //Votes werden ausgeführt wenn die Person voten darf
             if (finished) {
+                alreadyVoted.sort(Comparator.comparingInt(p -> p.getCharacterType().getPriority()));
                 for (Player p : alreadyVoted) {
-                    System.out.println(p.getClass());
                     p.vote(savedReaction.get(p), votings, gameController.game);
-                    System.out.println(votings.toString());
                 }
             }
 
@@ -143,15 +142,14 @@ public class VotingController {
             voter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "self-vote"));
             return;
         }
-        if (voter.getCharacterType() == CharacterType.Jailor) {
-            LOGGER.info(voter.getUsername() + " hat " + target.getUsername() + "(" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") erflogreich gejailt");
-            target.setJailed(true);
-        } else {
+
+
+
+        if(voter.getCharacterType().canVote()) {
+            voter.sendMessage("Vote received!");
             LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()).getCharacterType() + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") zwischengespeichert");
             savedReaction.put(voter, target);
         }
-        if(voter.getCharacterType().canVote())
-            voter.sendMessage("Vote received!");
 
         alreadyVoted.add(voter);
     }

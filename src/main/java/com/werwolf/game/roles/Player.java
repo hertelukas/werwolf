@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class Player {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(Game.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(Player.class);
 
     String username;
     long id;
