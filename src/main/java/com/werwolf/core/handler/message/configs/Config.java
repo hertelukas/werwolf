@@ -1,6 +1,8 @@
 package com.werwolf.core.handler.message.configs;
 
+import com.werwolf.core.handler.message.HandleConfig;
 import com.werwolf.game.Game;
+
 
 public abstract class Config {
 
