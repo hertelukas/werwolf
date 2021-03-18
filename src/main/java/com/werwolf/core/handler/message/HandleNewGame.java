@@ -37,7 +37,6 @@ public class HandleNewGame extends MessageHandler {
 
             //Wir versuchen den VoiceChannel zu bekommen, falls der Host nicht in einem Voice Channel ist, der Voicechannel nicht existiert usw, dann ignorieren wir den voiceChannel
             try{
-                System.out.println(event.getMember().getVoiceState().getChannel().getIdLong());
                 game.setVoiceChannelID(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).getChannel()).getIdLong());
             }
             catch (Exception e){
