@@ -43,7 +43,7 @@ public class DayController {
         StringBuilder storySb = new StringBuilder();
         storySb.append(DayTextCreator.getCreator().getStory(game, days.size()));
         if(killedDuringNight.size() == 0)
-            storySb.append(UserMessageCreator.getCreator().getMessage(game, "nobody-killed"));
+            storySb.append(" ").append(UserMessageCreator.getCreator().getMessage(game, "nobody-killed"));
         else {
             if(!game.getConfigurations().isEnglish()) storySb.append(killedDuringNight.size() > 1 ? " wurden " : " wurde ");
 
@@ -80,16 +80,19 @@ public class DayController {
         StringBuilder playerSb = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
 
-        int votedForSkip = result.get(null);
+        int votedForSkip = result.get((long) -1);
+        result.remove((long)-1);
 
         LOGGER.info(votedForSkip + " players voted to skip this round");
 
         char prefix = 'A';
         Map.Entry<Long, Integer> votedPlayer = null;
         for(Map.Entry<Long, Integer> player : result.entrySet()) {
-            //We want to update the voted player, if the voted player is null and no one is for a skip
-            //Or if the votedplayer exists and the current player has more votes than voted player and even more than the skipped one
-            if((votedPlayer == null && votedForSkip == 0) || (votedPlayer != null && votedPlayer.getValue() < player.getValue() && player.getValue() > votedForSkip))
+            boolean votedPlayerExists = votedPlayer != null;
+            boolean playerHasMoreThanSkip = player.getValue() > votedForSkip;
+            boolean playerHasMoreThanOldVotedPlayer = votedPlayerExists && player.getValue() > votedPlayer.getValue();
+
+            if((!votedPlayerExists && playerHasMoreThanSkip) || (playerHasMoreThanOldVotedPlayer))
                 votedPlayer = player;
         }
 
