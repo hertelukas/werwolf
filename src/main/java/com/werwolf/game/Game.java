@@ -334,6 +334,8 @@ public class Game {
         int sherifftmp = configurations.getSheriffnum();
         int jailortmp = configurations.getJailornum();
         int bodytmp = configurations.getBodyguardnum();
+        int killertmp = 0;
+        if(configurations.getSerialkiller())  killertmp = 1;
 
 
         for (int i = werewolves.size(); i < playerSize; i++) {
@@ -370,7 +372,7 @@ public class Game {
                 players.set(playerNumber, new Bodyguard(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-bodyguard"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Bodyguard");
-            }else if(configurations.getSerialkiller()){
+            }else if(killertmp-- > 0){
                 players.set(playerNumber, new Serialkiller(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-killer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Serienmörder");
