@@ -1,8 +1,8 @@
 package com.werwolf.game.roles;
 
-public class Hunter extends Villager {
+public class Hunter_not_implemented extends Villager {
 
-    public Hunter(Player player){
+    public Hunter_not_implemented(Player player){
         super(player);
         this.username = player.username;
         this.id = player.id;
