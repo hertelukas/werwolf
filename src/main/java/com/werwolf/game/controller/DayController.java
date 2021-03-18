@@ -90,7 +90,7 @@ public class DayController {
         for(Player player : days.peek().getAlive()) {
             playerSb.append(prefix++).append(": ").append(player.getUsername());
             if (player.getId() == votedPlayer.getKey()) {
-                player.die();
+                player.die(game);
                 playerSb.append("  🗡🩸");
                 AudioHandler.getAudioHandler().loadAndPlay(game, "Betrugsversuch.wav", false, true);
                 AudioHandler.getAudioHandler().loadAndPlay(game, "Never.mp3", true, false);

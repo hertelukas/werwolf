@@ -13,6 +13,7 @@ public class Configurations {
     private boolean isEnglish = true;
     private boolean playMusic = true;
     private boolean playAudio = true;
+    private boolean showRole = false;
 
     public int getWitchnum() {
         return witchnum;
@@ -100,6 +101,14 @@ public class Configurations {
 
     public void setBodyguardnum(int bodyguardnum) {
         this.bodyguardnum = bodyguardnum;
+    }
+
+    public boolean isShowRole() {
+        return showRole;
+    }
+
+    public void setShowRole(boolean showRole) {
+        this.showRole = showRole;
     }
 
     public void setAll(int[] num) {

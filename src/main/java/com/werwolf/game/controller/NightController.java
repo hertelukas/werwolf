@@ -94,7 +94,7 @@ public class NightController {
             if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
                 if(!player.isSavedByBodyguyard()){
                     if (game.getTumMode()) player.sendMessage("https://bit.ly/unexzellent");
-                    player.die();
+                    player.die(game);
                     playerSB.append("  🗡🩸");
                     LOGGER.info(player.getUsername() + " stirbt!");
                 }
