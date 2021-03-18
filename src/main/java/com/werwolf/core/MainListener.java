@@ -89,12 +89,10 @@ public class MainListener extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReactionAdd(@Nonnull PrivateMessageReactionAddEvent event) {
-        boolean found = false;
+        System.out.println("bruh moment");
         if (Objects.requireNonNull(event.getUser()).isBot()) return;
+        boolean found = privateReactionHandler.handle(event);
 
-        for (ReactionHandler handler : reactionHandlers) {
-            found = privateReactionHandler.handle(event) || found;
-        }
     }
 
     private MessageEmbed help() {
