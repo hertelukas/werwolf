@@ -80,20 +80,30 @@ public class DayController {
         StringBuilder playerSb = new StringBuilder();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
 
+        int votedForSkip = result.get(null);
+
+        LOGGER.info(votedForSkip + " players voted to skip this round");
+
         char prefix = 'A';
         Map.Entry<Long, Integer> votedPlayer = null;
         for(Map.Entry<Long, Integer> player : result.entrySet()) {
-            if(votedPlayer == null || votedPlayer.getValue() < player.getValue())
+            //We want to update the voted player, if the voted player is null and no one is for a skip
+            //Or if the votedplayer exists and the current player has more votes than voted player and even more than the skipped one
+            if((votedPlayer == null && votedForSkip == 0) || (votedPlayer != null && votedPlayer.getValue() < player.getValue() && player.getValue() > votedForSkip))
                 votedPlayer = player;
         }
 
         for(Player player : days.peek().getAlive()) {
             playerSb.append(prefix++).append(": ").append(player.getUsername());
-            if (player.getId() == votedPlayer.getKey()) {
+            if (votedPlayer != null && player.getId() == votedPlayer.getKey()) {
                 player.die(game);
                 playerSb.append("  🗡🩸");
             }
             playerSb.append("\r");
+        }
+
+        if(votedPlayer == null){
+            playerSb.append(UserMessageCreator.getCreator().getMessage(game, "skip-win")).append("\n");
         }
 
         if(game.getTumMode()) AudioHandler.getAudioHandler().loadAndPlay(game, "Betrugsversuch.wav", false, true);
@@ -123,8 +133,10 @@ public class DayController {
         for (Player p : alive) {
             playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
+        //Add skip option
+        playerSb.append(prefix).append(": ").append("Skip");
 
-        votingMessageBuilder.setTitle("Voting").addField("Lebende Spieler", playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title") ).addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSb.toString(), true);
 
         // Thread.sleep()?
         try {
@@ -140,6 +152,12 @@ public class DayController {
                 //Ins Voting hinzufügen
                 game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + i), alive.get(i).getId());
             }
+
+            //Add option to skip
+            message.addReaction("\uD83c" + (char)(unicodeStart + alive.size())).queue();
+            game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + alive.size()), -1);
+
+
             votingMessageID = message.getIdLong();
         });
         votingTime = true;

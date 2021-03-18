@@ -236,5 +236,22 @@
     "tumMode": false,
     "english": "Player roles",
     "german": "Spielerrollen"
+  },
+  "voted-for": {
+    "tumMode": false,
+    "english": "You voted for: ",
+    "german": "Deine Stimme ging an: "
+  },
+  "skip-vote": {
+    "tumMode": false,
+    "english": "You voted for not killing anyone this round.",
+    "german": "Deine Stimme, niemanden zu töten, wurde registriert."
+  },
+  "skip-win": {
+    "tumMode": true,
+    "english": "The village voted to skip!",
+    "german": "Das Dorf hat sich entschieden diese Nacht alle zu verschohnen.",
+    "englishTUM": "",
+    "germanTUM": ""
   }
 }

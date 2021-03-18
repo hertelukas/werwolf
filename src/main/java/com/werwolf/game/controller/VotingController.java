@@ -43,9 +43,18 @@ public class VotingController {
 
         boolean finished = true;
         Player currVoter = gameController.getGame().getPlayer(voter); // der Dude, der gevotet hat
-        Player votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+
+        Player votedPlayer;
+        //Check if it is skipped player
+        if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
+        else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
 
         if (nightVoting) {
+            if(votedPlayer == null){
+                LOGGER.warn(currVoter.getUsername() + " voted for skip in the night. This shouldn't be possible");
+                return;
+            }
+
             if (currVoter.isAlive()) {
                 //Wenn der Spieler noch nicht gevotet hat wird sein vote akzeptiert und passend verarbeitet
                 if (!alreadyVoted.contains(currVoter)) {
@@ -84,11 +93,18 @@ public class VotingController {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));
                 if (!alreadyVoted.contains(currVoter)) {
                     alreadyVoted.add(currVoter);
-                    currVoter.sendMessage("Du hast für " + votedPlayer.getUsername() + " gestimmt");
-                    LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+                    if(votedPlayer == null) {
+                        currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "skip-vote"));
+                        LOGGER.info(currVoter.getUsername() + " hat für nen Skip gevoted");
+                    }
+                    else{
+                        currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "voted-for") + votedPlayer.getUsername());
+                        LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+                    }
                 }
             }
 
+            //Check if a player still has to vote
             for (Player player : gameController.getGame().getPlayers()) {
                 if (player.isAlive()) {
                     if (!alreadyVoted.contains(player)) {
