@@ -5,20 +5,29 @@ import com.werwolf.core.handler.message.configs.Config;
 import com.werwolf.game.Game;
 import com.werwolf.game.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.RateLimitedException;
+import net.dv8tion.jda.api.requests.RestAction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 
 @Service
 @Configuration
@@ -69,19 +78,28 @@ public class HandleConfig extends MessageHandler {
         TextChannel channel = event.getChannel();
         Game game = Handler.games.get(channel.getIdLong());
 
+        if (game == null){
+            channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this Channel.").queue();
+            return true;
+        }
+
         if (game.getHost().getId() != event.getAuthor().getIdLong()) {
             event.getAuthor().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage("Only the host can configure the game.").queue());
             return true;
         }
 
-        if (game == null)
-            channel.sendMessage(event.getAuthor().getAsMention() + " there is no game in this Channel.").queue();
         else {
             if (args.length == 0) {
-                channel.sendMessage(getConfigEmbed(game)).queue(message -> {
-                    configMessage = message;
-                    message.delete().queueAfter(30, TimeUnit.SECONDS);
-                });
+                    channel.sendMessage(getConfigEmbed(game)).map(m -> {
+                        configMessage = m;
+                        return m;
+                    })
+                            .delay(Duration.ofSeconds(10))
+                            .flatMap(m -> {
+                                if(m.equals(configMessage)) configMessage = null;
+                                return m.delete();
+                            }).queue();
+
                 return true;
             } else {
                 for (Config config : configs) {
