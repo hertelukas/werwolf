@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -85,12 +86,13 @@ public class GameController {
 
         //Rollen aller Spieler ausgeben
         EmbedBuilder roleoutBuilder = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
-        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().ordinal())).collect(Collectors.groupingBy(Player::getCharacterType));
+        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().getGood_bad_special())).collect(Collectors.groupingBy(Player::getCharacterType));
         for (Map.Entry<CharacterType, List<Player>> playerEntry : groups.entrySet()) {
             StringBuilder groupSB = new StringBuilder();
             for (Player player : playerEntry.getValue()) {
                 groupSB.append(player.getUsername()).append("\r");
             }
+            if (playerEntry.getValue().get(0).getCharacterType().getGood_bad_special() == 0) roleoutBuilder.setColor(Color.GREEN);
             roleoutBuilder.addField(playerEntry.getKey().toString(), groupSB.toString(), false);
         }
         game.getChannel().sendMessage(roleoutBuilder.build()).queue();
