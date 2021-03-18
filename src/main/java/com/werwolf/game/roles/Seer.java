@@ -27,10 +27,13 @@ public class Seer extends Villager {
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+        if (!canVote()) return;
+
         String temp = target.getCharacterType().isCanSeeWWChannel() ? UserMessageCreator.getCreator().getMessage(game, "seer-response-true")
                 : UserMessageCreator.getCreator().getMessage(game, "seer-response-false");
         sendMessage(target.getUsername() + temp);
         LOGGER.info(getUsername() + " schaut " + target.getUsername() + "s Rolle an");
+
     }
 
     /**

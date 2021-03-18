@@ -25,9 +25,12 @@ public class Serialkiller extends Player{
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+        if (!canVote()) return;
+
         target.die(game);
         game.getController().getNightController().getNights().peek().getDiedtonight().add(target);
         LOGGER.info(getUsername() + "(SerialKiller) hat " + target.getUsername() + " umgebracht");
+
     }
 
     /**

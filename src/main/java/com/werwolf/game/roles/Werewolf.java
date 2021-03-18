@@ -33,29 +33,24 @@ public class Werewolf extends Player {
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
-        if (canVote()) {
-            if (target.getCharacterType() != CharacterType.Werewolf) {
-                LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wurde vom Werewolf " + getUsername() + " ausgewählt");
-                votings.computeIfPresent(target.getId(), (aLong, integer) -> (integer = integer + 1));
-                hasVoted = true;
-            }
-            boolean lastVoting = true;
-            for (Player player : game.getPlayers()) {
-                if (player instanceof Werewolf && !((Werewolf) player).hasVoted && player.canVote()) {
-                    lastVoting = false;
-                }
-            }
+        if (!canVote()) return;
 
-            if (lastVoting) {
-                killMostVoted(votings, game);
-            }
-
-
-
-
-        } else {
-            setCanVoteTrue(game);
+        if (target.getCharacterType() != CharacterType.Werewolf) {
+            LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wurde vom Werewolf " + getUsername() + " ausgewählt");
+            votings.computeIfPresent(target.getId(), (aLong, integer) -> (integer = integer + 1));
+            hasVoted = true;
         }
+        boolean lastVoting = true;
+        for (Player player : game.getPlayers()) {
+            if (player instanceof Werewolf && !((Werewolf) player).hasVoted && player.canVote()) {
+                lastVoting = false;
+            }
+        }
+
+        if (lastVoting) {
+            killMostVoted(votings, game);
+        }
+
     }
 
     private void killMostVoted(HashMap<Long, Integer> votings, Game game) {
