@@ -28,13 +28,12 @@ public class Bodyguard extends Villager {
      */
     @Override
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
-        if (canVote()) {
-            LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wird vom Bodyguard " + getUsername() + " beschützt");
-            target.setSavedByBodyguard(true);
-            savedPlayer = target;
-        } else {
-            setCanVoteTrue(game);
-        }
+        if (!canVote()) return;
+
+        LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wird vom Bodyguard " + getUsername() + " beschützt");
+        target.setSavedByBodyguard(true);
+        savedPlayer = target;
+
     }
 
     /**
