@@ -192,4 +192,8 @@ public class DayController {
     public void setVotingTime(boolean votingTime) {
         this.votingTime = votingTime;
     }
+
+    public Stack<Day> getDays() {
+        return days;
+    }
 }

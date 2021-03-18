@@ -209,4 +209,8 @@ public class GameController {
     public NightController getNightController() {
         return nightController;
     }
+
+    public DayController getDayController() {
+        return dayController;
+    }
 }

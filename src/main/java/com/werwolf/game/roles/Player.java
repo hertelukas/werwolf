@@ -144,6 +144,14 @@ public class Player {
     }
 
     /**
+     * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
+     * @param prefix Spieler der als Ziel des möglichen Votings ausgewählt wurde (dessen Prefix)
+     * @param voteMessageID
+     */
+    public void vote(String prefix, long voteMessageID) {
+    }
+
+    /**
      * Setzt die ggf. gesetzen Attribute/durch den Charackter ausgelösten Aktionen zurück beim Aufruf
      * (Wird jede Runde für die in der Runde am Anfang lebenden Spieler aufgerufen
      * @param game
