@@ -48,6 +48,10 @@ public class VotingController {
         if(playerPrefixmap.get(playerPrefix) == -1) votedPlayer = null;
         else votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
 
+
+
+
+        //VOTING IN DER NACHT
         if (nightVoting) {
             if(votedPlayer == null){
                 LOGGER.warn(currVoter.getUsername() + " voted for skip in the night. This shouldn't be possible");
@@ -73,10 +77,15 @@ public class VotingController {
             //Votes werden ausgeführt wenn die Person voten darf
             if (finished) {
                 for (Player p : alreadyVoted) {
+                    System.out.println(p.getClass());
                     p.vote(savedReaction.get(p), votings, gameController.game);
+                    System.out.println(votings.toString());
                 }
             }
 
+
+
+        //VOTING AM TAG
         } else {
             if (currVoter.isAlive()) {
                 votings.computeIfPresent(playerPrefixmap.get(playerPrefix), (aLong, integer) -> (integer = integer + 1));

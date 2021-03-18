@@ -292,11 +292,10 @@ public class Game {
             } while (werewolves.contains(playerNumber));
 
             werewolves.add(playerNumber);
+            players.set(playerNumber, new Werewolf(players.get(playerNumber)));
             Player player = players.get(playerNumber);
 
-            player.setCharacterType(CharacterType.Werewolf);
-            Werewolf werewolf = new Werewolf(player);
-            this.werewolves.add(werewolf);
+            this.werewolves.add((Werewolf) players.get(playerNumber));
             player.sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-werewolf"));
             LOGGER.info(player.getUsername() + " ist ein Werwolf");
         }
