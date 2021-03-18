@@ -124,6 +124,13 @@
     "englishTUM": "The students won!",
     "germanTUM": "Die Studenten haben gewonnen!"
   },
+  "killer-win-title": {
+    "tumMode": true,
+    "english": "Serial killer has won!",
+    "german": "Der Serienkiller hat gewonnen!",
+    "englishTUM": "The crazy student won!",
+    "germanTUM": "Der verrückte Student hat gewonnen"
+  },
   "wolf-win-text": {
     "tumMode": true,
     "english": "The werewolves managed to wipe out the whole village",
@@ -137,6 +144,13 @@
     "german": "Die Dorfbewohner haben es geschafft alle Werwölfe ausfindig zu machen. Endlich kann man wieder ruhig schlafen.",
     "englishTUM": "The students weren't intimidated and managed to track down and destroy the undercover penguins of the ÜL.",
     "germanTUM": "Die Studenten haben sich nicht einschüchtern lassen und konnten die Undercover Pinguine der Übungsleitung ausfindig machen und vernichten."
+  },
+  "killer-win-text": {
+    "tumMode": true,
+    "english": "The serial killer managed to wipe out the whole village",
+    "german": "Der Serienkiller hat es geschafft das ganze Dorf auszulöschen",
+    "englishTUM": "The crazy student managed to scar everyone away from TUM, TUM is now controlled by this crazy student",
+    "germanTUM": "Der verrückte Student hat die Kontrolle über die TUM erlangt und alle Studenten verjagt, selbst der Präsident Prof. Hofmann hat die TUM verlassen und sucht woanders nach cer Exzellenz. Der Campus Garching ist verloren (die anderen Standorte natürlich auch, aber wer interessiert sich denn dafür)"
   },
   "killed": {
     "tumMode": true,

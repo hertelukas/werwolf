@@ -1,9 +1,7 @@
 package com.werwolf.game.controller;
 
 import com.werwolf.game.*;
-import com.werwolf.game.roles.CharacterType;
-import com.werwolf.game.roles.Player;
-import com.werwolf.game.roles.Team;
+import com.werwolf.game.roles.*;
 import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
@@ -77,11 +75,15 @@ public class GameController {
             finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "wolf-win-title"));
             finishedBuilder.setThumbnail("https://cdn.pixabay.com/photo/2013/07/13/14/02/wolf-161987_960_720.png");
             finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "wolf-win-text"));
-        } else {
+        } else if (status == GameStatus.VillagerWin){
             finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "villager-win-title"));
             //TODO Opensource checken
             finishedBuilder.setThumbnail("https://i.pinimg.com/originals/2c/9c/26/2c9c269156e26259dbe8f4733249f9b5.jpg");
             finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "villager-win-text"));
+        } else if (status == GameStatus.SerialKillerWin) {
+            finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "killer-win-title"));
+            finishedBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
+            finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "killer-win-text"));
         }
         game.getChannel().sendMessage(finishedBuilder.build()).queue();
 
@@ -101,14 +103,18 @@ public class GameController {
     }
 
     public GameStatus gameStatus() {
-        long werewolves = game.getPlayers().stream().filter(p -> p.getCharacterType() == CharacterType.Werewolf && p.isAlive()).count();
+        long werewolves = game.getPlayers().stream().filter(p -> p instanceof Werewolf && p.isAlive()).count();
+        long villager = game.getPlayers().stream().filter(p -> p instanceof Villager && p.isAlive()).count();
+        long killers = game.getPlayers().stream().filter(p -> p instanceof Serialkiller && p.isAlive()).count();
         long alive = game.getPlayers().stream().filter(Player::isAlive).count();
 
         GameStatus status;
-        if (werewolves == 0)
+        if (villager == alive)
             status = GameStatus.VillagerWin;
-        else if (werewolves >= (alive - werewolves))
+        else if (werewolves == alive)
             status = GameStatus.WolfWin;
+        else if (killers == alive)
+            status = GameStatus.SerialKillerWin;
         else
             status = GameStatus.Cont;
         this.status = status;
