@@ -14,6 +14,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.net.URI;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GameController {
 
@@ -82,6 +86,19 @@ public class GameController {
             finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "villager-win-text"));
         }
         game.getChannel().sendMessage(finishedBuilder.build()).queue();
+
+        //Rollen aller Spieler ausgeben
+        EmbedBuilder roleoutBuilder = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game, "role-sout"));
+        Map<CharacterType, List<Player>> groups = game.getPlayers().stream().sorted(Comparator.comparingInt(p -> p.getCharacterType().ordinal())).collect(Collectors.groupingBy(Player::getCharacterType));
+        for (Map.Entry<CharacterType, List<Player>> playerEntry : groups.entrySet()) {
+            StringBuilder groupSB = new StringBuilder();
+            for (Player player : playerEntry.getValue()) {
+                groupSB.append(player.getUsername()).append("\r");
+            }
+            roleoutBuilder.addField(playerEntry.getKey().toString(), groupSB.toString(), false);
+        }
+        game.getChannel().sendMessage(roleoutBuilder.build()).queue();
+
         game.stop();
     }
 
