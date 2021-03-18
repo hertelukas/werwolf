@@ -1,16 +1,18 @@
-package com.werwolf.game;
+package com.werwolf.game.specialRoles;
 
+import com.werwolf.game.CharacterType;
+import com.werwolf.game.Game;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class Player {
 
@@ -21,13 +23,12 @@ public class Player {
     boolean isAlive;
     User user;
     CharacterType characterType;
-    private boolean jailed;
-    private boolean savedByBodyguyard = false;
-
-    //Todo we might want to remove this, makes no sense. Is here to allow Werewolf and Villager with no constructor
-    public Player(){}
+    boolean jailed;
+    boolean savedByBodyguyard = false;
+    Guild guild;
 
     public Player(User user, Guild guild){
+        this.guild = guild;
         this.username = user.getName();
         this.id = user.getIdLong();
         this.user = user;
@@ -57,10 +58,6 @@ public class Player {
         return id;
     }
 
-    public boolean vote(Player player) {
-        return true;
-    }
-
     public boolean isAlive() {
         return isAlive;
     }
@@ -77,6 +74,22 @@ public class Player {
         return user;
     }
 
+    public void setCharacterType(CharacterType characterType) {
+        this.characterType = characterType;
+    }
+
+    public boolean isSavedByBodyguyard() {
+        return savedByBodyguyard;
+    }
+
+    public void setSavedByBodyguyard(boolean savedByBodyguyard) {
+        this.savedByBodyguyard = savedByBodyguyard;
+    }
+
+
+    /**
+     * Bringt den Spieler um
+     */
     public void die(Game game) {
         this.isAlive = false;
 
@@ -104,6 +117,10 @@ public class Player {
         user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(embed).queue());
     }
 
+    /**
+     * Gibt zurück, ob der ausgewählte Spieler voten kann oder nicht (da er z.B. im Gefängnis ist)
+     * @return boolean ob er voten kann
+     */
     public boolean canVote() {
         if (!jailed) {
             return characterType.canVote();
@@ -112,11 +129,21 @@ public class Player {
         }
     }
 
-    public boolean isSavedByBodyguyard() {
-        return savedByBodyguyard;
+    /**
+     * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
+     * @param target Spieler der als Ziel des möglichen Votings ausgewählt wurde
+     * @param votings Hashmap, die die Voting der Werewölfe beinhaltet (Falls später auch noch andere darauf zugriff haben sollen)
+     */
+    public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
     }
 
-    public void setSavedByBodyguyard(boolean savedByBodyguyard) {
-        this.savedByBodyguyard = savedByBodyguyard;
+    /**
+     * Ermöglicht es dem Spieler in der nächsten Runde wieder zu voten, falls er diese Runde gejailt war oder ähnliches
+     */
+    public void setCanVoteTrue(Game game) {
+        if (jailed) {
+            sendMessage(UserMessageCreator.getCreator().getMessage(game, "jailor-jails"));
+            jailed = false;
+        }
     }
 }

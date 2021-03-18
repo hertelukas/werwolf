@@ -2,12 +2,12 @@ package com.werwolf.game.controller;
 
 import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.*;
+import com.werwolf.game.specialRoles.Player;
 import com.werwolf.helpers.NightTextCreator;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import java.util.HashMap;
 import java.util.Map;

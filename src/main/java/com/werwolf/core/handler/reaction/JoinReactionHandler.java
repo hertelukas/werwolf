@@ -2,7 +2,7 @@ package com.werwolf.core.handler.reaction;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
-import com.werwolf.game.Player;
+import com.werwolf.game.specialRoles.Player;
 import com.werwolf.game.PlayerListStatus;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -27,7 +27,6 @@ public class JoinReactionHandler extends ReactionHandler {
 
             updateReactions(channel, event.getMessageIdLong());
             Game game = Handler.games.get(channel.getIdLong());
-
             PlayerListStatus result = game.addPlayer(new Player(event.getUser(), event.getGuild()));
 
             if(result == PlayerListStatus.successful)

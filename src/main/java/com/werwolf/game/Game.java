@@ -4,6 +4,7 @@ import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.controller.GameController;
 import com.werwolf.game.controller.VotingController;
+import com.werwolf.game.specialRoles.*;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
@@ -252,8 +253,8 @@ public class Game {
 
     public void setWerwolfWritePermissions(boolean value){
         for (Player player : players) {
-            if(!player.characterType.isCanSeeWWChannel()) continue;
-            IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.user);
+            if(!player.getCharacterType().isCanSeeWWChannel()) continue;
+            IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.getUser());
             try {
                 if(value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
                 else Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
@@ -293,7 +294,7 @@ public class Game {
             werewolves.add(playerNumber);
             Player player = players.get(playerNumber);
 
-            player.characterType = CharacterType.Werewolf;
+            player.setCharacterType(CharacterType.Werewolf);
             Werewolf werewolf = new Werewolf(player);
             this.werewolves.add(werewolf);
             player.sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-werewolf"));
@@ -314,34 +315,34 @@ public class Game {
             int playerNumber;
             do {
                 playerNumber = (int) (Math.random() * playerSize);
-            } while (players.get(playerNumber).characterType != CharacterType.Villager);
+            } while (players.get(playerNumber).getCharacterType() != CharacterType.Villager);
 
             if (witchtmp-- > 0) {
-                players.get(playerNumber).characterType = CharacterType.Witch;
+                players.set(playerNumber, new Witch(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-witch"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist die Hexe");
             } else if (seertmp-- > 0) {
-                players.get(playerNumber).characterType = CharacterType.Seer;
+                players.set(playerNumber, new Seer(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-seer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");
             } else if (huntertmp-- > 0) {
-                players.get(playerNumber).characterType = CharacterType.Hunter;
+                players.set(playerNumber, new Hunter(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-hunter"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Jäger");
             } else if (littleGirltmp-- > 0) {
-                players.get(playerNumber).characterType = CharacterType.LittleGirl;
+                players.set(playerNumber, new LittleGirl(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-littlegirl"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist das Mädchen");
             } else if(sherifftmp-- > 0){
-                players.get(playerNumber).characterType = CharacterType.Sheriff;
+                players.set(playerNumber, new Sheriff(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-sheriff"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Sheriff");
             } else if(jailortmp-- > 0){
-                players.get(playerNumber).characterType = CharacterType.Jailor;
+                players.set(playerNumber, new Jailor(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-jailor"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Jailor");
             }else if(bodytmp-- > 0){
-                players.get(playerNumber).characterType = CharacterType.Bodyguard;
+                players.set(playerNumber, new Bodyguard(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-bodyguard"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Bodyguard");
             }
@@ -349,7 +350,7 @@ public class Game {
 
         //Create Werewolves channel
         for (int i = 0; i < playerSize; i++) {
-            if (!werewolves.contains(i) && players.get(i).characterType == CharacterType.Villager) {
+            if (!werewolves.contains(i) && players.get(i).getCharacterType() == CharacterType.Villager) {
                 players.get(i).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-villager"));
                 LOGGER.info(players.get(i).getUsername() + " ist ein Dorfbewohner");
             }
@@ -373,7 +374,7 @@ public class Game {
 
                 //Set the permissions for all players
                 for (Player player : players) {
-                    IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.user);
+                    IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.getUser());
                     if (!player.getCharacterType().isCanSeeWWChannel())
                         wolfChannel.putPermissionOverride(permissionHolder).setDeny(Permission.VIEW_CHANNEL).queue();
                     else

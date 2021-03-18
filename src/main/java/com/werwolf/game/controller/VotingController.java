@@ -1,7 +1,7 @@
 package com.werwolf.game.controller;
 
 import com.werwolf.game.CharacterType;
-import com.werwolf.game.Player;
+import com.werwolf.game.specialRoles.Player;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
@@ -74,17 +74,7 @@ public class VotingController {
             //Votes werden ausgeführt wenn die Person voten darf
             if (finished) {
                 for (Player p : alreadyVoted) {
-                    if (p.canVote()) {
-                        switch (p.getCharacterType()) {
-                            case Werewolf -> voteAsWerewolf(savedReaction.get(p), p, playerPrefix);
-                            case Seer -> voteAsSeer(savedReaction.get(p), p, playerPrefix);
-                            case Sheriff -> voteAsSheriff(savedReaction.get(p), p, playerPrefix);
-                            case Bodyguard -> voteAsBodyguard(savedReaction.get(p), p, playerPrefix);
-                        }
-                    } else if (p.isJailed()) {
-                        p.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.game, "jailor-jails"));
-                        p.setJailed(false);
-                    }
+                    p.vote(savedReaction.get(p), votings, gameController.game);
                 }
             }
 
@@ -154,77 +144,5 @@ public class VotingController {
             voter.sendMessage("Vote received!");
 
         alreadyVoted.add(voter);
-    }
-
-    /**
-     * Werewolf stimmt ab
-     * @param target Spieler der gevotet wurde
-     * @param voter Spieler der die Stimme abgegeben hat
-     * @param playerPrefix
-     */
-    private void voteAsWerewolf(Player target, Player voter, String playerPrefix) {
-        if (target.getCharacterType() != CharacterType.Werewolf) {
-            LOGGER.info(gameController.game.getPlayer(target.getId()).getUsername() + " wurde vom Werewolf " + voter.getUsername() + " ausgewählt");
-            votings.computeIfPresent(target.getId(), (aLong, integer) -> (integer = integer + 1));
-        }
-    }
-
-    /**
-     * Bodyguards stimmen ab
-     * @param target Spieler der gevotet wurde
-     * @param voter Spieler der die Stimme abgegeben hat
-     * @param playerPrefix
-     */
-    private void voteAsBodyguard(Player target, Player voter, String playerPrefix) {
-
-        target.setSavedByBodyguyard(true);
-
-    }
-
-
-    /**
-     * Seher stimmt ab
-     * @param target Spieler der gevotet wurde
-     * @param voter Spieler der die Stimme abgegeben hat
-     * @param playerPrefix
-     */
-    private void voteAsSeer(Player target, Player voter, String playerPrefix) {
-        // todo embed message oder grundsätzlich etwas verschönern
-        String temp = target.getCharacterType().isCanSeeWWChannel() ? UserMessageCreator.getCreator().getMessage(gameController.getGame(), "seer-response-true")
-                : UserMessageCreator.getCreator().getMessage(gameController.getGame(), "seer-response-false");
-        voter.sendMessage(target.getUsername() + temp);
-        LOGGER.info(voter.getUsername() + " schaut " + target.getUsername() + "s Rolle an");
-
-    }
-
-    /**
-     * Sheriff stimmt ab
-     * @param target Spieler der gevotet wurde
-     * @param voter Spieler der die Stimme abgegeben hat
-     * @param playerPrefix
-     */
-    private void voteAsSheriff(Player target, Player voter, String playerPrefix) {
-        Random rd = new Random();
-        int chanceForTrueInformation = rd.nextInt(SHERIFF_AVG_SUCCESS) + 100 - SHERIFF_AVG_SUCCESS;
-        int success = rd.nextInt(100);
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setTitle(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report"));
-        builder.addField(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "certainty"), chanceForTrueInformation + ((100 - chanceForTrueInformation) / 2) + "%", false );
-        //If we have success we send true information
-        if(success < chanceForTrueInformation){
-            //Todo alle Rollen auflisten die in der Nacht nichts machen
-            if(target.getCharacterType() == CharacterType.Villager)
-                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(),  "sheriff-report-home"));
-            else
-                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
-        }else{
-            //This information is random
-            if(rd.nextBoolean())
-                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-home"));
-            else
-                builder.setDescription(target.getUsername() + UserMessageCreator.getCreator().getMessage(gameController.getGame(), "sheriff-report-sus"));
-        }
-        voter.sendMessage(builder.build());
-        LOGGER.info(voter.getUsername() + " untersucht " + target.getUsername());
     }
 }

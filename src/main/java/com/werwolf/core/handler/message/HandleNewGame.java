@@ -2,7 +2,7 @@ package com.werwolf.core.handler.message;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
-import com.werwolf.game.Player;
+import com.werwolf.game.specialRoles.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -29,13 +29,13 @@ public class HandleNewGame extends MessageHandler {
         if (!command.equals(getCommand())) return false;
 
         TextChannel channel = event.getChannel();
+        Game game = games.get(channel.getIdLong());
         Player hostPlayer = new Player(event.getAuthor(), event.getGuild());
 
         //Try to create a new game with this id
         if (Handler.createGame(channel, hostPlayer, channel.getGuild())) {
             //Wir versuchen den VoiceChannel zu bekommen, falls der Host nicht in einem Voice Channel ist, der Voicechannel nicht existiert usw, dann ignorieren wir den voiceChannel
             try{
-                Game game = games.get(channel.getIdLong());
                 game.setVoiceChannelID(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).getChannel()).getIdLong());
             }
             catch (Exception e){

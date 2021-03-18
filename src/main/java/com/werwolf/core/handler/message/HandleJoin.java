@@ -1,6 +1,6 @@
 package com.werwolf.core.handler.message;
 
-import com.werwolf.game.Player;
+import com.werwolf.game.specialRoles.Player;
 import com.werwolf.game.PlayerListStatus;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -22,6 +22,7 @@ public class HandleJoin extends MessageHandler {
         TextChannel channel = event.getChannel();
 
         if (games.containsKey(channel.getIdLong())) {
+            System.out.println(games.get(channel.getIdLong()));
             PlayerListStatus result = games.get(channel.getIdLong()).addPlayer(new Player(event.getAuthor(), event.getGuild()));
             if(result == PlayerListStatus.successful) {
                 updateMainMessage(channel);
