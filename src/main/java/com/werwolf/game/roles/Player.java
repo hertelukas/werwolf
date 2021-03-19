@@ -24,6 +24,7 @@ public class Player {
     boolean jailed;
     boolean savedByBodyguard = false;
     Guild guild;
+    boolean isMajor = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -141,6 +142,14 @@ public class Player {
      * @param game
      */
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
+    }
+
+    /**
+     * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
+     * @param prefix Spieler der als Ziel des möglichen Votings ausgewählt wurde (dessen Prefix)
+     * @param voteMessageID
+     */
+    public void vote(String prefix, long voteMessageID) {
     }
 
     /**

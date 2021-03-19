@@ -121,6 +121,10 @@ public class GameController {
         return status;
     }
 
+    public void majorelection() {
+        //TODO
+    }
+
     public boolean isActive() {
         return isActive;
     }
@@ -215,4 +219,10 @@ public class GameController {
     public NightController getNightController() {
         return nightController;
     }
+
+    public DayController getDayController() {
+        return dayController;
+    }
+
+
 }

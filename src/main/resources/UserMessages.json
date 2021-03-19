@@ -276,5 +276,13 @@
     "german": "Das Dorf hat sich entschieden diese Nacht alle zu verschohnen.",
     "englishTUM": "",
     "germanTUM": ""
+  },
+  "hunter-death": {
+    "tumMode": true,
+    "english": "You have been killed, kill another person!",
+    "german": "Du wurdest ermordet, töte eine andere Person!",
+    "englishTUM": "platzhalter lol",
+    "germanTUM": "platzhalter lol"
   }
+
 }

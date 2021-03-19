@@ -65,6 +65,8 @@ public class Game {
                 AudioHandler.getAudioHandler().loadAndPlay(this, "Werwolf.wav", true, true);
         }
 
+        LOGGER.info("Bürgermeisterwahl");
+        controller.majorelection();
         LOGGER.info("Erste Nacht gestartet");
         controller.nextNight();
 
