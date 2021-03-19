@@ -25,6 +25,7 @@ public class Player {
     boolean savedByBodyguard = false;
     Guild guild;
     boolean isMajor = false;
+    boolean hasVoted = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -156,7 +157,7 @@ public class Player {
      * @param prefix Spieler der als Ziel des möglichen Votings ausgewählt wurde (dessen Prefix)
      * @param voteMessageID
      */
-    public void vote(String prefix, long voteMessageID) {
+    public void vote(String prefix, long voteMessageID, Game game) {
     }
 
     /**
@@ -176,5 +177,9 @@ public class Player {
             sendMessage(UserMessageCreator.getCreator().getMessage(game, "jailor-jails"));
             jailed = false;
         }
+    }
+
+    public boolean hasVoted() {
+        return hasVoted;
     }
 }

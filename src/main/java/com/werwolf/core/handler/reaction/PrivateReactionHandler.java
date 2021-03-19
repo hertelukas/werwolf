@@ -14,13 +14,20 @@ public  class PrivateReactionHandler extends Handler {
 
     public  boolean handle(PrivateMessageReactionAddEvent event) {
         Game game = null;
+        System.out.println("bruh");
         for(Game g : games.values()) { // won't work if player is in multiple games
-            for (Player p: g.getPlayers())
-                game = p.getId() == event.getUserIdLong() ? g : game;
+            for (Player p: g.getPlayers()) {
+                game = (p.getUser().equals(event.getUser()) && p.getCharacterType() == CharacterType.Hunter) ? g : game;
+            }
         }
-        if (game == null) return false;
+        if (game != null) System.out.println("wow");
+        if (game == null) {
+            System.out.println("huh");
+            return false;
+        }
 
-        event.getUser().openPrivateChannel().queue(message -> message.sendMessage("successful react").queue());
+
+        Objects.requireNonNull(event.getUser()).openPrivateChannel().queue(message -> message.sendMessage("successful react").queue());
 
         // Long votingMessage = game.getCurrentVotingMessage();
 
@@ -29,10 +36,11 @@ public  class PrivateReactionHandler extends Handler {
 
         //todo voting itself (maybe for witch as well)
 
+        Game finalGame = game;
         game.getPlayers().stream()
                 .filter(p -> p.getCharacterType() == CharacterType.Hunter && p.getId() == event.getUserIdLong())
                 .findFirst()
-                .ifPresent(hunter -> hunter.vote(event.getReactionEmote().getAsReactionCode(), event.getMessageIdLong()));
+                .ifPresent(hunter -> hunter.vote(event.getReactionEmote().getAsReactionCode(), event.getMessageIdLong(), finalGame));
 
 
         // game.getVotingController().vote(event.getReactionEmote().getAsReactionCode(), Objects.requireNonNull(event.getUser()).getIdLong());

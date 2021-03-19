@@ -136,13 +136,13 @@ public class NightController {
             int unicodeStart = 0xDDE6;
             for (int i = 0; i < nights.peek().getAlive().size(); i++) {
                 message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
-                //Ins Votinghinzufügen
+                //Ins Voting hinzufügen
                 game.getVotingController().addPlayer("\uD83c" + (char) (unicodeStart + i), nights.peek().getAlive().get(i).getId());
             }
             votingMessageID = message.getIdLong();
         });
 
-        //Lebende Spieler an den Werewolfchannel schicken
+        //Lebende Spieler an den Werewolf-channel schicken
         EmbedBuilder werewolfMessage = new EmbedBuilder().setTitle(UserMessageCreator.getCreator().getMessage(game,  "wolf-information"));
         StringBuilder livingPlayerSB = new StringBuilder();
         StringBuilder livingWerewolfsSB = new StringBuilder();

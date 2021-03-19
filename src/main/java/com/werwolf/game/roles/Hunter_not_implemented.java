@@ -4,17 +4,20 @@ import com.werwolf.game.Game;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hunter_not_implemented extends Villager {
 
-    boolean hasVoted = false;
+  //  boolean hasVoted = false;
     long voteMessageID = -1;
+    Map<String, Player> votes = new HashMap<>();
     Thread waiting = new Thread(() -> {
         long start = System.currentTimeMillis();
         while(!hasVoted) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("oh no");
             }
@@ -32,12 +35,16 @@ public class Hunter_not_implemented extends Villager {
     }
 
     public boolean die(Game game) {
-        if (super.die(game)) {
+        if (!isSavedByBodyguard()) {
+            this.isAlive = false;
+
+            if (game.getTumMode()) sendMessage("https://bit.ly/unexzellent");
             sendMessage("You died.");
 
             // hunter soll dann voten
             List<Player> alive = game.getController().isNight() ? game.getController().getNightController().getNights().peek().getAlive()
                     : game.getController().getDayController().getDays().peek().getAlive();
+            alive.remove(this); // damit hunter nicht sich selbst voten kann (iwie sinnlos)
             StringBuilder playerSb = new StringBuilder();
             EmbedBuilder votingMessageBuilder = new EmbedBuilder();
 
@@ -58,17 +65,21 @@ public class Hunter_not_implemented extends Villager {
                 int unicodeStart = 0xDDE6;
                 for (int i=0; i < alive.size(); i++) {
                     message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
+                    votes.put("\uD83c" + (char) (unicodeStart + i), alive.get(i));
                     //Ins Voting hinzufügen
                 }
                 // message.addReaction("\uD83c" + (char)(unicodeStart + alive.size())).queue(); <-- skip option?
             }));
 
+            System.out.println("now waiting");
             waiting.start();
-            try {
-                waiting.join(); // necessary?
-            } catch (InterruptedException e) {
-                System.out.println("no good");
-            }
+//            try {
+//                waiting.join(); // necessary?
+//            } catch (InterruptedException e) {
+//                System.out.println("no good");
+//            }
+            System.out.println("got here");
+
 
             if (game.getConfigurations().isShowRole()) {
                 EmbedBuilder showRole = new EmbedBuilder();
@@ -77,13 +88,19 @@ public class Hunter_not_implemented extends Villager {
                 game.getChannel().sendMessage(showRole.build()).queue();
             }
             return true;
-        }
-        return false;
+        } else
+            return false;
     }
 
-    public void vote(String prefix, long voteMessageID) { // fix?
+    @Override
+    public void vote(String prefix, long voteMessageID, Game game) { // fix?
         if (voteMessageID == this.voteMessageID) {
-            // player.die()
+            System.out.println("got msg");
+            if(!hasVoted && votes.get(prefix) != null) {
+                System.out.println("success");
+                votes.get(prefix).die(game);
+                hasVoted = true;
+            }
         }
     }
 }
