@@ -25,6 +25,7 @@ public class Player {
     boolean savedByBodyguard = false;
     Guild guild;
     boolean isMajor = false;
+    private boolean hasSex = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -85,6 +86,14 @@ public class Player {
         this.savedByBodyguard = savedByBodyguard;
     }
 
+    public boolean isHavingSex() {
+        return hasSex;
+    }
+
+    public void setHasSex(boolean hasSex){
+        this.hasSex = hasSex;
+    }
+
 
     /**
      * Versucht den Spieler umzubringen falls möglich true sonst false
@@ -104,7 +113,6 @@ public class Player {
         } else {
             return false;
         }
-
     }
 
     /**

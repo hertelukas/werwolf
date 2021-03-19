@@ -336,6 +336,7 @@ public class Game {
         int jailortmp = configurations.getJailornum();
         int bodytmp = configurations.getBodyguardnum();
         int killertmp = 0;
+        int prostitutestmp = configurations.getPrositutesnum();
         if (configurations.getSerialkiller()) killertmp = 1;
 
 
@@ -377,6 +378,10 @@ public class Game {
                 players.set(playerNumber, new Serialkiller(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-killer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Serienmörder");
+            } else if(prostitutestmp-- > 0){
+                players.set(playerNumber, new Prostitute(players.get(playerNumber)));
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-prostitute"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist eine Nutte");
             }
         }
 
