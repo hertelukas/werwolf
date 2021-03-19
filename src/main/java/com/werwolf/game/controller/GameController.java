@@ -115,8 +115,8 @@ public class GameController {
         return status;
     }
 
-    public void majorelection(boolean firstVoting) {
-        majorVotingController.newVoting(firstVoting, null);
+    public void majorelection(boolean firstVoting, Player oldMajor) {
+        majorVotingController.newVoting(firstVoting, oldMajor);
     }
 
     public void receiveVoteMajor(Player player, String target) {
@@ -239,7 +239,7 @@ public class GameController {
 
     public boolean isMajorNormalVoting() {
 
-        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        if (!majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
         return false;
     }
 

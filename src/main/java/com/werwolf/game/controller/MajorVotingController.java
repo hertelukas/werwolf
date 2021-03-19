@@ -53,19 +53,24 @@ public class MajorVotingController {
             if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "hunter-death"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
 
         major.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();
             int unicodeStart = 0xDDE6;
             int i = 0;
             for (Player p : game.getPlayers()) {
-                message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
-                targetmap.put("\uD83c" + (char) (unicodeStart + i), p);
-                i++;
+                if (p.isAlive()) {
+                    message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
+                    targetmap.put("\uD83c" + (char) (unicodeStart + i), p);
+                    i++;
+                }
             }
         }));
+
+        votesNeeded = 1;
+        LOGGER.info("Auf voting Ergebnis warten");
     }
 
     private void firstVoting() {
@@ -108,7 +113,6 @@ public class MajorVotingController {
             alreadyVotet.add(player);
         }
 
-        System.out.println(targetmap.toString() + "     " + target);
         LOGGER.info(player.getUsername() + " hat für " +  targetmap.get(target).getUsername() + " gestimmt");
 
         if (votingmap.containsKey(player)) {
@@ -121,6 +125,10 @@ public class MajorVotingController {
 
             if (firstVoting) {
                 LOGGER.info("Erste Nacht gestartet");
+                gameController.nextNight();
+            } else  if (gameController.isNight) {
+                gameController.nextDay();
+            } else if (!gameController.isNight) {
                 gameController.nextNight();
             }
         }

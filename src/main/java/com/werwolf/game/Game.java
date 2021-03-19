@@ -67,7 +67,7 @@ public class Game {
         }
 
         LOGGER.info("Bürgermeisterwahl");
-        controller.majorelection(true);
+        controller.majorelection(true, null);
 
         return true;
     }

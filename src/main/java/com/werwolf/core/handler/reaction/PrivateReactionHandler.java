@@ -2,9 +2,12 @@ package com.werwolf.core.handler.reaction;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
+import com.werwolf.game.controller.GameController;
 import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -12,18 +15,30 @@ import java.util.Objects;
 @Service
 public  class PrivateReactionHandler extends Handler {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(PrivateReactionHandler.class);
+
     public  boolean handle(PrivateMessageReactionAddEvent event) {
+
+
+
         Game game = null;
-        System.out.println("bruh");
         for(Game g : games.values()) { // won't work if player is in multiple games
-            for (Player p: g.getPlayers()) {
-                game = (p.getUser().equals(event.getUser()) && p.getCharacterType() == CharacterType.Hunter) ? g : game;
+            if (g.getController().getMajorVoteMessageID() == event.getMessageIdLong()) {
+                game = g;
+                break;
             }
         }
-        if (game != null) System.out.println("wow");
+
         if (game == null) {
-            System.out.println("huh");
             return false;
+        }
+
+        System.out.println(game.getController().isMajorNormalVoting());
+        if (game.getController().isMajorNormalVoting()) {
+
+            LOGGER.info(event.getUser().getName() + " hat erfolgreich als ehemaliger Bürgermeister seine Stimmme abgegeben für: " + event.getReactionEmote().getAsReactionCode());
+            game.getController().receiveVoteMajor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
+            return true;
         }
 
 

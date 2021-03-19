@@ -66,10 +66,14 @@ public class NightController {
 
         updateVotingResult();
         game.getController().gameStatus();
+        for (Player player : nights.peek().getDiedtonight()) {
+            if (player.isMajor()) {
+                game.getController().majorelection(false, player);
+                player.setMajor(false);
+                return;
+            }
+        }
         game.getController().nextDay();
-        //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
-
-        //Tag bricht an
     }
 
     private void updateVotingResult() {

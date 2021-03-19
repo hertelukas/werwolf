@@ -71,6 +71,14 @@ public class DayController {
         LOGGER.info("Voting beendet");
         updateVotingResult();
         game.getController().gameStatus();
+
+        for (Player player : days.peek().getAlive()) {
+            if (player.isMajor() && !player.isAlive()) {
+                game.getController().majorelection(false, player);
+                player.setMajor(false);
+                return;
+            }
+        }
         game.getController().nextNight();
 
     }
