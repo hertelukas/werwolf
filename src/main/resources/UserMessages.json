@@ -309,6 +309,11 @@
     "german": " ist der neue Bürgermeister",
     "englishTUM": " is the new semester representative",
     "germanTUM": " ist der neue Semestersprecher"
+  },
+  "mayor-votetitle": {
+    "tumMode": false,
+    "english": "The mayor has chosen",
+    "german": "Der Bürgermeister hat entschieden"
   }
 
 }
