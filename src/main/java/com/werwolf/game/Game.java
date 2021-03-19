@@ -409,7 +409,7 @@ public class Game {
             try {
                 //If there is no werewolf channel, create a new one
                 if (guild.getTextChannelsByName(werewolfChannelName, true).size() == 0) {
-                    guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position).setSlowmode(5).complete();
+                    guild.createTextChannel(channel.getName() + "-werewolves").setParent(category).setPosition(position).setSlowmode(10).complete();
                 }
 
                 wolfChannelID = guild.getTextChannelsByName(werewolfChannelName, true).get(0).getIdLong();
