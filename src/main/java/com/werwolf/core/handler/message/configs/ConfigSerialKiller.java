@@ -22,7 +22,12 @@ public class ConfigSerialKiller extends Config{
     public boolean updateConfig(Game game, String command, String arg) {
         if (!command.equals(getCommand()) || game == null) return false;
 
-        game.getConfigurations().setSerialkiller(arg.equals("on"));
+        if(arg == null){
+            game.getConfigurations().setSerialkiller(true);
+        }else{
+            game.getConfigurations().setSerialkiller(arg.equals("on"));
+        }
+
 
         return true;
     }

@@ -36,7 +36,6 @@ public class Game {
     private final Guild guild;
     private boolean tumMode = false;
     private Configurations configurations = new Configurations();
-    private Thread maingameThread;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
@@ -63,7 +62,7 @@ public class Game {
         //If there is a voice channel specified, we try to join
         if (voiceChannelID != 0) {
             VoiceChannel voiceChannel = guild.getVoiceChannelById(voiceChannelID);
-            if(voiceChannel != null)
+            if (voiceChannel != null)
                 AudioHandler.getAudioHandler().loadAndPlay(this, "Werwolf.wav", true, true);
         }
 
@@ -82,15 +81,14 @@ public class Game {
             controller.setActive(false);
             setMainWritePermissions();
             LOGGER.info("Spiel erfolgreich gestoppt");
-        }
-        catch (Exception e){
-           LOGGER.warn("Failed to remove werewolf channel: " + e.getMessage());
+        } catch (Exception e) {
+            LOGGER.warn("Failed to remove werewolf channel: " + e.getMessage());
         }
         return true;
     }
 
     public PlayerListStatus addPlayer(@NotNull Player player) {
-        if(isActive()) return PlayerListStatus.unsuccessful;
+        if (isActive()) return PlayerListStatus.unsuccessful;
         if (hasPlayer(player.getId())) return PlayerListStatus.contains;
         if (isBanned(player.getId())) return PlayerListStatus.isBanned;
         players.add(player);
@@ -256,22 +254,18 @@ public class Game {
         return guild.getVoiceChannelById(voiceChannelID);
     }
 
-    public Thread getMaingameThread() {
-        return maingameThread;
-    }
 
-    public void setMaingameThread(Thread maingameThread) {
-        this.maingameThread = maingameThread;
-    }
 
     public void setWerwolfWritePermissions(boolean value){
         for (Player player : players) {
-            if(!player.getCharacterType().isCanSeeWWChannel()) continue;
-            IPermissionHolder permissionHolder = new MemberImpl ((GuildImpl) guild, player.getUser());
+            if (!player.getCharacterType().isCanSeeWWChannel()) continue;
+            IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.getUser());
             try {
-                if(player.isAlive() && value) Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
-                else Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
-            }catch (Exception e){
+                if (player.isAlive() && value)
+                    Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
+                else
+                    Objects.requireNonNull(guild.getTextChannelById(wolfChannelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
+            } catch (Exception e) {
                 LOGGER.warn("Failed to change writing permissions in werwolf channel: " + e.getMessage());
             }
         }
@@ -280,17 +274,16 @@ public class Game {
 
     public void setMainWritePermissions() {
         for (Player player : players) {
-            if(player.getId() == host.getId())continue;
+            if (player.getId() == host.getId()) continue;
 
             IPermissionHolder permissionHolder = new MemberImpl((GuildImpl) guild, player.getUser());
 
             try {
-                if(!configurations.canWrite() && isActive())
+                if (!configurations.canWrite() && isActive())
                     Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
                 else
                     Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setAllow(Permission.MESSAGE_WRITE).queue();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 LOGGER.warn("Failed to update write permissions for main channel: " + e.getMessage());
             }
         }
@@ -343,7 +336,7 @@ public class Game {
         int jailortmp = configurations.getJailornum();
         int bodytmp = configurations.getBodyguardnum();
         int killertmp = 0;
-        if(configurations.getSerialkiller())  killertmp = 1;
+        if (configurations.getSerialkiller()) killertmp = 1;
 
 
         for (int i = werewolves.size(); i < playerSize; i++) {
@@ -368,19 +361,19 @@ public class Game {
                 players.set(playerNumber, new LittleGirl(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-littlegirl"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist das Mädchen");
-            } else if(sherifftmp-- > 0){
+            } else if (sherifftmp-- > 0) {
                 players.set(playerNumber, new Sheriff(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-sheriff"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Sheriff");
-            } else if(jailortmp-- > 0){
+            } else if (jailortmp-- > 0) {
                 players.set(playerNumber, new Jailor(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-jailor"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Jailor");
-            }else if(bodytmp-- > 0){
+            } else if (bodytmp-- > 0) {
                 players.set(playerNumber, new Bodyguard(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-bodyguard"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Bodyguard");
-            }else if(killertmp-- > 0){
+            } else if (killertmp-- > 0) {
                 players.set(playerNumber, new Serialkiller(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-killer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Serienmörder");
@@ -430,14 +423,19 @@ public class Game {
 
     }
 
-    private void presetCheck(int werewolfNum) {
+    public void presetCheck(int werewolfNum) {
         switch (configurations.getPreset()) {
             case 1 -> { // one of each
-                configurations.setAll(new int[]{1,1,1,1,1,1,1});
+                configurations.setAll(new int[]{1, 1, 1, 1, 1, 1, 1, 1});
             }
-            case 2 -> {}
-            case 3 -> {}
-            default -> {}
+            case 2 -> {
+                configurations.setAll(new int[]{1, 1, 1, 1, 0, 0, 0, 0});
+            }
+            case 3 -> {
+                configurations.setAll(new int[]{1, 0, 0, 0, 1, 2, 2, 1});
+            }
+            default -> {
+            }
         }
 
     }

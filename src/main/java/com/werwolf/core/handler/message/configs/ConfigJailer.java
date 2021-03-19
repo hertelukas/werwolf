@@ -21,6 +21,11 @@ public class ConfigJailer extends Config {
     public boolean updateConfig(Game game, String command, String arg) {
         if (!command.equals(getCommand()) || game == null) return false;
 
+        if(arg == null){
+            game.getConfigurations().setJailornum(1);
+            return true;
+        }
+
         try {
             game.getConfigurations().setJailornum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {

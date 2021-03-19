@@ -20,7 +20,12 @@ public class ConfigLittleGirl extends Config {
 
     @Override
     public boolean updateConfig(Game game, String command, String arg) {
-        if (!command.equals(getCommand()) || game == null) return false;
+        if ((!command.equals(getCommand()) && !command.equals("girl")) || game == null) return false;
+
+        if(arg == null){
+            game.getConfigurations().setLittleGirlnum(1);
+            return true;
+        }
 
         try {
             game.getConfigurations().setLittleGirlnum(Math.max(Integer.parseInt(arg), 0));
