@@ -85,6 +85,13 @@ public class Player {
         this.savedByBodyguard = savedByBodyguard;
     }
 
+    public boolean isMajor() {
+        return isMajor;
+    }
+
+    public void setMajor(boolean major) {
+        isMajor = major;
+    }
 
     /**
      * Versucht den Spieler umzubringen falls möglich true sonst false

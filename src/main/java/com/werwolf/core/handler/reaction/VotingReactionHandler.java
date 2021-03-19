@@ -9,14 +9,20 @@ public class VotingReactionHandler extends ReactionHandler{
     @Override
     public boolean handle(GuildMessageReactionAddEvent event) {
         Game game = games.get(event.getChannel().getIdLong());
+
         if (game == null) return false;
         Long votingMessage = game.getCurrentVotingMessage();
+
+        if (game.getController().isMajorVoting() && event.getMessageIdLong() == game.getController().getMajorVoteMessageID()) {
+            game.getController().receiveVoteMajor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
+            return true;
+        }
 
         if (votingMessage == null || event.getMessageIdLong() != game.getCurrentVotingMessage()) return false;
 
         game.getVotingController().vote(event.getReactionEmote().getAsReactionCode(), event.getUser().getIdLong());
         updateReactions(event.getChannel(), event.getMessageIdLong());
 
-        return false;
+        return true;
     }
 }

@@ -32,10 +32,11 @@ public class Game {
     private long voiceChannelID = 0;
     private long wolfChannelID;
     private long mainGameMessage;
-    private final GameController controller = new GameController(this);
+    private final GameController controller;
     private final Guild guild;
     private boolean tumMode = false;
     private Configurations configurations = new Configurations();
+    private Thread maingameThread;
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
@@ -44,6 +45,7 @@ public class Game {
         if (players.length > 0) this.players = Arrays.asList(players);
         this.players.add(host);
         this.guild = guild;
+        this.controller = new GameController(this);
     }
 
     public boolean start() {
@@ -66,9 +68,7 @@ public class Game {
         }
 
         LOGGER.info("Bürgermeisterwahl");
-        controller.majorelection();
-        LOGGER.info("Erste Nacht gestartet");
-        controller.nextNight();
+        controller.majorelection(true);
 
         return true;
     }
@@ -256,7 +256,13 @@ public class Game {
         return guild.getVoiceChannelById(voiceChannelID);
     }
 
+    public Thread getMaingameThread() {
+        return maingameThread;
+    }
 
+    public void setMaingameThread(Thread maingameThread) {
+        this.maingameThread = maingameThread;
+    }
 
     public void setWerwolfWritePermissions(boolean value){
         for (Player player : players) {
