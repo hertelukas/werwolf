@@ -15,6 +15,7 @@ public abstract class Handler {
     private final static Logger LOGGER = LoggerFactory.getLogger(Handler.class);
 
     public static final HashMap<Long, Game> games = new HashMap<>();
+    private static final HashMap<Long, Game> werewolfChannel = new HashMap<>();
 
     public static boolean createGame(TextChannel channel, Player host, Guild guild) {
         //If there is already a game with this channel id, we won't create a new one
@@ -24,6 +25,7 @@ public abstract class Handler {
         games.put(channel.getIdLong(), newGame);
         return true;
     }
+
 
     public void updateMainMessage(TextChannel channel) {
         Game game = games.get(channel.getIdLong());
@@ -47,4 +49,16 @@ public abstract class Handler {
         Game game = games.remove(id);
         if (game == null) LOGGER.info("No game removed.");
     }
+
+    public static void addWerewolfChannel(long id, Game game){
+        werewolfChannel.put(id, game);
+    }
+
+    public static boolean werewolfChannelHandle(long idLong, String msg) {
+        if(!werewolfChannel.containsKey(idLong)) return false;
+        werewolfChannel.get(idLong).sendToSpy(msg);
+        return true;
+    }
+
+
 }

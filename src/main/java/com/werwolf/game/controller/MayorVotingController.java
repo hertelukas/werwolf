@@ -84,7 +84,8 @@ public class MayorVotingController {
         }
 
         votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-election"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true);
+                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true)
+                .setThumbnail("https://media.discordapp.net/attachments/821717465679003670/822606161710809088/ballot-1294935_1280.png?width=667&height=679");
 
         game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();

@@ -11,7 +11,8 @@ public enum CharacterType {
     Jailor(true, false, 1,  Team.Village),
     Bodyguard(true, false, 5,  Team.Village),
     SerialKiller(true, false, 15, Team.SerialKiller),
-    Prostitute(true, false, 9, Team.Village);
+    Prostitute(true, false, 9, Team.Village),
+    Spy(false, false, 10, Team.Village);
 
     private final boolean canVote;
     private final boolean canSeeWWChannel;
