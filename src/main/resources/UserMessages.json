@@ -281,6 +281,18 @@
     "german": "Du wurdest ermordet, töte eine andere Person!",
     "englishTUM": "platzhalter lol",
     "germanTUM": "platzhalter lol"
+  },
+  "major-election": {
+    "tumMode": true,
+    "english": "Major election",
+    "german": "Bürgermeisterwahl",
+    "englishTUM": "New semester representative needed",
+    "germanTUM": "Wir brauchen einen neuen Semestersprecher"
+  },
+  "major-candidates": {
+    "tumMode": false,
+    "english": "candidates",
+    "german": "Kanidaten"
   }
 
 }
