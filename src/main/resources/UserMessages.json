@@ -28,73 +28,73 @@
   },
   "role-werewolf": {
     "tumMode": true,
-    "english": "You are a werewolf",
-    "german": "Du bist ein Werwolf",
+    "english": "You are a **werewolf**. Every night you wake up and can communicate with the other werewolves through a channel that only you can see. (And the little girl, should there be one among you).",
+    "german": "Du bist ein **Werwolf**. Jede Nacht erwachst du und kannst mit den anderen Werwölfen kommunizieren über einen Kanal, den nur ihr sehen könnt. (Und das kleine Mädchen, solltet sich eines unter euch befinden)",
     "englishTUM": "You are in the exercise management (ÜL). Try to torture as many students as possible!",
     "germanTUM": "Du bist in der Übungsleitung. Versuche so viele Studenten wie möglich rauszuquälen!"
   },
   "role-villager": {
     "tumMode": true,
-    "english": "You are a villager",
-    "german": "Du bist ein Dorfbewohner",
-    "englishTUM": "You are a student",
-    "germanTUM": "Du bist Student"
+    "english": "You are a **villager**. At night you sleep peacefully in your bed, but during the day your task is to find and destroy the villains among the citizens.",
+    "german": "Du bist ein **Dorfbewohner**. Nachts schläfst du friedlich in deinem Bett, doch tagsüber ist es deine Aufgabe die Bösewichte unter den Bewohnern zu finden und zu vernichen.",
+    "englishTUM": "You are a **student**. Your goal is not to get exmatriculated. Then you would have to enroll at LMU, RIP. But every exam period, the ÜL kicks someone out.",
+    "germanTUM": "Du bist **Student**. Dein Ziel ist es, nicht exmatrikuliert zu werden. Denn dann müsstest du dich bei der LMU einschreiben, RIP. Doch jede Klausurphase wirft die Übungsleitung jemanden raus."
   },
   "role-witch": {
     "tumMode": true,
-    "english": "You are the witch. \nYou got one Potion to heal somebody and one Potion to kill somebody",
-    "german": "Du bist die Hexe. \nDu hast einen Trank, der einmal jemanden Retten kann und einmal kannst du einen weiteren mit in den Tod reissen. Wähle klug",
+    "english": "You are the **witch**. You got one Potion to heal somebody and one Potion to kill somebody",
+    "german": "Du bist die **Hexe**. Du hast einen Trank, der einmal jemanden Retten kann und einmal kannst du einen weiteren mit in den Tod reissen. Wähle klug",
     "englishTUM": "Witch EN TUM",
     "germanTUM": "Witch DE TUM"
   },
   "role-seer": {
     "tumMode": true,
-    "english": "You are the Seer. \nEach round you can choose a fellow citizen and you will get to see his role",
-    "german": "Du bist Seher. \nJede Runde kannst du einen Mitbürger wählen, von dem du die wahre Identität entdecken wirst.",
-    "englishTUM": "You are a tutor. You can uncover a role during each exam",
-    "germanTUM": "Du bist Tutor, dir ist es möglich jede Klausurenphase eine Rolle aufzudecken"
+    "english": "You are the **Seer**. Each round you can choose a fellow citizen and you will get to see his role.",
+    "german": "Du bist **Seher**. Jede Runde kannst du einen Mitbürger wählen, von dem du die wahre Identität entdecken wirst.",
+    "englishTUM": "You are a **tutor**. You can uncover a role during each exam",
+    "germanTUM": "Du bist **Tutor**, dir ist es möglich jede Klausurenphase eine Rolle aufzudecken"
   },
   "role-hunter": {
     "tumMode": true,
-    "english": "You are the Hunter. \nWhen your life ends you can take another citizen with you to death",
-    "german": "Du bist Jäger. \nWenn dein Leben endet kannst du einen weitere Person mit dir in den Tod reissen. Wähle weise!",
+    "english": "You are the **Hunter**. When your life ends you can take another citizen with you to death",
+    "german": "Du bist **Jäger**. Wenn dein Leben endet kannst du einen weitere Person mit dir in den Tod reissen. Wähle weise!",
     "englishTUM": "Hunter EN TUM",
     "germanTUM": "Hunter DE TUM"
   },
   "role-jailor": {
     "tumMode": true,
-    "english": "You are the Jailor. \nEach Night you can jail the person you choose, this person cant interact during the night.",
-    "german": "Du bist Gefängniswärter. \nJede Nacht kannst du eine Person auswählen, diese Person kann in dieser Nacht keine Aktion ausführen.",
-    "englishTUM": "Jailor EN TUM",
-    "germanTUM": "Jailor DE TUM"
+    "english": "You are the **Jailor**. Each Night you can jail the person you choose, this person can't do anything during the night.",
+    "german": "Du bist **Gefängniswärter**. Jede Nacht kannst du eine Person einsperren, und diese Person kann in dieser Nacht nichts unternehmen.",
+    "englishTUM": "You are an **alibi student**. You are enrolled, but you are not really studying. Every exam period you can stop one person from doing their job because you always distract everyone.",
+    "germanTUM": "Du bist **Alibistudent**. Du bist zwar eingeschrieben, studierst aber nicht wirklich. Jede Klausurphase kannst du eine Person davon abhalten ihrer Tätigkeit nachzugehen, da du immer alle ablenkst."
   },
   "role-killer": {
     "tumMode": true,
-    "english": "You are serial killer. \nYou play alone, and your goal is to kill everyone, even all werwolves.",
-    "german": "Du bist Serienmörder. \nDu spielst alleine, dein Ziel ist es alle zu töten, sogar die Werwölfe",
-    "englishTUM": "Killer EN TUM",
-    "germanTUM": "Killer DE TUM"
+    "english": "You are **serial killer**. You play alone, and your goal is to kill everyone, even all werwolves.",
+    "german": "Du bist **Serienmörder**. Du spielst alleine, dein Ziel ist es alle zu töten, sogar die Werwölfe",
+    "englishTUM": "You are the **crazy student**. Try to get rid of everyone, no matter if students or someone from the ÜL",
+    "germanTUM": "Du bist der **verrückte Student**. Versuche alle zur LMU zu bringen, sowohl Studenten als auch Übungsleitung"
   },
   "role-littlegirl": {
     "tumMode": true,
-    "english": "You are the Little Girl. \nYou can secretly live among the werewolves and act like you are one of them, but you want to help the village",
-    "german": "Du bist das Mädchen. Du kannst heimlich unter den Werwölfen leben und so tun, als wärst du einer von ihnen, aber du willst dem Dorf helfen",
-    "englishTUM": "Girl EN TUM",
-    "germanTUM": "Girl DE TUM"
+    "english": "You are the **Little Girl**. You can secretly live among the werewolves and act like you are one of them, but you want to help the village",
+    "german": "Du bist das **Mädchen**. Du kannst heimlich unter den Werwölfen leben und so tun, als wärst du einer von ihnen, aber du willst dem Dorf helfen",
+    "englishTUM": "You're the **nerd**. The ÜL love to take you in, they think you're one of them, but you stay loyal to the students.",
+    "germanTUM": "Du bist der **Streber**. Die Übungsleitung nimmt dich gerne bei sich auf, sie denken du wärst einer von ihnen, bleibst aber den Studenten treu."
   },
   "role-bodyguard": {
     "tumMode": true,
-    "english": "You are bodyguard",
-    "german": "Du bist Gefängniswärter. \nJede Nacht kannst du eine Person auswählen, diese Person kann in dieser Nacht keine Aktion ausführen.",
-    "englishTUM": "body EN TUM",
-    "germanTUM": "body DE TUM"
+    "english": "You are a **bodyguard**. You can protect someone. If the person gets attacked, the person will survive thanks to you and you will get notified.",
+    "german": "Du bist ein **Bodyguard**. Du kannst jemanden beschützen. Sollte die Person angegriffen werden, überlebt die Person dank dir und du wirst benachrichtigt.",
+    "englishTUM": "You are **Julius Kreutz**. You can save individuals from de-registration with the private boot camp.",
+    "germanTUM": "Du bist **Julius Kreutz**. Du kannst einzelne Personen vor der Exmatrikulation mit dem Privatbootcamp retten."
   },
   "role-sheriff": {
     "tumMode": true,
-    "english": "You are the sheriff of the village. You can follow a citizen every night, maybe you notice something suspicious?",
-    "german": "Du bist der Sheriff des Dorfs. Du kannst jede Nacht eine Person verfolgen, vielleicht merkst du ja was auffälliges?",
-    "englishTUM": "Sheriff EN TUM",
-    "germanTUM": "Sheriff DE TUM"
+    "english": "You are the **sheriff** of the village. You can follow a citizen every night, maybe you notice something suspicious?",
+    "german": "Du bist der **Dorfpolizist**. Du kannst jede Nacht eine Person verfolgen, vielleicht merkst du ja was auffälliges?",
+    "englishTUM": "You are a **Information Systems student**. You can bribe a person during each exam to find out what they are really doing. However, you cannot be completely sure.",
+    "germanTUM": "Du bist **Wirtschaftsinformatikstudent**. Du kannst während jeder Klausur eine Person bestechen, um ihr wahres tun zu ermitteln. Ganz sicher sein kannst du dir aber nicht."
   },
   "day": {
     "tumMode": true,
@@ -149,8 +149,8 @@
     "tumMode": true,
     "english": "The serial killer managed to wipe out the whole village",
     "german": "Der Serienkiller hat es geschafft das ganze Dorf auszulöschen",
-    "englishTUM": "The crazy student managed to scar everyone away from TUM, TUM is now controlled by this crazy student",
-    "germanTUM": "Der verrückte Student hat die Kontrolle über die TUM erlangt und alle Studenten verjagt, selbst der Präsident Prof. Hofmann hat die TUM verlassen und sucht woanders nach cer Exzellenz. Der Campus Garching ist verloren (die anderen Standorte natürlich auch, aber wer interessiert sich denn dafür)"
+    "englishTUM": "The crazy student managed to scare everyone away from TUM, TUM is now controlled by this crazy student",
+    "germanTUM": "Der verrückte Student hat die Kontrolle über die TUM erlangt und alle Studenten verjagt, selbst der Präsident Prof. Hofmann hat die TUM verlassen und sucht woanders nach der Exzellenz. Der Campus Garching ist verloren (die anderen Standorte natürlich auch, aber wer interessiert sich denn dafür)"
   },
   "killed": {
     "tumMode": true,
@@ -192,7 +192,7 @@
     "english": "Detective Report",
     "german": "Detektivbericht",
     "englishTUM": "Report",
-    "germanTUM": "Report"
+    "germanTUM": "Bericht"
   },
   "certainty": {
     "tumMode": false,
@@ -264,9 +264,11 @@
     "german": "Deine Stimme ging an: "
   },
   "skip-vote": {
-    "tumMode": false,
+    "tumMode": true,
     "english": "You voted for not killing anyone this round.",
-    "german": "Deine Stimme, niemanden zu töten, wurde registriert."
+    "german": "Deine Stimme, niemanden zu töten, wurde registriert.",
+    "englishTUM": "Your vote to not kick anyone out this tutoring session has been registered.",
+    "germanTUM": "Deine Stimme, diese Tutorstunde niemanden rauszumobben, wurde registriert."
   },
   "skip-win": {
     "tumMode": true,
