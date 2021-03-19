@@ -250,4 +250,25 @@ public class GameController {
         if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
         return false;
     }
+
+    public void waitForHunter() {
+        List<Player> deadHunters = game.getPlayers().stream()
+                .filter(p -> !p.isAlive() && p.getCharacterType() == CharacterType.Hunter).collect(Collectors.toList());
+        if (deadHunters.size() > 0) {
+            new Thread(() -> {
+                boolean done = false;
+                while(!done) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("no good");
+                    }
+                    done = true;
+                    for (Player p : deadHunters) {
+                        done = done && p.hasVoted();
+                    }
+                }
+            });
+        }
+    }
 }
