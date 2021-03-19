@@ -30,7 +30,7 @@ public class MajorVotingController {
         this.gameController = gameController;
     }
 
-    public void newVoting(boolean firstVoting) {
+    public void newVoting(boolean firstVoting, Player major) {
         this.firstVoting = firstVoting;
         this.game = gameController.game;
         isVoting = true;
@@ -39,11 +39,33 @@ public class MajorVotingController {
         targetmap = new HashMap<>();
         alreadyVotet = new ArrayList<>();
 
-        if (!firstVoting) normalVoting();
+        if (!firstVoting) normalVoting(major);
         else firstVoting();
     }
 
-    private void normalVoting() {
+    private void normalVoting(Player major) {
+        StringBuilder playerSb = new StringBuilder();
+        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+
+        char prefix = 'A';
+
+        for (Player p : game.getPlayers()) {
+            if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
+        }
+
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "hunter-death"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSb.toString(), true);
+
+        major.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(votingMessageBuilder.build()).queue(message -> {
+            votingmessageID = message.getIdLong();
+            int unicodeStart = 0xDDE6;
+            int i = 0;
+            for (Player p : game.getPlayers()) {
+                message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
+                targetmap.put("\uD83c" + (char) (unicodeStart + i), p);
+                i++;
+            }
+        }));
     }
 
     private void firstVoting() {
@@ -127,5 +149,9 @@ public class MajorVotingController {
 
     public boolean isVoting() {
         return isVoting;
+    }
+
+    public boolean isFirstVoting() {
+        return firstVoting;
     }
 }
