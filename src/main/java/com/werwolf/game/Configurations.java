@@ -138,8 +138,13 @@ public class Configurations {
         this.major = major;
     }
 
+    /**
+     * Sets all items according to the preset
+     * witch, seer, hunter, littlegirl, sheriff, jailor, bodyguard, serial killer
+     * @param num
+     */
     public void setAll(int[] num) {
-        if(num.length != 7)
+        if(num.length != 8)
             return;
         witchnum = num[0];
         seernum = num[1];
@@ -148,5 +153,6 @@ public class Configurations {
         sheriffnum = num[4];
         jailornum = num[5];
         bodyguardnum = num[6];
+        if(num[7] == 1) serialKiller = true;
     }
 }
