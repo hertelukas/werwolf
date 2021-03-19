@@ -34,6 +34,7 @@ public class GameController {
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
     GameStatus status = GameStatus.Cont;
+    private long majorVoteMessageID = -1;
 
     public GameController(Game game) {
         this.game = game;
@@ -122,7 +123,28 @@ public class GameController {
     }
 
     public void majorelection() {
-        //TODO
+        StringBuilder playerSb = new StringBuilder();
+        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+
+        char prefix = 'A';
+
+        for (Player p : game.getPlayers()) {
+            if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
+        }
+
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
+
+        game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
+            majorVoteMessageID = message.getIdLong();
+            int unicodeStart = 0xDDE6;
+            int i = 0;
+            for (Player p : game.getPlayers()) {
+                if (p.isAlive()) {
+                    message.addReaction("\uD83c" + (char) (unicodeStart + i++)).queue();
+                }
+            }
+        });
     }
 
     public boolean isActive() {
