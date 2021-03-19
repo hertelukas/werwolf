@@ -71,7 +71,6 @@ public class MajorVotingController {
         });
 
         votesNeeded = game.getPlayers().size();
-        game.setMaingameThread(Thread.currentThread());
         LOGGER.info("Auf voting Ergebnis warten");
     }
 
