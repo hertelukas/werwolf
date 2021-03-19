@@ -83,7 +83,7 @@ public class HandleConfig extends MessageHandler {
                         configMessage = m;
                         return m;
                     })
-                            .delay(Duration.ofSeconds(25))
+                            .delay(Duration.ofSeconds(30))
                             .flatMap(m -> {
                                 if(m.equals(configMessage)) configMessage = null;
                                 return m.delete();
@@ -91,12 +91,17 @@ public class HandleConfig extends MessageHandler {
 
                 return true;
             } else {
+                boolean foundConfig = false;
                 for (Config config : configs) {
+                    if(foundConfig) break;
                     if (args.length == 1) {
-                        config.updateConfig(game, args[0], null);
+                        foundConfig = config.updateConfig(game, args[0], null);
                     } else {
-                        config.updateConfig(game, args[0], args[1]);
+                        foundConfig = config.updateConfig(game, args[0], args[1]);
                     }
+                }
+                if(!foundConfig){
+                    event.getChannel().sendMessage("Did not find command. See `help config` for all available commands.").queue();
                 }
             }
         }
