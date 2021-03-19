@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MajorVotingController {
+public class MayorVotingController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
@@ -26,7 +26,7 @@ public class MajorVotingController {
     private List<Player> alreadyVotet;
     private boolean firstVoting;
 
-    public MajorVotingController(GameController gameController) {
+    public MayorVotingController(GameController gameController) {
         this.gameController = gameController;
     }
 
@@ -53,8 +53,8 @@ public class MajorVotingController {
             if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true);
 
         major.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();
@@ -83,8 +83,8 @@ public class MajorVotingController {
             if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true);
 
         game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();
@@ -143,10 +143,10 @@ public class MajorVotingController {
             if (major.getValue() < p.getValue()) major = p;
         }
         if (major == null) {
-            game.getChannel().sendMessage(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "major-result")).queue();
+            game.getChannel().sendMessage(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
             game.getPlayers().get(0).setMajor(true);
         } else {
-            game.getChannel().sendMessage(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "major-result")).queue();
+            game.getChannel().sendMessage(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
             major.getKey().setMajor(true);
         }
     }

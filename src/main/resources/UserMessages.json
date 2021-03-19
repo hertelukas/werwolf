@@ -298,19 +298,19 @@
     "englishTUM": "platzhalter lol",
     "germanTUM": "platzhalter lol"
   },
-  "major-election": {
+  "mayor-election": {
     "tumMode": true,
     "english": "Mayor election",
     "german": "Bürgermeisterwahl",
     "englishTUM": "New semester representative needed",
     "germanTUM": "Wir brauchen einen neuen Semestersprecher"
   },
-  "major-candidates": {
+  "mayor-candidates": {
     "tumMode": false,
     "english": "candidates",
     "german": "Kanidaten"
   },
-  "major-result": {
+  "mayor-result": {
     "tumMode": true,
     "english": " is the new mayor",
     "german": " ist der neue Bürgermeister",

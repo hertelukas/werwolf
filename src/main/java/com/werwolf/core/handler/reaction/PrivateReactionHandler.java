@@ -2,9 +2,7 @@ package com.werwolf.core.handler.reaction;
 
 import com.werwolf.core.handler.Handler;
 import com.werwolf.game.Game;
-import com.werwolf.game.controller.GameController;
 import com.werwolf.game.roles.CharacterType;
-import com.werwolf.game.roles.Player;
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,11 +31,11 @@ public  class PrivateReactionHandler extends Handler {
             return false;
         }
 
-        System.out.println(game.getController().isMajorNormalVoting());
-        if (game.getController().isMajorNormalVoting()) {
+        System.out.println(game.getController().isMayorNormalVoting());
+        if (game.getController().isMayorNormalVoting()) {
 
             LOGGER.info(event.getUser().getName() + " hat erfolgreich als ehemaliger Bürgermeister seine Stimmme abgegeben für: " + event.getReactionEmote().getAsReactionCode());
-            game.getController().receiveVoteMajor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
+            game.getController().receiveVoteMayor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
             return true;
         }
 

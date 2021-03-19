@@ -68,7 +68,7 @@ public class NightController {
         game.getController().gameStatus();
         for (Player player : nights.peek().getDiedtonight()) {
             if (player.isMajor()) {
-                game.getController().majorelection(false, player);
+                game.getController().mayorelection(false, player);
                 player.setMajor(false);
                 return;
             }

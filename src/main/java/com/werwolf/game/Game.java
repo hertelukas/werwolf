@@ -55,7 +55,6 @@ public class Game {
         controller.setActive(true);
         setMainWritePermissions();
 
-
         //Story
         controller.sendIntroMessage();
         if (createRoles()) controller.setActive(true);
@@ -68,7 +67,7 @@ public class Game {
         }
 
         LOGGER.info("Bürgermeisterwahl");
-        controller.majorelection(true, null);
+        controller.mayorelection(true, null);
         Handler.addWerewolfChannel(wolfChannelID, this);
 
 

@@ -74,7 +74,7 @@ public class DayController {
 
         for (Player player : days.peek().getAlive()) {
             if (player.isMajor() && !player.isAlive()) {
-                game.getController().majorelection(false, player);
+                game.getController().mayorelection(false, player);
                 player.setMajor(false);
                 return;
             }

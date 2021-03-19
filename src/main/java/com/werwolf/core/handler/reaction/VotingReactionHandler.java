@@ -14,7 +14,7 @@ public class VotingReactionHandler extends ReactionHandler{
         Long votingMessage = game.getCurrentVotingMessage();
 
         if (game.getController().isMajorVotingFirst() && event.getMessageIdLong() == game.getController().getMajorVoteMessageID()) {
-            game.getController().receiveVoteMajor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
+            game.getController().receiveVoteMayor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
             updateReactions(event.getChannel(), event.getMessageIdLong());
             return true;
         }
