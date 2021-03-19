@@ -30,38 +30,12 @@ public  class PrivateReactionHandler extends Handler {
         if (game == null) {
             return false;
         }
-
-        System.out.println(game.getController().isMayorNormalVoting());
         if (game.getController().isMayorNormalVoting()) {
 
             LOGGER.info(event.getUser().getName() + " hat erfolgreich als ehemaliger Bürgermeister seine Stimmme abgegeben für: " + event.getReactionEmote().getAsReactionCode());
             game.getController().receiveVoteMayor(game.getPlayer(event.getUserIdLong()), event.getReactionEmote().getAsReactionCode());
             return true;
         }
-
-
-        Objects.requireNonNull(event.getUser()).openPrivateChannel().queue(message -> message.sendMessage("successful react").queue());
-
-        // Long votingMessage = game.getCurrentVotingMessage();
-
-        // if (votingMessage == null || event.getMessageIdLong() != game.getCurrentVotingMessage()) return false;
-
-
-        //todo voting itself (maybe for witch as well)
-
-        Game finalGame = game;
-        game.getPlayers().stream()
-                .filter(p -> p.getCharacterType() == CharacterType.Hunter && p.getId() == event.getUserIdLong())
-                .findFirst()
-                .ifPresent(hunter -> hunter.vote(event.getReactionEmote().getAsReactionCode(), event.getMessageIdLong(), finalGame));
-
-
-        // game.getVotingController().vote(event.getReactionEmote().getAsReactionCode(), Objects.requireNonNull(event.getUser()).getIdLong());
-       // updateReactions(event.getChannel(), event.getMessageIdLong());
-
         return false;
     }
-
-
-
 }

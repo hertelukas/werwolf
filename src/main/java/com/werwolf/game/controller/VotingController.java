@@ -2,6 +2,7 @@ package com.werwolf.game.controller;
 
 import com.werwolf.game.roles.Player;
 import com.werwolf.helpers.UserMessageCreator;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,7 @@ public class VotingController {
     private HashMap<Player, Player> savedReaction = new HashMap<>();
     private boolean nightVoting = false;
     private List<Player> alreadyVoted = new ArrayList<>();
+    private Player majorsVote;
 
     public VotingController(GameController controller) {
         this.gameController = controller;
@@ -30,6 +32,7 @@ public class VotingController {
         this.nightVoting = isNight;
         alreadyVoted = new ArrayList<>();
         savedReaction = new HashMap<>();
+        majorsVote = null;
     }
 
     public void addPlayer(String playerPrefix, long playerID) {
@@ -94,10 +97,12 @@ public class VotingController {
                     if(votedPlayer == null) {
                         currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "skip-vote"));
                         LOGGER.info(currVoter.getUsername() + " hat für nen Skip gevoted");
+                        if (currVoter.isMajor()) majorsVote = null;
                     }
                     else{
                         currVoter.sendMessage(UserMessageCreator.getCreator().getMessage(gameController.getGame(), "voted-for") + votedPlayer.getUsername());
                         LOGGER.info(currVoter.getUsername() + " hat für " + votedPlayer.getUsername() + " gestimmt");
+                        if (currVoter.isMajor()) majorsVote = votedPlayer;
                     }
                 }
             }
@@ -129,7 +134,27 @@ public class VotingController {
 
 
     public HashMap<Long, Integer> getResult() {
-        LOGGER.info(votings.toString());
+        List<Long> sameAmount = new ArrayList<>();
+        int max = 0;
+
+        for (Map.Entry<Long, Integer> entry : votings.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                sameAmount = new ArrayList<>();
+                sameAmount.add(entry.getKey());
+            } else if (entry.getValue() == max) {
+                sameAmount.add(entry.getKey());
+            }
+        }
+
+        if (sameAmount.size() <= 1) {
+            LOGGER.info(votings.toString());
+        } else {
+            EmbedBuilder majorVote = new EmbedBuilder();
+            majorVote.setTitle(UserMessageCreator.getCreator().getMessage(gameController.game, "mayor-votetitle"));
+            gameController.getGame().getChannel().sendMessage(majorVote.build()).queue();
+            votings.computeIfPresent(majorsVote.getId(), (mv, val) -> val = 10000);
+        }
         return votings;
     }
 

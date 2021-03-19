@@ -321,6 +321,11 @@
     "tumMode": false,
     "english": "New message: ",
     "german": "Neue Nachricht: "
+  },
+  "mayor-votetitle": {
+    "tumMode": false,
+    "english": "The mayor has chosen",
+    "german": "Der Bürgermeister hat entschieden"
   }
 
 
