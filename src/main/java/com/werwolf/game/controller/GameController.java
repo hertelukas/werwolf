@@ -1,6 +1,7 @@
 package com.werwolf.game.controller;
 
-import com.werwolf.game.*;
+import com.werwolf.game.Game;
+import com.werwolf.game.GameStatus;
 import com.werwolf.game.roles.*;
 import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.NightTextCreator;
@@ -9,9 +10,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,12 +18,6 @@ public class GameController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
-    private static final int DAY_STORY_AMOUNT = 1;
-    private static final int DAY_TUM_STORY_AMOUNT = 1;
-    private static final int NIGHT_STORY_AMOUNT = 2;
-    private static final int NIGHT_TUM_STORY_AMOUNT = 1;
-    private static final int INTRO_TUM_STORY_AMOUNT = 1;
-    private static final int INTRO_STORY_AMOUNT = 1;
     boolean isActive;
     boolean isNight;
     Game game;

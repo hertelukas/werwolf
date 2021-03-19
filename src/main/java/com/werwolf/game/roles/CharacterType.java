@@ -23,7 +23,7 @@ public enum CharacterType {
      */
     private final Team team;
 
-    private CharacterType(boolean canVote, boolean canSeeWWChannel, int priority, Team team) {
+    CharacterType(boolean canVote, boolean canSeeWWChannel, int priority, Team team) {
         this.canVote = canVote;
         this.canSeeWWChannel = canSeeWWChannel;
         this.priority = priority;

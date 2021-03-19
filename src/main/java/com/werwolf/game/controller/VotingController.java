@@ -1,6 +1,5 @@
 package com.werwolf.game.controller;
 
-import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
 import com.werwolf.helpers.UserMessageCreator;
 import org.slf4j.Logger;
@@ -117,7 +116,10 @@ public class VotingController {
             StringBuilder loggingSB = new StringBuilder();
             for (Map.Entry<Long, Integer> entry : votings.entrySet()) {
                 if(entry.getKey() == -1) continue;
-                loggingSB.append(gameController.getGame().getPlayer(entry.getKey()).getUsername() + " hat " + entry.getValue() + "Stimmen\r");
+                loggingSB.append(gameController.getGame().getPlayer(entry.getKey()).getUsername())
+                        .append(" hat ")
+                        .append(entry.getValue())
+                        .append("Stimmen\r");
             }
             LOGGER.info(loggingSB.toString());
             gameController.waitForHunter();

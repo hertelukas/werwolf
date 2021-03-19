@@ -1,15 +1,10 @@
 package com.werwolf.core.handler.message;
 
-import com.werwolf.core.handler.Handler;
-import com.werwolf.game.Game;
-import com.werwolf.game.roles.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class HandleInstructions extends MessageHandler {

@@ -35,7 +35,7 @@ public class Game {
     private final GameController controller;
     private final Guild guild;
     private boolean tumMode = false;
-    private Configurations configurations = new Configurations();
+    private final Configurations configurations = new Configurations();
 
     public Game(TextChannel channel, Player host, Guild guild, Player... players) {
         this.channel = channel;
