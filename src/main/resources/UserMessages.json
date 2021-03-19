@@ -110,6 +110,13 @@
     "germanTUM": "TUM Prostituierte",
     "englishTUM": "TUM Prostitute"
   },
+  "role-spy": {
+    "tumMode": true,
+    "english": "You are the **spy**. You get all the messages from the werewolves sent to you, but you don't know who they are from.",
+    "german": "Du bist ein **Spion**. Du bekommst alle Nachrichten der Werwölfe zugesendet, weisst aber nicht von wem sie kommen.",
+    "germanTUM": "",
+    "englishTUM": ""
+  },
   "night": {
     "tumMode": true,
     "english": "Night",
@@ -293,7 +300,7 @@
   },
   "major-election": {
     "tumMode": true,
-    "english": "Major election",
+    "english": "Mayor election",
     "german": "Bürgermeisterwahl",
     "englishTUM": "New semester representative needed",
     "germanTUM": "Wir brauchen einen neuen Semestersprecher"
@@ -305,10 +312,16 @@
   },
   "major-result": {
     "tumMode": true,
-    "english": " is the new major",
+    "english": " is the new mayor",
     "german": " ist der neue Bürgermeister",
     "englishTUM": " is the new semester representative",
     "germanTUM": " ist der neue Semestersprecher"
+  },
+  "new-werewolf-msg": {
+    "tumMode": false,
+    "english": "New message: ",
+    "german": "Neue Nachricht: "
   }
+
 
 }

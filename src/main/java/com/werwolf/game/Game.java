@@ -55,6 +55,7 @@ public class Game {
         controller.setActive(true);
         setMainWritePermissions();
 
+
         //Story
         controller.sendIntroMessage();
         if (createRoles()) controller.setActive(true);
@@ -68,6 +69,8 @@ public class Game {
 
         LOGGER.info("Bürgermeisterwahl");
         controller.majorelection(true, null);
+        Handler.addWerewolfChannel(wolfChannelID, this);
+
 
         return true;
     }
@@ -337,6 +340,7 @@ public class Game {
         int bodytmp = configurations.getBodyguardnum();
         int killertmp = 0;
         int prostitutestmp = configurations.getPrositutesnum();
+        int spytmp = configurations.getSpynum();
         if (configurations.getSerialkiller()) killertmp = 1;
 
 
@@ -382,6 +386,11 @@ public class Game {
                 players.set(playerNumber, new Prostitute(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-prostitute"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist eine Nutte");
+            }else if(spytmp-- > 0){
+                players.set((playerNumber), new Spy(players.get(playerNumber)));
+                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-spy"));
+                LOGGER.info(players.get(playerNumber).getUsername() + " ist Spion");
+
             }
         }
 
@@ -442,7 +451,13 @@ public class Game {
             default -> {
             }
         }
-
     }
 
+    public void sendToSpy(String msg) {
+        for (Player player : players) {
+            if(player.getCharacterType() == CharacterType.Spy && player.isAlive()){
+                player.sendMessage(UserMessageCreator.getCreator().getMessage(this, "new-werewolf-msg") + "`" + msg + "`");
+            }
+        }
+    }
 }
