@@ -120,7 +120,6 @@ public class VotingController {
                 loggingSB.append(gameController.getGame().getPlayer(entry.getKey()).getUsername() + " hat " + entry.getValue() + "Stimmen\r");
             }
             LOGGER.info(loggingSB.toString());
-            gameController.waitForHunter();
             gameController.setVoting(false);
             gameController.continueAfterVoting();
         }

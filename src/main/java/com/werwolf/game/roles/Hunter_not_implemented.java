@@ -7,11 +7,13 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public class Hunter_not_implemented extends Villager {
 
   //  boolean hasVoted = false;
     long voteMessageID = -1;
+    CountDownLatch latch = new CountDownLatch(1);
     Map<String, Player> votes = new HashMap<>();
     Thread waiting = new Thread(() -> {
         long start = System.currentTimeMillis();
@@ -71,20 +73,17 @@ public class Hunter_not_implemented extends Villager {
                 // message.addReaction("\uD83c" + (char)(unicodeStart + alive.size())).queue(); <-- skip option?
             }));
 
-            System.out.println("now waiting");
-            waiting.start();
-//            try {
-//                waiting.join(); // necessary?
-//            } catch (InterruptedException e) {
-//                System.out.println("no good");
-//            }
-            System.out.println("got here");
-
+            // TODO Fix waiting
+            //waiting.start();
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             if (game.getConfigurations().isShowRole()) {
                 EmbedBuilder showRole = new EmbedBuilder();
                 showRole.setTitle(getUsername()).setDescription(getUsername() + UserMessageCreator.getCreator().getMessage(game, "death-Message") + characterType);
-
                 game.getChannel().sendMessage(showRole.build()).queue();
             }
             return true;
@@ -98,8 +97,11 @@ public class Hunter_not_implemented extends Villager {
             System.out.println("got msg");
             if(!hasVoted && votes.get(prefix) != null) {
                 System.out.println("success");
-                votes.get(prefix).die(game);
+                if (votes.get(prefix).die(game))
+                    if (game.getController().isNight())
+                        game.getController().getNightController().getNights().peek().getDiedtonight().add(votes.get(prefix));
                 hasVoted = true;
+                latch.countDown();
             }
         }
     }

@@ -10,10 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GameController {
@@ -249,26 +247,5 @@ public class GameController {
 
         if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
         return false;
-    }
-
-    public void waitForHunter() {
-        List<Player> deadHunters = game.getPlayers().stream()
-                .filter(p -> !p.isAlive() && p.getCharacterType() == CharacterType.Hunter).collect(Collectors.toList());
-        if (deadHunters.size() > 0) {
-            new Thread(() -> {
-                boolean done = false;
-                while(!done) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        System.out.println("no good");
-                    }
-                    done = true;
-                    for (Player p : deadHunters) {
-                        done = done && p.hasVoted();
-                    }
-                }
-            });
-        }
     }
 }

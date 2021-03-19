@@ -14,27 +14,15 @@ public  class PrivateReactionHandler extends Handler {
 
     public  boolean handle(PrivateMessageReactionAddEvent event) {
         Game game = null;
-        System.out.println("bruh");
-        for(Game g : games.values()) { // won't work if player is in multiple games
+        for (Game g : games.values()) { // won't work if player is in multiple games
             for (Player p: g.getPlayers()) {
                 game = (p.getUser().equals(event.getUser()) && p.getCharacterType() == CharacterType.Hunter) ? g : game;
             }
         }
-        if (game != null) System.out.println("wow");
-        if (game == null) {
-            System.out.println("huh");
-            return false;
-        }
+        if (game == null) return false;
 
 
         Objects.requireNonNull(event.getUser()).openPrivateChannel().queue(message -> message.sendMessage("successful react").queue());
-
-        // Long votingMessage = game.getCurrentVotingMessage();
-
-        // if (votingMessage == null || event.getMessageIdLong() != game.getCurrentVotingMessage()) return false;
-
-
-        //todo voting itself (maybe for witch as well)
 
         Game finalGame = game;
         game.getPlayers().stream()
