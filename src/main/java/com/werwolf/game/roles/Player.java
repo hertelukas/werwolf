@@ -86,6 +86,13 @@ public class Player {
         this.savedByBodyguard = savedByBodyguard;
     }
 
+    public boolean isMajor() {
+        return isMajor;
+    }
+
+    public void setMajor(boolean major) {
+        isMajor = major;
+    }
     public boolean isHavingSex() {
         return hasSex;
     }
@@ -113,6 +120,7 @@ public class Player {
         } else {
             return false;
         }
+
     }
 
     /**

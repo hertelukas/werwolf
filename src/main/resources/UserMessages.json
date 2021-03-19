@@ -302,6 +302,13 @@
     "tumMode": false,
     "english": "candidates",
     "german": "Kanidaten"
+  },
+  "major-result": {
+    "tumMode": true,
+    "english": " is the new major",
+    "german": " ist der neue Bürgermeister",
+    "englishTUM": " is the new semester representative",
+    "germanTUM": " ist der neue Semestersprecher"
   }
 
 }

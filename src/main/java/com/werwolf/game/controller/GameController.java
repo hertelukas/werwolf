@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,8 +34,8 @@ public class GameController {
     NightController nightController;
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
+    private final MajorVotingController majorVotingController = new MajorVotingController(this);
     GameStatus status = GameStatus.Cont;
-    private long majorVoteMessageID = -1;
 
     public GameController(Game game) {
         this.game = game;
@@ -122,29 +123,17 @@ public class GameController {
         return status;
     }
 
-    public void majorelection() {
-        StringBuilder playerSb = new StringBuilder();
-        EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+    public void majorelection(boolean firstVoting) {
+        majorVotingController.newVoting(firstVoting, null);
+    }
 
-        char prefix = 'A';
-
-        for (Player p : game.getPlayers()) {
-            if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
-        }
-
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
-
-        game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
-            majorVoteMessageID = message.getIdLong();
-            int unicodeStart = 0xDDE6;
-            int i = 0;
-            for (Player p : game.getPlayers()) {
-                if (p.isAlive()) {
-                    message.addReaction("\uD83c" + (char) (unicodeStart + i++)).queue();
-                }
-            }
-        });
+    public void receiveVoteMajor(Player player, String target) {
+        majorVotingController.receiveVoting(player, target);
+    }
+    
+    
+    public void majorVotingResult() {
+        majorVotingController.votingResult();
     }
 
     public boolean isActive() {
@@ -246,5 +235,19 @@ public class GameController {
         return dayController;
     }
 
+    public long getMajorVoteMessageID() {
+        return majorVotingController.getVotingmessageID();
+    }
 
+    public boolean isMajorVotingFirst() {
+
+        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        return false;
+    }
+
+    public boolean isMajorNormalVoting() {
+
+        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        return false;
+    }
 }
