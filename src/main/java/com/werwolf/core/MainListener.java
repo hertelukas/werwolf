@@ -1,5 +1,6 @@
 package com.werwolf.core;
 
+import com.werwolf.core.handler.Handler;
 import com.werwolf.core.handler.message.MessageHandler;
 import com.werwolf.core.handler.reaction.PrivateReactionHandler;
 import com.werwolf.core.handler.reaction.ReactionHandler;
@@ -44,6 +45,11 @@ public class MainListener extends ListenerAdapter {
         TextChannel channel = event.getChannel();
 
         String message = event.getMessage().getContentRaw().toLowerCase();
+
+        if(Handler.werewolfChannelHandle(channel.getIdLong(), event.getMessage().getContentRaw())){
+            //If this message gets handled by a werewolfchannel, we can ignore it
+            return;
+        }
 
         //Ignore if message does not start with prefix
         if(!message.startsWith(prefix)) return;

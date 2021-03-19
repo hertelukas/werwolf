@@ -1,8 +1,6 @@
 package com.werwolf.game.roles;
 
 import com.werwolf.game.Game;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

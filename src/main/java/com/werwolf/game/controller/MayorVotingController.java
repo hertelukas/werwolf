@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MajorVotingController {
+public class MayorVotingController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
@@ -26,7 +26,7 @@ public class MajorVotingController {
     private List<Player> alreadyVotet;
     private boolean firstVoting;
 
-    public MajorVotingController(GameController gameController) {
+    public MayorVotingController(GameController gameController) {
         this.gameController = gameController;
     }
 
@@ -53,19 +53,24 @@ public class MajorVotingController {
             if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "hunter-death"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true);
 
         major.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();
             int unicodeStart = 0xDDE6;
             int i = 0;
             for (Player p : game.getPlayers()) {
-                message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
-                targetmap.put("\uD83c" + (char) (unicodeStart + i), p);
-                i++;
+                if (p.isAlive()) {
+                    message.addReaction("\uD83c" + (char) (unicodeStart + i)).queue();
+                    targetmap.put("\uD83c" + (char) (unicodeStart + i), p);
+                    i++;
+                }
             }
         }));
+
+        votesNeeded = 1;
+        LOGGER.info("Auf voting Ergebnis warten");
     }
 
     private void firstVoting() {
@@ -78,8 +83,9 @@ public class MajorVotingController {
             if (p.isAlive()) playerSb.append(prefix++).append(": ").append(p.getUsername()).append("\r");
         }
 
-        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "major-election"))
-                .addField(UserMessageCreator.getCreator().getMessage(game, "major-candidates"), playerSb.toString(), true);
+        votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-election"))
+                .addField(UserMessageCreator.getCreator().getMessage(game, "mayor-candidates"), playerSb.toString(), true)
+                .setThumbnail("https://media.discordapp.net/attachments/821717465679003670/822606161710809088/ballot-1294935_1280.png?width=667&height=679");
 
         game.getChannel().sendMessage(votingMessageBuilder.build()).queue(message -> {
             votingmessageID = message.getIdLong();
@@ -108,7 +114,6 @@ public class MajorVotingController {
             alreadyVotet.add(player);
         }
 
-        System.out.println(targetmap.toString() + "     " + target);
         LOGGER.info(player.getUsername() + " hat für " +  targetmap.get(target).getUsername() + " gestimmt");
 
         if (votingmap.containsKey(player)) {
@@ -121,6 +126,10 @@ public class MajorVotingController {
 
             if (firstVoting) {
                 LOGGER.info("Erste Nacht gestartet");
+                gameController.nextNight();
+            } else  if (gameController.isNight) {
+                gameController.nextDay();
+            } else if (!gameController.isNight) {
                 gameController.nextNight();
             }
         }
@@ -135,10 +144,10 @@ public class MajorVotingController {
             if (major.getValue() < p.getValue()) major = p;
         }
         if (major == null) {
-            game.getChannel().sendMessage(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "major-result")).queue();
+            game.getChannel().sendMessage(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
             game.getPlayers().get(0).setMajor(true);
         } else {
-            game.getChannel().sendMessage(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "major-result")).queue();
+            game.getChannel().sendMessage(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
             major.getKey().setMajor(true);
         }
     }

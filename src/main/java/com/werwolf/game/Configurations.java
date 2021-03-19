@@ -10,6 +10,8 @@ public class Configurations {
     private int sheriffnum = 0;
     private int jailornum = 0;
     private int bodyguardnum = 0;
+    private int prositutesnum = 0;
+    private int spynum = 0;
     private boolean major = true;
     private boolean serialKiller = false;
     private boolean isEnglish = true;
@@ -154,5 +156,21 @@ public class Configurations {
         jailornum = num[5];
         bodyguardnum = num[6];
         if(num[7] == 1) serialKiller = true;
+    }
+
+    public int getPrositutesnum() {
+        return prositutesnum;
+    }
+
+    public void setPrositutesnum(int prositutesnum) {
+        this.prositutesnum = prositutesnum;
+    }
+
+    public int getSpynum() {
+        return spynum;
+    }
+
+    public void setSpynum(int spynum) {
+        this.spynum = spynum;
     }
 }

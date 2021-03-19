@@ -1,6 +1,7 @@
 package com.werwolf.game.controller;
 
-import com.werwolf.game.*;
+import com.werwolf.game.Game;
+import com.werwolf.game.GameStatus;
 import com.werwolf.game.roles.*;
 import com.werwolf.helpers.IntroTextCreator;
 import com.werwolf.helpers.NightTextCreator;
@@ -9,21 +10,14 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GameController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GameController.class);
 
-    private static final int DAY_STORY_AMOUNT = 1;
-    private static final int DAY_TUM_STORY_AMOUNT = 1;
-    private static final int NIGHT_STORY_AMOUNT = 2;
-    private static final int NIGHT_TUM_STORY_AMOUNT = 1;
-    private static final int INTRO_TUM_STORY_AMOUNT = 1;
-    private static final int INTRO_STORY_AMOUNT = 1;
     boolean isActive;
     boolean isNight;
     Game game;
@@ -32,7 +26,7 @@ public class GameController {
     NightController nightController;
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
-    private final MajorVotingController majorVotingController = new MajorVotingController(this);
+    private final MayorVotingController mayorVotingController = new MayorVotingController(this);
     GameStatus status = GameStatus.Cont;
 
     public GameController(Game game) {
@@ -121,17 +115,17 @@ public class GameController {
         return status;
     }
 
-    public void majorelection(boolean firstVoting) {
-        majorVotingController.newVoting(firstVoting, null);
+    public void mayorelection(boolean firstVoting, Player oldMajor) {
+        mayorVotingController.newVoting(firstVoting, oldMajor);
     }
 
-    public void receiveVoteMajor(Player player, String target) {
-        majorVotingController.receiveVoting(player, target);
+    public void receiveVoteMayor(Player player, String target) {
+        mayorVotingController.receiveVoting(player, target);
     }
     
     
-    public void majorVotingResult() {
-        majorVotingController.votingResult();
+    public void mayorVotingResult() {
+        mayorVotingController.votingResult();
     }
 
     public boolean isActive() {
@@ -234,18 +228,39 @@ public class GameController {
     }
 
     public long getMajorVoteMessageID() {
-        return majorVotingController.getVotingmessageID();
+        return mayorVotingController.getVotingmessageID();
     }
 
     public boolean isMajorVotingFirst() {
 
-        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        if (mayorVotingController.isFirstVoting()) return mayorVotingController.isVoting();
         return false;
     }
 
-    public boolean isMajorNormalVoting() {
+    public boolean isMayorNormalVoting() {
 
-        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        if (!mayorVotingController.isFirstVoting()) return mayorVotingController.isVoting();
         return false;
+    }
+
+    public void waitForHunter() {
+        List<Player> deadHunters = game.getPlayers().stream()
+                .filter(p -> !p.isAlive() && p.getCharacterType() == CharacterType.Hunter).collect(Collectors.toList());
+        if (deadHunters.size() > 0) {
+            new Thread(() -> {
+                boolean done = false;
+                while(!done) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("no good");
+                    }
+                    done = true;
+                    for (Player p : deadHunters) {
+                        done = done && p.hasVoted();
+                    }
+                }
+            });
+        }
     }
 }

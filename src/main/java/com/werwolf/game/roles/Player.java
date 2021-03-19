@@ -25,6 +25,7 @@ public class Player {
     boolean savedByBodyguard = false;
     Guild guild;
     boolean isMajor = false;
+    private boolean hasSex = false;
     boolean hasVoted = false;
 
     public Player(User user, Guild guild){
@@ -93,6 +94,14 @@ public class Player {
     public void setMajor(boolean major) {
         isMajor = major;
     }
+    public boolean isHavingSex() {
+        return hasSex;
+    }
+
+    public void setHasSex(boolean hasSex){
+        this.hasSex = hasSex;
+    }
+
 
     /**
      * Versucht den Spieler umzubringen falls möglich true sonst false

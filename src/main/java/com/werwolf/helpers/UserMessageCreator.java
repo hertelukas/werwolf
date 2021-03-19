@@ -1,7 +1,6 @@
 package com.werwolf.helpers;
 
 import com.werwolf.game.Game;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class UserMessageCreator extends JSONReader {

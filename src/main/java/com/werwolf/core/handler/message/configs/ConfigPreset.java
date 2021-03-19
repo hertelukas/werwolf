@@ -2,7 +2,6 @@ package com.werwolf.core.handler.message.configs;
 
 import com.werwolf.game.Game;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.springframework.stereotype.Service;
 
 @Service

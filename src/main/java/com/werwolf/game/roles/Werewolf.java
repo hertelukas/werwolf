@@ -1,10 +1,6 @@
 package com.werwolf.game.roles;
 
-import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.Game;
-import com.werwolf.game.Night;
-import com.werwolf.helpers.UserMessageCreator;
-import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,9 @@
 package com.werwolf.game.controller;
 
 import com.werwolf.core.handler.AudioHandler;
-import com.werwolf.game.*;
+import com.werwolf.game.FirstNight;
+import com.werwolf.game.Game;
+import com.werwolf.game.Night;
 import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
 import com.werwolf.helpers.NightTextCreator;
@@ -10,8 +12,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -66,10 +66,14 @@ public class NightController {
 
         updateVotingResult();
         game.getController().gameStatus();
+        for (Player player : nights.peek().getDiedtonight()) {
+            if (player.isMajor()) {
+                game.getController().mayorelection(false, player);
+                player.setMajor(false);
+                return;
+            }
+        }
         game.getController().nextDay();
-        //Nacht Objekt mit Daten updaten (wie viele für wen gevotet haben etc.)
-
-        //Tag bricht an
     }
 
     private void updateVotingResult() {

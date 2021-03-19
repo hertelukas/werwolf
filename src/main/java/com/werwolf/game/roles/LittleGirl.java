@@ -1,9 +1,5 @@
 package com.werwolf.game.roles;
 
-import com.werwolf.game.Game;
-
-import java.util.HashMap;
-
 public class LittleGirl extends Villager {
 
     public LittleGirl(Player player) {

@@ -103,6 +103,20 @@
     "englishTUM": "Tutor lesson",
     "germanTUM": "Tutorium"
   },
+  "role-prostitute": {
+    "tumMode": true,
+    "english": "You are the **prostitute**. Every night you have to choose someone you want to sleep with. So if you are attacked, the werewolves won't find you. But if they kill your client, you die as well.",
+    "german": "Du bist die **Prostituierte**. Jede Nacht musst du jemanden aussuchen, bei dem du schlafen möchtest. Wirst du angegriffen, werden die Werwölfe dich also nicht anfinden. Töten sie aber deinen Kunden, so stirbst du auch.",
+    "germanTUM": "TUM Prostituierte",
+    "englishTUM": "TUM Prostitute"
+  },
+  "role-spy": {
+    "tumMode": true,
+    "english": "You are the **spy**. You get all the messages from the werewolves sent to you, but you don't know who they are from.",
+    "german": "Du bist ein **Spion**. Du bekommst alle Nachrichten der Werwölfe zugesendet, weisst aber nicht von wem sie kommen.",
+    "germanTUM": "",
+    "englishTUM": ""
+  },
   "night": {
     "tumMode": true,
     "english": "Night",
@@ -284,24 +298,30 @@
     "englishTUM": "platzhalter lol",
     "germanTUM": "platzhalter lol"
   },
-  "major-election": {
+  "mayor-election": {
     "tumMode": true,
-    "english": "Major election",
+    "english": "Mayor election",
     "german": "Bürgermeisterwahl",
     "englishTUM": "New semester representative needed",
     "germanTUM": "Wir brauchen einen neuen Semestersprecher"
   },
-  "major-candidates": {
+  "mayor-candidates": {
     "tumMode": false,
     "english": "candidates",
     "german": "Kanidaten"
   },
-  "major-result": {
+  "mayor-result": {
     "tumMode": true,
-    "english": " is the new major",
+    "english": " is the new mayor",
     "german": " ist der neue Bürgermeister",
     "englishTUM": " is the new semester representative",
     "germanTUM": " ist der neue Semestersprecher"
+  },
+  "new-werewolf-msg": {
+    "tumMode": false,
+    "english": "New message: ",
+    "german": "Neue Nachricht: "
   }
+
 
 }
