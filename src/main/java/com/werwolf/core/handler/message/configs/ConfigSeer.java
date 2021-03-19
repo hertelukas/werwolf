@@ -22,6 +22,11 @@ public class ConfigSeer extends Config {
     public boolean updateConfig(Game game, String command, String arg) {
         if (!command.equals(getCommand()) || game == null) return false;
 
+        if(arg == null){
+            game.getConfigurations().setSeernum(1);
+            return true;
+        }
+
         try {
             game.getConfigurations().setSeernum(Math.max(Integer.parseInt(arg), 0));
         } catch (NumberFormatException e) {
