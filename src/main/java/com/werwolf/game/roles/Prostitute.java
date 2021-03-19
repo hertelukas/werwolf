@@ -37,8 +37,9 @@ public class Prostitute extends Villager {
     @Override
     public void reset(Game game) {
         if (visitedPlayer != null) {
-            System.out.println(visitedPlayer.getUsername() +  visitedPlayer.isAlive);
             if(!visitedPlayer.isAlive){
+                game.getController().getNightController().getNights().peek().getDiedtonight().add(this);
+                LOGGER.info("Die Prostituierte stirbt, da ihr Kunde ermordet wurde");
                 super.die(game);
             }
             visitedPlayer.setHasSex(false);
