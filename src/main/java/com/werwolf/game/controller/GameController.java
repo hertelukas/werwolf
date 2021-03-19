@@ -26,7 +26,7 @@ public class GameController {
     NightController nightController;
     DayController dayController;
     private final VotingController votingController = new VotingController(this);
-    private final MajorVotingController majorVotingController = new MajorVotingController(this);
+    private final MayorVotingController mayorVotingController = new MayorVotingController(this);
     GameStatus status = GameStatus.Cont;
 
     public GameController(Game game) {
@@ -115,17 +115,17 @@ public class GameController {
         return status;
     }
 
-    public void majorelection(boolean firstVoting, Player oldMajor) {
-        majorVotingController.newVoting(firstVoting, oldMajor);
+    public void mayorelection(boolean firstVoting, Player oldMajor) {
+        mayorVotingController.newVoting(firstVoting, oldMajor);
     }
 
-    public void receiveVoteMajor(Player player, String target) {
-        majorVotingController.receiveVoting(player, target);
+    public void receiveVoteMayor(Player player, String target) {
+        mayorVotingController.receiveVoting(player, target);
     }
     
     
-    public void majorVotingResult() {
-        majorVotingController.votingResult();
+    public void mayorVotingResult() {
+        mayorVotingController.votingResult();
     }
 
     public boolean isActive() {
@@ -228,18 +228,18 @@ public class GameController {
     }
 
     public long getMajorVoteMessageID() {
-        return majorVotingController.getVotingmessageID();
+        return mayorVotingController.getVotingmessageID();
     }
 
     public boolean isMajorVotingFirst() {
 
-        if (majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        if (mayorVotingController.isFirstVoting()) return mayorVotingController.isVoting();
         return false;
     }
 
-    public boolean isMajorNormalVoting() {
+    public boolean isMayorNormalVoting() {
 
-        if (!majorVotingController.isFirstVoting()) return majorVotingController.isVoting();
+        if (!mayorVotingController.isFirstVoting()) return mayorVotingController.isVoting();
         return false;
     }
 
