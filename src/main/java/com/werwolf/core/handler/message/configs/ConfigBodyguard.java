@@ -4,9 +4,9 @@ import com.werwolf.game.Game;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConfigBodyguard extends Config{
+public class ConfigBodyguard extends Config {
 
-    public ConfigBodyguard(){
+    public ConfigBodyguard() {
         setName("Amount of Bodyguards");
         setCommand("bodyguard");
         setDescription("Sets the amount of bodyguards");
@@ -20,16 +20,16 @@ public class ConfigBodyguard extends Config{
 
     @Override
     public boolean updateConfig(Game game, String command, String arg) {
-        if (!command.equals(getCommand()) || game == null) return false;
+        if ((!command.equals(getCommand()) && !command.equals("bodybuilder")) || game == null) return false;
 
-        if(arg == null){
+        if (arg == null) {
             game.getConfigurations().setBodyguardnum(1);
             return true;
         }
 
-        try{
+        try {
             game.getConfigurations().setBodyguardnum(Math.max(Integer.parseInt(arg), 0));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             game.getChannel().sendMessage("Config parameter for bodyguard must be a number").queue();
         }
 
