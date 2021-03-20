@@ -384,7 +384,6 @@ public class Game {
                 players.set((playerNumber), new Spy(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-spy"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist Spion");
-
             }
         }
 
