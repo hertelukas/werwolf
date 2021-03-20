@@ -56,7 +56,7 @@ public class GameController {
         //TODO
         if (status == GameStatus.Cont) {
             AudioHandler.getAudioHandler().loadAndPlay(game, "wolf.mp3", false, true);
-            AudioHandler.getAudioHandler().loadAndPlay(game, "Werewolf.mp3", true, false);
+            AudioHandler.getAudioHandler().loadAndPlay(game, "Werewolf.wav", true, false);
             votingController.newVoting(true);
             isNight = true;
             nightController.startNight();
