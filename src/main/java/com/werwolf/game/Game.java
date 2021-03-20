@@ -358,7 +358,7 @@ public class Game {
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-seer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");
             } else if (huntertmp-- > 0) {
-                players.set(playerNumber, new Hunter_not_implemented(players.get(playerNumber)));
+                players.set(playerNumber, new Hunter(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-hunter"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Jäger");
             } else if (littleGirltmp-- > 0) {
