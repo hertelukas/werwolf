@@ -43,6 +43,7 @@ public class Prostitute extends Villager {
     }
 
     public boolean dieSure(Game game) {
+        game.getController().getNightController().getNights().peek().getDiedtonight().add(this);
         return super.die(game);
     }
 
