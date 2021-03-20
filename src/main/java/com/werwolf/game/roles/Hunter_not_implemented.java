@@ -5,7 +5,6 @@ import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 
-
 public class Hunter_not_implemented extends Villager {
 
     boolean voteValid = false;
@@ -20,32 +19,27 @@ public class Hunter_not_implemented extends Villager {
         characterType = CharacterType.Hunter;
     }
 
+    @Override
     public boolean die(Game game) {
-        if (!isSavedByBodyguard()) {
-            this.isAlive = false;
+        if (super.die(game)) {
             if (game.getController().isNight())
                 noScope(game);
-            if (game.getTumMode()) sendMessage("https://bit.ly/unexzellent");
             sendMessage("You died, the dude you voted for hopefully died too lol");
-            if (game.getConfigurations().isShowRole()) {
-                EmbedBuilder showRole = new EmbedBuilder();
-                showRole.setTitle(getUsername()).setDescription(getUsername() + UserMessageCreator.getCreator().getMessage(game, "death-Message") + characterType);
-                game.getChannel().sendMessage(showRole.build()).queue();
-            }
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     @Override
     public void saveVote(Player votedGuy) { // fix?
-       // System.out.println("Hunter vote bueno?: " + (votedGuy != null));
+        // System.out.println("Hunter vote bueno?: " + (votedGuy != null));
         votedPlayer = votedGuy;
     }
 
     @Override
     public void noScope(Game game) {
-        if(votedPlayer != null) {
+        if (votedPlayer != null) {
             game.getController().getNightController().getNights().peek().getDiedtonight().add(votedPlayer);
             votedPlayer.die(game);
         } else {
