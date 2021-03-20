@@ -148,11 +148,11 @@ public class MayorVotingController {
         votingResultBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-new"));
 
         if (major == null) {
-            votingResultBuilder.setDescription(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result"))
+            votingResultBuilder.setDescription(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result"));
             game.getChannel().sendMessage(votingResultBuilder.build()).queue();
             game.getPlayers().get(0).setMajor(true);
         } else {
-            votingResultBuilder.setDescription(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result"))
+            votingResultBuilder.setDescription(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result"));
             game.getChannel().sendMessage(votingResultBuilder.build()).queue();
             major.getKey().setMajor(true);
         }
