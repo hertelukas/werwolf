@@ -330,7 +330,6 @@ public class Game {
 
         //Spzialrollen verteilen
         presetCheck(amount);
-        int witchtmp = configurations.getWitchnum();
         int seertmp = configurations.getSeernum();
         int huntertmp = configurations.getHunternum();
         int littleGirltmp = configurations.getLittleGirlnum();
@@ -349,11 +348,7 @@ public class Game {
                 playerNumber = (int) (Math.random() * playerSize);
             } while (players.get(playerNumber).getCharacterType() != CharacterType.Villager);
 
-            if (witchtmp-- > 0) {
-                players.set(playerNumber, new Witch_not_implemented(players.get(playerNumber)));
-                players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-witch"));
-                LOGGER.info(players.get(playerNumber).getUsername() + " ist die Hexe");
-            } else if (seertmp-- > 0) {
+            if (seertmp-- > 0) {
                 players.set(playerNumber, new Seer(players.get(playerNumber)));
                 players.get(playerNumber).sendMessage(UserMessageCreator.getCreator().getMessage(this, "role-seer"));
                 LOGGER.info(players.get(playerNumber).getUsername() + " ist der Seher");

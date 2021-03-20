@@ -4,7 +4,6 @@ public enum CharacterType {
     Villager(false, false, 10, Team.Village),
     Werewolf(true,true, 20, Team.Werewolf),
     Seer(true, false, 10,  Team.Village),
-    Witch(true, false, 10,  Team.Village),
     LittleGirl(false, true, 10,  Team.Village),
     Sheriff(true, false, 10,  Team.Village),
     Hunter(true,false, 10,  Team.Village),
