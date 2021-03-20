@@ -238,8 +238,8 @@
     "tumMode": true,
     "english": " got attacked. You rescued him.",
     "german": " wurde angegriffen. Dank dir lebt er noch.",
-    "englishTUM": "bodyguard TUM",
-    "germanTUM": "bodyguard TUM DE"
+    "englishTUM": " passed the exam thanks to your bootcamp.",
+    "germanTUM": " konnte dank deinem Bootcamp die Klausur bestehen."
   },
   "self-vote": {
     "tumMode": false,
