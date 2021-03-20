@@ -27,8 +27,7 @@ public class Player {
     boolean isMajor = false;
     private boolean hasSex = false;
     boolean hasVoted = false;
-    Player whore = null;
-    boolean isAttacked = false;
+    Prostitute whore = null;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -110,7 +109,7 @@ public class Player {
      */
     public boolean die(Game game) {
         if (!isSavedByBodyguard()) {
-            if (whore != null) whore.die(game);
+            if (whore != null) whore.dieSure(game);
             this.isAlive = false;
             if (game.getTumMode()) sendMessage("https://bit.ly/unexzellent");
 
@@ -122,7 +121,6 @@ public class Player {
             }
             return true;
         } else {
-            isAttacked = true;
             LOGGER.info("Er wurde vom Bodyguard beschützt");
             return false;
         }
