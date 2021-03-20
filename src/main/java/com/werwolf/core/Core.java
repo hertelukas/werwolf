@@ -14,7 +14,6 @@ import java.util.EnumSet;
 public class Core {
 
     @Value("${token}")
-   // @Value("ODE5NjQ4ODYyMjg5MjY0NzUw.YEprfQ.HVglR4A3M1CmGVYLc53R5QgsfaA")
     private String token;
 
     @Bean
