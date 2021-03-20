@@ -131,6 +131,7 @@ public class NightController {
             playerSB.append(prefix++).append(": ").append(player.getUsername()).append("\r");
         }
 
+        votingMessageBuilder.setColor(Color.BLACK);
         votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title")).addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSB.toString(), true);
         if (game.getTumMode()) votingMessageBuilder.setThumbnail("https://www.gerassist.com/wp-content/uploads/2020/02/tum-logo.png");
         //TODO ggf. warteZeit verändern/entfernen

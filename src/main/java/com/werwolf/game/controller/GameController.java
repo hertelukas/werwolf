@@ -79,7 +79,8 @@ public class GameController {
             finishedBuilder.setColor(Color.cyan);
         } else if (status == GameStatus.SerialKillerWin) {
             finishedBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "killer-win-title"));
-            finishedBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
+            if(game.getTumMode()) finishedBuilder.setThumbnail("https://cdn.discordapp.com/attachments/820378239821676616/821080486741934110/image0.png");
+            else finishedBuilder.setThumbnail("https://cdn.discordapp.com/attachments/821717465679003670/822860951715577896/knife-316655_1280.jpg");
             finishedBuilder.setDescription(UserMessageCreator.getCreator().getMessage(game, "killer-win-text"));
             finishedBuilder.setColor(Color.yellow);
         }
