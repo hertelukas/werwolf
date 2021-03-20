@@ -45,7 +45,11 @@ public class Hunter_not_implemented extends Villager {
 
     @Override
     public void noScope(Game game) {
-        game.getController().getNightController().getNights().peek().getDiedtonight().add(votedPlayer);
-        votedPlayer.die(game);
+        if(votedPlayer != null) {
+            game.getController().getNightController().getNights().peek().getDiedtonight().add(votedPlayer);
+            votedPlayer.die(game);
+        } else {
+            sendMessage("Could not no scope :(");
+        }
     }
 }
