@@ -28,6 +28,7 @@ public class Player {
     private boolean hasSex = false;
     boolean hasVoted = false;
     Player whore = null;
+    boolean isAttacked = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -121,6 +122,7 @@ public class Player {
             }
             return true;
         } else {
+            isAttacked = true;
             LOGGER.info("Er wurde vom Bodyguard beschützt");
             return false;
         }

@@ -1,6 +1,7 @@
 package com.werwolf.game.roles;
 
 import com.werwolf.game.Game;
+import com.werwolf.helpers.UserMessageCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,9 @@ public class Bodyguard extends Villager {
     @Override
     public void reset(Game game) {
         if (savedPlayer != null) {
+            if (savedPlayer.isAttacked)
+                sendMessage(savedPlayer.getUsername() + UserMessageCreator.getCreator().getMessage(game, "bodyguard-save"));
+            savedPlayer.isAttacked = false;
             savedPlayer.setSavedByBodyguard(false);
             savedPlayer = null;
         }
