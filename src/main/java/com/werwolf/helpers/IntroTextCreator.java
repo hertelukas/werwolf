@@ -5,7 +5,7 @@ public class IntroTextCreator extends JSONReader{
     static IntroTextCreator creator = new IntroTextCreator();
 
     private IntroTextCreator() {
-        document = parseFile("src/main/resources/IntroStories.json");
+        document = parseFile("src/main/data/IntroStories.json");
     }
 
     public static IntroTextCreator getCreator(){
