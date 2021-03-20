@@ -27,6 +27,7 @@ public class Player {
     boolean isMajor = false;
     private boolean hasSex = false;
     boolean hasVoted = false;
+    Player whore = null;
 
     public Player(User user, Guild guild){
         this.guild = guild;
@@ -108,6 +109,7 @@ public class Player {
      */
     public boolean die(Game game) {
         if (!isSavedByBodyguard()) {
+            if (whore != null) whore.die(game);
             this.isAlive = false;
             if (game.getTumMode()) sendMessage("https://bit.ly/unexzellent");
 

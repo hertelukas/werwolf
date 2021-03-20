@@ -28,6 +28,7 @@ public class Prostitute extends Villager {
         LOGGER.info(game.getPlayer(target.getId()).getUsername() + " wird von der Nutte " + getUsername() + " besucht");
         target.setHasSex(true);
         visitedPlayer = target;
+        target.whore = this;
     }
 
     /**
@@ -36,24 +37,10 @@ public class Prostitute extends Villager {
      */
     @Override
     public void reset(Game game) {
-        if (visitedPlayer != null) {
-            if(!visitedPlayer.isAlive){
-                game.getController().getNightController().getNights().peek().getDiedtonight().add(this);
-                LOGGER.info("Die Prostituierte stirbt, da ihr Kunde ermordet wurde");
-                super.die(game);
-            }
-            visitedPlayer.setHasSex(false);
-            visitedPlayer = null;
-        }
-    }
+        if (visitedPlayer == null) return;
+        visitedPlayer.setHasSex(false);
+        visitedPlayer.whore = null;
+        visitedPlayer = null;
 
-    /**
-     *  Wenn er stirbt, wird sein ziel nicht mehr beschützt
-     * @param game
-     * @return Ob er wirklich gestorben ist
-     */
-    @Override
-    public boolean die(Game game) {
-        return false;
     }
 }
