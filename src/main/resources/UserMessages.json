@@ -37,7 +37,7 @@
     "tumMode": true,
     "english": "You are a **villager**. At night you sleep peacefully in your bed, but during the day your task is to find and destroy the villains among the citizens.",
     "german": "Du bist ein **Dorfbewohner**. Nachts schläfst du friedlich in deinem Bett, doch tagsüber ist es deine Aufgabe die Bösewichte unter den Bewohnern zu finden und zu vernichen.",
-    "englishTUM": "You are a **student**. Your goal is not to get exmatriculated. Then you would have to enroll at LMU, RIP. But every exam period, the ÜL kicks someone out.",
+    "englishTUM": "You are a **student**. Your goal is not to get exmatriculated, otherwise you would have to enroll at LMU, RIP. It's rather inconvenient that the exercise management (ÜL) expels someone every exam period.",
     "germanTUM": "Du bist **Student**. Dein Ziel ist es, nicht exmatrikuliert zu werden. Denn dann müsstest du dich bei der LMU einschreiben, RIP. Doch jede Klausurphase wirft die Übungsleitung jemanden raus."
   },
   "role-witch": {
@@ -262,9 +262,9 @@
   },
   "death-Message": {
     "tumMode": true,
-    "english": " died, they were: ",
+    "english": " died, they were a: ",
     "german": " ist gestorben, diese Person war ein: ",
-    "englishTUM": " got exmatriculated, they were: ",
+    "englishTUM": " got exmatriculated, they were a: ",
     "germanTUM": " ist nun unexzellent, diese Person war ein: "
   },
   "role-sout": {
@@ -287,7 +287,7 @@
   "skip-win": {
     "tumMode": true,
     "english": "The village voted to skip!",
-    "german": "Das Dorf hat sich entschieden diese Nacht alle zu verschohnen.",
+    "german": "Das Dorf hat sich entschieden diese Nacht alle zu verschonen.",
     "englishTUM": "",
     "germanTUM": ""
   },
@@ -295,14 +295,14 @@
     "tumMode": true,
     "english": "You have been killed, your target will die too",
     "german": "Du wurdest ermordet, dein ausgewähltes Ziel wird auch sterben",
-    "englishTUM": "You got exmatriculated, so does your chosen target",
+    "englishTUM": "You have been exmatriculated, as was your chosen target",
     "germanTUM": "Du bist jetzt unexzellent, genau wie dein ausgewähltes Ziel"
   },
   "hunter-fail": {
     "tumMode": true,
     "english": "You are dead, but you weren't able to kill your target",
     "german": "Du bist gestorben, konntest aber dein Ziel nicht umbringen",
-    "englishTUM": "You got exmatriculated, but you werent able to punish your target",
+    "englishTUM": "You were exmatriculated, but you weren't able to punish your target",
     "germanTUM": "Du bist jetzt unexzellent, aber dein ausgewähltes Ziel hat es geschafft dir zu entkommen"
   },
   "mayor-election": {
@@ -315,7 +315,7 @@
   "mayor-candidates": {
     "tumMode": false,
     "english": "candidates",
-    "german": "Kanidaten"
+    "german": "Kandidaten"
   },
   "mayor-result": {
     "tumMode": true,

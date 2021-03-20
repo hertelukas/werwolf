@@ -154,7 +154,7 @@ public class DayController {
         }
         //Add skip option
         playerSb.append(prefix).append(": ").append("Skip");
-
+        votingMessageBuilder.setColor(Color.CYAN);
         votingMessageBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "vote-title") ).addField(UserMessageCreator.getCreator().getMessage(game, "living-players"), playerSb.toString(), true);
 
         // Thread.sleep()?
