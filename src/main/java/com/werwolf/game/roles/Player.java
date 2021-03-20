@@ -149,6 +149,7 @@ public class Player {
         if (!jailed) {
             return characterType.canVote();
         } else {
+            LOGGER.info("Er kann nicht voten er wurde gejailt");
             return false;
         }
     }
