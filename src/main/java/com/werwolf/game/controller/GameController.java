@@ -1,5 +1,6 @@
 package com.werwolf.game.controller;
 
+import com.werwolf.core.handler.AudioHandler;
 import com.werwolf.game.Game;
 import com.werwolf.game.GameStatus;
 import com.werwolf.game.roles.*;
@@ -54,6 +55,8 @@ public class GameController {
     public boolean nextNight() {
         //TODO
         if (status == GameStatus.Cont) {
+            AudioHandler.getAudioHandler().loadAndPlay(game, "wolf.mp3", false, true);
+            AudioHandler.getAudioHandler().loadAndPlay(game, "Werwolf.wav", true, false);
             votingController.newVoting(true);
             isNight = true;
             nightController.startNight();

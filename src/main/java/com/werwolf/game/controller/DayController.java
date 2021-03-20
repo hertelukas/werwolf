@@ -135,6 +135,7 @@ public class DayController {
         } else {
             votingMessageBuilder.setThumbnail("https://cdn.discordapp.com/attachments/821091668974633080/821134542374961172/firsttime.jpeg");
         }
+        votingMessageBuilder.setColor(Color.cyan);
         game.getChannel().retrieveMessageById(game.getCurrentVotingMessage()).queue(message -> {
             message.editMessage(votingMessageBuilder.build()).queue();
             message.clearReactions().queue();
