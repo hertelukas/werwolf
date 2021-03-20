@@ -36,10 +36,14 @@ public class Prostitute extends Villager {
         if (visitedPlayer == null || visitedPlayer == this) {
             LOGGER.info("Nutte wird bei sich zu Hause umgebracht");
             return super.die(game);
-        } else {
+        } else{
             LOGGER.info("Nutte ist nicht zu hause und wird folglich nicht umgebracht");
             return false;
         }
+    }
+
+    public boolean dieSure(Game game) {
+        return super.die(game);
     }
 
     /**
