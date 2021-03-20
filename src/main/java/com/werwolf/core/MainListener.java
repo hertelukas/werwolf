@@ -95,7 +95,7 @@ public class MainListener extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReactionAdd(@Nonnull PrivateMessageReactionAddEvent event) {
-        System.out.println("bruh moment");
+        // System.out.println("bruh moment");
         if (Objects.requireNonNull(event.getUser()).isBot()) return;
         boolean found = privateReactionHandler.handle(event);
 
