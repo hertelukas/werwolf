@@ -28,6 +28,7 @@ public class Player {
     private boolean hasSex = false;
     boolean hasVoted = false;
     Prostitute whore = null;
+    boolean isAttacked = false;
 
     public Player(User user, Guild guild){
         this.guild = guild;
