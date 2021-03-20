@@ -2,7 +2,6 @@ package com.werwolf.game.roles;
 
 import com.werwolf.game.Game;
 import com.werwolf.helpers.UserMessageCreator;
-import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.util.HashMap;
 
@@ -17,7 +16,7 @@ public class Nighthunter extends Villager {
         this.id = player.id;
         this.isAlive = player.isAlive;
         this.user = player.user;
-        characterType = CharacterType.Hunter;
+        characterType = CharacterType.Nighthunter;
     }
 
     @Override
