@@ -56,7 +56,7 @@
   },
   "role-hunter": {
     "tumMode": true,
-    "english": "You are the **Hunter**. When your life ends you can take another citizen with you to death",
+    "english": "You are the **Hunter**. When your life ends you take another citizen with you to death",
     "german": "Du bist **Jäger**. Wenn dein Leben endet kannst du einen weitere Person mit dir in den Tod reissen. Wähle weise!",
     "englishTUM": "Hunter EN TUM",
     "germanTUM": "Hunter DE TUM"
