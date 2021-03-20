@@ -126,7 +126,6 @@ public class Player {
             LOGGER.info("Er wurde vom Bodyguard beschützt");
             return false;
         }
-
     }
 
     /**
