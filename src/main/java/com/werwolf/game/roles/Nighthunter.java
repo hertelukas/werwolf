@@ -39,8 +39,8 @@ public class Nighthunter extends Villager {
             if (target.die(game)) {
                 sendMessage(UserMessageCreator.getCreator().getMessage(game, "hunter-death"));
                 game.getController().getNightController().getNights().peek().getDiedtonight().add(target);
-                if (target instanceof Werewolf)
-                    target.sendMessage("https://cdn.discordapp.com/attachments/821091668974633080/822866611790151750/chosendeath.png");
+//                if (target instanceof Werewolf)
+//                    target.sendMessage("https://cdn.discordapp.com/attachments/821091668974633080/822866611790151750/chosendeath.png");
                 LOGGER.info("Der Jäger bringt " + target.getUsername() + " um");
             } else if (target.isAlive) {
                 sendMessage(UserMessageCreator.getCreator().getMessage(game, "hunter-fail"));
