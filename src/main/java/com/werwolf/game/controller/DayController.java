@@ -12,7 +12,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class DayController {
@@ -60,6 +62,7 @@ public class DayController {
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(days.size() + ". " + UserMessageCreator.getCreator().getMessage(game,"day"));
         storyBuilder.setDescription(storySb);
+        storyBuilder.setColor(Color.BLUE);
         storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2018/04/16/12/59/face-3324569_960_720.jpg"); // pls review somebody
         game.getChannel().sendMessage(storyBuilder.build()).queue();
 
