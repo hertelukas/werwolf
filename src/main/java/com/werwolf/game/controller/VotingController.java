@@ -53,8 +53,11 @@ public class VotingController {
 
         //VOTING IN DER NACHT
         if (nightVoting) {
-
-            votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+            if (playerPrefixmap.containsKey(playerPrefix)) {
+                votedPlayer = gameController.getGame().getPlayer(playerPrefixmap.get(playerPrefix)); // der Dude, der gevotet wurde
+            } else {
+                votedPlayer = null;
+            }
             if(votedPlayer == null){
                 LOGGER.warn(currVoter.getUsername() + " voted for skip in the night. This shouldn't be possible");
                 return;
