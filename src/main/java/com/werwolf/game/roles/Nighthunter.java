@@ -34,6 +34,7 @@ public class Nighthunter extends Villager {
         if (died) {
             if (target.die(game)) {
                 sendMessage(UserMessageCreator.getCreator().getMessage(game, "hunter-death"));
+                game.getController().getNightController().getNights().peek().getDiedtonight().add(target);
             } else if (target.isAlive) {
                 sendMessage(UserMessageCreator.getCreator().getMessage(game, "hunter-fail"));
             } else {

@@ -44,7 +44,7 @@ public class HandleInstructions extends MessageHandler {
         builder.addField("7. Werewolves", "The werewolves can talk in their private channel and choose who they want to kill that night.", false);
 
         builder.addField("The Little Girl", "The little girl is a normal villager. However, at night she is always among the werewolves, and appears in the Werewolf Channel as a werewolf and can also write there. However, she cannot vote. The seer sees her as a werewolf.", false);
-        builder.addField("The Hunter", "The hunter, if he dies, must take another person with him to death. He will be notified privately should this happen and can choose a person per reaction", false);
+        builder.addField("The Hunter", "The hunter, if he dies during a night, he must take another person with him to death. He can do this with voting normally", false);
         builder.addField("The Spy", "The spy gets all the messages from the werewolves sent privately. However, he does not know who sends which message. But maybe he can still gain useful information?", false);
         builder.setThumbnail("https://media.discordapp.net/attachments/821717465679003670/822568803778035732/user-guide-2702483.png?width=679&height=679");
 
