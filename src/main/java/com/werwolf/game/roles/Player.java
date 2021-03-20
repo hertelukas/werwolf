@@ -119,6 +119,7 @@ public class Player {
             }
             return true;
         } else {
+            LOGGER.info("Er wurde vom Bodyguard beschützt");
             return false;
         }
 
