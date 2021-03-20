@@ -8,7 +8,7 @@ public class UserMessageCreator extends JSONReader {
     static UserMessageCreator creator = new UserMessageCreator();
 
     private UserMessageCreator() {
-        document = parseFile("src/main/data/UserMessages.json");
+        document = parseFile("data/UserMessages.json");
     }
 
     public String getMessage(Game game, String title){

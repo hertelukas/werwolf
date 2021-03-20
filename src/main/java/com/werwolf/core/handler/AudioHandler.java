@@ -55,7 +55,7 @@ public class AudioHandler extends ListenerAdapter {
         VoiceChannel channel = game.getVoiceChannel();
         if(channel == null) return;
         GuildAudioManager audioManager = getGuildAudioManager(channel.getGuild());
-        String trackUrl = isMusic ? "src/main/data/Audio/Music/" + track : "src/main/data/Audio/Voice/" + track;
+        String trackUrl = isMusic ? "data/Audio/Music/" + track : "data/Audio/Voice/" + track;
 
         if(isMusic)
             audioManager.setVolume(30);

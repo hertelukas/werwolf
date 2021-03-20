@@ -5,7 +5,7 @@ public class NightTextCreator extends JSONReader {
     static NightTextCreator creator = new NightTextCreator();
 
     private NightTextCreator() {
-        document = parseFile("src/main/data/NightStories.json");
+        document = parseFile("data/NightStories.json");
     }
 
 

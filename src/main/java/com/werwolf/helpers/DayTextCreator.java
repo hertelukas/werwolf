@@ -5,7 +5,7 @@ public class DayTextCreator extends JSONReader{
     static DayTextCreator creator = new DayTextCreator();
 
     private DayTextCreator() {
-        document = parseFile("src/main/data/DayStories.json");
+        document = parseFile("data/DayStories.json");
     }
 
     public static DayTextCreator getCreator(){
