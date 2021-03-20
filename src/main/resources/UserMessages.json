@@ -333,6 +333,11 @@
     "tumMode": false,
     "english": "The mayor has chosen",
     "german": "Der Bürgermeister hat entschieden"
+  },
+  "mayor-new": {
+    "tumMode": false,
+    "english": "There is a new mayor",
+    "german": "Es gibt einen neuen Bürgermeister"
   }
 
 

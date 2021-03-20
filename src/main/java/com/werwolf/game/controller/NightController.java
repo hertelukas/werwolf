@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ public class NightController {
         EmbedBuilder storyBuilder = new EmbedBuilder();
         storyBuilder.setTitle(nights.size() + ". " + UserMessageCreator.getCreator().getMessage(game, "night"));
         storyBuilder.setDescription(storySB);
+        storyBuilder.setColor(Color.BLACK);
         if (game.getTumMode())
             storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2017/01/18/12/33/session-1989711_960_720.png");
         else storyBuilder.setThumbnail("https://cdn.pixabay.com/photo/2016/11/29/13/12/cloudy-1869753_960_720.jpg");
@@ -83,6 +85,7 @@ public class NightController {
         StringBuilder playerSB = new StringBuilder();
         Night currentnight = game.getController().getNightController().getNights().peek();
         EmbedBuilder votingMessageBuilder = new EmbedBuilder();
+        votingMessageBuilder.setColor(Color.BLACK);
 
         for (Player player : currentnight.getAlive()) {
             playerSB.append(prefix++).append(": ").append(player.getUsername());
