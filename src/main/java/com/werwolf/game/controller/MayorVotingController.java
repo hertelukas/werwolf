@@ -143,11 +143,17 @@ public class MayorVotingController {
             LOGGER.info(major.getKey().getUsername() + " hat " + major.getValue() + " Stimmen");
             if (major.getValue() < p.getValue()) major = p;
         }
+
+        EmbedBuilder votingResultBuilder = new EmbedBuilder();
+        votingResultBuilder.setTitle(UserMessageCreator.getCreator().getMessage(game, "mayor-new"));
+
         if (major == null) {
-            game.getChannel().sendMessage(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
+            votingResultBuilder.setDescription(game.getPlayers().get(0) + UserMessageCreator.getCreator().getMessage(game, "mayor-result"));
+            game.getChannel().sendMessage(votingResultBuilder.build()).queue();
             game.getPlayers().get(0).setMajor(true);
         } else {
-            game.getChannel().sendMessage(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result")).queue();
+            votingResultBuilder.setDescription(major.getKey().getUsername() + UserMessageCreator.getCreator().getMessage(game, "mayor-result"));
+            game.getChannel().sendMessage(votingResultBuilder.build()).queue();
             major.getKey().setMajor(true);
         }
     }
