@@ -33,7 +33,7 @@ public class Prostitute extends Villager {
 
     @Override
     public boolean die(Game game) {
-        if (visitedPlayer == this) {
+        if (visitedPlayer == null || visitedPlayer == this) {
             return super.die(game);
         } else {
             return false;
