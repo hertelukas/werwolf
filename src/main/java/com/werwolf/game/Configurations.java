@@ -3,7 +3,6 @@ package com.werwolf.game;
 public class Configurations {
 
     private int preset = 0;
-    private int witchnum = 0;
     private int seernum = 0;
     private int hunternum = 0;
     private int littleGirlnum = 0;
@@ -19,10 +18,6 @@ public class Configurations {
     private boolean playAudio = true;
     private boolean showRole = false;
     private boolean write = false;
-
-    public int getWitchnum() {
-        return witchnum;
-    }
 
     public int getSeernum() {
         return seernum;
@@ -54,10 +49,6 @@ public class Configurations {
 
     public boolean playMusic() {
         return playMusic;
-    }
-
-    public void setWitchnum(int witchnum) {
-        this.witchnum = witchnum;
     }
 
     public void setSeernum(int seernum) {
@@ -148,7 +139,6 @@ public class Configurations {
     public void setAll(int[] num) {
         if(num.length != 8)
             return;
-        witchnum = num[0];
         seernum = num[1];
         hunternum = num[2];
         littleGirlnum = num[3];

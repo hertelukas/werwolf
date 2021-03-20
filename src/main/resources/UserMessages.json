@@ -229,10 +229,10 @@
   },
   "jailor-jails": {
     "tumMode": true,
-    "english": "You got jailed by the Jailor you must vote if you can, but your votes have no effect",
-    "german": "Du wurdest eingesperrt vom Gefängniswärter, Vote wenn du kannst, deine Stimme hat aber leider keinen Einfluss!",
-    "englishTUM": "TUM-MODE You got jailed",
-    "germanTUM": "TUM-MODE Du wurdest eingesperrt"
+    "english": "You got jailed by the Jailor; you must vote if you can, but your votes have no effect",
+    "german": "Du wurdest eingesperrt vom Gefängniswärter. Vote wenn du kannst, deine Stimme hat aber leider keinen Einfluss!",
+    "englishTUM": "You were distracted by an alibi student; you must vote if you can, but your votes have no effect",
+    "germanTUM": "Du wurdest abgelenkt vom Alibistudent. Vote wenn du kannst, deine Stimme hat aber leider keinen Einfluss!"
   },
   "bodyguard-save": {
     "tumMode": true,
