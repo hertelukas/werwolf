@@ -122,7 +122,7 @@ public class HandleConfig extends MessageHandler {
             }
             configBuilder.addField(config.getName(), config.getCommand() + ": " + config.getConfigResult(game), false);
         }
-        configBuilder.addField("----- Roles ----", " ", true);
+        configBuilder.addField("----- Roles -----", " ", true);
 
         //Add all role configs
         for (Config roleConfig : roleConfigs) {
