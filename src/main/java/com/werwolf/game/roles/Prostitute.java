@@ -31,6 +31,15 @@ public class Prostitute extends Villager {
         target.whore = this;
     }
 
+    @Override
+    public boolean die(Game game) {
+        if (visitedPlayer == this) {
+            super.die(game);
+        } else {
+            return false;
+        }
+    }
+
     /**
      * entschützt den gesicherten Spieler
      * @param game
