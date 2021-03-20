@@ -166,17 +166,6 @@ public class Player {
     }
 
     /**
-     *
-     * @param votedGuy Spieler der als Ziel des möglichen Votings ausgewählt wurde
-     *
-     */
-    public void saveVote(Player votedGuy) {
-    }
-
-    public void noScope(Game game) {
-    }
-
-    /**
      * Setzt die ggf. gesetzen Attribute/durch den Charackter ausgelösten Aktionen zurück beim Aufruf
      * (Wird jede Runde für die in der Runde am Anfang lebenden Spieler aufgerufen
      * @param game das Spiel lmao

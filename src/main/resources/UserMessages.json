@@ -293,10 +293,17 @@
   },
   "hunter-death": {
     "tumMode": true,
-    "english": "You have been killed, kill another person!",
-    "german": "Du wurdest ermordet, töte eine andere Person!",
-    "englishTUM": "platzhalter lol",
-    "germanTUM": "platzhalter lol"
+    "english": "You have been killed, your target will die too",
+    "german": "Du wurdest ermordet, dein ausgewähltes Ziel wird auch sterben",
+    "englishTUM": "You got exmatriculated, so does your chosen target",
+    "germanTUM": "Du bist jetzt unexzellent, genau wie dein ausgewähltes Ziel"
+  },
+  "hunter-fail": {
+    "tumMode": true,
+    "english": "You are dead, but you weren't able to kill your target",
+    "german": "Du bist gestorben, konntest aber dein Ziel nicht umbringen",
+    "englishTUM": "You got exmatriculated, but you werent able to punish your target",
+    "germanTUM": "Du bist jetzt unexzellent, aber dein ausgewähltes Ziel hat es geschafft dir zu entkommen"
   },
   "mayor-election": {
     "tumMode": true,

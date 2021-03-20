@@ -177,9 +177,6 @@ public class VotingController {
 
         if(voter.getCharacterType().canVote()) {
             voter.sendMessage("Vote received!");
-            if(voter.getCharacterType() == CharacterType.Hunter) {
-                voter.saveVote(target);
-            }
 
             LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()).getCharacterType() + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") zwischengespeichert");
             savedReaction.put(voter, target);
