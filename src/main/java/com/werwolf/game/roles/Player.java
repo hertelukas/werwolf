@@ -156,26 +156,28 @@ public class Player {
      * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
      * @param target Spieler der als Ziel des möglichen Votings ausgewählt wurde
      * @param votings Hashmap, die die Voting der Werewölfe beinhaltet (Falls später auch noch andere darauf zugriff haben sollen)
-     * @param game
+     * @param game das Spiel lmao
      */
     public void vote(Player target, HashMap<Long, Integer> votings, Game game) {
     }
 
     /**
-     * Jeder Player hat die Methode Vote, es wird erst gecheckt, ob dieser Spieler überhaupt voten kann, wenn ja dann votet er, wenn nein votet er nicht
-     * @param prefix Spieler der als Ziel des möglichen Votings ausgewählt wurde (dessen Prefix)
-     * @param voteMessageID
+     *
+     * @param votedGuy Spieler der als Ziel des möglichen Votings ausgewählt wurde
+     *
      */
-    public void vote(String prefix, long voteMessageID, Game game) {
+    public void saveVote(Player votedGuy) {
+    }
+
+    public void noScope(Game game) {
     }
 
     /**
      * Setzt die ggf. gesetzen Attribute/durch den Charackter ausgelösten Aktionen zurück beim Aufruf
      * (Wird jede Runde für die in der Runde am Anfang lebenden Spieler aufgerufen
-     * @param game
+     * @param game das Spiel lmao
      */
     public void reset(Game game) {
-
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.werwolf.game.controller;
 
+import com.werwolf.game.roles.CharacterType;
 import com.werwolf.game.roles.Player;
 import com.werwolf.helpers.UserMessageCreator;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -173,6 +174,10 @@ public class VotingController {
 
         if(voter.getCharacterType().canVote()) {
             voter.sendMessage("Vote received!");
+            if(voter.getCharacterType() == CharacterType.Hunter) {
+                voter.saveVote(target);
+            }
+
             LOGGER.info(voter.getUsername() + "(" + gameController.game.getPlayer(voter.getId()).getCharacterType() + ") auf " + target.getUsername() + " (" + gameController.game.getPlayer(target.getId()).getCharacterType() + ") zwischengespeichert");
             savedReaction.put(voter, target);
         }
