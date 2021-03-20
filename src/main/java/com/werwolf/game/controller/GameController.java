@@ -245,7 +245,7 @@ public class GameController {
 
     public void waitForHunter() {
         List<Player> deadHunters = game.getPlayers().stream()
-                .filter(p -> !p.isAlive() && p.getCharacterType() == CharacterType.Hunter).collect(Collectors.toList());
+                .filter(p -> !p.isAlive() && p.getCharacterType() == CharacterType.Nighthunter).collect(Collectors.toList());
         if (deadHunters.size() > 0) {
             new Thread(() -> {
                 boolean done = false;

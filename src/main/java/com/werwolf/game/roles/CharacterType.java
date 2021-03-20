@@ -6,7 +6,7 @@ public enum CharacterType {
     Seer(true, false, 10,  Team.Village),
     LittleGirl(false, true, 10,  Team.Village),
     Sheriff(true, false, 10,  Team.Village),
-    Hunter(true,false, 30,  Team.Village),
+    Nighthunter(true,false, 30,  Team.Village),
     Jailor(true, false, 1,  Team.Village),
     Bodyguard(true, false, 5,  Team.Village),
     SerialKiller(true, false, 15, Team.SerialKiller),
