@@ -282,9 +282,9 @@ public class Game {
 
             try {
                 if (!configurations.canWrite() && isActive())
-                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).reset().queue(); //(Permission.MESSAGE_WRITE).queue();
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).setDeny(Permission.MESSAGE_WRITE).queue();
                 else
-                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).reset().queue(); //.setAllow(Permission.MESSAGE_WRITE).queue();
+                    Objects.requireNonNull(guild.getTextChannelById(channelID)).putPermissionOverride(permissionHolder).reset().queue();  //.setAllow(Permission.MESSAGE_WRITE).queue();
             } catch (Exception e) {
                 LOGGER.warn("Failed to update write permissions for main channel: " + e.getMessage());
             }
