@@ -87,6 +87,7 @@ public class MainListener extends ListenerAdapter {
     public void onGuildMessageReactionAdd(@Nonnull GuildMessageReactionAddEvent event) {
         boolean found = false;
         if (event.getUser().isBot()) return;
+        if(Handler.games.get(event.getChannel().getIdLong()) == null) return;
 
         for (ReactionHandler handler : reactionHandlers) {
             found = handler.handle(event) || found;
